@@ -27,22 +27,21 @@
         <div class="row">
             <div class="col-6">
                 <p ><span class="detailHdr" id="fac">Facility:</span> <span id="facility_name"></span></p>
-                <p ><span class="detailHdr" id="yr-install">Year Installed:</span> <span id="install_year"></span></p>
                 <p><span class="detailHdr" id="stat">Status:</span> <span id="functional_status"></span></p>
                 <p><span class="detailHdr" id="rsn-not-work">Reason Not Working:</span> <span id="reason_not_working"></span></p>
                 <p><span class="detailHdr" id="srv-pri">Service Priority:</span> <span id="maintenance_priority"></span></p>
             </div>
 
             <div class="col-6">
+                <p ><span class="detailHdr" id="yr-install">Year Installed:</span> <span id="install_year"></span></p>
                 <p><span class="detailHdr" id="mdl-id">Model ID:</span> <span id="model_id"></span></p>
                 <p><span class="detailHdr" id="cold-id">Cold Room ID:</span> <span id="cold_room_id"></span>
-                <p><span class="detailHdr" id="volt-reg">Voltage Regulator?</span> <span id="voltage_regulator"></span></p>
                 <p><span class="detailHdr" id="date-srv">Date Serviced:</span> <span id="date_serviced"></span></p>
             </div>
         </div>
 
-        <div class="button">
-            <h3 id="vw-fac-info" href="#" onclick="onLinkClickFacility()">View Facility Information</h3>
+        <div id="editCRStatusBtn" class="button hideButton">
+            <h3 id="ed-cr-stat" href="#" onclick="onEditCRStatus()">Edit Cold Room Status</h3>
         </div>
 
         <div class="button">
@@ -50,11 +49,11 @@
         </div>
 
         <div class="button">
-            <h3 id="vw-all-mnt-rec" href="#" onclick="onClickViewAllMntRecs()">View All Maintenance Records</h3>
+            <h3 id="vw-fac-info" href="#" onclick="onLinkClickFacility()">View Facility Information</h3>
         </div>
 
-        <div id="editCRStatusBtn" class="button hideButton">
-            <h3 id="ed-cr-stat" href="#" onclick="onEditCRStatus()">Edit Cold Room Status</h3>
+        <div class="button">
+            <h3 id="vw-all-mnt-rec" href="#" onclick="onClickViewAllMntRecs()">View All Maintenance Records</h3>
         </div>
 
         <div id="editCRBtn" class="button hideButton">

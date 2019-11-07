@@ -24,13 +24,15 @@
           "title": {
             "text": {
               "default": "In Use",
-              "es": "En uso"
+              "es": "En uso",
+              "fr": "En service"
             }
           },
           "prompt": {
             "text": {
               "default": "Choose the current use status:",
-              "es": "¿En uso?"
+              "es": "¿En uso?",
+              "fr": "Choisir l'état actuel de fonctionnement :"
             }
           }
         },
@@ -38,39 +40,43 @@
       },
       {
         "type": "select_one",
-        "values_list": "status",
+        "values_list": "user_friendly_status",
         "name": "functional_status",
         "display": {
           "title": {
             "text": {
               "default": "Functional Status",
-              "es": "Functionando"
+              "es": "Functionando",
+              "fr": "État de fonctionnement"
             }
           },
           "prompt": {
             "text": {
               "default": "Functional status:",
-              "es": "¿Functionando?"
+              "es": "¿Functionando?",
+              "fr": "État de fonctionnement :"
             }
           }
         },
         "_row_num": 4
       },
       {
-        "type": "select_one",
+        "type": "select_multiple",
         "values_list": "reasons",
         "name": "reason_not_working",
         "display": {
           "title": {
             "text": {
               "default": "Reason Not Working",
-              "es": "Razon por no functionar"
+              "es": "Razon por no functionar",
+              "fr": "Raison de la panne"
             }
           },
           "prompt": {
             "text": {
               "default": "Reason not working:",
-              "es": "Razon por no functionar"
+              "es": "Razon por no functionar",
+              "fr": "Raison de la panne :"
             }
           }
         },
@@ -84,13 +90,15 @@
           "title": {
             "text": {
               "default": "Service Requested With Priority",
-              "es": "Servicio solicitado con prioridad"
+              "es": "Servicio solicitado con prioridad",
+              "fr": "Maintenance prioritaire"
             }
           },
           "prompt": {
             "text": {
               "default": "Choose priority for maintenance if applicable:",
-              "es": "Seleccione la prioridad de mantenimiento si corresponde:"
+              "es": "Seleccione la prioridad de mantenimiento si corresponde:",
+              "fr": "Choisir la maintenance prioritaire, le cas échéant :"
             }
           }
         },
@@ -103,26 +111,26 @@
     ],
     "choices": [
       {
-        "choice_list_name": "status",
+        "choice_list_name": "user_friendly_status",
         "data_value": "functioning",
         "display": {
           "title": {
             "text": {
-              "default": "Functioning",
-              "es": "Functionando"
+              "default": "No known issues",
+              "es": "No hay problemas conocidos"
             }
           }
         },
         "_row_num": 2
       },
       {
-        "choice_list_name": "status",
+        "choice_list_name": "user_friendly_status",
         "data_value": "not_functioning",
         "display": {
           "title": {
             "text": {
-              "default": "Not Functioning",
-              "es": "No Functionando"
+              "default": "Needs attention",
+              "es": "Necesita atención"
             }
           }
         },
@@ -135,7 +143,8 @@
           "title": {
             "text": {
               "default": "Needs Spare Parts",
-              "es": "Necesita Partes"
+              "es": "Necesita Partes",
+              "fr": "Pièces détachées nécessaires"
             }
           }
         },
@@ -148,7 +157,8 @@
           "title": {
             "text": {
               "default": "Unknown/Needs Investigation",
-              "es": "Investigación desconocida / de necesidades"
+              "es": "Investigación desconocida / de necesidades",
+              "fr": "Ne sais pas/Étude nécessaire"
             }
           }
         },
@@ -161,7 +171,8 @@
           "title": {
             "text": {
               "default": "Lack of Power",
-              "es": "Falta de poder"
+              "es": "Falta de poder",
+              "fr": "Absence d'énergie"
             }
           }
         },
@@ -174,7 +185,8 @@
           "title": {
             "text": {
               "default": "Awaiting Installation",
-              "es": "En espera de instalación"
+              "es": "En espera de instalación",
+              "fr": "Installation en attente"
             }
           }
         },
@@ -187,7 +199,8 @@
           "title": {
             "text": {
               "default": "Awaiting Decomissioning",
-              "es": "En espera de desarme"
+              "es": "En espera de desarme",
+              "fr": "Mise hors service en attente"
             }
           }
         },
@@ -200,7 +213,8 @@
           "title": {
             "text": {
               "default": "Lack of Technician Availability",
-              "es": "Falta de disponibilidad de técnicos"
+              "es": "Falta de disponibilidad de técnicos",
+              "fr": "Technicien non disponible"
             }
           }
         },
@@ -213,7 +227,8 @@
           "title": {
             "text": {
               "default": "Not Applicable",
-              "es": "No aplica"
+              "es": "No aplica",
+              "fr": "Sans objet"
             }
           }
         },
@@ -221,12 +236,12 @@
       },
       {
         "choice_list_name": "current_use",
-        "data_value": "in_use",
+        "data_value": "installed_in_use",
         "display": {
           "title": {
             "text": {
-              "default": "In Use",
-              "es": "En Uso"
+              "default": "Installed - In Use",
+              "es": "Instalado - En uso"
             }
           }
         },
@@ -234,12 +249,12 @@
       },
       {
         "choice_list_name": "current_use",
-        "data_value": "not_in_use",
+        "data_value": "installed_not_in_use",
         "display": {
           "title": {
             "text": {
-              "default": "Not In Use",
-              "es": "No En Uso"
+              "default": "Installed - Not In Use",
+              "es": "Instalado - No en uso"
             }
           }
         },
@@ -247,16 +262,42 @@
       },
       {
         "choice_list_name": "current_use",
-        "data_value": "not_installed",
+        "data_value": "not_installed_waiting_for_installation",
         "display": {
           "title": {
             "text": {
-              "default": "Not Installed",
-              "es": "No Instalado"
+              "default": "Not Installed - Waiting For Installation",
+              "es": "No instalado - Esperando instalación"
             }
           }
         },
         "_row_num": 15
+      },
+      {
+        "choice_list_name": "current_use",
+        "data_value": "not_installed_removed_from_service",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Not installed - Removed From Service",
+              "es": "No instalado: eliminado del servicio"
+            }
+          }
+        },
+        "_row_num": 16
+      },
+      {
+        "choice_list_name": "current_use",
+        "data_value": "missing",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Missing",
+              "es": "Desaparecido"
+            }
+          }
+        },
+        "_row_num": 17
       },
       {
         "choice_list_name": "service_priority_list",
@@ -265,11 +306,12 @@
           "title": {
             "text": {
               "default": "Not Applicable",
-              "es": "No Aplica"
+              "es": "No Aplica",
+              "fr": "Sans objet"
             }
           }
         },
-        "_row_num": 17
+        "_row_num": 19
       },
       {
         "choice_list_name": "service_priority_list",
@@ -278,11 +320,12 @@
           "title": {
             "text": {
               "default": "Low",
-              "es": "Bajo"
+              "es": "Bajo",
+              "fr": "Faible"
             }
           }
         },
-        "_row_num": 18
+        "_row_num": 20
       },
       {
         "choice_list_name": "service_priority_list",
@@ -291,11 +334,12 @@
           "title": {
             "text": {
               "default": "Medium",
-              "es": "Medio"
+              "es": "Medio",
+              "fr": "Moyen"
             }
           }
         },
-        "_row_num": 19
+        "_row_num": 21
       },
       {
         "choice_list_name": "service_priority_list",
@@ -304,11 +348,12 @@
           "title": {
             "text": {
               "default": "High",
-              "es": "Alto"
+              "es": "Alto",
+              "fr": "Élevé"
             }
           }
         },
-        "_row_num": 20
+        "_row_num": 22
       }
     ],
     "settings": [
@@ -350,7 +395,8 @@
           "locale": {
             "text": {
               "default": "English",
-              "es": "Inglés"
+              "es": "Inglés",
+              "fr": "Anglais"
             }
           }
         },
@@ -362,11 +408,25 @@
           "locale": {
             "text": {
               "default": "Spanish",
-              "es": "Español"
+              "es": "Español",
+              "fr": "Espagnol"
             }
           }
         },
         "_row_num": 8
+      },
+      {
+        "setting_name": "fr",
+        "display": {
+          "locale": {
+            "text": {
+              "default": "French",
+              "es": "Francés",
+              "fr": "Francais"
+            }
+          }
+        },
+        "_row_num": 9
       }
     ]
   },
@@ -425,7 +485,8 @@
           "locale": {
             "text": {
               "default": "English",
-              "es": "Inglés"
+              "es": "Inglés",
+              "fr": "Anglais"
             }
           }
         },
@@ -437,11 +498,25 @@
           "locale": {
             "text": {
               "default": "Spanish",
-              "es": "Español"
+              "es": "Español",
+              "fr": "Espagnol"
             }
           }
         },
         "_row_num": 8
+      },
+      "fr": {
+        "setting_name": "fr",
+        "display": {
+          "locale": {
+            "text": {
+              "default": "French",
+              "es": "Francés",
+              "fr": "Francais"
+            }
+          }
+        },
+        "_row_num": 9
       },
       "_locales": {
         "setting_name": "_locales",
@@ -452,7 +527,8 @@
               "locale": {
                 "text": {
                   "default": "Spanish",
-                  "es": "Español"
+                  "es": "Español",
+                  "fr": "Espagnol"
                 }
               }
             },
@@ -488,28 +564,28 @@
       }
     },
     "choices": {
-      "status": [
+      "user_friendly_status": [
         {
-          "choice_list_name": "status",
+          "choice_list_name": "user_friendly_status",
           "data_value": "functioning",
           "display": {
             "title": {
               "text": {
-                "default": "Functioning",
-                "es": "Functionando"
+                "default": "No known issues",
+                "es": "No hay problemas conocidos"
               }
             }
           },
           "_row_num": 2
         },
         {
-          "choice_list_name": "status",
+          "choice_list_name": "user_friendly_status",
           "data_value": "not_functioning",
           "display": {
             "title": {
               "text": {
-                "default": "Not Functioning",
-                "es": "No Functionando"
+                "default": "Needs attention",
+                "es": "Necesita atención"
               }
             }
           },
@@ -524,7 +600,8 @@
             "title": {
               "text": {
                 "default": "Needs Spare Parts",
-                "es": "Necesita Partes"
+                "es": "Necesita Partes",
+                "fr": "Pièces détachées nécessaires"
               }
             }
           },
@@ -537,7 +614,8 @@
             "title": {
               "text": {
                 "default": "Unknown/Needs Investigation",
-                "es": "Investigación desconocida / de necesidades"
+                "es": "Investigación desconocida / de necesidades",
+                "fr": "Ne sais pas/Étude nécessaire"
               }
             }
           },
@@ -550,7 +628,8 @@
             "title": {
               "text": {
                 "default": "Lack of Power",
-                "es": "Falta de poder"
+                "es": "Falta de poder",
+                "fr": "Absence d'énergie"
               }
             }
           },
@@ -563,7 +642,8 @@
             "title": {
               "text": {
                 "default": "Awaiting Installation",
-                "es": "En espera de instalación"
+                "es": "En espera de instalación",
+                "fr": "Installation en attente"
               }
             }
           },
@@ -576,7 +656,8 @@
             "title": {
               "text": {
                 "default": "Awaiting Decomissioning",
-                "es": "En espera de desarme"
+                "es": "En espera de desarme",
+                "fr": "Mise hors service en attente"
               }
             }
           },
@@ -589,7 +670,8 @@
             "title": {
               "text": {
                 "default": "Lack of Technician Availability",
-                "es": "Falta de disponibilidad de técnicos"
+                "es": "Falta de disponibilidad de técnicos",
+                "fr": "Technicien non disponible"
               }
             }
           },
@@ -602,7 +684,8 @@
             "title": {
               "text": {
                 "default": "Not Applicable",
-                "es": "No aplica"
+                "es": "No aplica",
+                "fr": "Sans objet"
               }
             }
           },
@@ -612,12 +695,12 @@
       "current_use": [
         {
           "choice_list_name": "current_use",
-          "data_value": "in_use",
+          "data_value": "installed_in_use",
           "display": {
             "title": {
               "text": {
-                "default": "In Use",
-                "es": "En Uso"
+                "default": "Installed - In Use",
+                "es": "Instalado - En uso"
               }
             }
           },
@@ -625,12 +708,12 @@
         },
         {
           "choice_list_name": "current_use",
-          "data_value": "not_in_use",
+          "data_value": "installed_not_in_use",
           "display": {
             "title": {
               "text": {
-                "default": "Not In Use",
-                "es": "No En Uso"
+                "default": "Installed - Not In Use",
+                "es": "Instalado - No en uso"
               }
             }
           },
@@ -638,16 +721,42 @@
         },
         {
           "choice_list_name": "current_use",
-          "data_value": "not_installed",
+          "data_value": "not_installed_waiting_for_installation",
           "display": {
             "title": {
               "text": {
-                "default": "Not Installed",
-                "es": "No Instalado"
+                "default": "Not Installed - Waiting For Installation",
+                "es": "No instalado - Esperando instalación"
               }
             }
           },
           "_row_num": 15
+        },
+        {
+          "choice_list_name": "current_use",
+          "data_value": "not_installed_removed_from_service",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Not installed - Removed From Service",
+                "es": "No instalado: eliminado del servicio"
+              }
+            }
+          },
+          "_row_num": 16
+        },
+        {
+          "choice_list_name": "current_use",
+          "data_value": "missing",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Missing",
+                "es": "Desaparecido"
+              }
+            }
+          },
+          "_row_num": 17
         }
       ],
       "service_priority_list": [
@@ -658,11 +767,12 @@
             "title": {
               "text": {
                 "default": "Not Applicable",
-                "es": "No Aplica"
+                "es": "No Aplica",
+                "fr": "Sans objet"
               }
             }
           },
-          "_row_num": 17
+          "_row_num": 19
         },
         {
           "choice_list_name": "service_priority_list",
@@ -671,11 +781,12 @@
             "title": {
               "text": {
                 "default": "Low",
-                "es": "Bajo"
+                "es": "Bajo",
+                "fr": "Faible"
               }
             }
           },
-          "_row_num": 18
+          "_row_num": 20
         },
         {
           "choice_list_name": "service_priority_list",
@@ -684,11 +795,12 @@
             "title": {
               "text": {
                 "default": "Medium",
-                "es": "Medio"
+                "es": "Medio",
+                "fr": "Moyen"
               }
             }
           },
-          "_row_num": 19
+          "_row_num": 21
         },
         {
           "choice_list_name": "service_priority_list",
@@ -697,11 +809,12 @@
             "title": {
               "text": {
                 "default": "High",
-                "es": "Alto"
+                "es": "Alto",
+                "fr": "Élevé"
               }
             }
           },
-          "_row_num": 20
+          "_row_num": 22
         }
       ]
     },
@@ -719,7 +832,8 @@
         "displayName": {
           "text": {
             "default": "In Use",
-            "es": "En uso"
+            "es": "En uso",
+            "fr": "En service"
           }
         },
         "valuesList": "current_use",
@@ -736,10 +850,11 @@
         "displayName": {
           "text": {
             "default": "Functional Status",
-            "es": "Functionando"
+            "es": "Functionando",
+            "fr": "État de fonctionnement"
           }
         },
-        "valuesList": "status",
+        "valuesList": "user_friendly_status",
         "elementKey": "functional_status"
       },
       "reason_not_working": {
@@ -749,11 +864,16 @@
             "section_name": "survey"
           }
         ],
-        "type": "string",
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "reason_not_working_items"
+        },
         "displayName": {
           "text": {
             "default": "Reason Not Working",
-            "es": "Razon por no functionar"
+            "es": "Razon por no functionar",
+            "fr": "Raison de la panne"
           }
         },
         "valuesList": "reasons",
@@ -770,7 +890,8 @@
         "displayName": {
           "text": {
             "default": "Service Requested With Priority",
-            "es": "Servicio solicitado con prioridad"
+            "es": "Servicio solicitado con prioridad",
+            "fr": "Maintenance prioritaire"
           }
         },
         "valuesList": "service_priority_list",
@@ -906,13 +1027,15 @@
               "title": {
                 "text": {
                   "default": "In Use",
-                  "es": "En uso"
+                  "es": "En uso",
+                  "fr": "En service"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Choose the current use status:",
-                  "es": "¿En uso?"
+                  "es": "¿En uso?",
+                  "fr": "Choisir l'état actuel de fonctionnement :"
                 }
               }
             },
@@ -925,19 +1048,21 @@
           },
           {
             "type": "select_one",
-            "values_list": "status",
+            "values_list": "user_friendly_status",
             "name": "functional_status",
             "display": {
               "title": {
                 "text": {
                   "default": "Functional Status",
-                  "es": "Functionando"
+                  "es": "Functionando",
+                  "fr": "État de fonctionnement"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Functional status:",
-                  "es": "¿Functionando?"
+                  "es": "¿Functionando?",
+                  "fr": "État de fonctionnement :"
                 }
               }
             },
@@ -949,27 +1074,29 @@
             "promptIdx": 1
           },
           {
-            "type": "select_one",
+            "type": "select_multiple",
             "values_list": "reasons",
             "name": "reason_not_working",
             "display": {
               "title": {
                 "text": {
                   "default": "Reason Not Working",
-                  "es": "Razon por no functionar"
+                  "es": "Razon por no functionar",
+                  "fr": "Raison de la panne"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Reason not working:",
-                  "es": "Razon por no functionar"
+                  "es": "Razon por no functionar",
+                  "fr": "Raison de la panne :"
                 }
               }
             },
             "_row_num": 5,
             "__rowNum__": 4,
             "_token_type": "prompt",
-            "_type": "select_one",
+            "_type": "select_multiple",
             "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 2
           },
@@ -981,13 +1108,15 @@
               "title": {
                 "text": {
                   "default": "Service Requested With Priority",
-                  "es": "Servicio solicitado con prioridad"
+                  "es": "Servicio solicitado con prioridad",
+                  "fr": "Maintenance prioritaire"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Choose priority for maintenance if applicable:",
-                  "es": "Seleccione la prioridad de mantenimiento si corresponde:"
+                  "es": "Seleccione la prioridad de mantenimiento si corresponde:",
+                  "fr": "Choisir la maintenance prioritaire, le cas échéant :"
                 }
               }
             },
@@ -1066,7 +1195,8 @@
         "displayName": {
           "text": {
             "default": "In Use",
-            "es": "En uso"
+            "es": "En uso",
+            "fr": "En service"
           }
         },
         "valuesList": "current_use",
@@ -1086,10 +1216,11 @@
         "displayName": {
           "text": {
             "default": "Functional Status",
-            "es": "Functionando"
+            "es": "Functionando",
+            "fr": "État de fonctionnement"
           }
         },
-        "valuesList": "status",
+        "valuesList": "user_friendly_status",
         "elementKey": "functional_status",
         "elementName": "functional_status",
         "elementSet": "data",
@@ -1102,18 +1233,30 @@
             "section_name": "survey"
           }
         ],
-        "type": "string",
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "reason_not_working_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "reason_not_working.items",
+          "notUnitOfRetention": true
+        },
         "displayName": {
           "text": {
             "default": "Reason Not Working",
-            "es": "Razon por no functionar"
+            "es": "Razon por no functionar",
+            "fr": "Raison de la panne"
           }
         },
         "valuesList": "reasons",
         "elementKey": "reason_not_working",
         "elementName": "reason_not_working",
         "elementSet": "data",
-        "elementPath": "reason_not_working"
+        "elementPath": "reason_not_working",
+        "listChildElementKeys": [
+          "reason_not_working_items"
+        ]
       },
       "maintenance_priority": {
         "_defn": [
@@ -1126,7 +1269,8 @@
         "displayName": {
           "text": {
             "default": "Service Requested With Priority",
-            "es": "Servicio solicitado con prioridad"
+            "es": "Servicio solicitado con prioridad",
+            "fr": "Maintenance prioritaire"
           }
         },
         "valuesList": "service_priority_list",
@@ -1134,6 +1278,14 @@
         "elementName": "maintenance_priority",
         "elementSet": "data",
         "elementPath": "maintenance_priority"
+      },
+      "reason_not_working_items": {
+        "type": "string",
+        "elementKey": "reason_not_working_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "reason_not_working.items",
+        "notUnitOfRetention": true
       },
       "_id": {
         "type": "string",

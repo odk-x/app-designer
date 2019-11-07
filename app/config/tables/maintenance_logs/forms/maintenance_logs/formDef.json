@@ -88,8 +88,27 @@
         "_row_num": 7
       },
       {
-        "clause": "end screen",
+        "type": "string",
+        "name": "technician_phone",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Technician Phone Number",
+              "es": "Número de teléfono del técnico"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Enter technician phone number if available",
+              "es": "Ingrese el número de teléfono del técnico si está disponible"
+            }
+          }
+        },
         "_row_num": 8
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 9
       },
       {
         "type": "image",
@@ -103,17 +122,17 @@
           },
           "prompt": {
             "text": {
-              "default": "Take a picture",
+              "default": "Take a picture of the area of repair",
               "es": "Toma una foto",
               "fr": "Prendre une photo"
             }
           }
         },
-        "_row_num": 9
+        "_row_num": 10
       },
       {
         "clause": "begin screen",
-        "_row_num": 10
+        "_row_num": 11
       },
       {
         "type": "birthdate",
@@ -121,35 +140,15 @@
         "display": {
           "title": {
             "text": {
-              "default": "Date Serviced",
+              "default": "Date of Service",
               "es": "Fecha de Servicio"
             }
           },
           "prompt": {
             "text": {
-              "default": "Enter the date of last service",
-              "es": "Fecha  del último servicio",
-              "fr": "Entrer la date de la dernière maintenance"
-            }
-          }
-        },
-        "_row_num": 11
-      },
-      {
-        "type": "date",
-        "name": "next_date_serviced",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Next Date Serviced",
-              "es": "Próxima Fecha de Servicio"
-            }
-          },
-          "prompt": {
-            "text": {
-              "default": "Enter the next date serviced",
-              "es": "Ingrese la próxima fecha de servicio",
-              "fr": "Entrer la date de la prochaine maintenance"
+              "default": "Enter the date of service",
+              "es": "Fecha  del servicio",
+              "fr": "Entrer la date de la maintenance"
             }
           }
         },
@@ -176,7 +175,7 @@
         "_row_num": 13
       },
       {
-        "type": "select_one",
+        "type": "select_multiple",
         "values_list": "maint_types",
         "name": "type_of_maintenance",
         "display": {
@@ -198,8 +197,36 @@
       },
       {
         "clause": "if",
-        "condition": "data('type_of_maintenance') === 'repair'",
+        "condition": "selected(data('type_of_maintenance'), 'other')",
         "_row_num": 15
+      },
+      {
+        "type": "text",
+        "name": "other_maintenance",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Other Maintenance",
+              "es": "Otro mantenimiento"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Enter other maintenance",
+              "es": "Ingrese otro mantenimiento"
+            }
+          }
+        },
+        "_row_num": 16
+      },
+      {
+        "clause": "end if",
+        "_row_num": 17
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('type_of_maintenance'),  'repair')",
+        "_row_num": 18
       },
       {
         "type": "select_multiple",
@@ -220,16 +247,63 @@
             }
           }
         },
-        "_row_num": 16
-      },
-      {
-        "clause": "end if",
-        "_row_num": 17
+        "_row_num": 19
       },
       {
         "clause": "if",
-        "condition": "data('type_of_maintenance') === 'preventative'",
-        "_row_num": 18
+        "condition": "selected(data('type_of_repair'), 'other')",
+        "_row_num": 20
+      },
+      {
+        "type": "text",
+        "name": "other_repair",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Other Repair",
+              "es": "Otra Reparación"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Enter other repair",
+              "es": "Ingrese otra reparación"
+            }
+          }
+        },
+        "_row_num": 21
+      },
+      {
+        "clause": "end if",
+        "_row_num": 22
+      },
+      {
+        "type": "text",
+        "name": "repair_activities",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Repair Activities",
+              "es": "Actividades de Reparacion"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Enter actions taken",
+              "es": "Ingrese las acciones tomadas"
+            }
+          }
+        },
+        "_row_num": 23
+      },
+      {
+        "clause": "end if",
+        "_row_num": 24
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('type_of_maintenance'), 'preventative')",
+        "_row_num": 25
       },
       {
         "type": "select_multiple",
@@ -244,244 +318,202 @@
           },
           "prompt": {
             "text": {
-              "default": "Select type of maintenance",
-              "es": "Seleccione tipo de mantenimiento",
+              "default": "Select type of preventative maintenance",
+              "es": "Seleccione tipo de mantenimiento preventivo",
               "fr": "Sélectionner le type de maintenance"
             }
           }
         },
-        "_row_num": 19
+        "_row_num": 26
       },
       {
-        "clause": "end if",
-        "_row_num": 20
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 21
-      },
-      {
-        "clause": "begin screen",
-        "_row_num": 22
-      },
-      {
-        "type": "select_multiple",
-        "values_list": "spare_parts_category_types",
-        "name": "spare_parts_category",
+        "type": "text",
+        "name": "preventative_comments",
         "display": {
           "title": {
-            "text": {
-              "default": "Spare Part Category",
-              "es": "Categoría de repuestos"
-            }
+            "text": "Comments"
           },
           "prompt": {
             "text": {
-              "default": "Select spare part category",
-              "es": "Seleccione la categoría de repuestos",
-              "fr": "Sélectionner des pièces détachées"
+              "default": "Enter comments",
+              "es": "Ingrese comentarios"
             }
           }
         },
-        "_row_num": 23
+        "_row_num": 27
       },
       {
-        "clause": "if",
-        "condition": "selected(data('spare_parts_category'), 'electrical_and_control_system')",
-        "_row_num": 24
+        "clause": "end if",
+        "_row_num": 28
       },
       {
-        "type": "select_multiple_inline",
+        "clause": "end screen",
+        "_row_num": 29
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 30
+      },
+      {
+        "type": "select_multiple",
         "values_list": "spare_parts_types_electrical",
         "name": "spare_parts_electrical",
         "display": {
           "title": {
             "text": {
-              "default": "Spare Parts",
-              "es": "Piezas de Repuesto"
+              "default": "Electrical and Control System",
+              "es": "Sistema electrico y de control"
             }
           },
           "prompt": {
             "text": {
-              "default": "Select spare parts",
-              "es": "Seleccione piezas de repuestos"
-            }
-          }
-        },
-        "_row_num": 25
-      },
-      {
-        "clause": "end if",
-        "_row_num": 26
-      },
-      {
-        "clause": "if",
-        "condition": "selected(data('spare_parts_category'), 'hardware')",
-        "_row_num": 27
-      },
-      {
-        "type": "select_multiple_inline",
-        "values_list": "spare_parts_types_hardware",
-        "name": "spare_parts_hardware",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Spare Parts",
-              "es": "Piezas de Repuesto"
-            }
-          },
-          "prompt": {
-            "text": {
-              "default": "Select spare parts",
-              "es": "Seleccione piezas de repuestos"
-            }
-          }
-        },
-        "_row_num": 28
-      },
-      {
-        "clause": "end if",
-        "_row_num": 29
-      },
-      {
-        "clause": "if",
-        "condition": "selected(data('spare_parts_category'), 'monitoring')",
-        "_row_num": 30
-      },
-      {
-        "type": "select_multiple_inline",
-        "values_list": "spare_parts_types_monitoring",
-        "name": "spare_parts_monitoring",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Spare Parts",
-              "es": "Piezas de Repuesto"
-            }
-          },
-          "prompt": {
-            "text": {
-              "default": "Select spare parts",
-              "es": "Seleccione piezas de repuestos"
+              "default": "Select Electrical and Control System spare parts replaced/used",
+              "es": "Seleccione las piezas de repuesto del sistema eléctrico y de control reemplazadas/usadas"
             }
           }
         },
         "_row_num": 31
       },
       {
-        "clause": "end if",
+        "type": "select_multiple",
+        "values_list": "spare_parts_types_hardware",
+        "name": "spare_parts_hardware",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Hardware",
+              "es": "Hardware"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Select Hardware spare parts replaced/used",
+              "es": "Seleccione piezas de repuesto de hardware reemplazadas/usadas"
+            }
+          }
+        },
         "_row_num": 32
       },
       {
-        "clause": "if",
-        "condition": "selected(data('spare_parts_category'), 'power')",
+        "type": "select_multiple",
+        "values_list": "spare_parts_types_monitoring",
+        "name": "spare_parts_monitoring",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Monitoring",
+              "es": "Vigilancia"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Select Monitoring spare parts replaced/used",
+              "es": "Seleccione Monitoreo de repuestos reemplazados/usados"
+            }
+          }
+        },
         "_row_num": 33
       },
       {
-        "type": "select_multiple_inline",
+        "type": "select_multiple",
         "values_list": "spare_parts_types_power",
         "name": "spare_parts_power",
         "display": {
           "title": {
             "text": {
-              "default": "Spare Parts",
-              "es": "Piezas de Repuesto"
+              "default": "Power",
+              "es": "Poder"
             }
           },
           "prompt": {
             "text": {
-              "default": "Select spare parts",
-              "es": "Seleccione piezas de repuestos"
+              "default": "Select Power spare parts replaced/used",
+              "es": "Seleccionar repuestos de potencia reemplazados/usados"
             }
           }
         },
         "_row_num": 34
       },
       {
-        "clause": "end if",
-        "_row_num": 35
-      },
-      {
-        "clause": "if",
-        "condition": "selected(data('spare_parts_category'), 'refrigeration_system')",
-        "_row_num": 36
-      },
-      {
-        "type": "select_multiple_inline",
+        "type": "select_multiple",
         "values_list": "spare_parts_types_refrigeration",
         "name": "spare_parts_refrigeration",
         "display": {
           "title": {
             "text": {
-              "default": "Spare Parts",
-              "es": "Piezas de Repuesto"
+              "default": "Refrigeration System",
+              "es": "Sistema de refrigeración"
             }
           },
           "prompt": {
             "text": {
-              "default": "Select spare parts",
-              "es": "Seleccione piezas de repuestos"
+              "default": "Select Refrigeration System spare parts replaced/used",
+              "es": "Seleccione los repuestos del sistema de refrigeración reemplazados/usados"
+            }
+          }
+        },
+        "_row_num": 35
+      },
+      {
+        "type": "select_multiple",
+        "values_list": "spare_parts_types_solar",
+        "name": "spare_parts_solar",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Solar",
+              "es": "Solar"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Select Solar spare parts replaced/used",
+              "es": "Seleccionar repuestos solares reemplazados/usados"
+            }
+          }
+        },
+        "_row_num": 36
+      },
+      {
+        "type": "string",
+        "name": "other_spare_parts",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Other",
+              "es": "Otro"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Other spare parts replaced/used",
+              "es": "Otras piezas de repuesto reemplazadas/usadas"
             }
           }
         },
         "_row_num": 37
       },
       {
-        "clause": "end if",
+        "clause": "end screen",
         "_row_num": 38
       },
       {
-        "clause": "if",
-        "condition": "selected(data('spare_parts_category'), 'solar')",
+        "type": "note",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Update Refrigerator Status",
+              "es": "Actualizar estado del refrigerador"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Please update refrigerator status as needed",
+              "es": "Actualice el estado del refrigerador según sea necesario"
+            }
+          }
+        },
         "_row_num": 39
-      },
-      {
-        "type": "select_multiple_inline",
-        "values_list": "spare_parts_types_solar",
-        "name": "spare_parts_solar",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Spare Parts",
-              "es": "Piezas de Repuesto"
-            }
-          },
-          "prompt": {
-            "text": {
-              "default": "Select spare parts",
-              "es": "Seleccione piezas de repuestos"
-            }
-          }
-        },
-        "_row_num": 40
-      },
-      {
-        "clause": "end if",
-        "_row_num": 41
-      },
-      {
-        "type": "string",
-        "name": "addtl_spare_parts",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Enter additional spare parts",
-              "es": "Entrar adicional piezas de repuesto"
-            }
-          },
-          "prompt": {
-            "text": {
-              "default": "Make a list of spare parts",
-              "es": "Haga una lista de repuestos",
-              "fr": "Faire une liste des pièces détachées"
-            }
-          }
-        },
-        "_row_num": 42
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 43
       }
     ],
     "choices": [
@@ -739,57 +771,185 @@
       },
       {
         "choice_list_name": "repair_types",
-        "data_value": "need_data",
+        "data_value": "electrical_and_control_system",
         "display": {
           "title": {
             "text": {
-              "default": "Need Data",
-              "es": "Necesita Datos",
-              "fr": "Données nécessaires"
+              "default": "Electrical and Control System",
+              "es": "Sistema electrico y de control"
             }
           }
         },
         "_row_num": 23
       },
       {
-        "choice_list_name": "preventative_maint_types",
-        "data_value": "clean_solar_panels",
+        "choice_list_name": "repair_types",
+        "data_value": "cabinet",
         "display": {
           "title": {
             "text": {
-              "default": "Clean solar panels",
-              "fr": "Panneaux solaires propres"
+              "default": "Cabinet",
+              "es": "Gabinete"
+            }
+          }
+        },
+        "_row_num": 24
+      },
+      {
+        "choice_list_name": "repair_types",
+        "data_value": "refrigeration_system",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Refrigeration System",
+              "es": "Sistema de refrigeración"
             }
           }
         },
         "_row_num": 25
       },
       {
-        "choice_list_name": "preventative_maint_types",
-        "data_value": "clean_coils",
+        "choice_list_name": "repair_types",
+        "data_value": "power",
         "display": {
           "title": {
             "text": {
-              "default": "Clean coils",
-              "fr": "Serpentins propres"
+              "default": "Power",
+              "es": "Energía"
             }
           }
         },
         "_row_num": 26
       },
       {
-        "choice_list_name": "preventative_maint_types",
-        "data_value": "need_data",
+        "choice_list_name": "repair_types",
+        "data_value": "solar",
         "display": {
           "title": {
             "text": {
-              "default": "Need Data",
-              "es": "Necesita Datos",
-              "fr": "Données nécessaires"
+              "default": "Solar",
+              "es": "Solar"
             }
           }
         },
         "_row_num": 27
+      },
+      {
+        "choice_list_name": "repair_types",
+        "data_value": "temperature_monitoring",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Temperature Monitoring",
+              "es": "Monitoreo de temperatura"
+            }
+          }
+        },
+        "_row_num": 28
+      },
+      {
+        "choice_list_name": "repair_types",
+        "data_value": "other",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Other",
+              "es": "Otro"
+            }
+          }
+        },
+        "_row_num": 29
+      },
+      {
+        "choice_list_name": "preventative_maint_types",
+        "data_value": "cleaning_cabinet",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Cleaning - cabinet",
+              "es": "Limpieza - gabinete"
+            }
+          }
+        },
+        "_row_num": 32
+      },
+      {
+        "choice_list_name": "preventative_maint_types",
+        "data_value": "cleaning_drying_storage_compartment",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Cleaning/drying - storage compartment",
+              "es": "Limpieza/secado - compartimento de almacenamiento"
+            }
+          }
+        },
+        "_row_num": 33
+      },
+      {
+        "choice_list_name": "preventative_maint_types",
+        "data_value": "cleaning_solar_panels",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Cleaning - solar panels",
+              "es": "Limpieza - paneles solares"
+            }
+          }
+        },
+        "_row_num": 34
+      },
+      {
+        "choice_list_name": "preventative_maint_types",
+        "data_value": "defrosting",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Defrosting",
+              "es": "Antihielo"
+            }
+          }
+        },
+        "_row_num": 35
+      },
+      {
+        "choice_list_name": "preventative_maint_types",
+        "data_value": "tightening",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Tightening",
+              "es": "Apriete"
+            }
+          }
+        },
+        "_row_num": 36
+      },
+      {
+        "choice_list_name": "preventative_maint_types",
+        "data_value": "check_seals",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Check seals",
+              "es": "Revise los sellos"
+            }
+          }
+        },
+        "_row_num": 37
+      },
+      {
+        "choice_list_name": "preventative_maint_types",
+        "data_value": "check_unit",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Check/clean cooling unit",
+              "es": "Comprobar/limpiar la unidad de enfriamiento"
+            }
+          }
+        },
+        "_row_num": 38
       },
       {
         "choice_list_name": "spare_parts_category_types",
@@ -802,7 +962,7 @@
             }
           }
         },
-        "_row_num": 29
+        "_row_num": 41
       },
       {
         "choice_list_name": "spare_parts_category_types",
@@ -815,7 +975,7 @@
             }
           }
         },
-        "_row_num": 30
+        "_row_num": 42
       },
       {
         "choice_list_name": "spare_parts_category_types",
@@ -828,7 +988,7 @@
             }
           }
         },
-        "_row_num": 31
+        "_row_num": 43
       },
       {
         "choice_list_name": "spare_parts_category_types",
@@ -841,7 +1001,7 @@
             }
           }
         },
-        "_row_num": 32
+        "_row_num": 44
       },
       {
         "choice_list_name": "spare_parts_category_types",
@@ -854,7 +1014,7 @@
             }
           }
         },
-        "_row_num": 33
+        "_row_num": 45
       },
       {
         "choice_list_name": "spare_parts_category_types",
@@ -867,7 +1027,7 @@
             }
           }
         },
-        "_row_num": 34
+        "_row_num": 46
       },
       {
         "choice_list_name": "spare_parts_types_electrical",
@@ -880,7 +1040,7 @@
             }
           }
         },
-        "_row_num": 36
+        "_row_num": 48
       },
       {
         "choice_list_name": "spare_parts_types_electrical",
@@ -893,7 +1053,7 @@
             }
           }
         },
-        "_row_num": 37
+        "_row_num": 49
       },
       {
         "choice_list_name": "spare_parts_types_electrical",
@@ -906,7 +1066,7 @@
             }
           }
         },
-        "_row_num": 38
+        "_row_num": 50
       },
       {
         "choice_list_name": "spare_parts_types_electrical",
@@ -919,7 +1079,7 @@
             }
           }
         },
-        "_row_num": 39
+        "_row_num": 51
       },
       {
         "choice_list_name": "spare_parts_types_electrical",
@@ -932,7 +1092,7 @@
             }
           }
         },
-        "_row_num": 40
+        "_row_num": 52
       },
       {
         "choice_list_name": "spare_parts_types_electrical",
@@ -945,7 +1105,7 @@
             }
           }
         },
-        "_row_num": 41
+        "_row_num": 53
       },
       {
         "choice_list_name": "spare_parts_types_electrical",
@@ -958,7 +1118,7 @@
             }
           }
         },
-        "_row_num": 42
+        "_row_num": 54
       },
       {
         "choice_list_name": "spare_parts_types_electrical",
@@ -971,7 +1131,7 @@
             }
           }
         },
-        "_row_num": 43
+        "_row_num": 55
       },
       {
         "choice_list_name": "spare_parts_types_electrical",
@@ -984,7 +1144,7 @@
             }
           }
         },
-        "_row_num": 44
+        "_row_num": 56
       },
       {
         "choice_list_name": "spare_parts_types_electrical",
@@ -997,7 +1157,7 @@
             }
           }
         },
-        "_row_num": 45
+        "_row_num": 57
       },
       {
         "choice_list_name": "spare_parts_types_electrical",
@@ -1010,7 +1170,7 @@
             }
           }
         },
-        "_row_num": 46
+        "_row_num": 58
       },
       {
         "choice_list_name": "spare_parts_types_electrical",
@@ -1023,7 +1183,7 @@
             }
           }
         },
-        "_row_num": 47
+        "_row_num": 59
       },
       {
         "choice_list_name": "spare_parts_types_electrical",
@@ -1036,7 +1196,7 @@
             }
           }
         },
-        "_row_num": 48
+        "_row_num": 60
       },
       {
         "choice_list_name": "spare_parts_types_electrical",
@@ -1049,7 +1209,7 @@
             }
           }
         },
-        "_row_num": 49
+        "_row_num": 61
       },
       {
         "choice_list_name": "spare_parts_types_electrical",
@@ -1062,7 +1222,7 @@
             }
           }
         },
-        "_row_num": 50
+        "_row_num": 62
       },
       {
         "choice_list_name": "spare_parts_types_electrical",
@@ -1075,7 +1235,7 @@
             }
           }
         },
-        "_row_num": 51
+        "_row_num": 63
       },
       {
         "choice_list_name": "spare_parts_types_hardware",
@@ -1088,7 +1248,7 @@
             }
           }
         },
-        "_row_num": 53
+        "_row_num": 65
       },
       {
         "choice_list_name": "spare_parts_types_hardware",
@@ -1101,7 +1261,7 @@
             }
           }
         },
-        "_row_num": 54
+        "_row_num": 66
       },
       {
         "choice_list_name": "spare_parts_types_hardware",
@@ -1114,7 +1274,7 @@
             }
           }
         },
-        "_row_num": 55
+        "_row_num": 67
       },
       {
         "choice_list_name": "spare_parts_types_hardware",
@@ -1127,7 +1287,7 @@
             }
           }
         },
-        "_row_num": 56
+        "_row_num": 68
       },
       {
         "choice_list_name": "spare_parts_types_hardware",
@@ -1140,7 +1300,7 @@
             }
           }
         },
-        "_row_num": 57
+        "_row_num": 69
       },
       {
         "choice_list_name": "spare_parts_types_hardware",
@@ -1153,7 +1313,7 @@
             }
           }
         },
-        "_row_num": 58
+        "_row_num": 70
       },
       {
         "choice_list_name": "spare_parts_types_hardware",
@@ -1166,7 +1326,7 @@
             }
           }
         },
-        "_row_num": 59
+        "_row_num": 71
       },
       {
         "choice_list_name": "spare_parts_types_hardware",
@@ -1179,7 +1339,7 @@
             }
           }
         },
-        "_row_num": 60
+        "_row_num": 72
       },
       {
         "choice_list_name": "spare_parts_types_monitoring",
@@ -1192,7 +1352,7 @@
             }
           }
         },
-        "_row_num": 62
+        "_row_num": 74
       },
       {
         "choice_list_name": "spare_parts_types_power",
@@ -1205,7 +1365,7 @@
             }
           }
         },
-        "_row_num": 64
+        "_row_num": 76
       },
       {
         "choice_list_name": "spare_parts_types_power",
@@ -1218,7 +1378,7 @@
             }
           }
         },
-        "_row_num": 65
+        "_row_num": 77
       },
       {
         "choice_list_name": "spare_parts_types_power",
@@ -1231,7 +1391,7 @@
             }
           }
         },
-        "_row_num": 66
+        "_row_num": 78
       },
       {
         "choice_list_name": "spare_parts_types_power",
@@ -1244,7 +1404,7 @@
             }
           }
         },
-        "_row_num": 67
+        "_row_num": 79
       },
       {
         "choice_list_name": "spare_parts_types_power",
@@ -1257,7 +1417,7 @@
             }
           }
         },
-        "_row_num": 68
+        "_row_num": 80
       },
       {
         "choice_list_name": "spare_parts_types_power",
@@ -1270,7 +1430,7 @@
             }
           }
         },
-        "_row_num": 69
+        "_row_num": 81
       },
       {
         "choice_list_name": "spare_parts_types_power",
@@ -1283,7 +1443,7 @@
             }
           }
         },
-        "_row_num": 70
+        "_row_num": 82
       },
       {
         "choice_list_name": "spare_parts_types_refrigeration",
@@ -1296,7 +1456,7 @@
             }
           }
         },
-        "_row_num": 72
+        "_row_num": 84
       },
       {
         "choice_list_name": "spare_parts_types_refrigeration",
@@ -1309,7 +1469,7 @@
             }
           }
         },
-        "_row_num": 73
+        "_row_num": 85
       },
       {
         "choice_list_name": "spare_parts_types_refrigeration",
@@ -1322,7 +1482,7 @@
             }
           }
         },
-        "_row_num": 74
+        "_row_num": 86
       },
       {
         "choice_list_name": "spare_parts_types_refrigeration",
@@ -1335,7 +1495,7 @@
             }
           }
         },
-        "_row_num": 75
+        "_row_num": 87
       },
       {
         "choice_list_name": "spare_parts_types_refrigeration",
@@ -1348,7 +1508,7 @@
             }
           }
         },
-        "_row_num": 76
+        "_row_num": 88
       },
       {
         "choice_list_name": "spare_parts_types_refrigeration",
@@ -1361,7 +1521,7 @@
             }
           }
         },
-        "_row_num": 77
+        "_row_num": 89
       },
       {
         "choice_list_name": "spare_parts_types_refrigeration",
@@ -1374,7 +1534,7 @@
             }
           }
         },
-        "_row_num": 78
+        "_row_num": 90
       },
       {
         "choice_list_name": "spare_parts_types_refrigeration",
@@ -1387,7 +1547,7 @@
             }
           }
         },
-        "_row_num": 79
+        "_row_num": 91
       },
       {
         "choice_list_name": "spare_parts_types_refrigeration",
@@ -1400,7 +1560,7 @@
             }
           }
         },
-        "_row_num": 80
+        "_row_num": 92
       },
       {
         "choice_list_name": "spare_parts_types_refrigeration",
@@ -1413,7 +1573,7 @@
             }
           }
         },
-        "_row_num": 81
+        "_row_num": 93
       },
       {
         "choice_list_name": "spare_parts_types_refrigeration",
@@ -1426,7 +1586,7 @@
             }
           }
         },
-        "_row_num": 82
+        "_row_num": 94
       },
       {
         "choice_list_name": "spare_parts_types_refrigeration",
@@ -1439,7 +1599,7 @@
             }
           }
         },
-        "_row_num": 83
+        "_row_num": 95
       },
       {
         "choice_list_name": "spare_parts_types_refrigeration",
@@ -1452,7 +1612,7 @@
             }
           }
         },
-        "_row_num": 84
+        "_row_num": 96
       },
       {
         "choice_list_name": "spare_parts_types_refrigeration",
@@ -1465,7 +1625,7 @@
             }
           }
         },
-        "_row_num": 85
+        "_row_num": 97
       },
       {
         "choice_list_name": "spare_parts_types_refrigeration",
@@ -1478,7 +1638,7 @@
             }
           }
         },
-        "_row_num": 86
+        "_row_num": 98
       },
       {
         "choice_list_name": "spare_parts_types_refrigeration",
@@ -1491,7 +1651,7 @@
             }
           }
         },
-        "_row_num": 87
+        "_row_num": 99
       },
       {
         "choice_list_name": "spare_parts_types_refrigeration",
@@ -1504,7 +1664,7 @@
             }
           }
         },
-        "_row_num": 88
+        "_row_num": 100
       },
       {
         "choice_list_name": "spare_parts_types_refrigeration",
@@ -1517,7 +1677,7 @@
             }
           }
         },
-        "_row_num": 89
+        "_row_num": 101
       },
       {
         "choice_list_name": "spare_parts_types_refrigeration",
@@ -1530,7 +1690,7 @@
             }
           }
         },
-        "_row_num": 90
+        "_row_num": 102
       },
       {
         "choice_list_name": "spare_parts_types_refrigeration",
@@ -1543,7 +1703,7 @@
             }
           }
         },
-        "_row_num": 91
+        "_row_num": 103
       },
       {
         "choice_list_name": "spare_parts_types_solar",
@@ -1556,7 +1716,7 @@
             }
           }
         },
-        "_row_num": 93
+        "_row_num": 105
       }
     ],
     "queries": [
@@ -2115,59 +2275,187 @@
       "repair_types": [
         {
           "choice_list_name": "repair_types",
-          "data_value": "need_data",
+          "data_value": "electrical_and_control_system",
           "display": {
             "title": {
               "text": {
-                "default": "Need Data",
-                "es": "Necesita Datos",
-                "fr": "Données nécessaires"
+                "default": "Electrical and Control System",
+                "es": "Sistema electrico y de control"
               }
             }
           },
           "_row_num": 23
-        }
-      ],
-      "preventative_maint_types": [
+        },
         {
-          "choice_list_name": "preventative_maint_types",
-          "data_value": "clean_solar_panels",
+          "choice_list_name": "repair_types",
+          "data_value": "cabinet",
           "display": {
             "title": {
               "text": {
-                "default": "Clean solar panels",
-                "fr": "Panneaux solaires propres"
+                "default": "Cabinet",
+                "es": "Gabinete"
+              }
+            }
+          },
+          "_row_num": 24
+        },
+        {
+          "choice_list_name": "repair_types",
+          "data_value": "refrigeration_system",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Refrigeration System",
+                "es": "Sistema de refrigeración"
               }
             }
           },
           "_row_num": 25
         },
         {
-          "choice_list_name": "preventative_maint_types",
-          "data_value": "clean_coils",
+          "choice_list_name": "repair_types",
+          "data_value": "power",
           "display": {
             "title": {
               "text": {
-                "default": "Clean coils",
-                "fr": "Serpentins propres"
+                "default": "Power",
+                "es": "Energía"
               }
             }
           },
           "_row_num": 26
         },
         {
-          "choice_list_name": "preventative_maint_types",
-          "data_value": "need_data",
+          "choice_list_name": "repair_types",
+          "data_value": "solar",
           "display": {
             "title": {
               "text": {
-                "default": "Need Data",
-                "es": "Necesita Datos",
-                "fr": "Données nécessaires"
+                "default": "Solar",
+                "es": "Solar"
               }
             }
           },
           "_row_num": 27
+        },
+        {
+          "choice_list_name": "repair_types",
+          "data_value": "temperature_monitoring",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Temperature Monitoring",
+                "es": "Monitoreo de temperatura"
+              }
+            }
+          },
+          "_row_num": 28
+        },
+        {
+          "choice_list_name": "repair_types",
+          "data_value": "other",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Other",
+                "es": "Otro"
+              }
+            }
+          },
+          "_row_num": 29
+        }
+      ],
+      "preventative_maint_types": [
+        {
+          "choice_list_name": "preventative_maint_types",
+          "data_value": "cleaning_cabinet",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Cleaning - cabinet",
+                "es": "Limpieza - gabinete"
+              }
+            }
+          },
+          "_row_num": 32
+        },
+        {
+          "choice_list_name": "preventative_maint_types",
+          "data_value": "cleaning_drying_storage_compartment",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Cleaning/drying - storage compartment",
+                "es": "Limpieza/secado - compartimento de almacenamiento"
+              }
+            }
+          },
+          "_row_num": 33
+        },
+        {
+          "choice_list_name": "preventative_maint_types",
+          "data_value": "cleaning_solar_panels",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Cleaning - solar panels",
+                "es": "Limpieza - paneles solares"
+              }
+            }
+          },
+          "_row_num": 34
+        },
+        {
+          "choice_list_name": "preventative_maint_types",
+          "data_value": "defrosting",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Defrosting",
+                "es": "Antihielo"
+              }
+            }
+          },
+          "_row_num": 35
+        },
+        {
+          "choice_list_name": "preventative_maint_types",
+          "data_value": "tightening",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Tightening",
+                "es": "Apriete"
+              }
+            }
+          },
+          "_row_num": 36
+        },
+        {
+          "choice_list_name": "preventative_maint_types",
+          "data_value": "check_seals",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Check seals",
+                "es": "Revise los sellos"
+              }
+            }
+          },
+          "_row_num": 37
+        },
+        {
+          "choice_list_name": "preventative_maint_types",
+          "data_value": "check_unit",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Check/clean cooling unit",
+                "es": "Comprobar/limpiar la unidad de enfriamiento"
+              }
+            }
+          },
+          "_row_num": 38
         }
       ],
       "spare_parts_category_types": [
@@ -2182,7 +2470,7 @@
               }
             }
           },
-          "_row_num": 29
+          "_row_num": 41
         },
         {
           "choice_list_name": "spare_parts_category_types",
@@ -2195,7 +2483,7 @@
               }
             }
           },
-          "_row_num": 30
+          "_row_num": 42
         },
         {
           "choice_list_name": "spare_parts_category_types",
@@ -2208,7 +2496,7 @@
               }
             }
           },
-          "_row_num": 31
+          "_row_num": 43
         },
         {
           "choice_list_name": "spare_parts_category_types",
@@ -2221,7 +2509,7 @@
               }
             }
           },
-          "_row_num": 32
+          "_row_num": 44
         },
         {
           "choice_list_name": "spare_parts_category_types",
@@ -2234,7 +2522,7 @@
               }
             }
           },
-          "_row_num": 33
+          "_row_num": 45
         },
         {
           "choice_list_name": "spare_parts_category_types",
@@ -2247,7 +2535,7 @@
               }
             }
           },
-          "_row_num": 34
+          "_row_num": 46
         }
       ],
       "spare_parts_types_electrical": [
@@ -2262,7 +2550,7 @@
               }
             }
           },
-          "_row_num": 36
+          "_row_num": 48
         },
         {
           "choice_list_name": "spare_parts_types_electrical",
@@ -2275,7 +2563,7 @@
               }
             }
           },
-          "_row_num": 37
+          "_row_num": 49
         },
         {
           "choice_list_name": "spare_parts_types_electrical",
@@ -2288,7 +2576,7 @@
               }
             }
           },
-          "_row_num": 38
+          "_row_num": 50
         },
         {
           "choice_list_name": "spare_parts_types_electrical",
@@ -2301,7 +2589,7 @@
               }
             }
           },
-          "_row_num": 39
+          "_row_num": 51
         },
         {
           "choice_list_name": "spare_parts_types_electrical",
@@ -2314,7 +2602,7 @@
               }
             }
           },
-          "_row_num": 40
+          "_row_num": 52
         },
         {
           "choice_list_name": "spare_parts_types_electrical",
@@ -2327,7 +2615,7 @@
               }
             }
           },
-          "_row_num": 41
+          "_row_num": 53
         },
         {
           "choice_list_name": "spare_parts_types_electrical",
@@ -2340,7 +2628,7 @@
               }
             }
           },
-          "_row_num": 42
+          "_row_num": 54
         },
         {
           "choice_list_name": "spare_parts_types_electrical",
@@ -2353,7 +2641,7 @@
               }
             }
           },
-          "_row_num": 43
+          "_row_num": 55
         },
         {
           "choice_list_name": "spare_parts_types_electrical",
@@ -2366,7 +2654,7 @@
               }
             }
           },
-          "_row_num": 44
+          "_row_num": 56
         },
         {
           "choice_list_name": "spare_parts_types_electrical",
@@ -2379,7 +2667,7 @@
               }
             }
           },
-          "_row_num": 45
+          "_row_num": 57
         },
         {
           "choice_list_name": "spare_parts_types_electrical",
@@ -2392,7 +2680,7 @@
               }
             }
           },
-          "_row_num": 46
+          "_row_num": 58
         },
         {
           "choice_list_name": "spare_parts_types_electrical",
@@ -2405,7 +2693,7 @@
               }
             }
           },
-          "_row_num": 47
+          "_row_num": 59
         },
         {
           "choice_list_name": "spare_parts_types_electrical",
@@ -2418,7 +2706,7 @@
               }
             }
           },
-          "_row_num": 48
+          "_row_num": 60
         },
         {
           "choice_list_name": "spare_parts_types_electrical",
@@ -2431,7 +2719,7 @@
               }
             }
           },
-          "_row_num": 49
+          "_row_num": 61
         },
         {
           "choice_list_name": "spare_parts_types_electrical",
@@ -2444,7 +2732,7 @@
               }
             }
           },
-          "_row_num": 50
+          "_row_num": 62
         },
         {
           "choice_list_name": "spare_parts_types_electrical",
@@ -2457,7 +2745,7 @@
               }
             }
           },
-          "_row_num": 51
+          "_row_num": 63
         }
       ],
       "spare_parts_types_hardware": [
@@ -2472,7 +2760,7 @@
               }
             }
           },
-          "_row_num": 53
+          "_row_num": 65
         },
         {
           "choice_list_name": "spare_parts_types_hardware",
@@ -2485,7 +2773,7 @@
               }
             }
           },
-          "_row_num": 54
+          "_row_num": 66
         },
         {
           "choice_list_name": "spare_parts_types_hardware",
@@ -2498,7 +2786,7 @@
               }
             }
           },
-          "_row_num": 55
+          "_row_num": 67
         },
         {
           "choice_list_name": "spare_parts_types_hardware",
@@ -2511,7 +2799,7 @@
               }
             }
           },
-          "_row_num": 56
+          "_row_num": 68
         },
         {
           "choice_list_name": "spare_parts_types_hardware",
@@ -2524,7 +2812,7 @@
               }
             }
           },
-          "_row_num": 57
+          "_row_num": 69
         },
         {
           "choice_list_name": "spare_parts_types_hardware",
@@ -2537,7 +2825,7 @@
               }
             }
           },
-          "_row_num": 58
+          "_row_num": 70
         },
         {
           "choice_list_name": "spare_parts_types_hardware",
@@ -2550,7 +2838,7 @@
               }
             }
           },
-          "_row_num": 59
+          "_row_num": 71
         },
         {
           "choice_list_name": "spare_parts_types_hardware",
@@ -2563,7 +2851,7 @@
               }
             }
           },
-          "_row_num": 60
+          "_row_num": 72
         }
       ],
       "spare_parts_types_monitoring": [
@@ -2578,7 +2866,7 @@
               }
             }
           },
-          "_row_num": 62
+          "_row_num": 74
         }
       ],
       "spare_parts_types_power": [
@@ -2593,7 +2881,7 @@
               }
             }
           },
-          "_row_num": 64
+          "_row_num": 76
         },
         {
           "choice_list_name": "spare_parts_types_power",
@@ -2606,7 +2894,7 @@
               }
             }
           },
-          "_row_num": 65
+          "_row_num": 77
         },
         {
           "choice_list_name": "spare_parts_types_power",
@@ -2619,7 +2907,7 @@
               }
             }
           },
-          "_row_num": 66
+          "_row_num": 78
         },
         {
           "choice_list_name": "spare_parts_types_power",
@@ -2632,7 +2920,7 @@
               }
             }
           },
-          "_row_num": 67
+          "_row_num": 79
         },
         {
           "choice_list_name": "spare_parts_types_power",
@@ -2645,7 +2933,7 @@
               }
             }
           },
-          "_row_num": 68
+          "_row_num": 80
         },
         {
           "choice_list_name": "spare_parts_types_power",
@@ -2658,7 +2946,7 @@
               }
             }
           },
-          "_row_num": 69
+          "_row_num": 81
         },
         {
           "choice_list_name": "spare_parts_types_power",
@@ -2671,7 +2959,7 @@
               }
             }
           },
-          "_row_num": 70
+          "_row_num": 82
         }
       ],
       "spare_parts_types_refrigeration": [
@@ -2686,7 +2974,7 @@
               }
             }
           },
-          "_row_num": 72
+          "_row_num": 84
         },
         {
           "choice_list_name": "spare_parts_types_refrigeration",
@@ -2699,7 +2987,7 @@
               }
             }
           },
-          "_row_num": 73
+          "_row_num": 85
         },
         {
           "choice_list_name": "spare_parts_types_refrigeration",
@@ -2712,7 +3000,7 @@
               }
             }
           },
-          "_row_num": 74
+          "_row_num": 86
         },
         {
           "choice_list_name": "spare_parts_types_refrigeration",
@@ -2725,7 +3013,7 @@
               }
             }
           },
-          "_row_num": 75
+          "_row_num": 87
         },
         {
           "choice_list_name": "spare_parts_types_refrigeration",
@@ -2738,7 +3026,7 @@
               }
             }
           },
-          "_row_num": 76
+          "_row_num": 88
         },
         {
           "choice_list_name": "spare_parts_types_refrigeration",
@@ -2751,7 +3039,7 @@
               }
             }
           },
-          "_row_num": 77
+          "_row_num": 89
         },
         {
           "choice_list_name": "spare_parts_types_refrigeration",
@@ -2764,7 +3052,7 @@
               }
             }
           },
-          "_row_num": 78
+          "_row_num": 90
         },
         {
           "choice_list_name": "spare_parts_types_refrigeration",
@@ -2777,7 +3065,7 @@
               }
             }
           },
-          "_row_num": 79
+          "_row_num": 91
         },
         {
           "choice_list_name": "spare_parts_types_refrigeration",
@@ -2790,7 +3078,7 @@
               }
             }
           },
-          "_row_num": 80
+          "_row_num": 92
         },
         {
           "choice_list_name": "spare_parts_types_refrigeration",
@@ -2803,7 +3091,7 @@
               }
             }
           },
-          "_row_num": 81
+          "_row_num": 93
         },
         {
           "choice_list_name": "spare_parts_types_refrigeration",
@@ -2816,7 +3104,7 @@
               }
             }
           },
-          "_row_num": 82
+          "_row_num": 94
         },
         {
           "choice_list_name": "spare_parts_types_refrigeration",
@@ -2829,7 +3117,7 @@
               }
             }
           },
-          "_row_num": 83
+          "_row_num": 95
         },
         {
           "choice_list_name": "spare_parts_types_refrigeration",
@@ -2842,7 +3130,7 @@
               }
             }
           },
-          "_row_num": 84
+          "_row_num": 96
         },
         {
           "choice_list_name": "spare_parts_types_refrigeration",
@@ -2855,7 +3143,7 @@
               }
             }
           },
-          "_row_num": 85
+          "_row_num": 97
         },
         {
           "choice_list_name": "spare_parts_types_refrigeration",
@@ -2868,7 +3156,7 @@
               }
             }
           },
-          "_row_num": 86
+          "_row_num": 98
         },
         {
           "choice_list_name": "spare_parts_types_refrigeration",
@@ -2881,7 +3169,7 @@
               }
             }
           },
-          "_row_num": 87
+          "_row_num": 99
         },
         {
           "choice_list_name": "spare_parts_types_refrigeration",
@@ -2894,7 +3182,7 @@
               }
             }
           },
-          "_row_num": 88
+          "_row_num": 100
         },
         {
           "choice_list_name": "spare_parts_types_refrigeration",
@@ -2907,7 +3195,7 @@
               }
             }
           },
-          "_row_num": 89
+          "_row_num": 101
         },
         {
           "choice_list_name": "spare_parts_types_refrigeration",
@@ -2920,7 +3208,7 @@
               }
             }
           },
-          "_row_num": 90
+          "_row_num": 102
         },
         {
           "choice_list_name": "spare_parts_types_refrigeration",
@@ -2933,7 +3221,7 @@
               }
             }
           },
-          "_row_num": 91
+          "_row_num": 103
         }
       ],
       "spare_parts_types_solar": [
@@ -2948,7 +3236,7 @@
               }
             }
           },
-          "_row_num": 93
+          "_row_num": 105
         }
       ]
     },
@@ -3019,10 +3307,26 @@
         },
         "elementKey": "technician_name"
       },
+      "technician_phone": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Technician Phone Number",
+            "es": "Número de teléfono del técnico"
+          }
+        },
+        "elementKey": "technician_phone"
+      },
       "maintenance_log_image": {
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 10,
             "section_name": "survey"
           }
         ],
@@ -3052,23 +3356,6 @@
       "date_serviced": {
         "_defn": [
           {
-            "_row_num": 11,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "elementType": "date",
-        "displayName": {
-          "text": {
-            "default": "Date Serviced",
-            "es": "Fecha de Servicio"
-          }
-        },
-        "elementKey": "date_serviced"
-      },
-      "next_date_serviced": {
-        "_defn": [
-          {
             "_row_num": 12,
             "section_name": "survey"
           }
@@ -3077,11 +3364,11 @@
         "elementType": "date",
         "displayName": {
           "text": {
-            "default": "Next Date Serviced",
-            "es": "Próxima Fecha de Servicio"
+            "default": "Date of Service",
+            "es": "Fecha de Servicio"
           }
         },
-        "elementKey": "next_date_serviced"
+        "elementKey": "date_serviced"
       },
       "notes": {
         "_defn": [
@@ -3106,7 +3393,11 @@
             "section_name": "survey"
           }
         ],
-        "type": "string",
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "type_of_maintenance_items"
+        },
         "displayName": {
           "text": {
             "default": "Type of Maintenance Performed",
@@ -3116,10 +3407,26 @@
         "valuesList": "maint_types",
         "elementKey": "type_of_maintenance"
       },
-      "type_of_repair": {
+      "other_maintenance": {
         "_defn": [
           {
             "_row_num": 16,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Other Maintenance",
+            "es": "Otro mantenimiento"
+          }
+        },
+        "elementKey": "other_maintenance"
+      },
+      "type_of_repair": {
+        "_defn": [
+          {
+            "_row_num": 19,
             "section_name": "survey"
           }
         ],
@@ -3137,10 +3444,42 @@
         "valuesList": "repair_types",
         "elementKey": "type_of_repair"
       },
+      "other_repair": {
+        "_defn": [
+          {
+            "_row_num": 21,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Other Repair",
+            "es": "Otra Reparación"
+          }
+        },
+        "elementKey": "other_repair"
+      },
+      "repair_activities": {
+        "_defn": [
+          {
+            "_row_num": 23,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Repair Activities",
+            "es": "Actividades de Reparacion"
+          }
+        },
+        "elementKey": "repair_activities"
+      },
       "type_of_preventative_maintenance": {
         "_defn": [
           {
-            "_row_num": 19,
+            "_row_num": 26,
             "section_name": "survey"
           }
         ],
@@ -3158,31 +3497,23 @@
         "valuesList": "preventative_maint_types",
         "elementKey": "type_of_preventative_maintenance"
       },
-      "spare_parts_category": {
+      "preventative_comments": {
         "_defn": [
           {
-            "_row_num": 23,
+            "_row_num": 27,
             "section_name": "survey"
           }
         ],
-        "type": "array",
-        "items": {
-          "type": "string",
-          "elementKey": "spare_parts_category_items"
-        },
+        "type": "string",
         "displayName": {
-          "text": {
-            "default": "Spare Part Category",
-            "es": "Categoría de repuestos"
-          }
+          "text": "Comments"
         },
-        "valuesList": "spare_parts_category_types",
-        "elementKey": "spare_parts_category"
+        "elementKey": "preventative_comments"
       },
       "spare_parts_electrical": {
         "_defn": [
           {
-            "_row_num": 25,
+            "_row_num": 31,
             "section_name": "survey"
           }
         ],
@@ -3193,8 +3524,8 @@
         },
         "displayName": {
           "text": {
-            "default": "Spare Parts",
-            "es": "Piezas de Repuesto"
+            "default": "Electrical and Control System",
+            "es": "Sistema electrico y de control"
           }
         },
         "valuesList": "spare_parts_types_electrical",
@@ -3203,7 +3534,7 @@
       "spare_parts_hardware": {
         "_defn": [
           {
-            "_row_num": 28,
+            "_row_num": 32,
             "section_name": "survey"
           }
         ],
@@ -3214,8 +3545,8 @@
         },
         "displayName": {
           "text": {
-            "default": "Spare Parts",
-            "es": "Piezas de Repuesto"
+            "default": "Hardware",
+            "es": "Hardware"
           }
         },
         "valuesList": "spare_parts_types_hardware",
@@ -3224,7 +3555,7 @@
       "spare_parts_monitoring": {
         "_defn": [
           {
-            "_row_num": 31,
+            "_row_num": 33,
             "section_name": "survey"
           }
         ],
@@ -3235,8 +3566,8 @@
         },
         "displayName": {
           "text": {
-            "default": "Spare Parts",
-            "es": "Piezas de Repuesto"
+            "default": "Monitoring",
+            "es": "Vigilancia"
           }
         },
         "valuesList": "spare_parts_types_monitoring",
@@ -3256,8 +3587,8 @@
         },
         "displayName": {
           "text": {
-            "default": "Spare Parts",
-            "es": "Piezas de Repuesto"
+            "default": "Power",
+            "es": "Poder"
           }
         },
         "valuesList": "spare_parts_types_power",
@@ -3266,7 +3597,7 @@
       "spare_parts_refrigeration": {
         "_defn": [
           {
-            "_row_num": 37,
+            "_row_num": 35,
             "section_name": "survey"
           }
         ],
@@ -3277,8 +3608,8 @@
         },
         "displayName": {
           "text": {
-            "default": "Spare Parts",
-            "es": "Piezas de Repuesto"
+            "default": "Refrigeration System",
+            "es": "Sistema de refrigeración"
           }
         },
         "valuesList": "spare_parts_types_refrigeration",
@@ -3287,7 +3618,7 @@
       "spare_parts_solar": {
         "_defn": [
           {
-            "_row_num": 40,
+            "_row_num": 36,
             "section_name": "survey"
           }
         ],
@@ -3298,28 +3629,28 @@
         },
         "displayName": {
           "text": {
-            "default": "Spare Parts",
-            "es": "Piezas de Repuesto"
+            "default": "Solar",
+            "es": "Solar"
           }
         },
         "valuesList": "spare_parts_types_solar",
         "elementKey": "spare_parts_solar"
       },
-      "addtl_spare_parts": {
+      "other_spare_parts": {
         "_defn": [
           {
-            "_row_num": 42,
+            "_row_num": 37,
             "section_name": "survey"
           }
         ],
         "type": "string",
         "displayName": {
           "text": {
-            "default": "Enter additional spare parts",
-            "es": "Entrar adicional piezas de repuesto"
+            "default": "Other",
+            "es": "Otro"
           }
         },
-        "elementKey": "addtl_spare_parts"
+        "elementKey": "other_spare_parts"
       }
     },
     "section_names": [
@@ -3522,6 +3853,30 @@
             "promptIdx": 2
           },
           {
+            "type": "string",
+            "name": "technician_phone",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Technician Phone Number",
+                  "es": "Número de teléfono del técnico"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Enter technician phone number if available",
+                  "es": "Ingrese el número de teléfono del técnico si está disponible"
+                }
+              }
+            },
+            "_row_num": 8,
+            "__rowNum__": 7,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen2",
+            "promptIdx": 3
+          },
+          {
             "type": "image",
             "name": "maintenance_log_image",
             "display": {
@@ -3533,18 +3888,18 @@
               },
               "prompt": {
                 "text": {
-                  "default": "Take a picture",
+                  "default": "Take a picture of the area of repair",
                   "es": "Toma una foto",
                   "fr": "Prendre une photo"
                 }
               }
             },
-            "_row_num": 9,
-            "__rowNum__": 8,
+            "_row_num": 10,
+            "__rowNum__": 9,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen9",
-            "promptIdx": 3
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 4
           },
           {
             "type": "birthdate",
@@ -3552,48 +3907,23 @@
             "display": {
               "title": {
                 "text": {
-                  "default": "Date Serviced",
+                  "default": "Date of Service",
                   "es": "Fecha de Servicio"
                 }
               },
               "prompt": {
                 "text": {
-                  "default": "Enter the date of last service",
-                  "es": "Fecha  del último servicio",
-                  "fr": "Entrer la date de la dernière maintenance"
-                }
-              }
-            },
-            "_row_num": 11,
-            "__rowNum__": 10,
-            "_token_type": "prompt",
-            "_type": "birthdate",
-            "_branch_label_enclosing_screen": "survey/_screen10",
-            "promptIdx": 4
-          },
-          {
-            "type": "date",
-            "name": "next_date_serviced",
-            "display": {
-              "title": {
-                "text": {
-                  "default": "Next Date Serviced",
-                  "es": "Próxima Fecha de Servicio"
-                }
-              },
-              "prompt": {
-                "text": {
-                  "default": "Enter the next date serviced",
-                  "es": "Ingrese la próxima fecha de servicio",
-                  "fr": "Entrer la date de la prochaine maintenance"
+                  "default": "Enter the date of service",
+                  "es": "Fecha  del servicio",
+                  "fr": "Entrer la date de la maintenance"
                 }
               }
             },
             "_row_num": 12,
             "__rowNum__": 11,
             "_token_type": "prompt",
-            "_type": "date",
-            "_branch_label_enclosing_screen": "survey/_screen10",
+            "_type": "birthdate",
+            "_branch_label_enclosing_screen": "survey/_screen11",
             "promptIdx": 5
           },
           {
@@ -3618,11 +3948,11 @@
             "__rowNum__": 12,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen10",
+            "_branch_label_enclosing_screen": "survey/_screen11",
             "promptIdx": 6
           },
           {
-            "type": "select_one",
+            "type": "select_multiple",
             "values_list": "maint_types",
             "name": "type_of_maintenance",
             "display": {
@@ -3643,9 +3973,33 @@
             "_row_num": 14,
             "__rowNum__": 13,
             "_token_type": "prompt",
-            "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen10",
+            "_type": "select_multiple",
+            "_branch_label_enclosing_screen": "survey/_screen11",
             "promptIdx": 7
+          },
+          {
+            "type": "text",
+            "name": "other_maintenance",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Other Maintenance",
+                  "es": "Otro mantenimiento"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Enter other maintenance",
+                  "es": "Ingrese otro mantenimiento"
+                }
+              }
+            },
+            "_row_num": 16,
+            "__rowNum__": 15,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 8
           },
           {
             "type": "select_multiple",
@@ -3666,12 +4020,60 @@
                 }
               }
             },
-            "_row_num": 16,
-            "__rowNum__": 15,
+            "_row_num": 19,
+            "__rowNum__": 18,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen10",
-            "promptIdx": 8
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 9
+          },
+          {
+            "type": "text",
+            "name": "other_repair",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Other Repair",
+                  "es": "Otra Reparación"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Enter other repair",
+                  "es": "Ingrese otra reparación"
+                }
+              }
+            },
+            "_row_num": 21,
+            "__rowNum__": 20,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 10
+          },
+          {
+            "type": "text",
+            "name": "repair_activities",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Repair Activities",
+                  "es": "Actividades de Reparacion"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Enter actions taken",
+                  "es": "Ingrese las acciones tomadas"
+                }
+              }
+            },
+            "_row_num": 23,
+            "__rowNum__": 22,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 11
           },
           {
             "type": "select_multiple",
@@ -3686,227 +4088,244 @@
               },
               "prompt": {
                 "text": {
-                  "default": "Select type of maintenance",
-                  "es": "Seleccione tipo de mantenimiento",
+                  "default": "Select type of preventative maintenance",
+                  "es": "Seleccione tipo de mantenimiento preventivo",
                   "fr": "Sélectionner le type de maintenance"
                 }
               }
             },
-            "_row_num": 19,
-            "__rowNum__": 18,
+            "_row_num": 26,
+            "__rowNum__": 25,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen10",
-            "promptIdx": 9
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 12
           },
           {
-            "type": "select_multiple",
-            "values_list": "spare_parts_category_types",
-            "name": "spare_parts_category",
+            "type": "text",
+            "name": "preventative_comments",
             "display": {
               "title": {
-                "text": {
-                  "default": "Spare Part Category",
-                  "es": "Categoría de repuestos"
-                }
+                "text": "Comments"
               },
               "prompt": {
                 "text": {
-                  "default": "Select spare part category",
-                  "es": "Seleccione la categoría de repuestos",
-                  "fr": "Sélectionner des pièces détachées"
+                  "default": "Enter comments",
+                  "es": "Ingrese comentarios"
                 }
               }
             },
-            "_row_num": 23,
-            "__rowNum__": 22,
+            "_row_num": 27,
+            "__rowNum__": 26,
             "_token_type": "prompt",
-            "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen22",
-            "promptIdx": 10
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 13
           },
           {
-            "type": "select_multiple_inline",
+            "type": "select_multiple",
             "values_list": "spare_parts_types_electrical",
             "name": "spare_parts_electrical",
             "display": {
               "title": {
                 "text": {
-                  "default": "Spare Parts",
-                  "es": "Piezas de Repuesto"
+                  "default": "Electrical and Control System",
+                  "es": "Sistema electrico y de control"
                 }
               },
               "prompt": {
                 "text": {
-                  "default": "Select spare parts",
-                  "es": "Seleccione piezas de repuestos"
-                }
-              }
-            },
-            "_row_num": 25,
-            "__rowNum__": 24,
-            "_token_type": "prompt",
-            "_type": "select_multiple_inline",
-            "_branch_label_enclosing_screen": "survey/_screen22",
-            "promptIdx": 11
-          },
-          {
-            "type": "select_multiple_inline",
-            "values_list": "spare_parts_types_hardware",
-            "name": "spare_parts_hardware",
-            "display": {
-              "title": {
-                "text": {
-                  "default": "Spare Parts",
-                  "es": "Piezas de Repuesto"
-                }
-              },
-              "prompt": {
-                "text": {
-                  "default": "Select spare parts",
-                  "es": "Seleccione piezas de repuestos"
-                }
-              }
-            },
-            "_row_num": 28,
-            "__rowNum__": 27,
-            "_token_type": "prompt",
-            "_type": "select_multiple_inline",
-            "_branch_label_enclosing_screen": "survey/_screen22",
-            "promptIdx": 12
-          },
-          {
-            "type": "select_multiple_inline",
-            "values_list": "spare_parts_types_monitoring",
-            "name": "spare_parts_monitoring",
-            "display": {
-              "title": {
-                "text": {
-                  "default": "Spare Parts",
-                  "es": "Piezas de Repuesto"
-                }
-              },
-              "prompt": {
-                "text": {
-                  "default": "Select spare parts",
-                  "es": "Seleccione piezas de repuestos"
+                  "default": "Select Electrical and Control System spare parts replaced/used",
+                  "es": "Seleccione las piezas de repuesto del sistema eléctrico y de control reemplazadas/usadas"
                 }
               }
             },
             "_row_num": 31,
             "__rowNum__": 30,
             "_token_type": "prompt",
-            "_type": "select_multiple_inline",
-            "_branch_label_enclosing_screen": "survey/_screen22",
-            "promptIdx": 13
+            "_type": "select_multiple",
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 14
           },
           {
-            "type": "select_multiple_inline",
+            "type": "select_multiple",
+            "values_list": "spare_parts_types_hardware",
+            "name": "spare_parts_hardware",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Hardware",
+                  "es": "Hardware"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Select Hardware spare parts replaced/used",
+                  "es": "Seleccione piezas de repuesto de hardware reemplazadas/usadas"
+                }
+              }
+            },
+            "_row_num": 32,
+            "__rowNum__": 31,
+            "_token_type": "prompt",
+            "_type": "select_multiple",
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 15
+          },
+          {
+            "type": "select_multiple",
+            "values_list": "spare_parts_types_monitoring",
+            "name": "spare_parts_monitoring",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Monitoring",
+                  "es": "Vigilancia"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Select Monitoring spare parts replaced/used",
+                  "es": "Seleccione Monitoreo de repuestos reemplazados/usados"
+                }
+              }
+            },
+            "_row_num": 33,
+            "__rowNum__": 32,
+            "_token_type": "prompt",
+            "_type": "select_multiple",
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 16
+          },
+          {
+            "type": "select_multiple",
             "values_list": "spare_parts_types_power",
             "name": "spare_parts_power",
             "display": {
               "title": {
                 "text": {
-                  "default": "Spare Parts",
-                  "es": "Piezas de Repuesto"
+                  "default": "Power",
+                  "es": "Poder"
                 }
               },
               "prompt": {
                 "text": {
-                  "default": "Select spare parts",
-                  "es": "Seleccione piezas de repuestos"
+                  "default": "Select Power spare parts replaced/used",
+                  "es": "Seleccionar repuestos de potencia reemplazados/usados"
                 }
               }
             },
             "_row_num": 34,
             "__rowNum__": 33,
             "_token_type": "prompt",
-            "_type": "select_multiple_inline",
-            "_branch_label_enclosing_screen": "survey/_screen22",
-            "promptIdx": 14
+            "_type": "select_multiple",
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 17
           },
           {
-            "type": "select_multiple_inline",
+            "type": "select_multiple",
             "values_list": "spare_parts_types_refrigeration",
             "name": "spare_parts_refrigeration",
             "display": {
               "title": {
                 "text": {
-                  "default": "Spare Parts",
-                  "es": "Piezas de Repuesto"
+                  "default": "Refrigeration System",
+                  "es": "Sistema de refrigeración"
                 }
               },
               "prompt": {
                 "text": {
-                  "default": "Select spare parts",
-                  "es": "Seleccione piezas de repuestos"
+                  "default": "Select Refrigeration System spare parts replaced/used",
+                  "es": "Seleccione los repuestos del sistema de refrigeración reemplazados/usados"
+                }
+              }
+            },
+            "_row_num": 35,
+            "__rowNum__": 34,
+            "_token_type": "prompt",
+            "_type": "select_multiple",
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 18
+          },
+          {
+            "type": "select_multiple",
+            "values_list": "spare_parts_types_solar",
+            "name": "spare_parts_solar",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Solar",
+                  "es": "Solar"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Select Solar spare parts replaced/used",
+                  "es": "Seleccionar repuestos solares reemplazados/usados"
+                }
+              }
+            },
+            "_row_num": 36,
+            "__rowNum__": 35,
+            "_token_type": "prompt",
+            "_type": "select_multiple",
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 19
+          },
+          {
+            "type": "string",
+            "name": "other_spare_parts",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Other",
+                  "es": "Otro"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Other spare parts replaced/used",
+                  "es": "Otras piezas de repuesto reemplazadas/usadas"
                 }
               }
             },
             "_row_num": 37,
             "__rowNum__": 36,
             "_token_type": "prompt",
-            "_type": "select_multiple_inline",
-            "_branch_label_enclosing_screen": "survey/_screen22",
-            "promptIdx": 15
-          },
-          {
-            "type": "select_multiple_inline",
-            "values_list": "spare_parts_types_solar",
-            "name": "spare_parts_solar",
-            "display": {
-              "title": {
-                "text": {
-                  "default": "Spare Parts",
-                  "es": "Piezas de Repuesto"
-                }
-              },
-              "prompt": {
-                "text": {
-                  "default": "Select spare parts",
-                  "es": "Seleccione piezas de repuestos"
-                }
-              }
-            },
-            "_row_num": 40,
-            "__rowNum__": 39,
-            "_token_type": "prompt",
-            "_type": "select_multiple_inline",
-            "_branch_label_enclosing_screen": "survey/_screen22",
-            "promptIdx": 16
-          },
-          {
-            "type": "string",
-            "name": "addtl_spare_parts",
-            "display": {
-              "title": {
-                "text": {
-                  "default": "Enter additional spare parts",
-                  "es": "Entrar adicional piezas de repuesto"
-                }
-              },
-              "prompt": {
-                "text": {
-                  "default": "Make a list of spare parts",
-                  "es": "Haga una lista de repuestos",
-                  "fr": "Faire une liste des pièces détachées"
-                }
-              }
-            },
-            "_row_num": 42,
-            "__rowNum__": 41,
-            "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen22",
-            "promptIdx": 17
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 20
+          },
+          {
+            "type": "note",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Update Refrigerator Status",
+                  "es": "Actualizar estado del refrigerador"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Please update refrigerator status as needed",
+                  "es": "Actualice el estado del refrigerador según sea necesario"
+                }
+              }
+            },
+            "_row_num": 39,
+            "__rowNum__": 38,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen39",
+            "promptIdx": 21
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 44,
-            "_branch_label_enclosing_screen": "survey/_screen44",
-            "promptIdx": 18
+            "_row_num": 40,
+            "_branch_label_enclosing_screen": "survey/_screen40",
+            "promptIdx": 22
           }
         ],
         "validation_tag_map": {
@@ -3922,76 +4341,83 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 8,
-              "__rowNum__": 7,
+              "_row_num": 9,
+              "__rowNum__": 8,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nif (0) {\nactivePromptIndicies.push(0);\n}\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nif (0) {\nactivePromptIndicies.push(0);\n}\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 0
           },
           {
-            "_row_num": 9,
+            "_row_num": 10,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 1
           },
           {
             "clause": "begin screen",
-            "_row_num": 10,
-            "__rowNum__": 9,
+            "_row_num": 11,
+            "__rowNum__": 10,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 21,
-              "__rowNum__": 20,
+              "_row_num": 29,
+              "__rowNum__": 28,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\nif (data('type_of_maintenance') === 'repair') {\nactivePromptIndicies.push(8);\n}\nif (data('type_of_maintenance') === 'preventative') {\nactivePromptIndicies.push(9);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\nif (selected(data('type_of_maintenance'), 'other')) {\nactivePromptIndicies.push(8);\n}\nif (selected(data('type_of_maintenance'),  'repair')) {\nactivePromptIndicies.push(9);\nif (selected(data('type_of_repair'), 'other')) {\nactivePromptIndicies.push(10);\n}\nactivePromptIndicies.push(11);\n}\nif (selected(data('type_of_maintenance'), 'preventative')) {\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 2
           },
           {
             "clause": "begin screen",
-            "_row_num": 22,
-            "__rowNum__": 21,
+            "_row_num": 30,
+            "__rowNum__": 29,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 43,
-              "__rowNum__": 42,
+              "_row_num": 38,
+              "__rowNum__": 37,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\nif (selected(data('spare_parts_category'), 'electrical_and_control_system')) {\nactivePromptIndicies.push(11);\n}\nif (selected(data('spare_parts_category'), 'hardware')) {\nactivePromptIndicies.push(12);\n}\nif (selected(data('spare_parts_category'), 'monitoring')) {\nactivePromptIndicies.push(13);\n}\nif (selected(data('spare_parts_category'), 'power')) {\nactivePromptIndicies.push(14);\n}\nif (selected(data('spare_parts_category'), 'refrigeration_system')) {\nactivePromptIndicies.push(15);\n}\nif (selected(data('spare_parts_category'), 'solar')) {\nactivePromptIndicies.push(16);\n}\nactivePromptIndicies.push(17);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\nactivePromptIndicies.push(15);\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\nactivePromptIndicies.push(19);\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 3
+          },
+          {
+            "_row_num": 39,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 4
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 44,
-            "operationIdx": 4
+            "_row_num": 40,
+            "operationIdx": 5
           },
           {
-            "_row_num": 44,
+            "_row_num": 40,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 5
+            "operationIdx": 6
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 44,
-            "operationIdx": 6
+            "_row_num": 40,
+            "operationIdx": 7
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
-          "_screen9": 1,
-          "_screen10": 2,
-          "_screen22": 3,
-          "_contents": 5,
-          "_screen44": 5
+          "_screen10": 1,
+          "_screen11": 2,
+          "_screen30": 3,
+          "_screen39": 4,
+          "_contents": 6,
+          "_screen40": 6
         }
       }
     },
@@ -4054,10 +4480,29 @@
         "elementSet": "data",
         "elementPath": "technician_name"
       },
+      "technician_phone": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Technician Phone Number",
+            "es": "Número de teléfono del técnico"
+          }
+        },
+        "elementKey": "technician_phone",
+        "elementName": "technician_phone",
+        "elementSet": "data",
+        "elementPath": "technician_phone"
+      },
       "maintenance_log_image": {
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 10,
             "section_name": "survey"
           }
         ],
@@ -4101,26 +4546,6 @@
       "date_serviced": {
         "_defn": [
           {
-            "_row_num": 11,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "elementType": "date",
-        "displayName": {
-          "text": {
-            "default": "Date Serviced",
-            "es": "Fecha de Servicio"
-          }
-        },
-        "elementKey": "date_serviced",
-        "elementName": "date_serviced",
-        "elementSet": "data",
-        "elementPath": "date_serviced"
-      },
-      "next_date_serviced": {
-        "_defn": [
-          {
             "_row_num": 12,
             "section_name": "survey"
           }
@@ -4129,14 +4554,14 @@
         "elementType": "date",
         "displayName": {
           "text": {
-            "default": "Next Date Serviced",
-            "es": "Próxima Fecha de Servicio"
+            "default": "Date of Service",
+            "es": "Fecha de Servicio"
           }
         },
-        "elementKey": "next_date_serviced",
-        "elementName": "next_date_serviced",
+        "elementKey": "date_serviced",
+        "elementName": "date_serviced",
         "elementSet": "data",
-        "elementPath": "next_date_serviced"
+        "elementPath": "date_serviced"
       },
       "notes": {
         "_defn": [
@@ -4164,7 +4589,15 @@
             "section_name": "survey"
           }
         ],
-        "type": "string",
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "type_of_maintenance_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "type_of_maintenance.items",
+          "notUnitOfRetention": true
+        },
         "displayName": {
           "text": {
             "default": "Type of Maintenance Performed",
@@ -4175,12 +4608,34 @@
         "elementKey": "type_of_maintenance",
         "elementName": "type_of_maintenance",
         "elementSet": "data",
-        "elementPath": "type_of_maintenance"
+        "elementPath": "type_of_maintenance",
+        "listChildElementKeys": [
+          "type_of_maintenance_items"
+        ]
+      },
+      "other_maintenance": {
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Other Maintenance",
+            "es": "Otro mantenimiento"
+          }
+        },
+        "elementKey": "other_maintenance",
+        "elementName": "other_maintenance",
+        "elementSet": "data",
+        "elementPath": "other_maintenance"
       },
       "type_of_repair": {
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 19,
             "section_name": "survey"
           }
         ],
@@ -4208,10 +4663,48 @@
           "type_of_repair_items"
         ]
       },
+      "other_repair": {
+        "_defn": [
+          {
+            "_row_num": 21,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Other Repair",
+            "es": "Otra Reparación"
+          }
+        },
+        "elementKey": "other_repair",
+        "elementName": "other_repair",
+        "elementSet": "data",
+        "elementPath": "other_repair"
+      },
+      "repair_activities": {
+        "_defn": [
+          {
+            "_row_num": 23,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Repair Activities",
+            "es": "Actividades de Reparacion"
+          }
+        },
+        "elementKey": "repair_activities",
+        "elementName": "repair_activities",
+        "elementSet": "data",
+        "elementPath": "repair_activities"
+      },
       "type_of_preventative_maintenance": {
         "_defn": [
           {
-            "_row_num": 19,
+            "_row_num": 26,
             "section_name": "survey"
           }
         ],
@@ -4239,41 +4732,26 @@
           "type_of_preventative_maintenance_items"
         ]
       },
-      "spare_parts_category": {
+      "preventative_comments": {
         "_defn": [
           {
-            "_row_num": 23,
+            "_row_num": 27,
             "section_name": "survey"
           }
         ],
-        "type": "array",
-        "items": {
-          "type": "string",
-          "elementKey": "spare_parts_category_items",
-          "elementName": "items",
-          "elementSet": "data",
-          "elementPath": "spare_parts_category.items",
-          "notUnitOfRetention": true
-        },
+        "type": "string",
         "displayName": {
-          "text": {
-            "default": "Spare Part Category",
-            "es": "Categoría de repuestos"
-          }
+          "text": "Comments"
         },
-        "valuesList": "spare_parts_category_types",
-        "elementKey": "spare_parts_category",
-        "elementName": "spare_parts_category",
+        "elementKey": "preventative_comments",
+        "elementName": "preventative_comments",
         "elementSet": "data",
-        "elementPath": "spare_parts_category",
-        "listChildElementKeys": [
-          "spare_parts_category_items"
-        ]
+        "elementPath": "preventative_comments"
       },
       "spare_parts_electrical": {
         "_defn": [
           {
-            "_row_num": 25,
+            "_row_num": 31,
             "section_name": "survey"
           }
         ],
@@ -4288,8 +4766,8 @@
         },
         "displayName": {
           "text": {
-            "default": "Spare Parts",
-            "es": "Piezas de Repuesto"
+            "default": "Electrical and Control System",
+            "es": "Sistema electrico y de control"
           }
         },
         "valuesList": "spare_parts_types_electrical",
@@ -4304,7 +4782,7 @@
       "spare_parts_hardware": {
         "_defn": [
           {
-            "_row_num": 28,
+            "_row_num": 32,
             "section_name": "survey"
           }
         ],
@@ -4319,8 +4797,8 @@
         },
         "displayName": {
           "text": {
-            "default": "Spare Parts",
-            "es": "Piezas de Repuesto"
+            "default": "Hardware",
+            "es": "Hardware"
           }
         },
         "valuesList": "spare_parts_types_hardware",
@@ -4335,7 +4813,7 @@
       "spare_parts_monitoring": {
         "_defn": [
           {
-            "_row_num": 31,
+            "_row_num": 33,
             "section_name": "survey"
           }
         ],
@@ -4350,8 +4828,8 @@
         },
         "displayName": {
           "text": {
-            "default": "Spare Parts",
-            "es": "Piezas de Repuesto"
+            "default": "Monitoring",
+            "es": "Vigilancia"
           }
         },
         "valuesList": "spare_parts_types_monitoring",
@@ -4381,8 +4859,8 @@
         },
         "displayName": {
           "text": {
-            "default": "Spare Parts",
-            "es": "Piezas de Repuesto"
+            "default": "Power",
+            "es": "Poder"
           }
         },
         "valuesList": "spare_parts_types_power",
@@ -4397,7 +4875,7 @@
       "spare_parts_refrigeration": {
         "_defn": [
           {
-            "_row_num": 37,
+            "_row_num": 35,
             "section_name": "survey"
           }
         ],
@@ -4412,8 +4890,8 @@
         },
         "displayName": {
           "text": {
-            "default": "Spare Parts",
-            "es": "Piezas de Repuesto"
+            "default": "Refrigeration System",
+            "es": "Sistema de refrigeración"
           }
         },
         "valuesList": "spare_parts_types_refrigeration",
@@ -4428,7 +4906,7 @@
       "spare_parts_solar": {
         "_defn": [
           {
-            "_row_num": 40,
+            "_row_num": 36,
             "section_name": "survey"
           }
         ],
@@ -4443,8 +4921,8 @@
         },
         "displayName": {
           "text": {
-            "default": "Spare Parts",
-            "es": "Piezas de Repuesto"
+            "default": "Solar",
+            "es": "Solar"
           }
         },
         "valuesList": "spare_parts_types_solar",
@@ -4456,24 +4934,24 @@
           "spare_parts_solar_items"
         ]
       },
-      "addtl_spare_parts": {
+      "other_spare_parts": {
         "_defn": [
           {
-            "_row_num": 42,
+            "_row_num": 37,
             "section_name": "survey"
           }
         ],
         "type": "string",
         "displayName": {
           "text": {
-            "default": "Enter additional spare parts",
-            "es": "Entrar adicional piezas de repuesto"
+            "default": "Other",
+            "es": "Otro"
           }
         },
-        "elementKey": "addtl_spare_parts",
-        "elementName": "addtl_spare_parts",
+        "elementKey": "other_spare_parts",
+        "elementName": "other_spare_parts",
         "elementSet": "data",
-        "elementPath": "addtl_spare_parts"
+        "elementPath": "other_spare_parts"
       },
       "maintenance_log_image_uriFragment": {
         "type": "string",
@@ -4492,6 +4970,14 @@
         "elementSet": "data",
         "elementPath": "maintenance_log_image.contentType"
       },
+      "type_of_maintenance_items": {
+        "type": "string",
+        "elementKey": "type_of_maintenance_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "type_of_maintenance.items",
+        "notUnitOfRetention": true
+      },
       "type_of_repair_items": {
         "type": "string",
         "elementKey": "type_of_repair_items",
@@ -4506,14 +4992,6 @@
         "elementName": "items",
         "elementSet": "data",
         "elementPath": "type_of_preventative_maintenance.items",
-        "notUnitOfRetention": true
-      },
-      "spare_parts_category_items": {
-        "type": "string",
-        "elementKey": "spare_parts_category_items",
-        "elementName": "items",
-        "elementSet": "data",
-        "elementPath": "spare_parts_category.items",
         "notUnitOfRetention": true
       },
       "spare_parts_electrical_items": {
@@ -4680,17 +5158,10 @@
     "properties": [
       {
         "_partition": "Column",
-        "_aspect": "addtl_spare_parts",
-        "_key": "displayName",
-        "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Enter additional spare parts\",\"es\":\"Entrar adicional piezas de repuesto\"}}"
-      },
-      {
-        "_partition": "Column",
         "_aspect": "date_serviced",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Date Serviced\",\"es\":\"Fecha de Servicio\"}}"
+        "_value": "{\"text\":{\"default\":\"Date of Service\",\"es\":\"Fecha de Servicio\"}}"
       },
       {
         "_partition": "Column",
@@ -4701,13 +5172,6 @@
       },
       {
         "_partition": "Column",
-        "_aspect": "next_date_serviced",
-        "_key": "displayName",
-        "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Next Date Serviced\",\"es\":\"Próxima Fecha de Servicio\"}}"
-      },
-      {
-        "_partition": "Column",
         "_aspect": "notes",
         "_key": "displayName",
         "_type": "object",
@@ -4715,10 +5179,45 @@
       },
       {
         "_partition": "Column",
+        "_aspect": "other_maintenance",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Other Maintenance\",\"es\":\"Otro mantenimiento\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "other_repair",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Other Repair\",\"es\":\"Otra Reparación\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "other_spare_parts",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Other\",\"es\":\"Otro\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "preventative_comments",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":\"Comments\"}"
+      },
+      {
+        "_partition": "Column",
         "_aspect": "refrigerator_id",
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":{\"default\":\"Refrigerator ID\",\"es\":\"ID de Frigorífico\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "repair_activities",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Repair Activities\",\"es\":\"Actividades de Reparacion\"}}"
       },
       {
         "_partition": "Column",
@@ -4736,101 +5235,87 @@
       },
       {
         "_partition": "Column",
-        "_aspect": "spare_parts_category",
-        "_key": "displayChoicesList",
-        "_type": "object",
-        "_value": "[{\"choice_list_name\":\"spare_parts_category_types\",\"data_value\":\"electrical_and_control_system\",\"display\":{\"title\":{\"text\":{\"default\":\"Electrical and Control System\",\"es\":\"Sistema electrico y de control\"}}},\"_row_num\":29},{\"choice_list_name\":\"spare_parts_category_types\",\"data_value\":\"hardware\",\"display\":{\"title\":{\"text\":{\"default\":\"Hardware\",\"es\":\"Hardware\"}}},\"_row_num\":30},{\"choice_list_name\":\"spare_parts_category_types\",\"data_value\":\"monitoring\",\"display\":{\"title\":{\"text\":{\"default\":\"Monitoring\",\"es\":\"Vigilancia\"}}},\"_row_num\":31},{\"choice_list_name\":\"spare_parts_category_types\",\"data_value\":\"power\",\"display\":{\"title\":{\"text\":{\"default\":\"Power\",\"es\":\"Poder\"}}},\"_row_num\":32},{\"choice_list_name\":\"spare_parts_category_types\",\"data_value\":\"refrigeration_system\",\"display\":{\"title\":{\"text\":{\"default\":\"Refrigeration System\",\"es\":\"Sistema de refrigeración\"}}},\"_row_num\":33},{\"choice_list_name\":\"spare_parts_category_types\",\"data_value\":\"solar\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar\",\"es\":\"Solar\"}}},\"_row_num\":34}]"
-      },
-      {
-        "_partition": "Column",
-        "_aspect": "spare_parts_category",
-        "_key": "displayName",
-        "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Spare Part Category\",\"es\":\"Categoría de repuestos\"}}"
-      },
-      {
-        "_partition": "Column",
         "_aspect": "spare_parts_electrical",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"capacitor\",\"display\":{\"title\":{\"text\":{\"default\":\"Capacitor\",\"es\":\"Descargador de picos\"}}},\"_row_num\":36},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"compressor_electronic_unit\",\"display\":{\"title\":{\"text\":{\"default\":\"Compressor Electronic Unit\",\"es\":\"Unidad electrónica de compresor\"}}},\"_row_num\":37},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"control_panel\",\"display\":{\"title\":{\"text\":{\"default\":\"Control Panel\",\"es\":\"Panel de control\"}}},\"_row_num\":38},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"display_battery\",\"display\":{\"title\":{\"text\":{\"default\":\"Display Battery\",\"es\":\"Pantalla de la batería\"}}},\"_row_num\":39},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"display_led\",\"display\":{\"title\":{\"text\":{\"default\":\"Display LED\",\"es\":\"Pantalla LED\"}}},\"_row_num\":40},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"keypad_external\",\"display\":{\"title\":{\"text\":{\"default\":\"Keypad External\",\"es\":\"Teclado Externo\"}}},\"_row_num\":41},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"fuse\",\"display\":{\"title\":{\"text\":{\"default\":\"Fuse\",\"es\":\"Fusible\"}}},\"_row_num\":42},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"indicator_light\",\"display\":{\"title\":{\"text\":{\"default\":\"Indicator Light\",\"es\":\"Luz indicadora\"}}},\"_row_num\":43},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"power_switch\",\"display\":{\"title\":{\"text\":{\"default\":\"Power Switch\",\"es\":\"Interruptor de alimentación\"}}},\"_row_num\":44},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"relay\",\"display\":{\"title\":{\"text\":{\"default\":\"Relay\",\"es\":\"Relé\"}}},\"_row_num\":45},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"resistor\",\"display\":{\"title\":{\"text\":{\"default\":\"Resistor\",\"es\":\"Resistor\"}}},\"_row_num\":46},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"starting_device\",\"display\":{\"title\":{\"text\":{\"default\":\"Starting Device\",\"es\":\"Dispositivo de inicio\"}}},\"_row_num\":47},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"thermostat_controller\",\"display\":{\"title\":{\"text\":{\"default\":\"Thermostat Controller\",\"es\":\"Controlador de termostato\"}}},\"_row_num\":48},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"wiring\",\"display\":{\"title\":{\"text\":{\"default\":\"Wiring\",\"es\":\"Alambrado\"}}},\"_row_num\":49},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"wiring_connections\",\"display\":{\"title\":{\"text\":{\"default\":\"Wiring Connections\",\"es\":\"Conexiones de cableado\"}}},\"_row_num\":50},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"wiring_terminals\",\"display\":{\"title\":{\"text\":{\"default\":\"Wiring Terminals\",\"es\":\"Terminales de cableado\"}}},\"_row_num\":51}]"
+        "_value": "[{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"capacitor\",\"display\":{\"title\":{\"text\":{\"default\":\"Capacitor\",\"es\":\"Descargador de picos\"}}},\"_row_num\":48},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"compressor_electronic_unit\",\"display\":{\"title\":{\"text\":{\"default\":\"Compressor Electronic Unit\",\"es\":\"Unidad electrónica de compresor\"}}},\"_row_num\":49},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"control_panel\",\"display\":{\"title\":{\"text\":{\"default\":\"Control Panel\",\"es\":\"Panel de control\"}}},\"_row_num\":50},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"display_battery\",\"display\":{\"title\":{\"text\":{\"default\":\"Display Battery\",\"es\":\"Pantalla de la batería\"}}},\"_row_num\":51},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"display_led\",\"display\":{\"title\":{\"text\":{\"default\":\"Display LED\",\"es\":\"Pantalla LED\"}}},\"_row_num\":52},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"keypad_external\",\"display\":{\"title\":{\"text\":{\"default\":\"Keypad External\",\"es\":\"Teclado Externo\"}}},\"_row_num\":53},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"fuse\",\"display\":{\"title\":{\"text\":{\"default\":\"Fuse\",\"es\":\"Fusible\"}}},\"_row_num\":54},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"indicator_light\",\"display\":{\"title\":{\"text\":{\"default\":\"Indicator Light\",\"es\":\"Luz indicadora\"}}},\"_row_num\":55},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"power_switch\",\"display\":{\"title\":{\"text\":{\"default\":\"Power Switch\",\"es\":\"Interruptor de alimentación\"}}},\"_row_num\":56},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"relay\",\"display\":{\"title\":{\"text\":{\"default\":\"Relay\",\"es\":\"Relé\"}}},\"_row_num\":57},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"resistor\",\"display\":{\"title\":{\"text\":{\"default\":\"Resistor\",\"es\":\"Resistor\"}}},\"_row_num\":58},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"starting_device\",\"display\":{\"title\":{\"text\":{\"default\":\"Starting Device\",\"es\":\"Dispositivo de inicio\"}}},\"_row_num\":59},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"thermostat_controller\",\"display\":{\"title\":{\"text\":{\"default\":\"Thermostat Controller\",\"es\":\"Controlador de termostato\"}}},\"_row_num\":60},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"wiring\",\"display\":{\"title\":{\"text\":{\"default\":\"Wiring\",\"es\":\"Alambrado\"}}},\"_row_num\":61},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"wiring_connections\",\"display\":{\"title\":{\"text\":{\"default\":\"Wiring Connections\",\"es\":\"Conexiones de cableado\"}}},\"_row_num\":62},{\"choice_list_name\":\"spare_parts_types_electrical\",\"data_value\":\"wiring_terminals\",\"display\":{\"title\":{\"text\":{\"default\":\"Wiring Terminals\",\"es\":\"Terminales de cableado\"}}},\"_row_num\":63}]"
       },
       {
         "_partition": "Column",
         "_aspect": "spare_parts_electrical",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Spare Parts\",\"es\":\"Piezas de Repuesto\"}}"
+        "_value": "{\"text\":{\"default\":\"Electrical and Control System\",\"es\":\"Sistema electrico y de control\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "spare_parts_hardware",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"spare_parts_types_hardware\",\"data_value\":\"baskets\",\"display\":{\"title\":{\"text\":{\"default\":\"Baskets\",\"es\":\"Cestas\"}}},\"_row_num\":53},{\"choice_list_name\":\"spare_parts_types_hardware\",\"data_value\":\"door_gasket\",\"display\":{\"title\":{\"text\":{\"default\":\"Door Gasket\",\"es\":\"Junta de la puerta\"}}},\"_row_num\":54},{\"choice_list_name\":\"spare_parts_types_hardware\",\"data_value\":\"door_hinges\",\"display\":{\"title\":{\"text\":{\"default\":\"Door Hinges\",\"es\":\"Bisagras de puerta\"}}},\"_row_num\":55},{\"choice_list_name\":\"spare_parts_types_hardware\",\"data_value\":\"handle\",\"display\":{\"title\":{\"text\":{\"default\":\"Handle\",\"es\":\"Manija\"}}},\"_row_num\":56},{\"choice_list_name\":\"spare_parts_types_hardware\",\"data_value\":\"door_hinge_cover\",\"display\":{\"title\":{\"text\":{\"default\":\"Door Hinge Cover\",\"es\":\"Cubierta de la bisagra de la puerta\"}}},\"_row_num\":57},{\"choice_list_name\":\"spare_parts_types_hardware\",\"data_value\":\"lock_and_key\",\"display\":{\"title\":{\"text\":{\"default\":\"Lock And Key\",\"es\":\"Cerradura y llave\"}}},\"_row_num\":58},{\"choice_list_name\":\"spare_parts_types_hardware\",\"data_value\":\"removable_insulation\",\"display\":{\"title\":{\"text\":{\"default\":\"Removable Insulation\",\"es\":\"Aislamiento removible\"}}},\"_row_num\":59},{\"choice_list_name\":\"spare_parts_types_hardware\",\"data_value\":\"ventillation_grill\",\"display\":{\"title\":{\"text\":{\"default\":\"Ventillation Grill\",\"es\":\"Rejilla de ventilación\"}}},\"_row_num\":60}]"
+        "_value": "[{\"choice_list_name\":\"spare_parts_types_hardware\",\"data_value\":\"baskets\",\"display\":{\"title\":{\"text\":{\"default\":\"Baskets\",\"es\":\"Cestas\"}}},\"_row_num\":65},{\"choice_list_name\":\"spare_parts_types_hardware\",\"data_value\":\"door_gasket\",\"display\":{\"title\":{\"text\":{\"default\":\"Door Gasket\",\"es\":\"Junta de la puerta\"}}},\"_row_num\":66},{\"choice_list_name\":\"spare_parts_types_hardware\",\"data_value\":\"door_hinges\",\"display\":{\"title\":{\"text\":{\"default\":\"Door Hinges\",\"es\":\"Bisagras de puerta\"}}},\"_row_num\":67},{\"choice_list_name\":\"spare_parts_types_hardware\",\"data_value\":\"handle\",\"display\":{\"title\":{\"text\":{\"default\":\"Handle\",\"es\":\"Manija\"}}},\"_row_num\":68},{\"choice_list_name\":\"spare_parts_types_hardware\",\"data_value\":\"door_hinge_cover\",\"display\":{\"title\":{\"text\":{\"default\":\"Door Hinge Cover\",\"es\":\"Cubierta de la bisagra de la puerta\"}}},\"_row_num\":69},{\"choice_list_name\":\"spare_parts_types_hardware\",\"data_value\":\"lock_and_key\",\"display\":{\"title\":{\"text\":{\"default\":\"Lock And Key\",\"es\":\"Cerradura y llave\"}}},\"_row_num\":70},{\"choice_list_name\":\"spare_parts_types_hardware\",\"data_value\":\"removable_insulation\",\"display\":{\"title\":{\"text\":{\"default\":\"Removable Insulation\",\"es\":\"Aislamiento removible\"}}},\"_row_num\":71},{\"choice_list_name\":\"spare_parts_types_hardware\",\"data_value\":\"ventillation_grill\",\"display\":{\"title\":{\"text\":{\"default\":\"Ventillation Grill\",\"es\":\"Rejilla de ventilación\"}}},\"_row_num\":72}]"
       },
       {
         "_partition": "Column",
         "_aspect": "spare_parts_hardware",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Spare Parts\",\"es\":\"Piezas de Repuesto\"}}"
+        "_value": "{\"text\":{\"default\":\"Hardware\",\"es\":\"Hardware\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "spare_parts_monitoring",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"spare_parts_types_monitoring\",\"data_value\":\"30_day_temperature_monitor\",\"display\":{\"title\":{\"text\":{\"default\":\"30 Day Temperature Monitor\",\"es\":\"Monitor de temperatura de 30 días\"}}},\"_row_num\":62}]"
+        "_value": "[{\"choice_list_name\":\"spare_parts_types_monitoring\",\"data_value\":\"30_day_temperature_monitor\",\"display\":{\"title\":{\"text\":{\"default\":\"30 Day Temperature Monitor\",\"es\":\"Monitor de temperatura de 30 días\"}}},\"_row_num\":74}]"
       },
       {
         "_partition": "Column",
         "_aspect": "spare_parts_monitoring",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Spare Parts\",\"es\":\"Piezas de Repuesto\"}}"
+        "_value": "{\"text\":{\"default\":\"Monitoring\",\"es\":\"Vigilancia\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "spare_parts_power",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"spare_parts_types_power\",\"data_value\":\"circuit_breaker\",\"display\":{\"title\":{\"text\":{\"default\":\"Circuit Breaker\",\"es\":\"Cortacircuitos\"}}},\"_row_num\":64},{\"choice_list_name\":\"spare_parts_types_power\",\"data_value\":\"spike_arrester\",\"display\":{\"title\":{\"text\":{\"default\":\"Spike Arrester\",\"es\":\"Descargador de picos\"}}},\"_row_num\":65},{\"choice_list_name\":\"spare_parts_types_power\",\"data_value\":\"power_adapter\",\"display\":{\"title\":{\"text\":{\"default\":\"Power Adapter\",\"es\":\"Adaptador de corriente\"}}},\"_row_num\":66},{\"choice_list_name\":\"spare_parts_types_power\",\"data_value\":\"power_lead\",\"display\":{\"title\":{\"text\":{\"default\":\"Power Lead\",\"es\":\"Cable de alimentación\"}}},\"_row_num\":67},{\"choice_list_name\":\"spare_parts_types_power\",\"data_value\":\"power_plug\",\"display\":{\"title\":{\"text\":{\"default\":\"Power Plug\",\"es\":\"Enchufe\"}}},\"_row_num\":68},{\"choice_list_name\":\"spare_parts_types_power\",\"data_value\":\"transformer\",\"display\":{\"title\":{\"text\":{\"default\":\"Transformer\",\"es\":\"Transformador\"}}},\"_row_num\":69},{\"choice_list_name\":\"spare_parts_types_power\",\"data_value\":\"voltage_stabilizer\",\"display\":{\"title\":{\"text\":{\"default\":\"Voltage Stabilizer\",\"es\":\"Estabilizador de voltaje\"}}},\"_row_num\":70}]"
+        "_value": "[{\"choice_list_name\":\"spare_parts_types_power\",\"data_value\":\"circuit_breaker\",\"display\":{\"title\":{\"text\":{\"default\":\"Circuit Breaker\",\"es\":\"Cortacircuitos\"}}},\"_row_num\":76},{\"choice_list_name\":\"spare_parts_types_power\",\"data_value\":\"spike_arrester\",\"display\":{\"title\":{\"text\":{\"default\":\"Spike Arrester\",\"es\":\"Descargador de picos\"}}},\"_row_num\":77},{\"choice_list_name\":\"spare_parts_types_power\",\"data_value\":\"power_adapter\",\"display\":{\"title\":{\"text\":{\"default\":\"Power Adapter\",\"es\":\"Adaptador de corriente\"}}},\"_row_num\":78},{\"choice_list_name\":\"spare_parts_types_power\",\"data_value\":\"power_lead\",\"display\":{\"title\":{\"text\":{\"default\":\"Power Lead\",\"es\":\"Cable de alimentación\"}}},\"_row_num\":79},{\"choice_list_name\":\"spare_parts_types_power\",\"data_value\":\"power_plug\",\"display\":{\"title\":{\"text\":{\"default\":\"Power Plug\",\"es\":\"Enchufe\"}}},\"_row_num\":80},{\"choice_list_name\":\"spare_parts_types_power\",\"data_value\":\"transformer\",\"display\":{\"title\":{\"text\":{\"default\":\"Transformer\",\"es\":\"Transformador\"}}},\"_row_num\":81},{\"choice_list_name\":\"spare_parts_types_power\",\"data_value\":\"voltage_stabilizer\",\"display\":{\"title\":{\"text\":{\"default\":\"Voltage Stabilizer\",\"es\":\"Estabilizador de voltaje\"}}},\"_row_num\":82}]"
       },
       {
         "_partition": "Column",
         "_aspect": "spare_parts_power",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Spare Parts\",\"es\":\"Piezas de Repuesto\"}}"
+        "_value": "{\"text\":{\"default\":\"Power\",\"es\":\"Poder\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "spare_parts_refrigeration",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"burner_boiler\",\"display\":{\"title\":{\"text\":{\"default\":\"Burner/Boiler\",\"es\":\"Quemador/Caldera\"}}},\"_row_num\":72},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"capillaries\",\"display\":{\"title\":{\"text\":{\"default\":\"Capillaries\",\"es\":\"Capilares\"}}},\"_row_num\":73},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"circulation_fan\",\"display\":{\"title\":{\"text\":{\"default\":\"Circulation Fan\",\"es\":\"Ventilador de circulación\"}}},\"_row_num\":74},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"compressor\",\"display\":{\"title\":{\"text\":{\"default\":\"Compressor\",\"es\":\"Compresor\"}}},\"_row_num\":75},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"condensor_fan\",\"display\":{\"title\":{\"text\":{\"default\":\"Condensor Fan\",\"es\":\"Abanico condensador\"}}},\"_row_num\":76},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"cooling_fan\",\"display\":{\"title\":{\"text\":{\"default\":\"Cooling Fan\",\"es\":\"Ventilador\"}}},\"_row_num\":77},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"evaporator_plate\",\"display\":{\"title\":{\"text\":{\"default\":\"Evaporator Plate\",\"es\":\"Placa del evaporador\"}}},\"_row_num\":78},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"condensor_external\",\"display\":{\"title\":{\"text\":{\"default\":\"Condensor External\",\"es\":\"Condensador externo\"}}},\"_row_num\":79},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"temperature_probe_external_display\",\"display\":{\"title\":{\"text\":{\"default\":\"Temperature Probe External Display\",\"es\":\"Sonda de temperatura Pantalla externa\"}}},\"_row_num\":80},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"filter_dryer\",\"display\":{\"title\":{\"text\":{\"default\":\"Filter Dryer\",\"es\":\"Filtro secador\"}}},\"_row_num\":81},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"flue\",\"display\":{\"title\":{\"text\":{\"default\":\"Flue\",\"es\":\"Tubo\"}}},\"_row_num\":82},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"flue_baffle\",\"display\":{\"title\":{\"text\":{\"default\":\"Flue Baffle\",\"es\":\"Deflector de humos\"}}},\"_row_num\":83},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"ice_packs_ice_bank_ice_liner\",\"display\":{\"title\":{\"text\":{\"default\":\"Ice Packs/Ice Bank/Ice Liner\",\"es\":\"Paquetes / banco / revestimiento de hielo\"}}},\"_row_num\":84},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"condensor_internal\",\"display\":{\"title\":{\"text\":{\"default\":\"Condensor Internal\",\"es\":\"Condensador interno\"}}},\"_row_num\":85},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"lamp_absorption\",\"display\":{\"title\":{\"text\":{\"default\":\"Lamp/Absorption\",\"es\":\"Lámpara / Absorción\"}}},\"_row_num\":86},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"piping_tubing\",\"display\":{\"title\":{\"text\":{\"default\":\"Piping/Tubing\",\"es\":\"Tuberías / Tubos\"}}},\"_row_num\":87},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"refrigerant\",\"display\":{\"title\":{\"text\":{\"default\":\"Refrigerant\",\"es\":\"Refrigerante\"}}},\"_row_num\":88},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"sealant\",\"display\":{\"title\":{\"text\":{\"default\":\"Sealant\",\"es\":\"Sellador\"}}},\"_row_num\":89},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"thermostat_probe\",\"display\":{\"title\":{\"text\":{\"default\":\"Thermostat Probe\",\"es\":\"Sonda de termostato\"}}},\"_row_num\":90},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"wicks\",\"display\":{\"title\":{\"text\":{\"default\":\"Wicks\",\"es\":\"Mechas\"}}},\"_row_num\":91}]"
+        "_value": "[{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"burner_boiler\",\"display\":{\"title\":{\"text\":{\"default\":\"Burner/Boiler\",\"es\":\"Quemador/Caldera\"}}},\"_row_num\":84},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"capillaries\",\"display\":{\"title\":{\"text\":{\"default\":\"Capillaries\",\"es\":\"Capilares\"}}},\"_row_num\":85},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"circulation_fan\",\"display\":{\"title\":{\"text\":{\"default\":\"Circulation Fan\",\"es\":\"Ventilador de circulación\"}}},\"_row_num\":86},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"compressor\",\"display\":{\"title\":{\"text\":{\"default\":\"Compressor\",\"es\":\"Compresor\"}}},\"_row_num\":87},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"condensor_fan\",\"display\":{\"title\":{\"text\":{\"default\":\"Condensor Fan\",\"es\":\"Abanico condensador\"}}},\"_row_num\":88},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"cooling_fan\",\"display\":{\"title\":{\"text\":{\"default\":\"Cooling Fan\",\"es\":\"Ventilador\"}}},\"_row_num\":89},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"evaporator_plate\",\"display\":{\"title\":{\"text\":{\"default\":\"Evaporator Plate\",\"es\":\"Placa del evaporador\"}}},\"_row_num\":90},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"condensor_external\",\"display\":{\"title\":{\"text\":{\"default\":\"Condensor External\",\"es\":\"Condensador externo\"}}},\"_row_num\":91},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"temperature_probe_external_display\",\"display\":{\"title\":{\"text\":{\"default\":\"Temperature Probe External Display\",\"es\":\"Sonda de temperatura Pantalla externa\"}}},\"_row_num\":92},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"filter_dryer\",\"display\":{\"title\":{\"text\":{\"default\":\"Filter Dryer\",\"es\":\"Filtro secador\"}}},\"_row_num\":93},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"flue\",\"display\":{\"title\":{\"text\":{\"default\":\"Flue\",\"es\":\"Tubo\"}}},\"_row_num\":94},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"flue_baffle\",\"display\":{\"title\":{\"text\":{\"default\":\"Flue Baffle\",\"es\":\"Deflector de humos\"}}},\"_row_num\":95},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"ice_packs_ice_bank_ice_liner\",\"display\":{\"title\":{\"text\":{\"default\":\"Ice Packs/Ice Bank/Ice Liner\",\"es\":\"Paquetes / banco / revestimiento de hielo\"}}},\"_row_num\":96},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"condensor_internal\",\"display\":{\"title\":{\"text\":{\"default\":\"Condensor Internal\",\"es\":\"Condensador interno\"}}},\"_row_num\":97},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"lamp_absorption\",\"display\":{\"title\":{\"text\":{\"default\":\"Lamp/Absorption\",\"es\":\"Lámpara / Absorción\"}}},\"_row_num\":98},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"piping_tubing\",\"display\":{\"title\":{\"text\":{\"default\":\"Piping/Tubing\",\"es\":\"Tuberías / Tubos\"}}},\"_row_num\":99},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"refrigerant\",\"display\":{\"title\":{\"text\":{\"default\":\"Refrigerant\",\"es\":\"Refrigerante\"}}},\"_row_num\":100},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"sealant\",\"display\":{\"title\":{\"text\":{\"default\":\"Sealant\",\"es\":\"Sellador\"}}},\"_row_num\":101},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"thermostat_probe\",\"display\":{\"title\":{\"text\":{\"default\":\"Thermostat Probe\",\"es\":\"Sonda de termostato\"}}},\"_row_num\":102},{\"choice_list_name\":\"spare_parts_types_refrigeration\",\"data_value\":\"wicks\",\"display\":{\"title\":{\"text\":{\"default\":\"Wicks\",\"es\":\"Mechas\"}}},\"_row_num\":103}]"
       },
       {
         "_partition": "Column",
         "_aspect": "spare_parts_refrigeration",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Spare Parts\",\"es\":\"Piezas de Repuesto\"}}"
+        "_value": "{\"text\":{\"default\":\"Refrigeration System\",\"es\":\"Sistema de refrigeración\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "spare_parts_solar",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"spare_parts_types_solar\",\"data_value\":\"solar_related_parts\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar Related Parts (Battery, Grounding, Etc)\",\"es\":\"Partes relacionadas con la energía solar (batería, etc.)\"}}},\"_row_num\":93}]"
+        "_value": "[{\"choice_list_name\":\"spare_parts_types_solar\",\"data_value\":\"solar_related_parts\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar Related Parts (Battery, Grounding, Etc)\",\"es\":\"Partes relacionadas con la energía solar (batería, etc.)\"}}},\"_row_num\":105}]"
       },
       {
         "_partition": "Column",
         "_aspect": "spare_parts_solar",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Spare Parts\",\"es\":\"Piezas de Repuesto\"}}"
+        "_value": "{\"text\":{\"default\":\"Solar\",\"es\":\"Solar\"}}"
       },
       {
         "_partition": "Column",
@@ -4838,6 +5323,13 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":{\"default\":\"Technician Name\",\"es\":\"Nombre del técnico\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "technician_phone",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Technician Phone Number\",\"es\":\"Número de teléfono del técnico\"}}"
       },
       {
         "_partition": "Column",
@@ -4858,7 +5350,7 @@
         "_aspect": "type_of_preventative_maintenance",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"clean_solar_panels\",\"display\":{\"title\":{\"text\":{\"default\":\"Clean solar panels\",\"fr\":\"Panneaux solaires propres\"}}},\"_row_num\":25},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"clean_coils\",\"display\":{\"title\":{\"text\":{\"default\":\"Clean coils\",\"fr\":\"Serpentins propres\"}}},\"_row_num\":26},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":{\"default\":\"Need Data\",\"es\":\"Necesita Datos\",\"fr\":\"Données nécessaires\"}}},\"_row_num\":27}]"
+        "_value": "[{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"cleaning_cabinet\",\"display\":{\"title\":{\"text\":{\"default\":\"Cleaning - cabinet\",\"es\":\"Limpieza - gabinete\"}}},\"_row_num\":32},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"cleaning_drying_storage_compartment\",\"display\":{\"title\":{\"text\":{\"default\":\"Cleaning/drying - storage compartment\",\"es\":\"Limpieza/secado - compartimento de almacenamiento\"}}},\"_row_num\":33},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"cleaning_solar_panels\",\"display\":{\"title\":{\"text\":{\"default\":\"Cleaning - solar panels\",\"es\":\"Limpieza - paneles solares\"}}},\"_row_num\":34},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"defrosting\",\"display\":{\"title\":{\"text\":{\"default\":\"Defrosting\",\"es\":\"Antihielo\"}}},\"_row_num\":35},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"tightening\",\"display\":{\"title\":{\"text\":{\"default\":\"Tightening\",\"es\":\"Apriete\"}}},\"_row_num\":36},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_seals\",\"display\":{\"title\":{\"text\":{\"default\":\"Check seals\",\"es\":\"Revise los sellos\"}}},\"_row_num\":37},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_unit\",\"display\":{\"title\":{\"text\":{\"default\":\"Check/clean cooling unit\",\"es\":\"Comprobar/limpiar la unidad de enfriamiento\"}}},\"_row_num\":38}]"
       },
       {
         "_partition": "Column",
@@ -4872,7 +5364,7 @@
         "_aspect": "type_of_repair",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"repair_types\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":{\"default\":\"Need Data\",\"es\":\"Necesita Datos\",\"fr\":\"Données nécessaires\"}}},\"_row_num\":23}]"
+        "_value": "[{\"choice_list_name\":\"repair_types\",\"data_value\":\"electrical_and_control_system\",\"display\":{\"title\":{\"text\":{\"default\":\"Electrical and Control System\",\"es\":\"Sistema electrico y de control\"}}},\"_row_num\":23},{\"choice_list_name\":\"repair_types\",\"data_value\":\"cabinet\",\"display\":{\"title\":{\"text\":{\"default\":\"Cabinet\",\"es\":\"Gabinete\"}}},\"_row_num\":24},{\"choice_list_name\":\"repair_types\",\"data_value\":\"refrigeration_system\",\"display\":{\"title\":{\"text\":{\"default\":\"Refrigeration System\",\"es\":\"Sistema de refrigeración\"}}},\"_row_num\":25},{\"choice_list_name\":\"repair_types\",\"data_value\":\"power\",\"display\":{\"title\":{\"text\":{\"default\":\"Power\",\"es\":\"Energía\"}}},\"_row_num\":26},{\"choice_list_name\":\"repair_types\",\"data_value\":\"solar\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar\",\"es\":\"Solar\"}}},\"_row_num\":27},{\"choice_list_name\":\"repair_types\",\"data_value\":\"temperature_monitoring\",\"display\":{\"title\":{\"text\":{\"default\":\"Temperature Monitoring\",\"es\":\"Monitoreo de temperatura\"}}},\"_row_num\":28},{\"choice_list_name\":\"repair_types\",\"data_value\":\"other\",\"display\":{\"title\":{\"text\":{\"default\":\"Other\",\"es\":\"Otro\"}}},\"_row_num\":29}]"
       },
       {
         "_partition": "Column",

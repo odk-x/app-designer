@@ -24,7 +24,7 @@ function cbFrigSuccess(result) {
     showIdArrayForDetail('#spare_parts_refrigeration', maintenanceLogsResultSet, 'spare_parts_refrigeration');
     showIdArrayForDetail('#spare_parts_solar', maintenanceLogsResultSet, 'spare_parts_solar');
 
-    util.showIdForDetail('#addtl_spare_parts', 'addtl_spare_parts', maintenanceLogsResultSet, true);
+    util.showIdForDetail('#addtl_spare_parts', 'other_spare_parts', maintenanceLogsResultSet, true);
     util.showIdForDetail('#notes', 'notes', maintenanceLogsResultSet, false);
 
 }

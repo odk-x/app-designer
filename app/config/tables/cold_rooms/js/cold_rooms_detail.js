@@ -18,7 +18,6 @@ function processCRPromises(facilityResult, logResult) {
     util.showIdForDetail('#install_year', 'year', coldRoomsResultSet, false);
     util.showIdForDetail('#functional_status', 'functional_status', coldRoomsResultSet, true);
     util.showIdForDetail('#reason_not_working', 'reason_not_working', coldRoomsResultSet, true);
-    util.showIdForDetail('#voltage_regulator', 'voltage_regulator', coldRoomsResultSet, true);
     util.showIdForDetail('#maintenance_priority', 'maintenance_priority', coldRoomsResultSet, true);
     util.showIdForDetail('#date_serviced', 'date_serviced', logResult, true);
 }
@@ -85,7 +84,6 @@ function display() {
     $('#srv-pri').text(odkCommon.localizeText(locale, "service_priority"));
     $('#mdl-id').text(odkCommon.localizeText(locale, "model_id"));
     $('#cold-id').text(odkCommon.localizeText(locale, "cold_room_id"));
-    $('#volt-reg').text(odkCommon.localizeText(locale, "voltage_regulator"));
     $('#date-srv').text(odkCommon.localizeText(locale, "date_serviced"));
 
     $('#vw-fac-info').text(odkCommon.localizeText(locale, "view_facility_information"));

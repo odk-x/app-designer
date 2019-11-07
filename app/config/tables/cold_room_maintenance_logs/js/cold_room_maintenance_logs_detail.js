@@ -22,7 +22,7 @@ function cbCRSuccess(result) {
         $('#spare_parts').text(crMaintenanceLogsResultSet.get('spare_parts'));
     }
 
-    util.showIdForDetail('#addtl_spare_parts', 'addtl_spare_parts', crMaintenanceLogsResultSet, true);
+    util.showIdForDetail('#addtl_spare_parts', 'other_spare_parts', crMaintenanceLogsResultSet, true);
     util.showIdForDetail('#notes', 'notes', crMaintenanceLogsResultSet, false);
 
 }

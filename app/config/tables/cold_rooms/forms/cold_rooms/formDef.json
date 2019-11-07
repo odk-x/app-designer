@@ -66,7 +66,8 @@
         "_row_num": 6
       },
       {
-        "type": "text",
+        "type": "select_one",
+        "values_list": "cold_room_type",
         "name": "type",
         "display": {
           "title": {
@@ -260,6 +261,31 @@
         "_row_num": 18
       },
       {
+        "type": "integer",
+        "name": "gross_volume",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Gross Volume",
+              "es": "Volúmen bruto"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Enter the gross volume:",
+              "es": "Ingrese el volumen bruto:"
+            }
+          },
+          "hint": {
+            "text": {
+              "default": "(cubic meters)",
+              "es": "(metros cúbicos)"
+            }
+          }
+        },
+        "_row_num": 19
+      },
+      {
         "type": "text",
         "name": "dimensions",
         "display": {
@@ -282,7 +308,15 @@
             }
           }
         },
-        "_row_num": 19
+        "_row_num": 20
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 21
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 22
       },
       {
         "type": "select_one",
@@ -302,11 +336,11 @@
             }
           }
         },
-        "_row_num": 20
+        "_row_num": 23
       },
       {
         "type": "select_one",
-        "values_list": "status",
+        "values_list": "user_friendly_status",
         "name": "functional_status",
         "display": {
           "title": {
@@ -322,10 +356,10 @@
             }
           }
         },
-        "_row_num": 21
+        "_row_num": 24
       },
       {
-        "type": "select_one",
+        "type": "select_multiple",
         "values_list": "reasons",
         "name": "reason_not_working",
         "display": {
@@ -342,7 +376,7 @@
             }
           }
         },
-        "_row_num": 22
+        "_row_num": 25
       },
       {
         "type": "select_one",
@@ -362,72 +396,91 @@
             }
           }
         },
-        "_row_num": 23
+        "_row_num": 26
       },
       {
         "clause": "end screen",
-        "_row_num": 24
+        "_row_num": 27
       },
       {
         "clause": "begin screen",
-        "_row_num": 25
+        "_row_num": 28
       },
       {
         "type": "select_one",
         "values_list": "yes_no_unknown",
-        "name": "voltage_regulator",
+        "name": "temperature_monitoring_device",
         "display": {
           "title": {
             "text": {
-              "default": "Voltage Regulator",
-              "es": "Regulador de voltaje"
+              "default": "Temperature Monitoring Device",
+              "es": "Dispositivo de monitoreo de temperatura"
             }
           },
           "prompt": {
             "text": {
-              "default": "Voltage regulator?",
-              "es": "¿Tiene regulador de voltaje?"
+              "default": "Is there a temperature monitoring device?",
+              "es": "¿Tiene el dispositivo de monitoreo de temperatura?"
             }
           }
         },
-        "_row_num": 26
+        "_row_num": 29
       },
       {
         "clause": "if",
-        "condition": "data('voltage_regulator') === 'yes'",
-        "_row_num": 27
+        "condition": "data('temperature_monitoring_device') === 'yes'",
+        "_row_num": 30
+      },
+      {
+        "type": "text",
+        "name": "temperature_monitoring_device_type",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Temperature Monitoring Device Type",
+              "es": "Tipo de dispositivo de monitoreo de temperatura"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "What type of the temperature monitoring device is present?",
+              "es": "¿Qué tipo de dispositivo de monitoreo de temperatura está presente?"
+            }
+          }
+        },
+        "_row_num": 31
       },
       {
         "type": "select_one",
         "values_list": "status",
-        "name": "voltage_regulator_functional_status",
+        "name": "temperature_monitoring_device_functional_status",
         "display": {
           "title": {
             "text": {
-              "default": "Voltage Regulator Functional",
-              "es": "Regulador de voltaje funcional"
+              "default": "Temperature Monitoring Device Functional",
+              "es": "Dispositivo de monitoreo de temperatura funcional"
             }
           },
           "prompt": {
             "text": {
-              "default": "Is voltage regulator functional?",
-              "es": "¿Funciona el regulador de voltaje?"
+              "default": "Is temperature monitoring device functional?",
+              "es": "¿Funciona el dispositivo de monitoreo de temperatura?"
             }
           }
         },
-        "_row_num": 28
+        "_row_num": 32
       },
       {
         "clause": "end if",
-        "_row_num": 29
+        "_row_num": 33
       },
       {
         "clause": "end screen",
-        "_row_num": 30
+        "_row_num": 34
       },
       {
         "clause": "begin screen",
-        "_row_num": 31
+        "_row_num": 35
       },
       {
         "type": "select_one",
@@ -447,12 +500,12 @@
             }
           }
         },
-        "_row_num": 32
+        "_row_num": 36
       },
       {
         "clause": "if",
-        "condition": "data('backup_generator') === yes",
-        "_row_num": 33
+        "condition": "data('backup_generator') === 'yes'",
+        "_row_num": 37
       },
       {
         "type": "select_one",
@@ -472,18 +525,57 @@
             }
           }
         },
-        "_row_num": 34
+        "_row_num": 38
       },
       {
         "clause": "end if",
-        "_row_num": 35
+        "_row_num": 39
       },
       {
         "clause": "end screen",
-        "_row_num": 36
+        "_row_num": 40
       }
     ],
     "choices": [
+      {
+        "choice_list_name": "cold_room_type",
+        "data_value": "refrigerator",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Refrigerator",
+              "es": "Refrigerador"
+            }
+          }
+        },
+        "_row_num": 2
+      },
+      {
+        "choice_list_name": "cold_room_type",
+        "data_value": "freezer",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Freezer",
+              "es": "Congelador"
+            }
+          }
+        },
+        "_row_num": 3
+      },
+      {
+        "choice_list_name": "cold_room_type",
+        "data_value": "refrigerator_freezer",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Refrigerator/Freezer",
+              "es": "Refrigerador/Congelador"
+            }
+          }
+        },
+        "_row_num": 4
+      },
       {
         "choice_list_name": "status",
         "data_value": "functioning",
@@ -491,11 +583,12 @@
           "title": {
             "text": {
               "default": "Functioning",
-              "es": "Functionando"
+              "es": "Functionando",
+              "fr": "Fonctionne"
             }
           }
         },
-        "_row_num": 2
+        "_row_num": 6
       },
       {
         "choice_list_name": "status",
@@ -504,11 +597,38 @@
           "title": {
             "text": {
               "default": "Not Functioning",
-              "es": "No Functionando"
+              "es": "No Functionando",
+              "fr": "Ne fonctionne pas"
             }
           }
         },
-        "_row_num": 3
+        "_row_num": 7
+      },
+      {
+        "choice_list_name": "user_friendly_status",
+        "data_value": "functioning",
+        "display": {
+          "title": {
+            "text": {
+              "default": "No known issues",
+              "es": "No hay problemas conocidos"
+            }
+          }
+        },
+        "_row_num": 9
+      },
+      {
+        "choice_list_name": "user_friendly_status",
+        "data_value": "not_functioning",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Needs attention",
+              "es": "Necesita atención"
+            }
+          }
+        },
+        "_row_num": 10
       },
       {
         "choice_list_name": "reasons",
@@ -521,7 +641,7 @@
             }
           }
         },
-        "_row_num": 5
+        "_row_num": 12
       },
       {
         "choice_list_name": "reasons",
@@ -534,7 +654,7 @@
             }
           }
         },
-        "_row_num": 6
+        "_row_num": 13
       },
       {
         "choice_list_name": "reasons",
@@ -547,7 +667,7 @@
             }
           }
         },
-        "_row_num": 7
+        "_row_num": 14
       },
       {
         "choice_list_name": "reasons",
@@ -560,7 +680,7 @@
             }
           }
         },
-        "_row_num": 8
+        "_row_num": 15
       },
       {
         "choice_list_name": "reasons",
@@ -573,7 +693,7 @@
             }
           }
         },
-        "_row_num": 9
+        "_row_num": 16
       },
       {
         "choice_list_name": "reasons",
@@ -586,7 +706,7 @@
             }
           }
         },
-        "_row_num": 10
+        "_row_num": 17
       },
       {
         "choice_list_name": "reasons",
@@ -599,46 +719,72 @@
             }
           }
         },
-        "_row_num": 11
+        "_row_num": 18
       },
       {
         "choice_list_name": "current_use",
-        "data_value": "in_use",
+        "data_value": "installed_in_use",
         "display": {
           "title": {
             "text": {
-              "default": "In Use",
-              "es": "En Uso"
+              "default": "Installed - In Use",
+              "es": "Instalado - En uso"
             }
           }
         },
-        "_row_num": 14
+        "_row_num": 20
       },
       {
         "choice_list_name": "current_use",
-        "data_value": "not_in_use",
+        "data_value": "installed_not_in_use",
         "display": {
           "title": {
             "text": {
-              "default": "Not In Use",
-              "es": "No En Uso"
+              "default": "Installed - Not In Use",
+              "es": "Instalado - No en uso"
             }
           }
         },
-        "_row_num": 15
+        "_row_num": 21
       },
       {
         "choice_list_name": "current_use",
-        "data_value": "not_installed",
+        "data_value": "not_installed_waiting_for_installation",
         "display": {
           "title": {
             "text": {
-              "default": "Not Installed",
-              "es": "No Instalado"
+              "default": "Not Installed - Waiting For Installation",
+              "es": "No instalado - Esperando instalación"
             }
           }
         },
-        "_row_num": 16
+        "_row_num": 22
+      },
+      {
+        "choice_list_name": "current_use",
+        "data_value": "not_installed_removed_from_service",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Not installed - Removed From Service",
+              "es": "No instalado: eliminado del servicio"
+            }
+          }
+        },
+        "_row_num": 23
+      },
+      {
+        "choice_list_name": "current_use",
+        "data_value": "missing",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Missing",
+              "es": "Desaparecido"
+            }
+          }
+        },
+        "_row_num": 24
       },
       {
         "choice_list_name": "yes_no_unknown",
@@ -651,7 +797,7 @@
             }
           }
         },
-        "_row_num": 18
+        "_row_num": 27
       },
       {
         "choice_list_name": "yes_no_unknown",
@@ -664,7 +810,7 @@
             }
           }
         },
-        "_row_num": 19
+        "_row_num": 28
       },
       {
         "choice_list_name": "yes_no_unknown",
@@ -677,7 +823,7 @@
             }
           }
         },
-        "_row_num": 20
+        "_row_num": 29
       },
       {
         "choice_list_name": "service_priority_list",
@@ -690,7 +836,7 @@
             }
           }
         },
-        "_row_num": 23
+        "_row_num": 32
       },
       {
         "choice_list_name": "service_priority_list",
@@ -703,7 +849,7 @@
             }
           }
         },
-        "_row_num": 24
+        "_row_num": 33
       },
       {
         "choice_list_name": "service_priority_list",
@@ -716,7 +862,7 @@
             }
           }
         },
-        "_row_num": 25
+        "_row_num": 34
       },
       {
         "choice_list_name": "service_priority_list",
@@ -729,7 +875,7 @@
             }
           }
         },
-        "_row_num": 26
+        "_row_num": 35
       }
     ],
     "queries": [
@@ -842,7 +988,8 @@
           "locale": {
             "text": {
               "default": "English",
-              "es": "Inglés"
+              "es": "Inglés",
+              "fr": "Anglais"
             }
           }
         },
@@ -854,11 +1001,25 @@
           "locale": {
             "text": {
               "default": "Spanish",
-              "es": "Español"
+              "es": "Español",
+              "fr": "Espagnol"
             }
           }
         },
         "_row_num": 8
+      },
+      {
+        "setting_name": "fr",
+        "display": {
+          "locale": {
+            "text": {
+              "default": "French",
+              "es": "Francés",
+              "fr": "Francais"
+            }
+          }
+        },
+        "_row_num": 9
       }
     ],
     "calculates": [
@@ -924,7 +1085,8 @@
           "locale": {
             "text": {
               "default": "English",
-              "es": "Inglés"
+              "es": "Inglés",
+              "fr": "Anglais"
             }
           }
         },
@@ -936,11 +1098,25 @@
           "locale": {
             "text": {
               "default": "Spanish",
-              "es": "Español"
+              "es": "Español",
+              "fr": "Espagnol"
             }
           }
         },
         "_row_num": 8
+      },
+      "fr": {
+        "setting_name": "fr",
+        "display": {
+          "locale": {
+            "text": {
+              "default": "French",
+              "es": "Francés",
+              "fr": "Francais"
+            }
+          }
+        },
+        "_row_num": 9
       },
       "_locales": {
         "setting_name": "_locales",
@@ -951,7 +1127,8 @@
               "locale": {
                 "text": {
                   "default": "Spanish",
-                  "es": "Español"
+                  "es": "Español",
+                  "fr": "Espagnol"
                 }
               }
             },
@@ -987,6 +1164,47 @@
       }
     },
     "choices": {
+      "cold_room_type": [
+        {
+          "choice_list_name": "cold_room_type",
+          "data_value": "refrigerator",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Refrigerator",
+                "es": "Refrigerador"
+              }
+            }
+          },
+          "_row_num": 2
+        },
+        {
+          "choice_list_name": "cold_room_type",
+          "data_value": "freezer",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Freezer",
+                "es": "Congelador"
+              }
+            }
+          },
+          "_row_num": 3
+        },
+        {
+          "choice_list_name": "cold_room_type",
+          "data_value": "refrigerator_freezer",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Refrigerator/Freezer",
+                "es": "Refrigerador/Congelador"
+              }
+            }
+          },
+          "_row_num": 4
+        }
+      ],
       "status": [
         {
           "choice_list_name": "status",
@@ -995,11 +1213,12 @@
             "title": {
               "text": {
                 "default": "Functioning",
-                "es": "Functionando"
+                "es": "Functionando",
+                "fr": "Fonctionne"
               }
             }
           },
-          "_row_num": 2
+          "_row_num": 6
         },
         {
           "choice_list_name": "status",
@@ -1008,11 +1227,40 @@
             "title": {
               "text": {
                 "default": "Not Functioning",
-                "es": "No Functionando"
+                "es": "No Functionando",
+                "fr": "Ne fonctionne pas"
               }
             }
           },
-          "_row_num": 3
+          "_row_num": 7
+        }
+      ],
+      "user_friendly_status": [
+        {
+          "choice_list_name": "user_friendly_status",
+          "data_value": "functioning",
+          "display": {
+            "title": {
+              "text": {
+                "default": "No known issues",
+                "es": "No hay problemas conocidos"
+              }
+            }
+          },
+          "_row_num": 9
+        },
+        {
+          "choice_list_name": "user_friendly_status",
+          "data_value": "not_functioning",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Needs attention",
+                "es": "Necesita atención"
+              }
+            }
+          },
+          "_row_num": 10
         }
       ],
       "reasons": [
@@ -1027,7 +1275,7 @@
               }
             }
           },
-          "_row_num": 5
+          "_row_num": 12
         },
         {
           "choice_list_name": "reasons",
@@ -1040,7 +1288,7 @@
               }
             }
           },
-          "_row_num": 6
+          "_row_num": 13
         },
         {
           "choice_list_name": "reasons",
@@ -1053,7 +1301,7 @@
               }
             }
           },
-          "_row_num": 7
+          "_row_num": 14
         },
         {
           "choice_list_name": "reasons",
@@ -1066,7 +1314,7 @@
               }
             }
           },
-          "_row_num": 8
+          "_row_num": 15
         },
         {
           "choice_list_name": "reasons",
@@ -1079,7 +1327,7 @@
               }
             }
           },
-          "_row_num": 9
+          "_row_num": 16
         },
         {
           "choice_list_name": "reasons",
@@ -1092,7 +1340,7 @@
               }
             }
           },
-          "_row_num": 10
+          "_row_num": 17
         },
         {
           "choice_list_name": "reasons",
@@ -1105,48 +1353,74 @@
               }
             }
           },
-          "_row_num": 11
+          "_row_num": 18
         }
       ],
       "current_use": [
         {
           "choice_list_name": "current_use",
-          "data_value": "in_use",
+          "data_value": "installed_in_use",
           "display": {
             "title": {
               "text": {
-                "default": "In Use",
-                "es": "En Uso"
+                "default": "Installed - In Use",
+                "es": "Instalado - En uso"
               }
             }
           },
-          "_row_num": 14
+          "_row_num": 20
         },
         {
           "choice_list_name": "current_use",
-          "data_value": "not_in_use",
+          "data_value": "installed_not_in_use",
           "display": {
             "title": {
               "text": {
-                "default": "Not In Use",
-                "es": "No En Uso"
+                "default": "Installed - Not In Use",
+                "es": "Instalado - No en uso"
               }
             }
           },
-          "_row_num": 15
+          "_row_num": 21
         },
         {
           "choice_list_name": "current_use",
-          "data_value": "not_installed",
+          "data_value": "not_installed_waiting_for_installation",
           "display": {
             "title": {
               "text": {
-                "default": "Not Installed",
-                "es": "No Instalado"
+                "default": "Not Installed - Waiting For Installation",
+                "es": "No instalado - Esperando instalación"
               }
             }
           },
-          "_row_num": 16
+          "_row_num": 22
+        },
+        {
+          "choice_list_name": "current_use",
+          "data_value": "not_installed_removed_from_service",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Not installed - Removed From Service",
+                "es": "No instalado: eliminado del servicio"
+              }
+            }
+          },
+          "_row_num": 23
+        },
+        {
+          "choice_list_name": "current_use",
+          "data_value": "missing",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Missing",
+                "es": "Desaparecido"
+              }
+            }
+          },
+          "_row_num": 24
         }
       ],
       "yes_no_unknown": [
@@ -1161,7 +1435,7 @@
               }
             }
           },
-          "_row_num": 18
+          "_row_num": 27
         },
         {
           "choice_list_name": "yes_no_unknown",
@@ -1174,7 +1448,7 @@
               }
             }
           },
-          "_row_num": 19
+          "_row_num": 28
         },
         {
           "choice_list_name": "yes_no_unknown",
@@ -1187,7 +1461,7 @@
               }
             }
           },
-          "_row_num": 20
+          "_row_num": 29
         }
       ],
       "service_priority_list": [
@@ -1202,7 +1476,7 @@
               }
             }
           },
-          "_row_num": 23
+          "_row_num": 32
         },
         {
           "choice_list_name": "service_priority_list",
@@ -1215,7 +1489,7 @@
               }
             }
           },
-          "_row_num": 24
+          "_row_num": 33
         },
         {
           "choice_list_name": "service_priority_list",
@@ -1228,7 +1502,7 @@
               }
             }
           },
-          "_row_num": 25
+          "_row_num": 34
         },
         {
           "choice_list_name": "service_priority_list",
@@ -1241,7 +1515,7 @@
               }
             }
           },
-          "_row_num": 26
+          "_row_num": 35
         }
       ]
     },
@@ -1316,6 +1590,7 @@
             "es": "Tipo"
           }
         },
+        "valuesList": "cold_room_type",
         "elementKey": "type"
       },
       "manufacturer": {
@@ -1444,10 +1719,26 @@
         },
         "elementKey": "net_volume"
       },
-      "dimensions": {
+      "gross_volume": {
         "_defn": [
           {
             "_row_num": 19,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": {
+          "text": {
+            "default": "Gross Volume",
+            "es": "Volúmen bruto"
+          }
+        },
+        "elementKey": "gross_volume"
+      },
+      "dimensions": {
+        "_defn": [
+          {
+            "_row_num": 20,
             "section_name": "survey"
           }
         ],
@@ -1463,7 +1754,7 @@
       "utilization": {
         "_defn": [
           {
-            "_row_num": 20,
+            "_row_num": 23,
             "section_name": "survey"
           }
         ],
@@ -1480,7 +1771,7 @@
       "functional_status": {
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 24,
             "section_name": "survey"
           }
         ],
@@ -1491,17 +1782,21 @@
             "es": "Functionando"
           }
         },
-        "valuesList": "status",
+        "valuesList": "user_friendly_status",
         "elementKey": "functional_status"
       },
       "reason_not_working": {
         "_defn": [
           {
-            "_row_num": 22,
+            "_row_num": 25,
             "section_name": "survey"
           }
         ],
-        "type": "string",
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "reason_not_working_items"
+        },
         "displayName": {
           "text": {
             "default": "Reason Not Working",
@@ -1514,7 +1809,7 @@
       "maintenance_priority": {
         "_defn": [
           {
-            "_row_num": 23,
+            "_row_num": 26,
             "section_name": "survey"
           }
         ],
@@ -1528,44 +1823,60 @@
         "valuesList": "service_priority_list",
         "elementKey": "maintenance_priority"
       },
-      "voltage_regulator": {
+      "temperature_monitoring_device": {
         "_defn": [
           {
-            "_row_num": 26,
+            "_row_num": 29,
             "section_name": "survey"
           }
         ],
         "type": "string",
         "displayName": {
           "text": {
-            "default": "Voltage Regulator",
-            "es": "Regulador de voltaje"
+            "default": "Temperature Monitoring Device",
+            "es": "Dispositivo de monitoreo de temperatura"
           }
         },
         "valuesList": "yes_no_unknown",
-        "elementKey": "voltage_regulator"
+        "elementKey": "temperature_monitoring_device"
       },
-      "voltage_regulator_functional_status": {
+      "temperature_monitoring_device_type": {
         "_defn": [
           {
-            "_row_num": 28,
+            "_row_num": 31,
             "section_name": "survey"
           }
         ],
         "type": "string",
         "displayName": {
           "text": {
-            "default": "Voltage Regulator Functional",
-            "es": "Regulador de voltaje funcional"
+            "default": "Temperature Monitoring Device Type",
+            "es": "Tipo de dispositivo de monitoreo de temperatura"
+          }
+        },
+        "elementKey": "temperature_monitoring_device_type"
+      },
+      "temperature_monitoring_device_functional_status": {
+        "_defn": [
+          {
+            "_row_num": 32,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Temperature Monitoring Device Functional",
+            "es": "Dispositivo de monitoreo de temperatura funcional"
           }
         },
         "valuesList": "status",
-        "elementKey": "voltage_regulator_functional_status"
+        "elementKey": "temperature_monitoring_device_functional_status"
       },
       "backup_generator": {
         "_defn": [
           {
-            "_row_num": 32,
+            "_row_num": 36,
             "section_name": "survey"
           }
         ],
@@ -1582,7 +1893,7 @@
       "backup_generator_functional_status": {
         "_defn": [
           {
-            "_row_num": 34,
+            "_row_num": 38,
             "section_name": "survey"
           }
         ],
@@ -1769,7 +2080,8 @@
             "promptIdx": 1
           },
           {
-            "type": "text",
+            "type": "select_one",
+            "values_list": "cold_room_type",
             "name": "type",
             "display": {
               "title": {
@@ -1788,7 +2100,7 @@
             "_row_num": 7,
             "__rowNum__": 6,
             "_token_type": "prompt",
-            "_type": "text",
+            "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 2
           },
@@ -1987,6 +2299,36 @@
             "promptIdx": 9
           },
           {
+            "type": "integer",
+            "name": "gross_volume",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Gross Volume",
+                  "es": "Volúmen bruto"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Enter the gross volume:",
+                  "es": "Ingrese el volumen bruto:"
+                }
+              },
+              "hint": {
+                "text": {
+                  "default": "(cubic meters)",
+                  "es": "(metros cúbicos)"
+                }
+              }
+            },
+            "_row_num": 19,
+            "__rowNum__": 18,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen16",
+            "promptIdx": 10
+          },
+          {
             "type": "text",
             "name": "dimensions",
             "display": {
@@ -2009,12 +2351,12 @@
                 }
               }
             },
-            "_row_num": 19,
-            "__rowNum__": 18,
+            "_row_num": 20,
+            "__rowNum__": 19,
             "_token_type": "prompt",
             "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen16",
-            "promptIdx": 10
+            "promptIdx": 11
           },
           {
             "type": "select_one",
@@ -2034,16 +2376,16 @@
                 }
               }
             },
-            "_row_num": 20,
-            "__rowNum__": 19,
+            "_row_num": 23,
+            "__rowNum__": 22,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen16",
-            "promptIdx": 11
+            "_branch_label_enclosing_screen": "survey/_screen22",
+            "promptIdx": 12
           },
           {
             "type": "select_one",
-            "values_list": "status",
+            "values_list": "user_friendly_status",
             "name": "functional_status",
             "display": {
               "title": {
@@ -2059,15 +2401,15 @@
                 }
               }
             },
-            "_row_num": 21,
-            "__rowNum__": 20,
+            "_row_num": 24,
+            "__rowNum__": 23,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen16",
-            "promptIdx": 12
+            "_branch_label_enclosing_screen": "survey/_screen22",
+            "promptIdx": 13
           },
           {
-            "type": "select_one",
+            "type": "select_multiple",
             "values_list": "reasons",
             "name": "reason_not_working",
             "display": {
@@ -2084,12 +2426,12 @@
                 }
               }
             },
-            "_row_num": 22,
-            "__rowNum__": 21,
+            "_row_num": 25,
+            "__rowNum__": 24,
             "_token_type": "prompt",
-            "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen16",
-            "promptIdx": 13
+            "_type": "select_multiple",
+            "_branch_label_enclosing_screen": "survey/_screen22",
+            "promptIdx": 14
           },
           {
             "type": "select_one",
@@ -2109,62 +2451,86 @@
                 }
               }
             },
-            "_row_num": 23,
-            "__rowNum__": 22,
-            "_token_type": "prompt",
-            "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen16",
-            "promptIdx": 14
-          },
-          {
-            "type": "select_one",
-            "values_list": "yes_no_unknown",
-            "name": "voltage_regulator",
-            "display": {
-              "title": {
-                "text": {
-                  "default": "Voltage Regulator",
-                  "es": "Regulador de voltaje"
-                }
-              },
-              "prompt": {
-                "text": {
-                  "default": "Voltage regulator?",
-                  "es": "¿Tiene regulador de voltaje?"
-                }
-              }
-            },
             "_row_num": 26,
             "__rowNum__": 25,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen25",
+            "_branch_label_enclosing_screen": "survey/_screen22",
             "promptIdx": 15
           },
           {
             "type": "select_one",
-            "values_list": "status",
-            "name": "voltage_regulator_functional_status",
+            "values_list": "yes_no_unknown",
+            "name": "temperature_monitoring_device",
             "display": {
               "title": {
                 "text": {
-                  "default": "Voltage Regulator Functional",
-                  "es": "Regulador de voltaje funcional"
+                  "default": "Temperature Monitoring Device",
+                  "es": "Dispositivo de monitoreo de temperatura"
                 }
               },
               "prompt": {
                 "text": {
-                  "default": "Is voltage regulator functional?",
-                  "es": "¿Funciona el regulador de voltaje?"
+                  "default": "Is there a temperature monitoring device?",
+                  "es": "¿Tiene el dispositivo de monitoreo de temperatura?"
                 }
               }
             },
-            "_row_num": 28,
-            "__rowNum__": 27,
+            "_row_num": 29,
+            "__rowNum__": 28,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen25",
+            "_branch_label_enclosing_screen": "survey/_screen28",
             "promptIdx": 16
+          },
+          {
+            "type": "text",
+            "name": "temperature_monitoring_device_type",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Temperature Monitoring Device Type",
+                  "es": "Tipo de dispositivo de monitoreo de temperatura"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "What type of the temperature monitoring device is present?",
+                  "es": "¿Qué tipo de dispositivo de monitoreo de temperatura está presente?"
+                }
+              }
+            },
+            "_row_num": 31,
+            "__rowNum__": 30,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen28",
+            "promptIdx": 17
+          },
+          {
+            "type": "select_one",
+            "values_list": "status",
+            "name": "temperature_monitoring_device_functional_status",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Temperature Monitoring Device Functional",
+                  "es": "Dispositivo de monitoreo de temperatura funcional"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Is temperature monitoring device functional?",
+                  "es": "¿Funciona el dispositivo de monitoreo de temperatura?"
+                }
+              }
+            },
+            "_row_num": 32,
+            "__rowNum__": 31,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen28",
+            "promptIdx": 18
           },
           {
             "type": "select_one",
@@ -2184,12 +2550,12 @@
                 }
               }
             },
-            "_row_num": 32,
-            "__rowNum__": 31,
+            "_row_num": 36,
+            "__rowNum__": 35,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen31",
-            "promptIdx": 17
+            "_branch_label_enclosing_screen": "survey/_screen35",
+            "promptIdx": 19
           },
           {
             "type": "select_one",
@@ -2209,20 +2575,20 @@
                 }
               }
             },
-            "_row_num": 34,
-            "__rowNum__": 33,
+            "_row_num": 38,
+            "__rowNum__": 37,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen31",
-            "promptIdx": 18
+            "_branch_label_enclosing_screen": "survey/_screen35",
+            "promptIdx": 20
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 37,
-            "_branch_label_enclosing_screen": "survey/_screen37",
-            "promptIdx": 19
+            "_row_num": 41,
+            "_branch_label_enclosing_screen": "survey/_screen41",
+            "promptIdx": 21
           }
         ],
         "validation_tag_map": {
@@ -2268,71 +2634,86 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 24,
-              "__rowNum__": 23,
+              "_row_num": 21,
+              "__rowNum__": 20,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 2
           },
           {
             "clause": "begin screen",
-            "_row_num": 25,
-            "__rowNum__": 24,
+            "_row_num": 22,
+            "__rowNum__": 21,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 30,
-              "__rowNum__": 29,
+              "_row_num": 27,
+              "__rowNum__": 26,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\nif (data('voltage_regulator') === 'yes') {\nactivePromptIndicies.push(16);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\nactivePromptIndicies.push(14);\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 3
           },
           {
             "clause": "begin screen",
-            "_row_num": 31,
-            "__rowNum__": 30,
+            "_row_num": 28,
+            "__rowNum__": 27,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 36,
-              "__rowNum__": 35,
+              "_row_num": 34,
+              "__rowNum__": 33,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(17);\nif (data('backup_generator') === yes) {\nactivePromptIndicies.push(18);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\nif (data('temperature_monitoring_device') === 'yes') {\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 4
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 35,
+            "__rowNum__": 34,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 40,
+              "__rowNum__": 39,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\nif (data('backup_generator') === 'yes') {\nactivePromptIndicies.push(20);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 5
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 37,
-            "operationIdx": 5
+            "_row_num": 41,
+            "operationIdx": 6
           },
           {
-            "_row_num": 37,
+            "_row_num": 41,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 6
+            "operationIdx": 7
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 37,
-            "operationIdx": 7
+            "_row_num": 41,
+            "operationIdx": 8
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
           "_screen13": 1,
           "_screen16": 2,
-          "_screen25": 3,
-          "_screen31": 4,
-          "_contents": 6,
-          "_screen37": 6
+          "_screen22": 3,
+          "_screen28": 4,
+          "_screen35": 5,
+          "_contents": 7,
+          "_screen41": 7
         }
       }
     },
@@ -2390,6 +2771,7 @@
             "es": "Tipo"
           }
         },
+        "valuesList": "cold_room_type",
         "elementKey": "type",
         "elementName": "type",
         "elementSet": "data",
@@ -2553,10 +2935,29 @@
         "elementSet": "data",
         "elementPath": "net_volume"
       },
-      "dimensions": {
+      "gross_volume": {
         "_defn": [
           {
             "_row_num": 19,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": {
+          "text": {
+            "default": "Gross Volume",
+            "es": "Volúmen bruto"
+          }
+        },
+        "elementKey": "gross_volume",
+        "elementName": "gross_volume",
+        "elementSet": "data",
+        "elementPath": "gross_volume"
+      },
+      "dimensions": {
+        "_defn": [
+          {
+            "_row_num": 20,
             "section_name": "survey"
           }
         ],
@@ -2575,7 +2976,7 @@
       "utilization": {
         "_defn": [
           {
-            "_row_num": 20,
+            "_row_num": 23,
             "section_name": "survey"
           }
         ],
@@ -2595,7 +2996,7 @@
       "functional_status": {
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 24,
             "section_name": "survey"
           }
         ],
@@ -2606,7 +3007,7 @@
             "es": "Functionando"
           }
         },
-        "valuesList": "status",
+        "valuesList": "user_friendly_status",
         "elementKey": "functional_status",
         "elementName": "functional_status",
         "elementSet": "data",
@@ -2615,11 +3016,19 @@
       "reason_not_working": {
         "_defn": [
           {
-            "_row_num": 22,
+            "_row_num": 25,
             "section_name": "survey"
           }
         ],
-        "type": "string",
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "reason_not_working_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "reason_not_working.items",
+          "notUnitOfRetention": true
+        },
         "displayName": {
           "text": {
             "default": "Reason Not Working",
@@ -2630,12 +3039,15 @@
         "elementKey": "reason_not_working",
         "elementName": "reason_not_working",
         "elementSet": "data",
-        "elementPath": "reason_not_working"
+        "elementPath": "reason_not_working",
+        "listChildElementKeys": [
+          "reason_not_working_items"
+        ]
       },
       "maintenance_priority": {
         "_defn": [
           {
-            "_row_num": 23,
+            "_row_num": 26,
             "section_name": "survey"
           }
         ],
@@ -2652,50 +3064,69 @@
         "elementSet": "data",
         "elementPath": "maintenance_priority"
       },
-      "voltage_regulator": {
+      "temperature_monitoring_device": {
         "_defn": [
           {
-            "_row_num": 26,
+            "_row_num": 29,
             "section_name": "survey"
           }
         ],
         "type": "string",
         "displayName": {
           "text": {
-            "default": "Voltage Regulator",
-            "es": "Regulador de voltaje"
+            "default": "Temperature Monitoring Device",
+            "es": "Dispositivo de monitoreo de temperatura"
           }
         },
         "valuesList": "yes_no_unknown",
-        "elementKey": "voltage_regulator",
-        "elementName": "voltage_regulator",
+        "elementKey": "temperature_monitoring_device",
+        "elementName": "temperature_monitoring_device",
         "elementSet": "data",
-        "elementPath": "voltage_regulator"
+        "elementPath": "temperature_monitoring_device"
       },
-      "voltage_regulator_functional_status": {
+      "temperature_monitoring_device_type": {
         "_defn": [
           {
-            "_row_num": 28,
+            "_row_num": 31,
             "section_name": "survey"
           }
         ],
         "type": "string",
         "displayName": {
           "text": {
-            "default": "Voltage Regulator Functional",
-            "es": "Regulador de voltaje funcional"
+            "default": "Temperature Monitoring Device Type",
+            "es": "Tipo de dispositivo de monitoreo de temperatura"
+          }
+        },
+        "elementKey": "temperature_monitoring_device_type",
+        "elementName": "temperature_monitoring_device_type",
+        "elementSet": "data",
+        "elementPath": "temperature_monitoring_device_type"
+      },
+      "temperature_monitoring_device_functional_status": {
+        "_defn": [
+          {
+            "_row_num": 32,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Temperature Monitoring Device Functional",
+            "es": "Dispositivo de monitoreo de temperatura funcional"
           }
         },
         "valuesList": "status",
-        "elementKey": "voltage_regulator_functional_status",
-        "elementName": "voltage_regulator_functional_status",
+        "elementKey": "temperature_monitoring_device_functional_status",
+        "elementName": "temperature_monitoring_device_functional_status",
         "elementSet": "data",
-        "elementPath": "voltage_regulator_functional_status"
+        "elementPath": "temperature_monitoring_device_functional_status"
       },
       "backup_generator": {
         "_defn": [
           {
-            "_row_num": 32,
+            "_row_num": 36,
             "section_name": "survey"
           }
         ],
@@ -2715,7 +3146,7 @@
       "backup_generator_functional_status": {
         "_defn": [
           {
-            "_row_num": 34,
+            "_row_num": 38,
             "section_name": "survey"
           }
         ],
@@ -2748,6 +3179,14 @@
         "elementName": "contentType",
         "elementSet": "data",
         "elementPath": "cold_room_image.contentType"
+      },
+      "reason_not_working_items": {
+        "type": "string",
+        "elementKey": "reason_not_working_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "reason_not_working.items",
+        "notUnitOfRetention": true
       },
       "_id": {
         "type": "string",
@@ -2868,7 +3307,7 @@
         "_aspect": "backup_generator",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no_unknown\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Sí\"}}},\"_row_num\":18},{\"choice_list_name\":\"yes_no_unknown\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}}},\"_row_num\":19},{\"choice_list_name\":\"yes_no_unknown\",\"data_value\":\"unknown\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\"}}},\"_row_num\":20}]"
+        "_value": "[{\"choice_list_name\":\"yes_no_unknown\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Sí\"}}},\"_row_num\":27},{\"choice_list_name\":\"yes_no_unknown\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}}},\"_row_num\":28},{\"choice_list_name\":\"yes_no_unknown\",\"data_value\":\"unknown\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\"}}},\"_row_num\":29}]"
       },
       {
         "_partition": "Column",
@@ -2882,7 +3321,7 @@
         "_aspect": "backup_generator_functional_status",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"status\",\"data_value\":\"functioning\",\"display\":{\"title\":{\"text\":{\"default\":\"Functioning\",\"es\":\"Functionando\"}}},\"_row_num\":2},{\"choice_list_name\":\"status\",\"data_value\":\"not_functioning\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Functioning\",\"es\":\"No Functionando\"}}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"status\",\"data_value\":\"functioning\",\"display\":{\"title\":{\"text\":{\"default\":\"Functioning\",\"es\":\"Functionando\",\"fr\":\"Fonctionne\"}}},\"_row_num\":6},{\"choice_list_name\":\"status\",\"data_value\":\"not_functioning\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Functioning\",\"es\":\"No Functionando\",\"fr\":\"Ne fonctionne pas\"}}},\"_row_num\":7}]"
       },
       {
         "_partition": "Column",
@@ -2917,7 +3356,7 @@
         "_aspect": "functional_status",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"status\",\"data_value\":\"functioning\",\"display\":{\"title\":{\"text\":{\"default\":\"Functioning\",\"es\":\"Functionando\"}}},\"_row_num\":2},{\"choice_list_name\":\"status\",\"data_value\":\"not_functioning\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Functioning\",\"es\":\"No Functionando\"}}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"user_friendly_status\",\"data_value\":\"functioning\",\"display\":{\"title\":{\"text\":{\"default\":\"No known issues\",\"es\":\"No hay problemas conocidos\"}}},\"_row_num\":9},{\"choice_list_name\":\"user_friendly_status\",\"data_value\":\"not_functioning\",\"display\":{\"title\":{\"text\":{\"default\":\"Needs attention\",\"es\":\"Necesita atención\"}}},\"_row_num\":10}]"
       },
       {
         "_partition": "Column",
@@ -2928,10 +3367,17 @@
       },
       {
         "_partition": "Column",
+        "_aspect": "gross_volume",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Gross Volume\",\"es\":\"Volúmen bruto\"}}"
+      },
+      {
+        "_partition": "Column",
         "_aspect": "maintenance_priority",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"not_applicable\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Applicable\",\"es\":\"No Aplica\"}}},\"_row_num\":23},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"low\",\"display\":{\"title\":{\"text\":{\"default\":\"Low\",\"es\":\"Bajo\"}}},\"_row_num\":24},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"medium\",\"display\":{\"title\":{\"text\":{\"default\":\"Medium\",\"es\":\"Medio\"}}},\"_row_num\":25},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"high\",\"display\":{\"title\":{\"text\":{\"default\":\"High\",\"es\":\"Alto\"}}},\"_row_num\":26}]"
+        "_value": "[{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"not_applicable\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Applicable\",\"es\":\"No Aplica\"}}},\"_row_num\":32},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"low\",\"display\":{\"title\":{\"text\":{\"default\":\"Low\",\"es\":\"Bajo\"}}},\"_row_num\":33},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"medium\",\"display\":{\"title\":{\"text\":{\"default\":\"Medium\",\"es\":\"Medio\"}}},\"_row_num\":34},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"high\",\"display\":{\"title\":{\"text\":{\"default\":\"High\",\"es\":\"Alto\"}}},\"_row_num\":35}]"
       },
       {
         "_partition": "Column",
@@ -2966,7 +3412,7 @@
         "_aspect": "reason_not_working",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"reasons\",\"data_value\":\"needs_spare_parts\",\"display\":{\"title\":{\"text\":{\"default\":\"Needs Spare Parts\",\"es\":\"Necesita Partes\"}}},\"_row_num\":5},{\"choice_list_name\":\"reasons\",\"data_value\":\"unknown_needs_investigation\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown/Needs Investigation\",\"es\":\"Investigación desconocida / de necesidades\"}}},\"_row_num\":6},{\"choice_list_name\":\"reasons\",\"data_value\":\"lack_of_power\",\"display\":{\"title\":{\"text\":{\"default\":\"Lack of Power\",\"es\":\"Falta de poder\"}}},\"_row_num\":7},{\"choice_list_name\":\"reasons\",\"data_value\":\"awaiting_installation\",\"display\":{\"title\":{\"text\":{\"default\":\"Awaiting Installation\",\"es\":\"En espera de instalación\"}}},\"_row_num\":8},{\"choice_list_name\":\"reasons\",\"data_value\":\"awaiting_decomissioning\",\"display\":{\"title\":{\"text\":{\"default\":\"Awaiting Decomissioning\",\"es\":\"En espera de desarme\"}}},\"_row_num\":9},{\"choice_list_name\":\"reasons\",\"data_value\":\"lack_of_tech_availability\",\"display\":{\"title\":{\"text\":{\"default\":\"Lack of Technician Availability\",\"es\":\"Falta de disponibilidad de técnicos\"}}},\"_row_num\":10},{\"choice_list_name\":\"reasons\",\"data_value\":\"not_applicable\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Applicable\",\"es\":\"No aplica\"}}},\"_row_num\":11}]"
+        "_value": "[{\"choice_list_name\":\"reasons\",\"data_value\":\"needs_spare_parts\",\"display\":{\"title\":{\"text\":{\"default\":\"Needs Spare Parts\",\"es\":\"Necesita Partes\"}}},\"_row_num\":12},{\"choice_list_name\":\"reasons\",\"data_value\":\"unknown_needs_investigation\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown/Needs Investigation\",\"es\":\"Investigación desconocida / de necesidades\"}}},\"_row_num\":13},{\"choice_list_name\":\"reasons\",\"data_value\":\"lack_of_power\",\"display\":{\"title\":{\"text\":{\"default\":\"Lack of Power\",\"es\":\"Falta de poder\"}}},\"_row_num\":14},{\"choice_list_name\":\"reasons\",\"data_value\":\"awaiting_installation\",\"display\":{\"title\":{\"text\":{\"default\":\"Awaiting Installation\",\"es\":\"En espera de instalación\"}}},\"_row_num\":15},{\"choice_list_name\":\"reasons\",\"data_value\":\"awaiting_decomissioning\",\"display\":{\"title\":{\"text\":{\"default\":\"Awaiting Decomissioning\",\"es\":\"En espera de desarme\"}}},\"_row_num\":16},{\"choice_list_name\":\"reasons\",\"data_value\":\"lack_of_tech_availability\",\"display\":{\"title\":{\"text\":{\"default\":\"Lack of Technician Availability\",\"es\":\"Falta de disponibilidad de técnicos\"}}},\"_row_num\":17},{\"choice_list_name\":\"reasons\",\"data_value\":\"not_applicable\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Applicable\",\"es\":\"No aplica\"}}},\"_row_num\":18}]"
       },
       {
         "_partition": "Column",
@@ -2991,10 +3437,52 @@
       },
       {
         "_partition": "Column",
+        "_aspect": "temperature_monitoring_device",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no_unknown\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Sí\"}}},\"_row_num\":27},{\"choice_list_name\":\"yes_no_unknown\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}}},\"_row_num\":28},{\"choice_list_name\":\"yes_no_unknown\",\"data_value\":\"unknown\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\"}}},\"_row_num\":29}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "temperature_monitoring_device",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Temperature Monitoring Device\",\"es\":\"Dispositivo de monitoreo de temperatura\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "temperature_monitoring_device_functional_status",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"status\",\"data_value\":\"functioning\",\"display\":{\"title\":{\"text\":{\"default\":\"Functioning\",\"es\":\"Functionando\",\"fr\":\"Fonctionne\"}}},\"_row_num\":6},{\"choice_list_name\":\"status\",\"data_value\":\"not_functioning\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Functioning\",\"es\":\"No Functionando\",\"fr\":\"Ne fonctionne pas\"}}},\"_row_num\":7}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "temperature_monitoring_device_functional_status",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Temperature Monitoring Device Functional\",\"es\":\"Dispositivo de monitoreo de temperatura funcional\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "temperature_monitoring_device_type",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Temperature Monitoring Device Type\",\"es\":\"Tipo de dispositivo de monitoreo de temperatura\"}}"
+      },
+      {
+        "_partition": "Column",
         "_aspect": "tracking_id",
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":{\"default\":\"Tracking ID\",\"es\":\"Número de seguimiento\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "type",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"cold_room_type\",\"data_value\":\"refrigerator\",\"display\":{\"title\":{\"text\":{\"default\":\"Refrigerator\",\"es\":\"Refrigerador\"}}},\"_row_num\":2},{\"choice_list_name\":\"cold_room_type\",\"data_value\":\"freezer\",\"display\":{\"title\":{\"text\":{\"default\":\"Freezer\",\"es\":\"Congelador\"}}},\"_row_num\":3},{\"choice_list_name\":\"cold_room_type\",\"data_value\":\"refrigerator_freezer\",\"display\":{\"title\":{\"text\":{\"default\":\"Refrigerator/Freezer\",\"es\":\"Refrigerador/Congelador\"}}},\"_row_num\":4}]"
       },
       {
         "_partition": "Column",
@@ -3008,7 +3496,7 @@
         "_aspect": "utilization",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"current_use\",\"data_value\":\"in_use\",\"display\":{\"title\":{\"text\":{\"default\":\"In Use\",\"es\":\"En Uso\"}}},\"_row_num\":14},{\"choice_list_name\":\"current_use\",\"data_value\":\"not_in_use\",\"display\":{\"title\":{\"text\":{\"default\":\"Not In Use\",\"es\":\"No En Uso\"}}},\"_row_num\":15},{\"choice_list_name\":\"current_use\",\"data_value\":\"not_installed\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Installed\",\"es\":\"No Instalado\"}}},\"_row_num\":16}]"
+        "_value": "[{\"choice_list_name\":\"current_use\",\"data_value\":\"installed_in_use\",\"display\":{\"title\":{\"text\":{\"default\":\"Installed - In Use\",\"es\":\"Instalado - En uso\"}}},\"_row_num\":20},{\"choice_list_name\":\"current_use\",\"data_value\":\"installed_not_in_use\",\"display\":{\"title\":{\"text\":{\"default\":\"Installed - Not In Use\",\"es\":\"Instalado - No en uso\"}}},\"_row_num\":21},{\"choice_list_name\":\"current_use\",\"data_value\":\"not_installed_waiting_for_installation\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Installed - Waiting For Installation\",\"es\":\"No instalado - Esperando instalación\"}}},\"_row_num\":22},{\"choice_list_name\":\"current_use\",\"data_value\":\"not_installed_removed_from_service\",\"display\":{\"title\":{\"text\":{\"default\":\"Not installed - Removed From Service\",\"es\":\"No instalado: eliminado del servicio\"}}},\"_row_num\":23},{\"choice_list_name\":\"current_use\",\"data_value\":\"missing\",\"display\":{\"title\":{\"text\":{\"default\":\"Missing\",\"es\":\"Desaparecido\"}}},\"_row_num\":24}]"
       },
       {
         "_partition": "Column",
@@ -3016,34 +3504,6 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":{\"default\":\"In Use\",\"es\":\"En uso\"}}"
-      },
-      {
-        "_partition": "Column",
-        "_aspect": "voltage_regulator",
-        "_key": "displayChoicesList",
-        "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no_unknown\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Sí\"}}},\"_row_num\":18},{\"choice_list_name\":\"yes_no_unknown\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}}},\"_row_num\":19},{\"choice_list_name\":\"yes_no_unknown\",\"data_value\":\"unknown\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\"}}},\"_row_num\":20}]"
-      },
-      {
-        "_partition": "Column",
-        "_aspect": "voltage_regulator",
-        "_key": "displayName",
-        "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Voltage Regulator\",\"es\":\"Regulador de voltaje\"}}"
-      },
-      {
-        "_partition": "Column",
-        "_aspect": "voltage_regulator_functional_status",
-        "_key": "displayChoicesList",
-        "_type": "object",
-        "_value": "[{\"choice_list_name\":\"status\",\"data_value\":\"functioning\",\"display\":{\"title\":{\"text\":{\"default\":\"Functioning\",\"es\":\"Functionando\"}}},\"_row_num\":2},{\"choice_list_name\":\"status\",\"data_value\":\"not_functioning\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Functioning\",\"es\":\"No Functionando\"}}},\"_row_num\":3}]"
-      },
-      {
-        "_partition": "Column",
-        "_aspect": "voltage_regulator_functional_status",
-        "_key": "displayName",
-        "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Voltage Regulator Functional\",\"es\":\"Regulador de voltaje funcional\"}}"
       },
       {
         "_partition": "Column",
