@@ -9,6 +9,7 @@ var typeQueryString = 'health_facilities.facility_type = ?';
 var powerSourceQueryString = 'refrigerators.power_source = ?';
 var numOfFrigsLabel = "Number of Refrigerators";
 var yearsLabel = "years";
+var refrigeratorsYearInstalled = 'year_installed';
 
 var bucket0 = 0;
 var bucket1 = 1;
@@ -19,11 +20,11 @@ var bucketLabels = ['0-1','2-4','5-10','10+'];
 
 var frigData = {};
 
-var graphQueryStr = 'SELECT refrigerators.year, COUNT(*) FROM refrigerators JOIN health_facilities ON ' +
+var graphQueryStr = 'SELECT refrigerators.' + refrigeratorsYearInstalled + ', COUNT(*) FROM refrigerators JOIN health_facilities ON ' +
     'refrigerators.facility_row_id = health_facilities._id JOIN geographic_regions ON ' +
     'health_facilities.admin_region_id = geographic_regions._id';
 
-var graphQueryGroupBy = ' GROUP BY refrigerators.year';
+var graphQueryGroupBy = ' GROUP BY refrigerators.' + refrigeratorsYearInstalled;
 
 
 function healthFacilityCBSuccess(result) {
@@ -140,11 +141,11 @@ function frigHistogramByAge(divName, yAxisText) {
 
     var dataJ = [];
     for (var i = 0; i < frigData.getCount(); i++) {
-        var idx = getDataIndex(dataJ, putFrigInAgeBucket(frigData.getData(i, 'year')));
+        var idx = getDataIndex(dataJ, putFrigInAgeBucket(frigData.getData(i, refrigeratorsYearInstalled)));
 
         if (idx === -1) {
             var frig = {};
-            frig.bucket = putFrigInAgeBucket(frigData.getData(i, 'year'));
+            frig.bucket = putFrigInAgeBucket(frigData.getData(i, refrigeratorsYearInstalled));
             frig.value = parseInt(frigData.getData(i, 'COUNT(*)'));
             dataJ.push(frig);
         } else {
