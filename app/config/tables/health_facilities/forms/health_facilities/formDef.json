@@ -783,6 +783,185 @@
         "_row_num": 18
       },
       {
+        "choice_list_name": "facility_types",
+        "data_value": "ngo_hospital",
+        "display": {
+          "title": {
+            "text": {
+              "default": "NGO Hospital",
+              "es": "Hospital de ONG"
+            }
+          }
+        },
+        "_row_num": 19
+      },
+      {
+        "choice_list_name": "facility_types",
+        "data_value": "public_hciv",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Public HCIV",
+              "es": "Centro de salud pública IV"
+            }
+          }
+        },
+        "_row_num": 20
+      },
+      {
+        "choice_list_name": "facility_types",
+        "data_value": "private_hciv",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Private HCIV",
+              "es": "Centro de salud privado IV"
+            }
+          }
+        },
+        "_row_num": 21
+      },
+      {
+        "choice_list_name": "facility_types",
+        "data_value": "ngo_hciv",
+        "display": {
+          "title": {
+            "text": {
+              "default": "NGO HCIV",
+              "es": "Centro de salud de ONG IV"
+            }
+          }
+        },
+        "_row_num": 22
+      },
+      {
+        "choice_list_name": "facility_types",
+        "data_value": "public_hciii",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Public  HCIII",
+              "es": "Centro de salud pública III"
+            }
+          }
+        },
+        "_row_num": 23
+      },
+      {
+        "choice_list_name": "facility_types",
+        "data_value": "private_hciii",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Private HCIII",
+              "es": "Centro de salud privado III"
+            }
+          }
+        },
+        "_row_num": 24
+      },
+      {
+        "choice_list_name": "facility_types",
+        "data_value": "ngo_hciii",
+        "display": {
+          "title": {
+            "text": {
+              "default": "NGO HCIII",
+              "es": "Centro de salud de ONG III"
+            }
+          }
+        },
+        "_row_num": 25
+      },
+      {
+        "choice_list_name": "facility_types",
+        "data_value": "public_hcii",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Public  HCII",
+              "es": "Centro de salud pública II"
+            }
+          }
+        },
+        "_row_num": 26
+      },
+      {
+        "choice_list_name": "facility_types",
+        "data_value": "private_hcii",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Private  HCII",
+              "es": "Centro de salud privado II"
+            }
+          }
+        },
+        "_row_num": 27
+      },
+      {
+        "choice_list_name": "facility_types",
+        "data_value": "ngo_hcii",
+        "display": {
+          "title": {
+            "text": {
+              "default": "NGO HCII",
+              "es": "Centro de salud de ONG II"
+            }
+          }
+        },
+        "_row_num": 28
+      },
+      {
+        "choice_list_name": "facility_types",
+        "data_value": "sub_district_vaccine_store",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Sub-District vaccine store",
+              "es": "Tienda subdistrito de vacunas"
+            }
+          }
+        },
+        "_row_num": 29
+      },
+      {
+        "choice_list_name": "facility_types",
+        "data_value": "public_hospital",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Public hospital",
+              "es": "Hospital público"
+            }
+          }
+        },
+        "_row_num": 30
+      },
+      {
+        "choice_list_name": "facility_types",
+        "data_value": "private_hospital",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Private  hospital",
+              "es": "Hospital privado"
+            }
+          }
+        },
+        "_row_num": 31
+      },
+      {
+        "choice_list_name": "facility_types",
+        "data_value": "uvri",
+        "display": {
+          "title": {
+            "text": "UVRI"
+          }
+        },
+        "_row_num": 32
+      },
+      {
         "choice_list_name": "ownership_types",
         "data_value": "public",
         "display": {
@@ -794,7 +973,7 @@
             }
           }
         },
-        "_row_num": 20
+        "_row_num": 34
       },
       {
         "choice_list_name": "ownership_types",
@@ -808,7 +987,7 @@
             }
           }
         },
-        "_row_num": 21
+        "_row_num": 35
       },
       {
         "choice_list_name": "ownership_types",
@@ -822,7 +1001,7 @@
             }
           }
         },
-        "_row_num": 22
+        "_row_num": 36
       },
       {
         "choice_list_name": "ownership_types",
@@ -836,7 +1015,7 @@
             }
           }
         },
-        "_row_num": 23
+        "_row_num": 37
       },
       {
         "choice_list_name": "ownership_types",
@@ -850,7 +1029,7 @@
             }
           }
         },
-        "_row_num": 24
+        "_row_num": 38
       },
       {
         "choice_list_name": "elec_sources",
@@ -864,7 +1043,7 @@
             }
           }
         },
-        "_row_num": 26
+        "_row_num": 40
       },
       {
         "choice_list_name": "elec_sources",
@@ -878,7 +1057,7 @@
             }
           }
         },
-        "_row_num": 27
+        "_row_num": 41
       },
       {
         "choice_list_name": "elec_sources",
@@ -892,7 +1071,7 @@
             }
           }
         },
-        "_row_num": 28
+        "_row_num": 42
       },
       {
         "choice_list_name": "elec_sources",
@@ -906,7 +1085,7 @@
             }
           }
         },
-        "_row_num": 29
+        "_row_num": 43
       },
       {
         "choice_list_name": "elec_sources",
@@ -920,7 +1099,7 @@
             }
           }
         },
-        "_row_num": 30
+        "_row_num": 44
       },
       {
         "choice_list_name": "elec_sources",
@@ -934,7 +1113,7 @@
             }
           }
         },
-        "_row_num": 31
+        "_row_num": 45
       },
       {
         "choice_list_name": "elec_sources",
@@ -948,7 +1127,7 @@
             }
           }
         },
-        "_row_num": 32
+        "_row_num": 46
       },
       {
         "choice_list_name": "grid",
@@ -962,7 +1141,7 @@
             }
           }
         },
-        "_row_num": 34
+        "_row_num": 48
       },
       {
         "choice_list_name": "grid",
@@ -976,7 +1155,7 @@
             }
           }
         },
-        "_row_num": 35
+        "_row_num": 49
       },
       {
         "choice_list_name": "grid",
@@ -990,7 +1169,7 @@
             }
           }
         },
-        "_row_num": 36
+        "_row_num": 50
       },
       {
         "choice_list_name": "grid",
@@ -1004,7 +1183,7 @@
             }
           }
         },
-        "_row_num": 37
+        "_row_num": 51
       },
       {
         "choice_list_name": "grid",
@@ -1018,7 +1197,7 @@
             }
           }
         },
-        "_row_num": 38
+        "_row_num": 52
       },
       {
         "choice_list_name": "fuel_availability_types",
@@ -1032,7 +1211,7 @@
             }
           }
         },
-        "_row_num": 40
+        "_row_num": 54
       },
       {
         "choice_list_name": "fuel_availability_types",
@@ -1046,7 +1225,7 @@
             }
           }
         },
-        "_row_num": 41
+        "_row_num": 55
       },
       {
         "choice_list_name": "fuel_availability_types",
@@ -1060,7 +1239,7 @@
             }
           }
         },
-        "_row_num": 42
+        "_row_num": 56
       },
       {
         "choice_list_name": "fuel_availability_types",
@@ -1074,7 +1253,7 @@
             }
           }
         },
-        "_row_num": 43
+        "_row_num": 57
       },
       {
         "choice_list_name": "fuel_availability_types",
@@ -1088,7 +1267,7 @@
             }
           }
         },
-        "_row_num": 44
+        "_row_num": 58
       },
       {
         "choice_list_name": "climate_types",
@@ -1102,7 +1281,7 @@
             }
           }
         },
-        "_row_num": 46
+        "_row_num": 60
       },
       {
         "choice_list_name": "climate_types",
@@ -1116,7 +1295,7 @@
             }
           }
         },
-        "_row_num": 47
+        "_row_num": 61
       },
       {
         "choice_list_name": "climate_types",
@@ -1130,7 +1309,7 @@
             }
           }
         },
-        "_row_num": 48
+        "_row_num": 62
       },
       {
         "choice_list_name": "storage_types",
@@ -1144,7 +1323,7 @@
             }
           }
         },
-        "_row_num": 50
+        "_row_num": 64
       },
       {
         "choice_list_name": "storage_types",
@@ -1158,7 +1337,7 @@
             }
           }
         },
-        "_row_num": 51
+        "_row_num": 65
       },
       {
         "choice_list_name": "storage_types",
@@ -1172,7 +1351,7 @@
             }
           }
         },
-        "_row_num": 52
+        "_row_num": 66
       },
       {
         "choice_list_name": "immunization_services",
@@ -1186,7 +1365,7 @@
             }
           }
         },
-        "_row_num": 54
+        "_row_num": 68
       },
       {
         "choice_list_name": "immunization_services",
@@ -1200,7 +1379,7 @@
             }
           }
         },
-        "_row_num": 55
+        "_row_num": 69
       },
       {
         "choice_list_name": "immunization_services",
@@ -1214,7 +1393,7 @@
             }
           }
         },
-        "_row_num": 56
+        "_row_num": 70
       },
       {
         "choice_list_name": "immunization_services",
@@ -1228,7 +1407,7 @@
             }
           }
         },
-        "_row_num": 57
+        "_row_num": 71
       },
       {
         "choice_list_name": "immunization_services",
@@ -1242,7 +1421,7 @@
             }
           }
         },
-        "_row_num": 58
+        "_row_num": 72
       },
       {
         "choice_list_name": "vaccine_modes",
@@ -1256,7 +1435,7 @@
             }
           }
         },
-        "_row_num": 60
+        "_row_num": 74
       },
       {
         "choice_list_name": "vaccine_modes",
@@ -1270,7 +1449,7 @@
             }
           }
         },
-        "_row_num": 61
+        "_row_num": 75
       },
       {
         "choice_list_name": "vaccine_modes",
@@ -1284,7 +1463,7 @@
             }
           }
         },
-        "_row_num": 62
+        "_row_num": 76
       },
       {
         "choice_list_name": "vaccine_modes",
@@ -1298,7 +1477,7 @@
             }
           }
         },
-        "_row_num": 63
+        "_row_num": 77
       },
       {
         "choice_list_name": "vaccine_modes",
@@ -1312,7 +1491,7 @@
             }
           }
         },
-        "_row_num": 64
+        "_row_num": 78
       }
     ],
     "queries": [
@@ -1889,6 +2068,185 @@
             }
           },
           "_row_num": 18
+        },
+        {
+          "choice_list_name": "facility_types",
+          "data_value": "ngo_hospital",
+          "display": {
+            "title": {
+              "text": {
+                "default": "NGO Hospital",
+                "es": "Hospital de ONG"
+              }
+            }
+          },
+          "_row_num": 19
+        },
+        {
+          "choice_list_name": "facility_types",
+          "data_value": "public_hciv",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Public HCIV",
+                "es": "Centro de salud pública IV"
+              }
+            }
+          },
+          "_row_num": 20
+        },
+        {
+          "choice_list_name": "facility_types",
+          "data_value": "private_hciv",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Private HCIV",
+                "es": "Centro de salud privado IV"
+              }
+            }
+          },
+          "_row_num": 21
+        },
+        {
+          "choice_list_name": "facility_types",
+          "data_value": "ngo_hciv",
+          "display": {
+            "title": {
+              "text": {
+                "default": "NGO HCIV",
+                "es": "Centro de salud de ONG IV"
+              }
+            }
+          },
+          "_row_num": 22
+        },
+        {
+          "choice_list_name": "facility_types",
+          "data_value": "public_hciii",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Public  HCIII",
+                "es": "Centro de salud pública III"
+              }
+            }
+          },
+          "_row_num": 23
+        },
+        {
+          "choice_list_name": "facility_types",
+          "data_value": "private_hciii",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Private HCIII",
+                "es": "Centro de salud privado III"
+              }
+            }
+          },
+          "_row_num": 24
+        },
+        {
+          "choice_list_name": "facility_types",
+          "data_value": "ngo_hciii",
+          "display": {
+            "title": {
+              "text": {
+                "default": "NGO HCIII",
+                "es": "Centro de salud de ONG III"
+              }
+            }
+          },
+          "_row_num": 25
+        },
+        {
+          "choice_list_name": "facility_types",
+          "data_value": "public_hcii",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Public  HCII",
+                "es": "Centro de salud pública II"
+              }
+            }
+          },
+          "_row_num": 26
+        },
+        {
+          "choice_list_name": "facility_types",
+          "data_value": "private_hcii",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Private  HCII",
+                "es": "Centro de salud privado II"
+              }
+            }
+          },
+          "_row_num": 27
+        },
+        {
+          "choice_list_name": "facility_types",
+          "data_value": "ngo_hcii",
+          "display": {
+            "title": {
+              "text": {
+                "default": "NGO HCII",
+                "es": "Centro de salud de ONG II"
+              }
+            }
+          },
+          "_row_num": 28
+        },
+        {
+          "choice_list_name": "facility_types",
+          "data_value": "sub_district_vaccine_store",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Sub-District vaccine store",
+                "es": "Tienda subdistrito de vacunas"
+              }
+            }
+          },
+          "_row_num": 29
+        },
+        {
+          "choice_list_name": "facility_types",
+          "data_value": "public_hospital",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Public hospital",
+                "es": "Hospital público"
+              }
+            }
+          },
+          "_row_num": 30
+        },
+        {
+          "choice_list_name": "facility_types",
+          "data_value": "private_hospital",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Private  hospital",
+                "es": "Hospital privado"
+              }
+            }
+          },
+          "_row_num": 31
+        },
+        {
+          "choice_list_name": "facility_types",
+          "data_value": "uvri",
+          "display": {
+            "title": {
+              "text": "UVRI"
+            }
+          },
+          "_row_num": 32
         }
       ],
       "ownership_types": [
@@ -1904,7 +2262,7 @@
               }
             }
           },
-          "_row_num": 20
+          "_row_num": 34
         },
         {
           "choice_list_name": "ownership_types",
@@ -1918,7 +2276,7 @@
               }
             }
           },
-          "_row_num": 21
+          "_row_num": 35
         },
         {
           "choice_list_name": "ownership_types",
@@ -1932,7 +2290,7 @@
               }
             }
           },
-          "_row_num": 22
+          "_row_num": 36
         },
         {
           "choice_list_name": "ownership_types",
@@ -1946,7 +2304,7 @@
               }
             }
           },
-          "_row_num": 23
+          "_row_num": 37
         },
         {
           "choice_list_name": "ownership_types",
@@ -1960,7 +2318,7 @@
               }
             }
           },
-          "_row_num": 24
+          "_row_num": 38
         }
       ],
       "elec_sources": [
@@ -1976,7 +2334,7 @@
               }
             }
           },
-          "_row_num": 26
+          "_row_num": 40
         },
         {
           "choice_list_name": "elec_sources",
@@ -1990,7 +2348,7 @@
               }
             }
           },
-          "_row_num": 27
+          "_row_num": 41
         },
         {
           "choice_list_name": "elec_sources",
@@ -2004,7 +2362,7 @@
               }
             }
           },
-          "_row_num": 28
+          "_row_num": 42
         },
         {
           "choice_list_name": "elec_sources",
@@ -2018,7 +2376,7 @@
               }
             }
           },
-          "_row_num": 29
+          "_row_num": 43
         },
         {
           "choice_list_name": "elec_sources",
@@ -2032,7 +2390,7 @@
               }
             }
           },
-          "_row_num": 30
+          "_row_num": 44
         },
         {
           "choice_list_name": "elec_sources",
@@ -2046,7 +2404,7 @@
               }
             }
           },
-          "_row_num": 31
+          "_row_num": 45
         },
         {
           "choice_list_name": "elec_sources",
@@ -2060,7 +2418,7 @@
               }
             }
           },
-          "_row_num": 32
+          "_row_num": 46
         }
       ],
       "grid": [
@@ -2076,7 +2434,7 @@
               }
             }
           },
-          "_row_num": 34
+          "_row_num": 48
         },
         {
           "choice_list_name": "grid",
@@ -2090,7 +2448,7 @@
               }
             }
           },
-          "_row_num": 35
+          "_row_num": 49
         },
         {
           "choice_list_name": "grid",
@@ -2104,7 +2462,7 @@
               }
             }
           },
-          "_row_num": 36
+          "_row_num": 50
         },
         {
           "choice_list_name": "grid",
@@ -2118,7 +2476,7 @@
               }
             }
           },
-          "_row_num": 37
+          "_row_num": 51
         },
         {
           "choice_list_name": "grid",
@@ -2132,7 +2490,7 @@
               }
             }
           },
-          "_row_num": 38
+          "_row_num": 52
         }
       ],
       "fuel_availability_types": [
@@ -2148,7 +2506,7 @@
               }
             }
           },
-          "_row_num": 40
+          "_row_num": 54
         },
         {
           "choice_list_name": "fuel_availability_types",
@@ -2162,7 +2520,7 @@
               }
             }
           },
-          "_row_num": 41
+          "_row_num": 55
         },
         {
           "choice_list_name": "fuel_availability_types",
@@ -2176,7 +2534,7 @@
               }
             }
           },
-          "_row_num": 42
+          "_row_num": 56
         },
         {
           "choice_list_name": "fuel_availability_types",
@@ -2190,7 +2548,7 @@
               }
             }
           },
-          "_row_num": 43
+          "_row_num": 57
         },
         {
           "choice_list_name": "fuel_availability_types",
@@ -2204,7 +2562,7 @@
               }
             }
           },
-          "_row_num": 44
+          "_row_num": 58
         }
       ],
       "climate_types": [
@@ -2220,7 +2578,7 @@
               }
             }
           },
-          "_row_num": 46
+          "_row_num": 60
         },
         {
           "choice_list_name": "climate_types",
@@ -2234,7 +2592,7 @@
               }
             }
           },
-          "_row_num": 47
+          "_row_num": 61
         },
         {
           "choice_list_name": "climate_types",
@@ -2248,7 +2606,7 @@
               }
             }
           },
-          "_row_num": 48
+          "_row_num": 62
         }
       ],
       "storage_types": [
@@ -2264,7 +2622,7 @@
               }
             }
           },
-          "_row_num": 50
+          "_row_num": 64
         },
         {
           "choice_list_name": "storage_types",
@@ -2278,7 +2636,7 @@
               }
             }
           },
-          "_row_num": 51
+          "_row_num": 65
         },
         {
           "choice_list_name": "storage_types",
@@ -2292,7 +2650,7 @@
               }
             }
           },
-          "_row_num": 52
+          "_row_num": 66
         }
       ],
       "immunization_services": [
@@ -2308,7 +2666,7 @@
               }
             }
           },
-          "_row_num": 54
+          "_row_num": 68
         },
         {
           "choice_list_name": "immunization_services",
@@ -2322,7 +2680,7 @@
               }
             }
           },
-          "_row_num": 55
+          "_row_num": 69
         },
         {
           "choice_list_name": "immunization_services",
@@ -2336,7 +2694,7 @@
               }
             }
           },
-          "_row_num": 56
+          "_row_num": 70
         },
         {
           "choice_list_name": "immunization_services",
@@ -2350,7 +2708,7 @@
               }
             }
           },
-          "_row_num": 57
+          "_row_num": 71
         },
         {
           "choice_list_name": "immunization_services",
@@ -2364,7 +2722,7 @@
               }
             }
           },
-          "_row_num": 58
+          "_row_num": 72
         }
       ],
       "vaccine_modes": [
@@ -2380,7 +2738,7 @@
               }
             }
           },
-          "_row_num": 60
+          "_row_num": 74
         },
         {
           "choice_list_name": "vaccine_modes",
@@ -2394,7 +2752,7 @@
               }
             }
           },
-          "_row_num": 61
+          "_row_num": 75
         },
         {
           "choice_list_name": "vaccine_modes",
@@ -2408,7 +2766,7 @@
               }
             }
           },
-          "_row_num": 62
+          "_row_num": 76
         },
         {
           "choice_list_name": "vaccine_modes",
@@ -2422,7 +2780,7 @@
               }
             }
           },
-          "_row_num": 63
+          "_row_num": 77
         },
         {
           "choice_list_name": "vaccine_modes",
@@ -2436,7 +2794,7 @@
               }
             }
           },
-          "_row_num": 64
+          "_row_num": 78
         }
       ]
     },
@@ -4389,7 +4747,7 @@
         "_aspect": "electricity_source",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"elec_sources\",\"data_value\":\"grid\",\"display\":{\"title\":{\"text\":{\"default\":\"Grid\",\"es\":\"Red\",\"fr\":\"Électricité\"}}},\"_row_num\":26},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"solar\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar\",\"es\":\"Solar\",\"fr\":\"Énergie solaire\"}}},\"_row_num\":27},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"generator\",\"display\":{\"title\":{\"text\":{\"default\":\"Generator\",\"es\":\"Generador\",\"fr\":\"Groupe électrogène\"}}},\"_row_num\":28},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"both_grid_and_generator\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Grid and Generator\",\"es\":\"Red y generador\",\"fr\":\"Électricité et groupe électrogène\"}}},\"_row_num\":29},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"both_grid_and_solar\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Grid and Solar\",\"es\":\"Red y solar\",\"fr\":\"Électricité et énergie solaire\"}}},\"_row_num\":30},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"both_solar_and_generator\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Generator and Solar\",\"es\":\"Generador y solar\",\"fr\":\"Groupe électrogène et énergie solaire\"}}},\"_row_num\":31},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"es\":\"Nada\",\"fr\":\"Aucune source d'énergie\"}}},\"_row_num\":32}]"
+        "_value": "[{\"choice_list_name\":\"elec_sources\",\"data_value\":\"grid\",\"display\":{\"title\":{\"text\":{\"default\":\"Grid\",\"es\":\"Red\",\"fr\":\"Électricité\"}}},\"_row_num\":40},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"solar\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar\",\"es\":\"Solar\",\"fr\":\"Énergie solaire\"}}},\"_row_num\":41},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"generator\",\"display\":{\"title\":{\"text\":{\"default\":\"Generator\",\"es\":\"Generador\",\"fr\":\"Groupe électrogène\"}}},\"_row_num\":42},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"both_grid_and_generator\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Grid and Generator\",\"es\":\"Red y generador\",\"fr\":\"Électricité et groupe électrogène\"}}},\"_row_num\":43},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"both_grid_and_solar\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Grid and Solar\",\"es\":\"Red y solar\",\"fr\":\"Électricité et énergie solaire\"}}},\"_row_num\":44},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"both_solar_and_generator\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Generator and Solar\",\"es\":\"Generador y solar\",\"fr\":\"Groupe électrogène et énergie solaire\"}}},\"_row_num\":45},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"es\":\"Nada\",\"fr\":\"Aucune source d'énergie\"}}},\"_row_num\":46}]"
       },
       {
         "_partition": "Column",
@@ -4417,7 +4775,7 @@
         "_aspect": "facility_ownership",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"ownership_types\",\"data_value\":\"public\",\"display\":{\"title\":{\"text\":{\"default\":\"Public\",\"es\":\"Público\",\"fr\":\"Public\"}}},\"_row_num\":20},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"private\",\"display\":{\"title\":{\"text\":{\"default\":\"Private\",\"es\":\"Privado\",\"fr\":\"Privé\"}}},\"_row_num\":21},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"ngo\",\"display\":{\"title\":{\"text\":{\"default\":\"NGO\",\"es\":\"ONG\",\"fr\":\"ONG\"}}},\"_row_num\":22},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"faithbased\",\"display\":{\"title\":{\"text\":{\"default\":\"Faithbased\",\"es\":\"Basado en fé\",\"fr\":\"Confessionnel\"}}},\"_row_num\":23},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"other\",\"display\":{\"title\":{\"text\":{\"default\":\"Other\",\"es\":\"Otro\",\"fr\":\"Autre\"}}},\"_row_num\":24}]"
+        "_value": "[{\"choice_list_name\":\"ownership_types\",\"data_value\":\"public\",\"display\":{\"title\":{\"text\":{\"default\":\"Public\",\"es\":\"Público\",\"fr\":\"Public\"}}},\"_row_num\":34},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"private\",\"display\":{\"title\":{\"text\":{\"default\":\"Private\",\"es\":\"Privado\",\"fr\":\"Privé\"}}},\"_row_num\":35},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"ngo\",\"display\":{\"title\":{\"text\":{\"default\":\"NGO\",\"es\":\"ONG\",\"fr\":\"ONG\"}}},\"_row_num\":36},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"faithbased\",\"display\":{\"title\":{\"text\":{\"default\":\"Faithbased\",\"es\":\"Basado en fé\",\"fr\":\"Confessionnel\"}}},\"_row_num\":37},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"other\",\"display\":{\"title\":{\"text\":{\"default\":\"Other\",\"es\":\"Otro\",\"fr\":\"Autre\"}}},\"_row_num\":38}]"
       },
       {
         "_partition": "Column",
@@ -4431,7 +4789,7 @@
         "_aspect": "facility_type",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"facility_types\",\"data_value\":\"national_vaccine_store\",\"display\":{\"title\":{\"text\":{\"default\":\"National vaccine store\",\"es\":\"Tienda nacional de vacunas\",\"fr\":\"Entrepôt national de vaccins\"}}},\"_row_num\":5},{\"choice_list_name\":\"facility_types\",\"data_value\":\"regional_vaccine_store\",\"display\":{\"title\":{\"text\":{\"default\":\"Regional vaccine store\",\"es\":\"Tienda regional de vacunas\",\"fr\":\"Entrepôt régional de vaccins\"}}},\"_row_num\":6},{\"choice_list_name\":\"facility_types\",\"data_value\":\"district_vaccine_store\",\"display\":{\"title\":{\"text\":{\"default\":\"District vaccine store\",\"es\":\"Tienda de vacunas por un distrito\",\"fr\":\"Entrepôt de vaccins de district\"}}},\"_row_num\":7},{\"choice_list_name\":\"facility_types\",\"data_value\":\"central_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"Central hospital\",\"es\":\"Hospital centrál\",\"fr\":\"Hôpital central\"}}},\"_row_num\":8},{\"choice_list_name\":\"facility_types\",\"data_value\":\"district_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"District hospital\",\"es\":\"Hospital por un distrito\",\"fr\":\"Hôpital de district\"}}},\"_row_num\":9},{\"choice_list_name\":\"facility_types\",\"data_value\":\"rural_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"Rural hospital\",\"es\":\"Hospital rurál\",\"fr\":\"Hôpital rural\"}}},\"_row_num\":10},{\"choice_list_name\":\"facility_types\",\"data_value\":\"hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"Hospital\",\"es\":\"Hospital generál\",\"fr\":\"Hôpital\"}}},\"_row_num\":11},{\"choice_list_name\":\"facility_types\",\"data_value\":\"community_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"Community hospital\",\"es\":\"Hospital de comunidad\",\"fr\":\"Hôpital communautaire\"}}},\"_row_num\":12},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_center\",\"display\":{\"title\":{\"text\":{\"default\":\"Health center\",\"es\":\"Centro de salud\",\"fr\":\"Centre de santé\"}}},\"_row_num\":13},{\"choice_list_name\":\"facility_types\",\"data_value\":\"dispensary\",\"display\":{\"title\":{\"text\":{\"default\":\"Dispensary\",\"es\":\"Dispensario\",\"fr\":\"Dispensaire\"}}},\"_row_num\":14},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_station\",\"display\":{\"title\":{\"text\":{\"default\":\"Health Station\",\"es\":\"Estación de salud\",\"fr\":\"Station de santé\"}}},\"_row_num\":15},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_post\",\"display\":{\"title\":{\"text\":{\"default\":\"Health post\",\"es\":\"Campamiento de salud\",\"fr\":\"Poste de santé\"}}},\"_row_num\":16},{\"choice_list_name\":\"facility_types\",\"data_value\":\"maternity\",\"display\":{\"title\":{\"text\":{\"default\":\"Maternity\",\"es\":\"Maternidad\",\"fr\":\"Maternité\"}}},\"_row_num\":17},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_facility\",\"display\":{\"title\":{\"text\":{\"default\":\"Health Facility\",\"es\":\"Facilidad de Salúd\"}}},\"_row_num\":18}]"
+        "_value": "[{\"choice_list_name\":\"facility_types\",\"data_value\":\"national_vaccine_store\",\"display\":{\"title\":{\"text\":{\"default\":\"National vaccine store\",\"es\":\"Tienda nacional de vacunas\",\"fr\":\"Entrepôt national de vaccins\"}}},\"_row_num\":5},{\"choice_list_name\":\"facility_types\",\"data_value\":\"regional_vaccine_store\",\"display\":{\"title\":{\"text\":{\"default\":\"Regional vaccine store\",\"es\":\"Tienda regional de vacunas\",\"fr\":\"Entrepôt régional de vaccins\"}}},\"_row_num\":6},{\"choice_list_name\":\"facility_types\",\"data_value\":\"district_vaccine_store\",\"display\":{\"title\":{\"text\":{\"default\":\"District vaccine store\",\"es\":\"Tienda de vacunas por un distrito\",\"fr\":\"Entrepôt de vaccins de district\"}}},\"_row_num\":7},{\"choice_list_name\":\"facility_types\",\"data_value\":\"central_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"Central hospital\",\"es\":\"Hospital centrál\",\"fr\":\"Hôpital central\"}}},\"_row_num\":8},{\"choice_list_name\":\"facility_types\",\"data_value\":\"district_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"District hospital\",\"es\":\"Hospital por un distrito\",\"fr\":\"Hôpital de district\"}}},\"_row_num\":9},{\"choice_list_name\":\"facility_types\",\"data_value\":\"rural_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"Rural hospital\",\"es\":\"Hospital rurál\",\"fr\":\"Hôpital rural\"}}},\"_row_num\":10},{\"choice_list_name\":\"facility_types\",\"data_value\":\"hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"Hospital\",\"es\":\"Hospital generál\",\"fr\":\"Hôpital\"}}},\"_row_num\":11},{\"choice_list_name\":\"facility_types\",\"data_value\":\"community_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"Community hospital\",\"es\":\"Hospital de comunidad\",\"fr\":\"Hôpital communautaire\"}}},\"_row_num\":12},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_center\",\"display\":{\"title\":{\"text\":{\"default\":\"Health center\",\"es\":\"Centro de salud\",\"fr\":\"Centre de santé\"}}},\"_row_num\":13},{\"choice_list_name\":\"facility_types\",\"data_value\":\"dispensary\",\"display\":{\"title\":{\"text\":{\"default\":\"Dispensary\",\"es\":\"Dispensario\",\"fr\":\"Dispensaire\"}}},\"_row_num\":14},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_station\",\"display\":{\"title\":{\"text\":{\"default\":\"Health Station\",\"es\":\"Estación de salud\",\"fr\":\"Station de santé\"}}},\"_row_num\":15},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_post\",\"display\":{\"title\":{\"text\":{\"default\":\"Health post\",\"es\":\"Campamiento de salud\",\"fr\":\"Poste de santé\"}}},\"_row_num\":16},{\"choice_list_name\":\"facility_types\",\"data_value\":\"maternity\",\"display\":{\"title\":{\"text\":{\"default\":\"Maternity\",\"es\":\"Maternidad\",\"fr\":\"Maternité\"}}},\"_row_num\":17},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_facility\",\"display\":{\"title\":{\"text\":{\"default\":\"Health Facility\",\"es\":\"Facilidad de Salúd\"}}},\"_row_num\":18},{\"choice_list_name\":\"facility_types\",\"data_value\":\"ngo_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"NGO Hospital\",\"es\":\"Hospital de ONG\"}}},\"_row_num\":19},{\"choice_list_name\":\"facility_types\",\"data_value\":\"public_hciv\",\"display\":{\"title\":{\"text\":{\"default\":\"Public HCIV\",\"es\":\"Centro de salud pública IV\"}}},\"_row_num\":20},{\"choice_list_name\":\"facility_types\",\"data_value\":\"private_hciv\",\"display\":{\"title\":{\"text\":{\"default\":\"Private HCIV\",\"es\":\"Centro de salud privado IV\"}}},\"_row_num\":21},{\"choice_list_name\":\"facility_types\",\"data_value\":\"ngo_hciv\",\"display\":{\"title\":{\"text\":{\"default\":\"NGO HCIV\",\"es\":\"Centro de salud de ONG IV\"}}},\"_row_num\":22},{\"choice_list_name\":\"facility_types\",\"data_value\":\"public_hciii\",\"display\":{\"title\":{\"text\":{\"default\":\"Public  HCIII\",\"es\":\"Centro de salud pública III\"}}},\"_row_num\":23},{\"choice_list_name\":\"facility_types\",\"data_value\":\"private_hciii\",\"display\":{\"title\":{\"text\":{\"default\":\"Private HCIII\",\"es\":\"Centro de salud privado III\"}}},\"_row_num\":24},{\"choice_list_name\":\"facility_types\",\"data_value\":\"ngo_hciii\",\"display\":{\"title\":{\"text\":{\"default\":\"NGO HCIII\",\"es\":\"Centro de salud de ONG III\"}}},\"_row_num\":25},{\"choice_list_name\":\"facility_types\",\"data_value\":\"public_hcii\",\"display\":{\"title\":{\"text\":{\"default\":\"Public  HCII\",\"es\":\"Centro de salud pública II\"}}},\"_row_num\":26},{\"choice_list_name\":\"facility_types\",\"data_value\":\"private_hcii\",\"display\":{\"title\":{\"text\":{\"default\":\"Private  HCII\",\"es\":\"Centro de salud privado II\"}}},\"_row_num\":27},{\"choice_list_name\":\"facility_types\",\"data_value\":\"ngo_hcii\",\"display\":{\"title\":{\"text\":{\"default\":\"NGO HCII\",\"es\":\"Centro de salud de ONG II\"}}},\"_row_num\":28},{\"choice_list_name\":\"facility_types\",\"data_value\":\"sub_district_vaccine_store\",\"display\":{\"title\":{\"text\":{\"default\":\"Sub-District vaccine store\",\"es\":\"Tienda subdistrito de vacunas\"}}},\"_row_num\":29},{\"choice_list_name\":\"facility_types\",\"data_value\":\"public_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"Public hospital\",\"es\":\"Hospital público\"}}},\"_row_num\":30},{\"choice_list_name\":\"facility_types\",\"data_value\":\"private_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"Private  hospital\",\"es\":\"Hospital privado\"}}},\"_row_num\":31},{\"choice_list_name\":\"facility_types\",\"data_value\":\"uvri\",\"display\":{\"title\":{\"text\":\"UVRI\"}},\"_row_num\":32}]"
       },
       {
         "_partition": "Column",
@@ -4445,7 +4803,7 @@
         "_aspect": "fuel_availability",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"fuel_availability_types\",\"data_value\":\"available\",\"display\":{\"title\":{\"text\":{\"default\":\"Available\",\"es\":\"Disponible\",\"fr\":\"Disponible\"}}},\"_row_num\":40},{\"choice_list_name\":\"fuel_availability_types\",\"data_value\":\"irregular\",\"display\":{\"title\":{\"text\":{\"default\":\"Irregular\",\"es\":\"Irregular\",\"fr\":\"Disponible de façon irrégulière\"}}},\"_row_num\":41},{\"choice_list_name\":\"fuel_availability_types\",\"data_value\":\"not_available\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Available\",\"es\":\"No Disponible\",\"fr\":\"Non disponible\"}}},\"_row_num\":42},{\"choice_list_name\":\"fuel_availability_types\",\"data_value\":\"unknown\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\",\"fr\":\"Ne sais pas\"}}},\"_row_num\":43},{\"choice_list_name\":\"fuel_availability_types\",\"data_value\":\"not_applicable\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Applicable\",\"es\":\"No Applicable\",\"fr\":\"Sans objet\"}}},\"_row_num\":44}]"
+        "_value": "[{\"choice_list_name\":\"fuel_availability_types\",\"data_value\":\"available\",\"display\":{\"title\":{\"text\":{\"default\":\"Available\",\"es\":\"Disponible\",\"fr\":\"Disponible\"}}},\"_row_num\":54},{\"choice_list_name\":\"fuel_availability_types\",\"data_value\":\"irregular\",\"display\":{\"title\":{\"text\":{\"default\":\"Irregular\",\"es\":\"Irregular\",\"fr\":\"Disponible de façon irrégulière\"}}},\"_row_num\":55},{\"choice_list_name\":\"fuel_availability_types\",\"data_value\":\"not_available\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Available\",\"es\":\"No Disponible\",\"fr\":\"Non disponible\"}}},\"_row_num\":56},{\"choice_list_name\":\"fuel_availability_types\",\"data_value\":\"unknown\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\",\"fr\":\"Ne sais pas\"}}},\"_row_num\":57},{\"choice_list_name\":\"fuel_availability_types\",\"data_value\":\"not_applicable\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Applicable\",\"es\":\"No Applicable\",\"fr\":\"Sans objet\"}}},\"_row_num\":58}]"
       },
       {
         "_partition": "Column",
@@ -4459,7 +4817,7 @@
         "_aspect": "grid_power_availability",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"grid\",\"data_value\":\"more_than_16\",\"display\":{\"title\":{\"text\":{\"default\":\"More than 16\",\"es\":\"Más que 16\",\"fr\":\"Plus de 16\"}}},\"_row_num\":34},{\"choice_list_name\":\"grid\",\"data_value\":\"8_to_16\",\"display\":{\"title\":{\"text\":{\"default\":\"8 to 16\",\"es\":\"8 a 16\",\"fr\":\"8 à 16\"}}},\"_row_num\":35},{\"choice_list_name\":\"grid\",\"data_value\":\"4_to_8\",\"display\":{\"title\":{\"text\":{\"default\":\"4 to 8\",\"es\":\"4 a 8\",\"fr\":\"4 à 8\"}}},\"_row_num\":36},{\"choice_list_name\":\"grid\",\"data_value\":\"fewer_than_4\",\"display\":{\"title\":{\"text\":{\"default\":\"Fewer than 4\",\"es\":\"Menos que 4\",\"fr\":\"Moins de 4\"}}},\"_row_num\":37},{\"choice_list_name\":\"grid\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"es\":\"Ninguno\",\"fr\":\"Aucun\"}}},\"_row_num\":38}]"
+        "_value": "[{\"choice_list_name\":\"grid\",\"data_value\":\"more_than_16\",\"display\":{\"title\":{\"text\":{\"default\":\"More than 16\",\"es\":\"Más que 16\",\"fr\":\"Plus de 16\"}}},\"_row_num\":48},{\"choice_list_name\":\"grid\",\"data_value\":\"8_to_16\",\"display\":{\"title\":{\"text\":{\"default\":\"8 to 16\",\"es\":\"8 a 16\",\"fr\":\"8 à 16\"}}},\"_row_num\":49},{\"choice_list_name\":\"grid\",\"data_value\":\"4_to_8\",\"display\":{\"title\":{\"text\":{\"default\":\"4 to 8\",\"es\":\"4 a 8\",\"fr\":\"4 à 8\"}}},\"_row_num\":50},{\"choice_list_name\":\"grid\",\"data_value\":\"fewer_than_4\",\"display\":{\"title\":{\"text\":{\"default\":\"Fewer than 4\",\"es\":\"Menos que 4\",\"fr\":\"Moins de 4\"}}},\"_row_num\":51},{\"choice_list_name\":\"grid\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"es\":\"Ninguno\",\"fr\":\"Aucun\"}}},\"_row_num\":52}]"
       },
       {
         "_partition": "Column",
@@ -4473,7 +4831,7 @@
         "_aspect": "immunization_services_offered",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"immunization_services\",\"data_value\":\"static\",\"display\":{\"title\":{\"text\":{\"default\":\"Static/Fixed Post\",\"es\":\"Estático/Puesto Fijo\",\"fr\":\"Poste fixe\"}}},\"_row_num\":54},{\"choice_list_name\":\"immunization_services\",\"data_value\":\"outreach\",\"display\":{\"title\":{\"text\":{\"default\":\"Outreach\",\"es\":\"Extensión\",\"fr\":\"Ambulant\"}}},\"_row_num\":55},{\"choice_list_name\":\"immunization_services\",\"data_value\":\"both_static_and_outreach\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Static and Outreach\",\"es\":\"Estático y Extensión\",\"fr\":\"Fixe et ambulant\"}}},\"_row_num\":56},{\"choice_list_name\":\"immunization_services\",\"data_value\":\"storage_only\",\"display\":{\"title\":{\"text\":{\"default\":\"Storage Only\",\"es\":\"Solo almacenamiento\",\"fr\":\"Stockage uniquement\"}}},\"_row_num\":57},{\"choice_list_name\":\"immunization_services\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"es\":\"Nada\",\"fr\":\"Aucun\"}}},\"_row_num\":58}]"
+        "_value": "[{\"choice_list_name\":\"immunization_services\",\"data_value\":\"static\",\"display\":{\"title\":{\"text\":{\"default\":\"Static/Fixed Post\",\"es\":\"Estático/Puesto Fijo\",\"fr\":\"Poste fixe\"}}},\"_row_num\":68},{\"choice_list_name\":\"immunization_services\",\"data_value\":\"outreach\",\"display\":{\"title\":{\"text\":{\"default\":\"Outreach\",\"es\":\"Extensión\",\"fr\":\"Ambulant\"}}},\"_row_num\":69},{\"choice_list_name\":\"immunization_services\",\"data_value\":\"both_static_and_outreach\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Static and Outreach\",\"es\":\"Estático y Extensión\",\"fr\":\"Fixe et ambulant\"}}},\"_row_num\":70},{\"choice_list_name\":\"immunization_services\",\"data_value\":\"storage_only\",\"display\":{\"title\":{\"text\":{\"default\":\"Storage Only\",\"es\":\"Solo almacenamiento\",\"fr\":\"Stockage uniquement\"}}},\"_row_num\":71},{\"choice_list_name\":\"immunization_services\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"es\":\"Nada\",\"fr\":\"Aucun\"}}},\"_row_num\":72}]"
       },
       {
         "_partition": "Column",
@@ -4522,7 +4880,7 @@
         "_aspect": "vaccine_supply_mode",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"delivered\",\"display\":{\"title\":{\"text\":{\"default\":\"Delivered\",\"es\":\"Enviado\",\"fr\":\"Livré\"}}},\"_row_num\":60},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"collected\",\"display\":{\"title\":{\"text\":{\"default\":\"Collected\",\"es\":\"Collectado\",\"fr\":\"Collecté\"}}},\"_row_num\":61},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"both\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Delivered and Collected\",\"es\":\"Enviado y Collectado\",\"fr\":\"Livré et collecté\"}}},\"_row_num\":62},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"es\":\"Ninguno\",\"fr\":\"Aucun\"}}},\"_row_num\":63},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"unknown\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\",\"fr\":\"Ne sais pas\"}}},\"_row_num\":64}]"
+        "_value": "[{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"delivered\",\"display\":{\"title\":{\"text\":{\"default\":\"Delivered\",\"es\":\"Enviado\",\"fr\":\"Livré\"}}},\"_row_num\":74},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"collected\",\"display\":{\"title\":{\"text\":{\"default\":\"Collected\",\"es\":\"Collectado\",\"fr\":\"Collecté\"}}},\"_row_num\":75},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"both\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Delivered and Collected\",\"es\":\"Enviado y Collectado\",\"fr\":\"Livré et collecté\"}}},\"_row_num\":76},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"es\":\"Ninguno\",\"fr\":\"Aucun\"}}},\"_row_num\":77},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"unknown\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\",\"fr\":\"Ne sais pas\"}}},\"_row_num\":78}]"
       },
       {
         "_partition": "Column",

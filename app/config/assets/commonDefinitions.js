@@ -1416,6 +1416,118 @@ window.odkCommonDefinitions = {
         "es": "Institucion"
       },
       "_row_num": 161
+    },
+    "ngo_hospital": {
+      "string_token": "ngo_hospital",
+      "text": {
+        "default": "NGO Hospital",
+        "es": "Hospital de ONG"
+      },
+      "_row_num": 162
+    },
+    "public_hciv": {
+      "string_token": "public_hciv",
+      "text": {
+        "default": "Public HCIV",
+        "es": "Centro de salud pública IV"
+      },
+      "_row_num": 163
+    },
+    "private_hciv": {
+      "string_token": "private_hciv",
+      "text": {
+        "default": "Private HCIV",
+        "es": "Centro de salud privado IV"
+      },
+      "_row_num": 164
+    },
+    "ngo_hciv": {
+      "string_token": "ngo_hciv",
+      "text": {
+        "default": "NGO HCIV",
+        "es": "Centro de salud de ONG IV"
+      },
+      "_row_num": 165
+    },
+    "public_hciii": {
+      "string_token": "public_hciii",
+      "text": {
+        "default": "Public  HCIII",
+        "es": "Centro de salud pública III"
+      },
+      "_row_num": 166
+    },
+    "private_hciii": {
+      "string_token": "private_hciii",
+      "text": {
+        "default": "Private HCIII",
+        "es": "Centro de salud privado III"
+      },
+      "_row_num": 167
+    },
+    "ngo_hciii": {
+      "string_token": "ngo_hciii",
+      "text": {
+        "default": "NGO HCIII",
+        "es": "Centro de salud de ONG III"
+      },
+      "_row_num": 168
+    },
+    "public_hcii": {
+      "string_token": "public_hcii",
+      "text": {
+        "default": "Public  HCII",
+        "es": "Centro de salud pública II"
+      },
+      "_row_num": 169
+    },
+    "private_hcii": {
+      "string_token": "private_hcii",
+      "text": {
+        "default": "Private  HCII",
+        "es": "Centro de salud privado II"
+      },
+      "_row_num": 170
+    },
+    "ngo_hcii": {
+      "string_token": "ngo_hcii",
+      "text": {
+        "default": "NGO HCII",
+        "es": "Centro de salud de ONG II"
+      },
+      "_row_num": 171
+    },
+    "sub_district_store": {
+      "string_token": "sub_district_store",
+      "text": {
+        "default": "Sub-District vaccine store",
+        "es": "Tienda subdistrito de vacunas"
+      },
+      "_row_num": 172
+    },
+    "public_hospital": {
+      "string_token": "public_hospital",
+      "text": {
+        "default": "Public hospital",
+        "es": "Hospital público"
+      },
+      "_row_num": 173
+    },
+    "private_hospital": {
+      "string_token": "private_hospital",
+      "text": {
+        "default": "Private  hospital",
+        "es": "Hospital privado"
+      },
+      "_row_num": 174
+    },
+    "uvri": {
+      "string_token": "uvri",
+      "text": {
+        "default": "UVRI",
+        "es": "UVRI"
+      },
+      "_row_num": 175
     }
   },
   "_locales": {
