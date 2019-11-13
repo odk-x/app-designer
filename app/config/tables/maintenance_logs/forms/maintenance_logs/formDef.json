@@ -111,28 +111,8 @@
         "_row_num": 9
       },
       {
-        "type": "image",
-        "name": "maintenance_log_image",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Image",
-              "es": "Imagen"
-            }
-          },
-          "prompt": {
-            "text": {
-              "default": "Take a picture of the area of repair",
-              "es": "Toma una foto",
-              "fr": "Prendre une photo"
-            }
-          }
-        },
-        "_row_num": 10
-      },
-      {
         "clause": "begin screen",
-        "_row_num": 11
+        "_row_num": 10
       },
       {
         "type": "birthdate",
@@ -152,7 +132,7 @@
             }
           }
         },
-        "_row_num": 12
+        "_row_num": 11
       },
       {
         "type": "string",
@@ -172,7 +152,7 @@
             }
           }
         },
-        "_row_num": 13
+        "_row_num": 12
       },
       {
         "type": "select_multiple",
@@ -190,6 +170,26 @@
               "default": "Select type of maintenance",
               "es": "Seleccione el tipo de mantenimiento",
               "fr": "Sélectionner le type de maintenance"
+            }
+          }
+        },
+        "_row_num": 13
+      },
+      {
+        "type": "image",
+        "name": "maintenance_log_image",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Image",
+              "es": "Imagen"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Take a picture of the area of repair",
+              "es": "Toma una foto",
+              "fr": "Prendre une photo"
             }
           }
         },
@@ -351,8 +351,13 @@
         "_row_num": 29
       },
       {
-        "clause": "begin screen",
+        "clause": "if",
+        "condition": "selected(data('type_of_maintenance'),  'repair') || selected(data('type_of_maintenance'), 'other')",
         "_row_num": 30
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 31
       },
       {
         "type": "select_multiple",
@@ -367,12 +372,12 @@
           },
           "prompt": {
             "text": {
-              "default": "Select Electrical and Control System spare parts replaced/used",
-              "es": "Seleccione las piezas de repuesto del sistema eléctrico y de control reemplazadas/usadas"
+              "default": "Select <strong>Electrical and Control System</strong> parts replaced/used",
+              "es": "Seleccione las piezas del <strong>sistema eléctrico y de control</strong> reemplazadas/usadas"
             }
           }
         },
-        "_row_num": 31
+        "_row_num": 32
       },
       {
         "type": "select_multiple",
@@ -387,12 +392,12 @@
           },
           "prompt": {
             "text": {
-              "default": "Select Hardware spare parts replaced/used",
-              "es": "Seleccione piezas de repuesto de hardware reemplazadas/usadas"
+              "default": "Select <strong>Hardware</strong> parts replaced/used",
+              "es": "Seleccione piezas de <strong>hardware</strong> reemplazadas/usadas"
             }
           }
         },
-        "_row_num": 32
+        "_row_num": 33
       },
       {
         "type": "select_multiple",
@@ -407,12 +412,12 @@
           },
           "prompt": {
             "text": {
-              "default": "Select Monitoring spare parts replaced/used",
-              "es": "Seleccione Monitoreo de repuestos reemplazados/usados"
+              "default": "Select <strong>Monitoring</strong> parts replaced/used",
+              "es": "Seleccione las piezas de <strong>Monitoreo</strong> reemplazados/usados"
             }
           }
         },
-        "_row_num": 33
+        "_row_num": 34
       },
       {
         "type": "select_multiple",
@@ -427,12 +432,12 @@
           },
           "prompt": {
             "text": {
-              "default": "Select Power spare parts replaced/used",
-              "es": "Seleccionar repuestos de potencia reemplazados/usados"
+              "default": "Select <strong>Power</strong> parts replaced/used",
+              "es": "Seleccione las piezas de <strong>potencia</strong> reemplazados/usados"
             }
           }
         },
-        "_row_num": 34
+        "_row_num": 35
       },
       {
         "type": "select_multiple",
@@ -447,12 +452,12 @@
           },
           "prompt": {
             "text": {
-              "default": "Select Refrigeration System spare parts replaced/used",
-              "es": "Seleccione los repuestos del sistema de refrigeración reemplazados/usados"
+              "default": "Select <strong>Refrigeration System</strong> parts replaced/used",
+              "es": "Seleccione las piezas del <strong>sistema de refrigeración</strong> reemplazados/usados"
             }
           }
         },
-        "_row_num": 35
+        "_row_num": 36
       },
       {
         "type": "select_multiple",
@@ -467,12 +472,12 @@
           },
           "prompt": {
             "text": {
-              "default": "Select Solar spare parts replaced/used",
-              "es": "Seleccionar repuestos solares reemplazados/usados"
+              "default": "Select <strong>Solar</strong> parts replaced/used",
+              "es": "Seleccione las piezas de <strong>solares</strong> reemplazados/usados"
             }
           }
         },
-        "_row_num": 36
+        "_row_num": 37
       },
       {
         "type": "string",
@@ -486,16 +491,16 @@
           },
           "prompt": {
             "text": {
-              "default": "Other spare parts replaced/used",
+              "default": "Other parts replaced/used",
               "es": "Otras piezas de repuesto reemplazadas/usadas"
             }
           }
         },
-        "_row_num": 37
+        "_row_num": 38
       },
       {
         "clause": "end screen",
-        "_row_num": 38
+        "_row_num": 39
       },
       {
         "type": "note",
@@ -513,7 +518,11 @@
             }
           }
         },
-        "_row_num": 39
+        "_row_num": 40
+      },
+      {
+        "clause": "end if",
+        "_row_num": 41
       }
     ],
     "choices": [
@@ -3323,10 +3332,64 @@
         },
         "elementKey": "technician_phone"
       },
+      "date_serviced": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementType": "date",
+        "displayName": {
+          "text": {
+            "default": "Date of Service",
+            "es": "Fecha de Servicio"
+          }
+        },
+        "elementKey": "date_serviced"
+      },
+      "notes": {
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Notes",
+            "es": "Notas"
+          }
+        },
+        "elementKey": "notes"
+      },
+      "type_of_maintenance": {
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "type_of_maintenance_items"
+        },
+        "displayName": {
+          "text": {
+            "default": "Type of Maintenance Performed",
+            "es": "Tipo de mantenimiento realizado"
+          }
+        },
+        "valuesList": "maint_types",
+        "elementKey": "type_of_maintenance"
+      },
       "maintenance_log_image": {
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 14,
             "section_name": "survey"
           }
         ],
@@ -3352,60 +3415,6 @@
           }
         },
         "elementKey": "maintenance_log_image"
-      },
-      "date_serviced": {
-        "_defn": [
-          {
-            "_row_num": 12,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "elementType": "date",
-        "displayName": {
-          "text": {
-            "default": "Date of Service",
-            "es": "Fecha de Servicio"
-          }
-        },
-        "elementKey": "date_serviced"
-      },
-      "notes": {
-        "_defn": [
-          {
-            "_row_num": 13,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "displayName": {
-          "text": {
-            "default": "Notes",
-            "es": "Notas"
-          }
-        },
-        "elementKey": "notes"
-      },
-      "type_of_maintenance": {
-        "_defn": [
-          {
-            "_row_num": 14,
-            "section_name": "survey"
-          }
-        ],
-        "type": "array",
-        "items": {
-          "type": "string",
-          "elementKey": "type_of_maintenance_items"
-        },
-        "displayName": {
-          "text": {
-            "default": "Type of Maintenance Performed",
-            "es": "Tipo de mantenimiento realizado"
-          }
-        },
-        "valuesList": "maint_types",
-        "elementKey": "type_of_maintenance"
       },
       "other_maintenance": {
         "_defn": [
@@ -3513,7 +3522,7 @@
       "spare_parts_electrical": {
         "_defn": [
           {
-            "_row_num": 31,
+            "_row_num": 32,
             "section_name": "survey"
           }
         ],
@@ -3534,7 +3543,7 @@
       "spare_parts_hardware": {
         "_defn": [
           {
-            "_row_num": 32,
+            "_row_num": 33,
             "section_name": "survey"
           }
         ],
@@ -3555,7 +3564,7 @@
       "spare_parts_monitoring": {
         "_defn": [
           {
-            "_row_num": 33,
+            "_row_num": 34,
             "section_name": "survey"
           }
         ],
@@ -3576,7 +3585,7 @@
       "spare_parts_power": {
         "_defn": [
           {
-            "_row_num": 34,
+            "_row_num": 35,
             "section_name": "survey"
           }
         ],
@@ -3597,7 +3606,7 @@
       "spare_parts_refrigeration": {
         "_defn": [
           {
-            "_row_num": 35,
+            "_row_num": 36,
             "section_name": "survey"
           }
         ],
@@ -3618,7 +3627,7 @@
       "spare_parts_solar": {
         "_defn": [
           {
-            "_row_num": 36,
+            "_row_num": 37,
             "section_name": "survey"
           }
         ],
@@ -3639,7 +3648,7 @@
       "other_spare_parts": {
         "_defn": [
           {
-            "_row_num": 37,
+            "_row_num": 38,
             "section_name": "survey"
           }
         ],
@@ -3877,31 +3886,6 @@
             "promptIdx": 3
           },
           {
-            "type": "image",
-            "name": "maintenance_log_image",
-            "display": {
-              "title": {
-                "text": {
-                  "default": "Image",
-                  "es": "Imagen"
-                }
-              },
-              "prompt": {
-                "text": {
-                  "default": "Take a picture of the area of repair",
-                  "es": "Toma una foto",
-                  "fr": "Prendre une photo"
-                }
-              }
-            },
-            "_row_num": 10,
-            "__rowNum__": 9,
-            "_token_type": "prompt",
-            "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen10",
-            "promptIdx": 4
-          },
-          {
             "type": "birthdate",
             "name": "date_serviced",
             "display": {
@@ -3919,12 +3903,12 @@
                 }
               }
             },
-            "_row_num": 12,
-            "__rowNum__": 11,
+            "_row_num": 11,
+            "__rowNum__": 10,
             "_token_type": "prompt",
             "_type": "birthdate",
-            "_branch_label_enclosing_screen": "survey/_screen11",
-            "promptIdx": 5
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 4
           },
           {
             "type": "string",
@@ -3944,12 +3928,12 @@
                 }
               }
             },
-            "_row_num": 13,
-            "__rowNum__": 12,
+            "_row_num": 12,
+            "__rowNum__": 11,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen11",
-            "promptIdx": 6
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 5
           },
           {
             "type": "select_multiple",
@@ -3970,11 +3954,36 @@
                 }
               }
             },
+            "_row_num": 13,
+            "__rowNum__": 12,
+            "_token_type": "prompt",
+            "_type": "select_multiple",
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 6
+          },
+          {
+            "type": "image",
+            "name": "maintenance_log_image",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Image",
+                  "es": "Imagen"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Take a picture of the area of repair",
+                  "es": "Toma una foto",
+                  "fr": "Prendre une photo"
+                }
+              }
+            },
             "_row_num": 14,
             "__rowNum__": 13,
             "_token_type": "prompt",
-            "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen11",
+            "_type": "image",
+            "_branch_label_enclosing_screen": "survey/_screen10",
             "promptIdx": 7
           },
           {
@@ -3998,7 +4007,7 @@
             "__rowNum__": 15,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen11",
+            "_branch_label_enclosing_screen": "survey/_screen10",
             "promptIdx": 8
           },
           {
@@ -4024,7 +4033,7 @@
             "__rowNum__": 18,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen11",
+            "_branch_label_enclosing_screen": "survey/_screen10",
             "promptIdx": 9
           },
           {
@@ -4048,7 +4057,7 @@
             "__rowNum__": 20,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen11",
+            "_branch_label_enclosing_screen": "survey/_screen10",
             "promptIdx": 10
           },
           {
@@ -4072,7 +4081,7 @@
             "__rowNum__": 22,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen11",
+            "_branch_label_enclosing_screen": "survey/_screen10",
             "promptIdx": 11
           },
           {
@@ -4098,7 +4107,7 @@
             "__rowNum__": 25,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen11",
+            "_branch_label_enclosing_screen": "survey/_screen10",
             "promptIdx": 12
           },
           {
@@ -4119,7 +4128,7 @@
             "__rowNum__": 26,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen11",
+            "_branch_label_enclosing_screen": "survey/_screen10",
             "promptIdx": 13
           },
           {
@@ -4135,16 +4144,16 @@
               },
               "prompt": {
                 "text": {
-                  "default": "Select Electrical and Control System spare parts replaced/used",
-                  "es": "Seleccione las piezas de repuesto del sistema eléctrico y de control reemplazadas/usadas"
+                  "default": "Select <strong>Electrical and Control System</strong> parts replaced/used",
+                  "es": "Seleccione las piezas del <strong>sistema eléctrico y de control</strong> reemplazadas/usadas"
                 }
               }
             },
-            "_row_num": 31,
-            "__rowNum__": 30,
+            "_row_num": 32,
+            "__rowNum__": 31,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen30",
+            "_branch_label_enclosing_screen": "survey/_screen31",
             "promptIdx": 14
           },
           {
@@ -4160,16 +4169,16 @@
               },
               "prompt": {
                 "text": {
-                  "default": "Select Hardware spare parts replaced/used",
-                  "es": "Seleccione piezas de repuesto de hardware reemplazadas/usadas"
+                  "default": "Select <strong>Hardware</strong> parts replaced/used",
+                  "es": "Seleccione piezas de <strong>hardware</strong> reemplazadas/usadas"
                 }
               }
             },
-            "_row_num": 32,
-            "__rowNum__": 31,
+            "_row_num": 33,
+            "__rowNum__": 32,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen30",
+            "_branch_label_enclosing_screen": "survey/_screen31",
             "promptIdx": 15
           },
           {
@@ -4185,16 +4194,16 @@
               },
               "prompt": {
                 "text": {
-                  "default": "Select Monitoring spare parts replaced/used",
-                  "es": "Seleccione Monitoreo de repuestos reemplazados/usados"
+                  "default": "Select <strong>Monitoring</strong> parts replaced/used",
+                  "es": "Seleccione las piezas de <strong>Monitoreo</strong> reemplazados/usados"
                 }
               }
             },
-            "_row_num": 33,
-            "__rowNum__": 32,
+            "_row_num": 34,
+            "__rowNum__": 33,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen30",
+            "_branch_label_enclosing_screen": "survey/_screen31",
             "promptIdx": 16
           },
           {
@@ -4210,16 +4219,16 @@
               },
               "prompt": {
                 "text": {
-                  "default": "Select Power spare parts replaced/used",
-                  "es": "Seleccionar repuestos de potencia reemplazados/usados"
+                  "default": "Select <strong>Power</strong> parts replaced/used",
+                  "es": "Seleccione las piezas de <strong>potencia</strong> reemplazados/usados"
                 }
               }
             },
-            "_row_num": 34,
-            "__rowNum__": 33,
+            "_row_num": 35,
+            "__rowNum__": 34,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen30",
+            "_branch_label_enclosing_screen": "survey/_screen31",
             "promptIdx": 17
           },
           {
@@ -4235,16 +4244,16 @@
               },
               "prompt": {
                 "text": {
-                  "default": "Select Refrigeration System spare parts replaced/used",
-                  "es": "Seleccione los repuestos del sistema de refrigeración reemplazados/usados"
+                  "default": "Select <strong>Refrigeration System</strong> parts replaced/used",
+                  "es": "Seleccione las piezas del <strong>sistema de refrigeración</strong> reemplazados/usados"
                 }
               }
             },
-            "_row_num": 35,
-            "__rowNum__": 34,
+            "_row_num": 36,
+            "__rowNum__": 35,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen30",
+            "_branch_label_enclosing_screen": "survey/_screen31",
             "promptIdx": 18
           },
           {
@@ -4260,16 +4269,16 @@
               },
               "prompt": {
                 "text": {
-                  "default": "Select Solar spare parts replaced/used",
-                  "es": "Seleccionar repuestos solares reemplazados/usados"
+                  "default": "Select <strong>Solar</strong> parts replaced/used",
+                  "es": "Seleccione las piezas de <strong>solares</strong> reemplazados/usados"
                 }
               }
             },
-            "_row_num": 36,
-            "__rowNum__": 35,
+            "_row_num": 37,
+            "__rowNum__": 36,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen30",
+            "_branch_label_enclosing_screen": "survey/_screen31",
             "promptIdx": 19
           },
           {
@@ -4284,16 +4293,16 @@
               },
               "prompt": {
                 "text": {
-                  "default": "Other spare parts replaced/used",
+                  "default": "Other parts replaced/used",
                   "es": "Otras piezas de repuesto reemplazadas/usadas"
                 }
               }
             },
-            "_row_num": 37,
-            "__rowNum__": 36,
+            "_row_num": 38,
+            "__rowNum__": 37,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen30",
+            "_branch_label_enclosing_screen": "survey/_screen31",
             "promptIdx": 20
           },
           {
@@ -4312,19 +4321,19 @@
                 }
               }
             },
-            "_row_num": 39,
-            "__rowNum__": 38,
+            "_row_num": 40,
+            "__rowNum__": 39,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen39",
+            "_branch_label_enclosing_screen": "survey/_screen40",
             "promptIdx": 21
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 40,
-            "_branch_label_enclosing_screen": "survey/_screen40",
+            "_row_num": 42,
+            "_branch_label_enclosing_screen": "survey/_screen42",
             "promptIdx": 22
           }
         ],
@@ -4349,15 +4358,9 @@
             "operationIdx": 0
           },
           {
-            "_row_num": 10,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 1
-          },
-          {
             "clause": "begin screen",
-            "_row_num": 11,
-            "__rowNum__": 10,
+            "_row_num": 10,
+            "__rowNum__": 9,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
@@ -4365,59 +4368,84 @@
               "__rowNum__": 28,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\nif (selected(data('type_of_maintenance'), 'other')) {\nactivePromptIndicies.push(8);\n}\nif (selected(data('type_of_maintenance'),  'repair')) {\nactivePromptIndicies.push(9);\nif (selected(data('type_of_repair'), 'other')) {\nactivePromptIndicies.push(10);\n}\nactivePromptIndicies.push(11);\n}\nif (selected(data('type_of_maintenance'), 'preventative')) {\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\nif (selected(data('type_of_maintenance'), 'other')) {\nactivePromptIndicies.push(8);\n}\nif (selected(data('type_of_maintenance'),  'repair')) {\nactivePromptIndicies.push(9);\nif (selected(data('type_of_repair'), 'other')) {\nactivePromptIndicies.push(10);\n}\nactivePromptIndicies.push(11);\n}\nif (selected(data('type_of_maintenance'), 'preventative')) {\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 1
+          },
+          {
+            "clause": "if",
+            "condition": "selected(data('type_of_maintenance'),  'repair') || selected(data('type_of_maintenance'), 'other')",
+            "_row_num": 30,
+            "__rowNum__": 29,
+            "_token_type": "goto_label",
+            "_branch_label": "_then30",
             "operationIdx": 2
           },
           {
-            "clause": "begin screen",
-            "_row_num": 30,
-            "__rowNum__": 29,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 38,
-              "__rowNum__": 37,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\nactivePromptIndicies.push(15);\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\nactivePromptIndicies.push(19);\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else41",
+            "_row_num": 41,
             "operationIdx": 3
           },
           {
-            "_row_num": 39,
+            "clause": "begin screen",
+            "_row_num": 31,
+            "__rowNum__": 30,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 39,
+              "__rowNum__": 38,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\nactivePromptIndicies.push(15);\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\nactivePromptIndicies.push(19);\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 4
+          },
+          {
+            "_row_num": 40,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 4
+            "operationIdx": 5
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif41",
+            "_row_num": 41,
+            "operationIdx": 6
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 40,
-            "operationIdx": 5
+            "_row_num": 42,
+            "operationIdx": 7
           },
           {
-            "_row_num": 40,
+            "_row_num": 42,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 6
+            "operationIdx": 8
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 40,
-            "operationIdx": 7
+            "_row_num": 42,
+            "operationIdx": 9
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
           "_screen10": 1,
-          "_screen11": 2,
-          "_screen30": 3,
-          "_screen39": 4,
-          "_contents": 6,
-          "_screen40": 6
+          "_then30": 4,
+          "_screen31": 4,
+          "_screen40": 5,
+          "_else41": 7,
+          "_endif41": 7,
+          "_contents": 8,
+          "_screen42": 8
         }
       }
     },
@@ -4499,10 +4527,80 @@
         "elementSet": "data",
         "elementPath": "technician_phone"
       },
+      "date_serviced": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementType": "date",
+        "displayName": {
+          "text": {
+            "default": "Date of Service",
+            "es": "Fecha de Servicio"
+          }
+        },
+        "elementKey": "date_serviced",
+        "elementName": "date_serviced",
+        "elementSet": "data",
+        "elementPath": "date_serviced"
+      },
+      "notes": {
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Notes",
+            "es": "Notas"
+          }
+        },
+        "elementKey": "notes",
+        "elementName": "notes",
+        "elementSet": "data",
+        "elementPath": "notes"
+      },
+      "type_of_maintenance": {
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "type_of_maintenance_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "type_of_maintenance.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": {
+          "text": {
+            "default": "Type of Maintenance Performed",
+            "es": "Tipo de mantenimiento realizado"
+          }
+        },
+        "valuesList": "maint_types",
+        "elementKey": "type_of_maintenance",
+        "elementName": "type_of_maintenance",
+        "elementSet": "data",
+        "elementPath": "type_of_maintenance",
+        "listChildElementKeys": [
+          "type_of_maintenance_items"
+        ]
+      },
       "maintenance_log_image": {
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 14,
             "section_name": "survey"
           }
         ],
@@ -4542,76 +4640,6 @@
           "maintenance_log_image_uriFragment"
         ],
         "notUnitOfRetention": true
-      },
-      "date_serviced": {
-        "_defn": [
-          {
-            "_row_num": 12,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "elementType": "date",
-        "displayName": {
-          "text": {
-            "default": "Date of Service",
-            "es": "Fecha de Servicio"
-          }
-        },
-        "elementKey": "date_serviced",
-        "elementName": "date_serviced",
-        "elementSet": "data",
-        "elementPath": "date_serviced"
-      },
-      "notes": {
-        "_defn": [
-          {
-            "_row_num": 13,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "displayName": {
-          "text": {
-            "default": "Notes",
-            "es": "Notas"
-          }
-        },
-        "elementKey": "notes",
-        "elementName": "notes",
-        "elementSet": "data",
-        "elementPath": "notes"
-      },
-      "type_of_maintenance": {
-        "_defn": [
-          {
-            "_row_num": 14,
-            "section_name": "survey"
-          }
-        ],
-        "type": "array",
-        "items": {
-          "type": "string",
-          "elementKey": "type_of_maintenance_items",
-          "elementName": "items",
-          "elementSet": "data",
-          "elementPath": "type_of_maintenance.items",
-          "notUnitOfRetention": true
-        },
-        "displayName": {
-          "text": {
-            "default": "Type of Maintenance Performed",
-            "es": "Tipo de mantenimiento realizado"
-          }
-        },
-        "valuesList": "maint_types",
-        "elementKey": "type_of_maintenance",
-        "elementName": "type_of_maintenance",
-        "elementSet": "data",
-        "elementPath": "type_of_maintenance",
-        "listChildElementKeys": [
-          "type_of_maintenance_items"
-        ]
       },
       "other_maintenance": {
         "_defn": [
@@ -4751,7 +4779,7 @@
       "spare_parts_electrical": {
         "_defn": [
           {
-            "_row_num": 31,
+            "_row_num": 32,
             "section_name": "survey"
           }
         ],
@@ -4782,7 +4810,7 @@
       "spare_parts_hardware": {
         "_defn": [
           {
-            "_row_num": 32,
+            "_row_num": 33,
             "section_name": "survey"
           }
         ],
@@ -4813,7 +4841,7 @@
       "spare_parts_monitoring": {
         "_defn": [
           {
-            "_row_num": 33,
+            "_row_num": 34,
             "section_name": "survey"
           }
         ],
@@ -4844,7 +4872,7 @@
       "spare_parts_power": {
         "_defn": [
           {
-            "_row_num": 34,
+            "_row_num": 35,
             "section_name": "survey"
           }
         ],
@@ -4875,7 +4903,7 @@
       "spare_parts_refrigeration": {
         "_defn": [
           {
-            "_row_num": 35,
+            "_row_num": 36,
             "section_name": "survey"
           }
         ],
@@ -4906,7 +4934,7 @@
       "spare_parts_solar": {
         "_defn": [
           {
-            "_row_num": 36,
+            "_row_num": 37,
             "section_name": "survey"
           }
         ],
@@ -4937,7 +4965,7 @@
       "other_spare_parts": {
         "_defn": [
           {
-            "_row_num": 37,
+            "_row_num": 38,
             "section_name": "survey"
           }
         ],
@@ -4952,6 +4980,14 @@
         "elementName": "other_spare_parts",
         "elementSet": "data",
         "elementPath": "other_spare_parts"
+      },
+      "type_of_maintenance_items": {
+        "type": "string",
+        "elementKey": "type_of_maintenance_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "type_of_maintenance.items",
+        "notUnitOfRetention": true
       },
       "maintenance_log_image_uriFragment": {
         "type": "string",
@@ -4969,14 +5005,6 @@
         "elementName": "contentType",
         "elementSet": "data",
         "elementPath": "maintenance_log_image.contentType"
-      },
-      "type_of_maintenance_items": {
-        "type": "string",
-        "elementKey": "type_of_maintenance_items",
-        "elementName": "items",
-        "elementSet": "data",
-        "elementPath": "type_of_maintenance.items",
-        "notUnitOfRetention": true
       },
       "type_of_repair_items": {
         "type": "string",
