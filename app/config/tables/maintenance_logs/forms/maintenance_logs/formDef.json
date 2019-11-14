@@ -176,29 +176,9 @@
         "_row_num": 13
       },
       {
-        "type": "image",
-        "name": "maintenance_log_image",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Image",
-              "es": "Imagen"
-            }
-          },
-          "prompt": {
-            "text": {
-              "default": "Take a picture of the area of repair",
-              "es": "Toma una foto",
-              "fr": "Prendre une photo"
-            }
-          }
-        },
-        "_row_num": 14
-      },
-      {
         "clause": "if",
         "condition": "selected(data('type_of_maintenance'), 'other')",
-        "_row_num": 15
+        "_row_num": 14
       },
       {
         "type": "text",
@@ -217,16 +197,16 @@
             }
           }
         },
-        "_row_num": 16
+        "_row_num": 15
       },
       {
         "clause": "end if",
-        "_row_num": 17
+        "_row_num": 16
       },
       {
         "clause": "if",
         "condition": "selected(data('type_of_maintenance'),  'repair')",
-        "_row_num": 18
+        "_row_num": 17
       },
       {
         "type": "select_multiple",
@@ -247,12 +227,12 @@
             }
           }
         },
-        "_row_num": 19
+        "_row_num": 18
       },
       {
         "clause": "if",
         "condition": "selected(data('type_of_repair'), 'other')",
-        "_row_num": 20
+        "_row_num": 19
       },
       {
         "type": "text",
@@ -271,11 +251,11 @@
             }
           }
         },
-        "_row_num": 21
+        "_row_num": 20
       },
       {
         "clause": "end if",
-        "_row_num": 22
+        "_row_num": 21
       },
       {
         "type": "text",
@@ -294,16 +274,16 @@
             }
           }
         },
-        "_row_num": 23
+        "_row_num": 22
       },
       {
         "clause": "end if",
-        "_row_num": 24
+        "_row_num": 23
       },
       {
         "clause": "if",
         "condition": "selected(data('type_of_maintenance'), 'preventative')",
-        "_row_num": 25
+        "_row_num": 24
       },
       {
         "type": "select_multiple",
@@ -324,7 +304,7 @@
             }
           }
         },
-        "_row_num": 26
+        "_row_num": 25
       },
       {
         "type": "text",
@@ -340,24 +320,53 @@
             }
           }
         },
-        "_row_num": 27
+        "_row_num": 26
       },
       {
         "clause": "end if",
-        "_row_num": 28
+        "_row_num": 27
       },
       {
         "clause": "end screen",
+        "_row_num": 28
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('type_of_maintenance'),  'repair') || selected(data('type_of_maintenance'), 'other')  || selected(data('type_of_maintenance'), 'preventative')",
         "_row_num": 29
+      },
+      {
+        "type": "image",
+        "name": "maintenance_log_image",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Image",
+              "es": "Imagen"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Take a picture of the area",
+              "es": "Toma una foto",
+              "fr": "Prendre une photo"
+            }
+          }
+        },
+        "_row_num": 30
+      },
+      {
+        "clause": "end if",
+        "_row_num": 31
       },
       {
         "clause": "if",
         "condition": "selected(data('type_of_maintenance'),  'repair') || selected(data('type_of_maintenance'), 'other')",
-        "_row_num": 30
+        "_row_num": 32
       },
       {
         "clause": "begin screen",
-        "_row_num": 31
+        "_row_num": 33
       },
       {
         "type": "select_multiple",
@@ -377,7 +386,7 @@
             }
           }
         },
-        "_row_num": 32
+        "_row_num": 34
       },
       {
         "type": "select_multiple",
@@ -397,7 +406,7 @@
             }
           }
         },
-        "_row_num": 33
+        "_row_num": 35
       },
       {
         "type": "select_multiple",
@@ -417,7 +426,7 @@
             }
           }
         },
-        "_row_num": 34
+        "_row_num": 36
       },
       {
         "type": "select_multiple",
@@ -437,7 +446,7 @@
             }
           }
         },
-        "_row_num": 35
+        "_row_num": 37
       },
       {
         "type": "select_multiple",
@@ -457,7 +466,7 @@
             }
           }
         },
-        "_row_num": 36
+        "_row_num": 38
       },
       {
         "type": "select_multiple",
@@ -477,7 +486,7 @@
             }
           }
         },
-        "_row_num": 37
+        "_row_num": 39
       },
       {
         "type": "string",
@@ -496,11 +505,11 @@
             }
           }
         },
-        "_row_num": 38
+        "_row_num": 40
       },
       {
         "clause": "end screen",
-        "_row_num": 39
+        "_row_num": 41
       },
       {
         "type": "note",
@@ -518,11 +527,11 @@
             }
           }
         },
-        "_row_num": 40
+        "_row_num": 42
       },
       {
         "clause": "end if",
-        "_row_num": 41
+        "_row_num": 43
       }
     ],
     "choices": [
@@ -3386,10 +3395,113 @@
         "valuesList": "maint_types",
         "elementKey": "type_of_maintenance"
       },
+      "other_maintenance": {
+        "_defn": [
+          {
+            "_row_num": 15,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Other Maintenance",
+            "es": "Otro mantenimiento"
+          }
+        },
+        "elementKey": "other_maintenance"
+      },
+      "type_of_repair": {
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "type_of_repair_items"
+        },
+        "displayName": {
+          "text": {
+            "default": "Type of Repair",
+            "es": "Tipo de Reparación"
+          }
+        },
+        "valuesList": "repair_types",
+        "elementKey": "type_of_repair"
+      },
+      "other_repair": {
+        "_defn": [
+          {
+            "_row_num": 20,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Other Repair",
+            "es": "Otra Reparación"
+          }
+        },
+        "elementKey": "other_repair"
+      },
+      "repair_activities": {
+        "_defn": [
+          {
+            "_row_num": 22,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Repair Activities",
+            "es": "Actividades de Reparacion"
+          }
+        },
+        "elementKey": "repair_activities"
+      },
+      "type_of_preventative_maintenance": {
+        "_defn": [
+          {
+            "_row_num": 25,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "type_of_preventative_maintenance_items"
+        },
+        "displayName": {
+          "text": {
+            "default": "Type of Preventative Maintenance",
+            "es": "Tipo de Mantenimiento Preventivo"
+          }
+        },
+        "valuesList": "preventative_maint_types",
+        "elementKey": "type_of_preventative_maintenance"
+      },
+      "preventative_comments": {
+        "_defn": [
+          {
+            "_row_num": 26,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": "Comments"
+        },
+        "elementKey": "preventative_comments"
+      },
       "maintenance_log_image": {
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 30,
             "section_name": "survey"
           }
         ],
@@ -3416,113 +3528,10 @@
         },
         "elementKey": "maintenance_log_image"
       },
-      "other_maintenance": {
-        "_defn": [
-          {
-            "_row_num": 16,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "displayName": {
-          "text": {
-            "default": "Other Maintenance",
-            "es": "Otro mantenimiento"
-          }
-        },
-        "elementKey": "other_maintenance"
-      },
-      "type_of_repair": {
-        "_defn": [
-          {
-            "_row_num": 19,
-            "section_name": "survey"
-          }
-        ],
-        "type": "array",
-        "items": {
-          "type": "string",
-          "elementKey": "type_of_repair_items"
-        },
-        "displayName": {
-          "text": {
-            "default": "Type of Repair",
-            "es": "Tipo de Reparación"
-          }
-        },
-        "valuesList": "repair_types",
-        "elementKey": "type_of_repair"
-      },
-      "other_repair": {
-        "_defn": [
-          {
-            "_row_num": 21,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "displayName": {
-          "text": {
-            "default": "Other Repair",
-            "es": "Otra Reparación"
-          }
-        },
-        "elementKey": "other_repair"
-      },
-      "repair_activities": {
-        "_defn": [
-          {
-            "_row_num": 23,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "displayName": {
-          "text": {
-            "default": "Repair Activities",
-            "es": "Actividades de Reparacion"
-          }
-        },
-        "elementKey": "repair_activities"
-      },
-      "type_of_preventative_maintenance": {
-        "_defn": [
-          {
-            "_row_num": 26,
-            "section_name": "survey"
-          }
-        ],
-        "type": "array",
-        "items": {
-          "type": "string",
-          "elementKey": "type_of_preventative_maintenance_items"
-        },
-        "displayName": {
-          "text": {
-            "default": "Type of Preventative Maintenance",
-            "es": "Tipo de Mantenimiento Preventivo"
-          }
-        },
-        "valuesList": "preventative_maint_types",
-        "elementKey": "type_of_preventative_maintenance"
-      },
-      "preventative_comments": {
-        "_defn": [
-          {
-            "_row_num": 27,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "displayName": {
-          "text": "Comments"
-        },
-        "elementKey": "preventative_comments"
-      },
       "spare_parts_electrical": {
         "_defn": [
           {
-            "_row_num": 32,
+            "_row_num": 34,
             "section_name": "survey"
           }
         ],
@@ -3543,7 +3552,7 @@
       "spare_parts_hardware": {
         "_defn": [
           {
-            "_row_num": 33,
+            "_row_num": 35,
             "section_name": "survey"
           }
         ],
@@ -3564,7 +3573,7 @@
       "spare_parts_monitoring": {
         "_defn": [
           {
-            "_row_num": 34,
+            "_row_num": 36,
             "section_name": "survey"
           }
         ],
@@ -3585,7 +3594,7 @@
       "spare_parts_power": {
         "_defn": [
           {
-            "_row_num": 35,
+            "_row_num": 37,
             "section_name": "survey"
           }
         ],
@@ -3606,7 +3615,7 @@
       "spare_parts_refrigeration": {
         "_defn": [
           {
-            "_row_num": 36,
+            "_row_num": 38,
             "section_name": "survey"
           }
         ],
@@ -3627,7 +3636,7 @@
       "spare_parts_solar": {
         "_defn": [
           {
-            "_row_num": 37,
+            "_row_num": 39,
             "section_name": "survey"
           }
         ],
@@ -3648,7 +3657,7 @@
       "other_spare_parts": {
         "_defn": [
           {
-            "_row_num": 38,
+            "_row_num": 40,
             "section_name": "survey"
           }
         ],
@@ -3962,31 +3971,6 @@
             "promptIdx": 6
           },
           {
-            "type": "image",
-            "name": "maintenance_log_image",
-            "display": {
-              "title": {
-                "text": {
-                  "default": "Image",
-                  "es": "Imagen"
-                }
-              },
-              "prompt": {
-                "text": {
-                  "default": "Take a picture of the area of repair",
-                  "es": "Toma una foto",
-                  "fr": "Prendre une photo"
-                }
-              }
-            },
-            "_row_num": 14,
-            "__rowNum__": 13,
-            "_token_type": "prompt",
-            "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen10",
-            "promptIdx": 7
-          },
-          {
             "type": "text",
             "name": "other_maintenance",
             "display": {
@@ -4003,12 +3987,12 @@
                 }
               }
             },
-            "_row_num": 16,
-            "__rowNum__": 15,
+            "_row_num": 15,
+            "__rowNum__": 14,
             "_token_type": "prompt",
             "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen10",
-            "promptIdx": 8
+            "promptIdx": 7
           },
           {
             "type": "select_multiple",
@@ -4029,12 +4013,12 @@
                 }
               }
             },
-            "_row_num": 19,
-            "__rowNum__": 18,
+            "_row_num": 18,
+            "__rowNum__": 17,
             "_token_type": "prompt",
             "_type": "select_multiple",
             "_branch_label_enclosing_screen": "survey/_screen10",
-            "promptIdx": 9
+            "promptIdx": 8
           },
           {
             "type": "text",
@@ -4053,12 +4037,12 @@
                 }
               }
             },
-            "_row_num": 21,
-            "__rowNum__": 20,
+            "_row_num": 20,
+            "__rowNum__": 19,
             "_token_type": "prompt",
             "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen10",
-            "promptIdx": 10
+            "promptIdx": 9
           },
           {
             "type": "text",
@@ -4077,12 +4061,12 @@
                 }
               }
             },
-            "_row_num": 23,
-            "__rowNum__": 22,
+            "_row_num": 22,
+            "__rowNum__": 21,
             "_token_type": "prompt",
             "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen10",
-            "promptIdx": 11
+            "promptIdx": 10
           },
           {
             "type": "select_multiple",
@@ -4103,12 +4087,12 @@
                 }
               }
             },
-            "_row_num": 26,
-            "__rowNum__": 25,
+            "_row_num": 25,
+            "__rowNum__": 24,
             "_token_type": "prompt",
             "_type": "select_multiple",
             "_branch_label_enclosing_screen": "survey/_screen10",
-            "promptIdx": 12
+            "promptIdx": 11
           },
           {
             "type": "text",
@@ -4124,11 +4108,36 @@
                 }
               }
             },
-            "_row_num": 27,
-            "__rowNum__": 26,
+            "_row_num": 26,
+            "__rowNum__": 25,
             "_token_type": "prompt",
             "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 12
+          },
+          {
+            "type": "image",
+            "name": "maintenance_log_image",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Image",
+                  "es": "Imagen"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Take a picture of the area",
+                  "es": "Toma una foto",
+                  "fr": "Prendre une photo"
+                }
+              }
+            },
+            "_row_num": 30,
+            "__rowNum__": 29,
+            "_token_type": "prompt",
+            "_type": "image",
+            "_branch_label_enclosing_screen": "survey/_screen30",
             "promptIdx": 13
           },
           {
@@ -4149,11 +4158,11 @@
                 }
               }
             },
-            "_row_num": 32,
-            "__rowNum__": 31,
+            "_row_num": 34,
+            "__rowNum__": 33,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen31",
+            "_branch_label_enclosing_screen": "survey/_screen33",
             "promptIdx": 14
           },
           {
@@ -4174,11 +4183,11 @@
                 }
               }
             },
-            "_row_num": 33,
-            "__rowNum__": 32,
+            "_row_num": 35,
+            "__rowNum__": 34,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen31",
+            "_branch_label_enclosing_screen": "survey/_screen33",
             "promptIdx": 15
           },
           {
@@ -4199,11 +4208,11 @@
                 }
               }
             },
-            "_row_num": 34,
-            "__rowNum__": 33,
+            "_row_num": 36,
+            "__rowNum__": 35,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen31",
+            "_branch_label_enclosing_screen": "survey/_screen33",
             "promptIdx": 16
           },
           {
@@ -4224,11 +4233,11 @@
                 }
               }
             },
-            "_row_num": 35,
-            "__rowNum__": 34,
+            "_row_num": 37,
+            "__rowNum__": 36,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen31",
+            "_branch_label_enclosing_screen": "survey/_screen33",
             "promptIdx": 17
           },
           {
@@ -4249,11 +4258,11 @@
                 }
               }
             },
-            "_row_num": 36,
-            "__rowNum__": 35,
+            "_row_num": 38,
+            "__rowNum__": 37,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen31",
+            "_branch_label_enclosing_screen": "survey/_screen33",
             "promptIdx": 18
           },
           {
@@ -4274,11 +4283,11 @@
                 }
               }
             },
-            "_row_num": 37,
-            "__rowNum__": 36,
+            "_row_num": 39,
+            "__rowNum__": 38,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen31",
+            "_branch_label_enclosing_screen": "survey/_screen33",
             "promptIdx": 19
           },
           {
@@ -4298,11 +4307,11 @@
                 }
               }
             },
-            "_row_num": 38,
-            "__rowNum__": 37,
+            "_row_num": 40,
+            "__rowNum__": 39,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen31",
+            "_branch_label_enclosing_screen": "survey/_screen33",
             "promptIdx": 20
           },
           {
@@ -4321,19 +4330,19 @@
                 }
               }
             },
-            "_row_num": 40,
-            "__rowNum__": 39,
+            "_row_num": 42,
+            "__rowNum__": 41,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen40",
+            "_branch_label_enclosing_screen": "survey/_screen42",
             "promptIdx": 21
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 42,
-            "_branch_label_enclosing_screen": "survey/_screen42",
+            "_row_num": 44,
+            "_branch_label_enclosing_screen": "survey/_screen44",
             "promptIdx": 22
           }
         ],
@@ -4364,88 +4373,121 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 29,
-              "__rowNum__": 28,
+              "_row_num": 28,
+              "__rowNum__": 27,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\nif (selected(data('type_of_maintenance'), 'other')) {\nactivePromptIndicies.push(8);\n}\nif (selected(data('type_of_maintenance'),  'repair')) {\nactivePromptIndicies.push(9);\nif (selected(data('type_of_repair'), 'other')) {\nactivePromptIndicies.push(10);\n}\nactivePromptIndicies.push(11);\n}\nif (selected(data('type_of_maintenance'), 'preventative')) {\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\nif (selected(data('type_of_maintenance'), 'other')) {\nactivePromptIndicies.push(7);\n}\nif (selected(data('type_of_maintenance'),  'repair')) {\nactivePromptIndicies.push(8);\nif (selected(data('type_of_repair'), 'other')) {\nactivePromptIndicies.push(9);\n}\nactivePromptIndicies.push(10);\n}\nif (selected(data('type_of_maintenance'), 'preventative')) {\nactivePromptIndicies.push(11);\nactivePromptIndicies.push(12);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 1
           },
           {
             "clause": "if",
-            "condition": "selected(data('type_of_maintenance'),  'repair') || selected(data('type_of_maintenance'), 'other')",
-            "_row_num": 30,
-            "__rowNum__": 29,
+            "condition": "selected(data('type_of_maintenance'),  'repair') || selected(data('type_of_maintenance'), 'other')  || selected(data('type_of_maintenance'), 'preventative')",
+            "_row_num": 29,
+            "__rowNum__": 28,
             "_token_type": "goto_label",
-            "_branch_label": "_then30",
+            "_branch_label": "_then29",
             "operationIdx": 2
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else41",
-            "_row_num": 41,
+            "_branch_label": "_else31",
+            "_row_num": 31,
             "operationIdx": 3
           },
           {
-            "clause": "begin screen",
-            "_row_num": 31,
-            "__rowNum__": 30,
+            "_row_num": 30,
             "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 39,
-              "__rowNum__": 38,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\nactivePromptIndicies.push(15);\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\nactivePromptIndicies.push(19);\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 4
-          },
-          {
-            "_row_num": 40,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 5
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif41",
-            "_row_num": 41,
+            "_branch_label": "_endif31",
+            "_row_num": 31,
+            "operationIdx": 5
+          },
+          {
+            "clause": "if",
+            "condition": "selected(data('type_of_maintenance'),  'repair') || selected(data('type_of_maintenance'), 'other')",
+            "_row_num": 32,
+            "__rowNum__": 31,
+            "_token_type": "goto_label",
+            "_branch_label": "_then32",
             "operationIdx": 6
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else43",
+            "_row_num": 43,
+            "operationIdx": 7
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 33,
+            "__rowNum__": 32,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 41,
+              "__rowNum__": 40,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\nactivePromptIndicies.push(15);\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\nactivePromptIndicies.push(19);\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 8
+          },
+          {
+            "_row_num": 42,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 9
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif43",
+            "_row_num": 43,
+            "operationIdx": 10
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 42,
-            "operationIdx": 7
+            "_row_num": 44,
+            "operationIdx": 11
           },
           {
-            "_row_num": 42,
+            "_row_num": 44,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 8
+            "operationIdx": 12
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 42,
-            "operationIdx": 9
+            "_row_num": 44,
+            "operationIdx": 13
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
           "_screen10": 1,
-          "_then30": 4,
-          "_screen31": 4,
-          "_screen40": 5,
-          "_else41": 7,
-          "_endif41": 7,
-          "_contents": 8,
-          "_screen42": 8
+          "_then29": 4,
+          "_screen30": 4,
+          "_else31": 6,
+          "_endif31": 6,
+          "_then32": 8,
+          "_screen33": 8,
+          "_screen42": 9,
+          "_else43": 11,
+          "_endif43": 11,
+          "_contents": 12,
+          "_screen44": 12
         }
       }
     },
@@ -4597,10 +4639,145 @@
           "type_of_maintenance_items"
         ]
       },
+      "other_maintenance": {
+        "_defn": [
+          {
+            "_row_num": 15,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Other Maintenance",
+            "es": "Otro mantenimiento"
+          }
+        },
+        "elementKey": "other_maintenance",
+        "elementName": "other_maintenance",
+        "elementSet": "data",
+        "elementPath": "other_maintenance"
+      },
+      "type_of_repair": {
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "type_of_repair_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "type_of_repair.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": {
+          "text": {
+            "default": "Type of Repair",
+            "es": "Tipo de Reparación"
+          }
+        },
+        "valuesList": "repair_types",
+        "elementKey": "type_of_repair",
+        "elementName": "type_of_repair",
+        "elementSet": "data",
+        "elementPath": "type_of_repair",
+        "listChildElementKeys": [
+          "type_of_repair_items"
+        ]
+      },
+      "other_repair": {
+        "_defn": [
+          {
+            "_row_num": 20,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Other Repair",
+            "es": "Otra Reparación"
+          }
+        },
+        "elementKey": "other_repair",
+        "elementName": "other_repair",
+        "elementSet": "data",
+        "elementPath": "other_repair"
+      },
+      "repair_activities": {
+        "_defn": [
+          {
+            "_row_num": 22,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Repair Activities",
+            "es": "Actividades de Reparacion"
+          }
+        },
+        "elementKey": "repair_activities",
+        "elementName": "repair_activities",
+        "elementSet": "data",
+        "elementPath": "repair_activities"
+      },
+      "type_of_preventative_maintenance": {
+        "_defn": [
+          {
+            "_row_num": 25,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "type_of_preventative_maintenance_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "type_of_preventative_maintenance.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": {
+          "text": {
+            "default": "Type of Preventative Maintenance",
+            "es": "Tipo de Mantenimiento Preventivo"
+          }
+        },
+        "valuesList": "preventative_maint_types",
+        "elementKey": "type_of_preventative_maintenance",
+        "elementName": "type_of_preventative_maintenance",
+        "elementSet": "data",
+        "elementPath": "type_of_preventative_maintenance",
+        "listChildElementKeys": [
+          "type_of_preventative_maintenance_items"
+        ]
+      },
+      "preventative_comments": {
+        "_defn": [
+          {
+            "_row_num": 26,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": "Comments"
+        },
+        "elementKey": "preventative_comments",
+        "elementName": "preventative_comments",
+        "elementSet": "data",
+        "elementPath": "preventative_comments"
+      },
       "maintenance_log_image": {
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 30,
             "section_name": "survey"
           }
         ],
@@ -4641,145 +4818,10 @@
         ],
         "notUnitOfRetention": true
       },
-      "other_maintenance": {
-        "_defn": [
-          {
-            "_row_num": 16,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "displayName": {
-          "text": {
-            "default": "Other Maintenance",
-            "es": "Otro mantenimiento"
-          }
-        },
-        "elementKey": "other_maintenance",
-        "elementName": "other_maintenance",
-        "elementSet": "data",
-        "elementPath": "other_maintenance"
-      },
-      "type_of_repair": {
-        "_defn": [
-          {
-            "_row_num": 19,
-            "section_name": "survey"
-          }
-        ],
-        "type": "array",
-        "items": {
-          "type": "string",
-          "elementKey": "type_of_repair_items",
-          "elementName": "items",
-          "elementSet": "data",
-          "elementPath": "type_of_repair.items",
-          "notUnitOfRetention": true
-        },
-        "displayName": {
-          "text": {
-            "default": "Type of Repair",
-            "es": "Tipo de Reparación"
-          }
-        },
-        "valuesList": "repair_types",
-        "elementKey": "type_of_repair",
-        "elementName": "type_of_repair",
-        "elementSet": "data",
-        "elementPath": "type_of_repair",
-        "listChildElementKeys": [
-          "type_of_repair_items"
-        ]
-      },
-      "other_repair": {
-        "_defn": [
-          {
-            "_row_num": 21,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "displayName": {
-          "text": {
-            "default": "Other Repair",
-            "es": "Otra Reparación"
-          }
-        },
-        "elementKey": "other_repair",
-        "elementName": "other_repair",
-        "elementSet": "data",
-        "elementPath": "other_repair"
-      },
-      "repair_activities": {
-        "_defn": [
-          {
-            "_row_num": 23,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "displayName": {
-          "text": {
-            "default": "Repair Activities",
-            "es": "Actividades de Reparacion"
-          }
-        },
-        "elementKey": "repair_activities",
-        "elementName": "repair_activities",
-        "elementSet": "data",
-        "elementPath": "repair_activities"
-      },
-      "type_of_preventative_maintenance": {
-        "_defn": [
-          {
-            "_row_num": 26,
-            "section_name": "survey"
-          }
-        ],
-        "type": "array",
-        "items": {
-          "type": "string",
-          "elementKey": "type_of_preventative_maintenance_items",
-          "elementName": "items",
-          "elementSet": "data",
-          "elementPath": "type_of_preventative_maintenance.items",
-          "notUnitOfRetention": true
-        },
-        "displayName": {
-          "text": {
-            "default": "Type of Preventative Maintenance",
-            "es": "Tipo de Mantenimiento Preventivo"
-          }
-        },
-        "valuesList": "preventative_maint_types",
-        "elementKey": "type_of_preventative_maintenance",
-        "elementName": "type_of_preventative_maintenance",
-        "elementSet": "data",
-        "elementPath": "type_of_preventative_maintenance",
-        "listChildElementKeys": [
-          "type_of_preventative_maintenance_items"
-        ]
-      },
-      "preventative_comments": {
-        "_defn": [
-          {
-            "_row_num": 27,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "displayName": {
-          "text": "Comments"
-        },
-        "elementKey": "preventative_comments",
-        "elementName": "preventative_comments",
-        "elementSet": "data",
-        "elementPath": "preventative_comments"
-      },
       "spare_parts_electrical": {
         "_defn": [
           {
-            "_row_num": 32,
+            "_row_num": 34,
             "section_name": "survey"
           }
         ],
@@ -4810,7 +4852,7 @@
       "spare_parts_hardware": {
         "_defn": [
           {
-            "_row_num": 33,
+            "_row_num": 35,
             "section_name": "survey"
           }
         ],
@@ -4841,7 +4883,7 @@
       "spare_parts_monitoring": {
         "_defn": [
           {
-            "_row_num": 34,
+            "_row_num": 36,
             "section_name": "survey"
           }
         ],
@@ -4872,7 +4914,7 @@
       "spare_parts_power": {
         "_defn": [
           {
-            "_row_num": 35,
+            "_row_num": 37,
             "section_name": "survey"
           }
         ],
@@ -4903,7 +4945,7 @@
       "spare_parts_refrigeration": {
         "_defn": [
           {
-            "_row_num": 36,
+            "_row_num": 38,
             "section_name": "survey"
           }
         ],
@@ -4934,7 +4976,7 @@
       "spare_parts_solar": {
         "_defn": [
           {
-            "_row_num": 37,
+            "_row_num": 39,
             "section_name": "survey"
           }
         ],
@@ -4965,7 +5007,7 @@
       "other_spare_parts": {
         "_defn": [
           {
-            "_row_num": 38,
+            "_row_num": 40,
             "section_name": "survey"
           }
         ],
@@ -4989,6 +5031,22 @@
         "elementPath": "type_of_maintenance.items",
         "notUnitOfRetention": true
       },
+      "type_of_repair_items": {
+        "type": "string",
+        "elementKey": "type_of_repair_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "type_of_repair.items",
+        "notUnitOfRetention": true
+      },
+      "type_of_preventative_maintenance_items": {
+        "type": "string",
+        "elementKey": "type_of_preventative_maintenance_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "type_of_preventative_maintenance.items",
+        "notUnitOfRetention": true
+      },
       "maintenance_log_image_uriFragment": {
         "type": "string",
         "elementType": "rowpath",
@@ -5005,22 +5063,6 @@
         "elementName": "contentType",
         "elementSet": "data",
         "elementPath": "maintenance_log_image.contentType"
-      },
-      "type_of_repair_items": {
-        "type": "string",
-        "elementKey": "type_of_repair_items",
-        "elementName": "items",
-        "elementSet": "data",
-        "elementPath": "type_of_repair.items",
-        "notUnitOfRetention": true
-      },
-      "type_of_preventative_maintenance_items": {
-        "type": "string",
-        "elementKey": "type_of_preventative_maintenance_items",
-        "elementName": "items",
-        "elementSet": "data",
-        "elementPath": "type_of_preventative_maintenance.items",
-        "notUnitOfRetention": true
       },
       "spare_parts_electrical_items": {
         "type": "string",
