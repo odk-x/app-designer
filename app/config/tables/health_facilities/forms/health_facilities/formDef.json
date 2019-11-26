@@ -1516,6 +1516,7 @@
         "selectionArgs": "[]",
         "newRowInitialElementKeyToValueMap": "{}",
         "openRowInitialElementKeyToValueMap": "{}",
+        "order_by": "regionName",
         "_row_num": 3
       }
     ],
@@ -2823,6 +2824,7 @@
         "selectionArgs": "[]",
         "newRowInitialElementKeyToValueMap": "{}",
         "openRowInitialElementKeyToValueMap": "{}",
+        "order_by": "regionName",
         "_row_num": 3
       }
     },
