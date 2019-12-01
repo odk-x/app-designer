@@ -25,6 +25,7 @@ days_from_warranty_claim_until_repaired,days_from_warranty_claim_until_repaired,
 freeze_alarms,freeze_alarms,integer,[]
 heat_alarms,heat_alarms,integer,[]
 heat_alarms_over_48,heat_alarms_over_48,integer,[]
+power_source,power_source,string,[]
 refrigerator_failure,refrigerator_failure,string,[]
 refrigerator_id,refrigerator_id,string,[]
 repair_occurred,repair_occurred,string,[]

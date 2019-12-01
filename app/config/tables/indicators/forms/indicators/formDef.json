@@ -599,7 +599,7 @@
       },
       {
         "clause": "if",
-        "condition": "calculates.refrigerator_age() < 4",
+        "condition": "(calculates.refrigerator_age() < 4 || (calculates.refrigerator_age() < 11 && data('power_source') === 'solar'))",
         "_row_num": 76
       },
       {
@@ -731,6 +731,11 @@
         "name": "third_build_quality_issue",
         "isSessionVariable": true,
         "_row_num": 7
+      },
+      {
+        "type": "string",
+        "name": "power_source",
+        "_row_num": 8
       }
     ],
     "choices": [
@@ -1839,6 +1844,16 @@
         ],
         "isSessionVariable": true,
         "elementKey": "third_build_quality_issue"
+      },
+      "power_source": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "power_source"
       },
       "reporting_period": {
         "_defn": [
@@ -3203,7 +3218,7 @@
           },
           {
             "clause": "if",
-            "condition": "calculates.refrigerator_age() < 4",
+            "condition": "(calculates.refrigerator_age() < 4 || (calculates.refrigerator_age() < 11 && data('power_source') === 'solar'))",
             "_row_num": 76,
             "__rowNum__": 75,
             "_token_type": "goto_label",
@@ -3384,6 +3399,19 @@
         "elementName": "third_build_quality_issue",
         "elementSet": "data",
         "elementPath": "third_build_quality_issue"
+      },
+      "power_source": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "power_source",
+        "elementName": "power_source",
+        "elementSet": "data",
+        "elementPath": "power_source"
       },
       "reporting_period": {
         "_defn": [

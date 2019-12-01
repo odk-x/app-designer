@@ -190,7 +190,8 @@ function onClickSentinelSurvey() {
         var defaults = {'refrigerator_id': refrigeratorsResultSet.get('_id'),
             'reporting_period': odkCommon.toOdkTimeStampFromDate(new Date())};
         defaults['voltage_stabilizer_present'] = refrigeratorsResultSet.get('voltage_regulator');
-        defaults['year_installed'] = refrigeratorsResultSet.get('year');
+        defaults['power_source'] = refrigeratorsResultSet.get('power_source');
+        defaults['year_installed'] = refrigeratorsResultSet.get('year_installed');
         defaults['_default_access'] = refrigeratorsResultSet.get('_default_access');
         defaults['_group_read_only'] = refrigeratorsResultSet.get('_group_read_only');
         defaults['_group_modify'] = refrigeratorsResultSet.get('_group_modify');
