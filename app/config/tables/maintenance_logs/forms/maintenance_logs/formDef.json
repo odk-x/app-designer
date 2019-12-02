@@ -332,41 +332,12 @@
       },
       {
         "clause": "if",
-        "condition": "selected(data('type_of_maintenance'),  'repair') || selected(data('type_of_maintenance'), 'other')  || selected(data('type_of_maintenance'), 'preventative')",
+        "condition": "selected(data('type_of_maintenance'),  'repair') || selected(data('type_of_maintenance'), 'other')",
         "_row_num": 29
       },
       {
-        "type": "image",
-        "name": "maintenance_log_image",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Image",
-              "es": "Imagen"
-            }
-          },
-          "prompt": {
-            "text": {
-              "default": "Take a picture of the area",
-              "es": "Toma una foto",
-              "fr": "Prendre une photo"
-            }
-          }
-        },
-        "_row_num": 30
-      },
-      {
-        "clause": "end if",
-        "_row_num": 31
-      },
-      {
-        "clause": "if",
-        "condition": "selected(data('type_of_maintenance'),  'repair') || selected(data('type_of_maintenance'), 'other')",
-        "_row_num": 32
-      },
-      {
         "clause": "begin screen",
-        "_row_num": 33
+        "_row_num": 30
       },
       {
         "type": "select_multiple",
@@ -386,7 +357,7 @@
             }
           }
         },
-        "_row_num": 34
+        "_row_num": 31
       },
       {
         "type": "select_multiple",
@@ -406,7 +377,7 @@
             }
           }
         },
-        "_row_num": 35
+        "_row_num": 32
       },
       {
         "type": "select_multiple",
@@ -426,7 +397,7 @@
             }
           }
         },
-        "_row_num": 36
+        "_row_num": 33
       },
       {
         "type": "select_multiple",
@@ -446,7 +417,7 @@
             }
           }
         },
-        "_row_num": 37
+        "_row_num": 34
       },
       {
         "type": "select_multiple",
@@ -466,7 +437,7 @@
             }
           }
         },
-        "_row_num": 38
+        "_row_num": 35
       },
       {
         "type": "select_multiple",
@@ -486,7 +457,7 @@
             }
           }
         },
-        "_row_num": 39
+        "_row_num": 36
       },
       {
         "type": "string",
@@ -505,11 +476,11 @@
             }
           }
         },
-        "_row_num": 40
+        "_row_num": 37
       },
       {
         "clause": "end screen",
-        "_row_num": 41
+        "_row_num": 38
       },
       {
         "type": "note",
@@ -527,11 +498,11 @@
             }
           }
         },
-        "_row_num": 42
+        "_row_num": 39
       },
       {
         "clause": "end if",
-        "_row_num": 43
+        "_row_num": 40
       }
     ],
     "choices": [
@@ -3498,40 +3469,10 @@
         },
         "elementKey": "preventative_comments"
       },
-      "maintenance_log_image": {
-        "_defn": [
-          {
-            "_row_num": 30,
-            "section_name": "survey"
-          }
-        ],
-        "type": "object",
-        "elementType": "mimeUri",
-        "properties": {
-          "uriFragment": {
-            "type": "string",
-            "elementType": "rowpath",
-            "elementKey": "maintenance_log_image_uriFragment"
-          },
-          "contentType": {
-            "type": "string",
-            "elementType": "mimeType",
-            "default": "image/*",
-            "elementKey": "maintenance_log_image_contentType"
-          }
-        },
-        "displayName": {
-          "text": {
-            "default": "Image",
-            "es": "Imagen"
-          }
-        },
-        "elementKey": "maintenance_log_image"
-      },
       "spare_parts_electrical": {
         "_defn": [
           {
-            "_row_num": 34,
+            "_row_num": 31,
             "section_name": "survey"
           }
         ],
@@ -3552,7 +3493,7 @@
       "spare_parts_hardware": {
         "_defn": [
           {
-            "_row_num": 35,
+            "_row_num": 32,
             "section_name": "survey"
           }
         ],
@@ -3573,7 +3514,7 @@
       "spare_parts_monitoring": {
         "_defn": [
           {
-            "_row_num": 36,
+            "_row_num": 33,
             "section_name": "survey"
           }
         ],
@@ -3594,7 +3535,7 @@
       "spare_parts_power": {
         "_defn": [
           {
-            "_row_num": 37,
+            "_row_num": 34,
             "section_name": "survey"
           }
         ],
@@ -3615,7 +3556,7 @@
       "spare_parts_refrigeration": {
         "_defn": [
           {
-            "_row_num": 38,
+            "_row_num": 35,
             "section_name": "survey"
           }
         ],
@@ -3636,7 +3577,7 @@
       "spare_parts_solar": {
         "_defn": [
           {
-            "_row_num": 39,
+            "_row_num": 36,
             "section_name": "survey"
           }
         ],
@@ -3657,7 +3598,7 @@
       "other_spare_parts": {
         "_defn": [
           {
-            "_row_num": 40,
+            "_row_num": 37,
             "section_name": "survey"
           }
         ],
@@ -4116,31 +4057,6 @@
             "promptIdx": 12
           },
           {
-            "type": "image",
-            "name": "maintenance_log_image",
-            "display": {
-              "title": {
-                "text": {
-                  "default": "Image",
-                  "es": "Imagen"
-                }
-              },
-              "prompt": {
-                "text": {
-                  "default": "Take a picture of the area",
-                  "es": "Toma una foto",
-                  "fr": "Prendre une photo"
-                }
-              }
-            },
-            "_row_num": 30,
-            "__rowNum__": 29,
-            "_token_type": "prompt",
-            "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen30",
-            "promptIdx": 13
-          },
-          {
             "type": "select_multiple",
             "values_list": "spare_parts_types_electrical",
             "name": "spare_parts_electrical",
@@ -4158,12 +4074,12 @@
                 }
               }
             },
-            "_row_num": 34,
-            "__rowNum__": 33,
+            "_row_num": 31,
+            "__rowNum__": 30,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen33",
-            "promptIdx": 14
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 13
           },
           {
             "type": "select_multiple",
@@ -4183,12 +4099,12 @@
                 }
               }
             },
-            "_row_num": 35,
-            "__rowNum__": 34,
+            "_row_num": 32,
+            "__rowNum__": 31,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen33",
-            "promptIdx": 15
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 14
           },
           {
             "type": "select_multiple",
@@ -4208,12 +4124,12 @@
                 }
               }
             },
-            "_row_num": 36,
-            "__rowNum__": 35,
+            "_row_num": 33,
+            "__rowNum__": 32,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen33",
-            "promptIdx": 16
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 15
           },
           {
             "type": "select_multiple",
@@ -4233,12 +4149,12 @@
                 }
               }
             },
-            "_row_num": 37,
-            "__rowNum__": 36,
+            "_row_num": 34,
+            "__rowNum__": 33,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen33",
-            "promptIdx": 17
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 16
           },
           {
             "type": "select_multiple",
@@ -4258,12 +4174,12 @@
                 }
               }
             },
-            "_row_num": 38,
-            "__rowNum__": 37,
+            "_row_num": 35,
+            "__rowNum__": 34,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen33",
-            "promptIdx": 18
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 17
           },
           {
             "type": "select_multiple",
@@ -4283,12 +4199,12 @@
                 }
               }
             },
-            "_row_num": 39,
-            "__rowNum__": 38,
+            "_row_num": 36,
+            "__rowNum__": 35,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen33",
-            "promptIdx": 19
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 18
           },
           {
             "type": "string",
@@ -4307,12 +4223,12 @@
                 }
               }
             },
-            "_row_num": 40,
-            "__rowNum__": 39,
+            "_row_num": 37,
+            "__rowNum__": 36,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen33",
-            "promptIdx": 20
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 19
           },
           {
             "type": "note",
@@ -4330,20 +4246,20 @@
                 }
               }
             },
-            "_row_num": 42,
-            "__rowNum__": 41,
+            "_row_num": 39,
+            "__rowNum__": 38,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen42",
-            "promptIdx": 21
+            "_branch_label_enclosing_screen": "survey/_screen39",
+            "promptIdx": 20
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 44,
-            "_branch_label_enclosing_screen": "survey/_screen44",
-            "promptIdx": 22
+            "_row_num": 41,
+            "_branch_label_enclosing_screen": "survey/_screen41",
+            "promptIdx": 21
           }
         ],
         "validation_tag_map": {
@@ -4382,7 +4298,7 @@
           },
           {
             "clause": "if",
-            "condition": "selected(data('type_of_maintenance'),  'repair') || selected(data('type_of_maintenance'), 'other')  || selected(data('type_of_maintenance'), 'preventative')",
+            "condition": "selected(data('type_of_maintenance'),  'repair') || selected(data('type_of_maintenance'), 'other')",
             "_row_num": 29,
             "__rowNum__": 28,
             "_token_type": "goto_label",
@@ -4392,86 +4308,57 @@
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else31",
-            "_row_num": 31,
+            "_branch_label": "_else40",
+            "_row_num": 40,
             "operationIdx": 3
           },
           {
-            "_row_num": 30,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 4
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif31",
-            "_row_num": 31,
-            "operationIdx": 5
-          },
-          {
-            "clause": "if",
-            "condition": "selected(data('type_of_maintenance'),  'repair') || selected(data('type_of_maintenance'), 'other')",
-            "_row_num": 32,
-            "__rowNum__": 31,
-            "_token_type": "goto_label",
-            "_branch_label": "_then32",
-            "operationIdx": 6
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_else43",
-            "_row_num": 43,
-            "operationIdx": 7
-          },
-          {
             "clause": "begin screen",
-            "_row_num": 33,
-            "__rowNum__": 32,
+            "_row_num": 30,
+            "__rowNum__": 29,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 41,
-              "__rowNum__": 40,
+              "_row_num": 38,
+              "__rowNum__": 37,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\nactivePromptIndicies.push(15);\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\nactivePromptIndicies.push(19);\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 8
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\nactivePromptIndicies.push(14);\nactivePromptIndicies.push(15);\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 4
           },
           {
-            "_row_num": 42,
+            "_row_num": 39,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 9
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 5
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif43",
-            "_row_num": 43,
-            "operationIdx": 10
+            "_branch_label": "_endif40",
+            "_row_num": 40,
+            "operationIdx": 6
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 44,
-            "operationIdx": 11
+            "_row_num": 41,
+            "operationIdx": 7
           },
           {
-            "_row_num": 44,
+            "_row_num": 41,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 12
+            "operationIdx": 8
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 44,
-            "operationIdx": 13
+            "_row_num": 41,
+            "operationIdx": 9
           }
         ],
         "branch_label_map": {
@@ -4479,15 +4366,11 @@
           "_screen10": 1,
           "_then29": 4,
           "_screen30": 4,
-          "_else31": 6,
-          "_endif31": 6,
-          "_then32": 8,
-          "_screen33": 8,
-          "_screen42": 9,
-          "_else43": 11,
-          "_endif43": 11,
-          "_contents": 12,
-          "_screen44": 12
+          "_screen39": 5,
+          "_else40": 7,
+          "_endif40": 7,
+          "_contents": 8,
+          "_screen41": 8
         }
       }
     },
@@ -4774,54 +4657,10 @@
         "elementSet": "data",
         "elementPath": "preventative_comments"
       },
-      "maintenance_log_image": {
-        "_defn": [
-          {
-            "_row_num": 30,
-            "section_name": "survey"
-          }
-        ],
-        "type": "object",
-        "elementType": "mimeUri",
-        "properties": {
-          "uriFragment": {
-            "type": "string",
-            "elementType": "rowpath",
-            "elementKey": "maintenance_log_image_uriFragment",
-            "elementName": "uriFragment",
-            "elementSet": "data",
-            "elementPath": "maintenance_log_image.uriFragment"
-          },
-          "contentType": {
-            "type": "string",
-            "elementType": "mimeType",
-            "default": "image/*",
-            "elementKey": "maintenance_log_image_contentType",
-            "elementName": "contentType",
-            "elementSet": "data",
-            "elementPath": "maintenance_log_image.contentType"
-          }
-        },
-        "displayName": {
-          "text": {
-            "default": "Image",
-            "es": "Imagen"
-          }
-        },
-        "elementKey": "maintenance_log_image",
-        "elementName": "maintenance_log_image",
-        "elementSet": "data",
-        "elementPath": "maintenance_log_image",
-        "listChildElementKeys": [
-          "maintenance_log_image_contentType",
-          "maintenance_log_image_uriFragment"
-        ],
-        "notUnitOfRetention": true
-      },
       "spare_parts_electrical": {
         "_defn": [
           {
-            "_row_num": 34,
+            "_row_num": 31,
             "section_name": "survey"
           }
         ],
@@ -4852,7 +4691,7 @@
       "spare_parts_hardware": {
         "_defn": [
           {
-            "_row_num": 35,
+            "_row_num": 32,
             "section_name": "survey"
           }
         ],
@@ -4883,7 +4722,7 @@
       "spare_parts_monitoring": {
         "_defn": [
           {
-            "_row_num": 36,
+            "_row_num": 33,
             "section_name": "survey"
           }
         ],
@@ -4914,7 +4753,7 @@
       "spare_parts_power": {
         "_defn": [
           {
-            "_row_num": 37,
+            "_row_num": 34,
             "section_name": "survey"
           }
         ],
@@ -4945,7 +4784,7 @@
       "spare_parts_refrigeration": {
         "_defn": [
           {
-            "_row_num": 38,
+            "_row_num": 35,
             "section_name": "survey"
           }
         ],
@@ -4976,7 +4815,7 @@
       "spare_parts_solar": {
         "_defn": [
           {
-            "_row_num": 39,
+            "_row_num": 36,
             "section_name": "survey"
           }
         ],
@@ -5007,7 +4846,7 @@
       "other_spare_parts": {
         "_defn": [
           {
-            "_row_num": 40,
+            "_row_num": 37,
             "section_name": "survey"
           }
         ],
@@ -5046,23 +4885,6 @@
         "elementSet": "data",
         "elementPath": "type_of_preventative_maintenance.items",
         "notUnitOfRetention": true
-      },
-      "maintenance_log_image_uriFragment": {
-        "type": "string",
-        "elementType": "rowpath",
-        "elementKey": "maintenance_log_image_uriFragment",
-        "elementName": "uriFragment",
-        "elementSet": "data",
-        "elementPath": "maintenance_log_image.uriFragment"
-      },
-      "maintenance_log_image_contentType": {
-        "type": "string",
-        "elementType": "mimeType",
-        "default": "image/*",
-        "elementKey": "maintenance_log_image_contentType",
-        "elementName": "contentType",
-        "elementSet": "data",
-        "elementPath": "maintenance_log_image.contentType"
       },
       "spare_parts_electrical_items": {
         "type": "string",
@@ -5232,13 +5054,6 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":{\"default\":\"Date of Service\",\"es\":\"Fecha de Servicio\"}}"
-      },
-      {
-        "_partition": "Column",
-        "_aspect": "maintenance_log_image",
-        "_key": "displayName",
-        "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Image\",\"es\":\"Imagen\"}}"
       },
       {
         "_partition": "Column",

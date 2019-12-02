@@ -1,9 +1,6 @@
 _element_key,_element_name,_element_type,_list_child_element_keys
 backup_generator,backup_generator,string,[]
 backup_generator_functional_status,backup_generator_functional_status,string,[]
-cold_room_image,cold_room_image,mimeUri,"[""cold_room_image_contentType"",""cold_room_image_uriFragment""]"
-cold_room_image_contentType,contentType,mimeType,[]
-cold_room_image_uriFragment,uriFragment,rowpath,[]
 dimensions,dimensions,string,[]
 facility_row_id,facility_row_id,string,[]
 functional_status,functional_status,string,[]

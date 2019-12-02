@@ -1,9 +1,6 @@
 _element_key,_element_name,_element_type,_list_child_element_keys
 cold_room_id,cold_room_id,string,[]
 date_serviced,date_serviced,date,[]
-maintenance_log_image,maintenance_log_image,mimeUri,"[""maintenance_log_image_contentType"",""maintenance_log_image_uriFragment""]"
-maintenance_log_image_contentType,contentType,mimeType,[]
-maintenance_log_image_uriFragment,uriFragment,rowpath,[]
 notes,notes,string,[]
 other_maintenance,other_maintenance,string,[]
 other_repair,other_repair,string,[]

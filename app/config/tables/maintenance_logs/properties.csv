@@ -1,6 +1,5 @@
 _partition,_aspect,_key,_type,_value
 Column,date_serviced,displayName,object,"{""text"":{""default"":""Date of Service"",""es"":""Fecha de Servicio""}}"
-Column,maintenance_log_image,displayName,object,"{""text"":{""default"":""Image"",""es"":""Imagen""}}"
 Column,notes,displayName,object,"{""text"":{""default"":""Notes"",""es"":""Notas""}}"
 Column,other_maintenance,displayName,object,"{""text"":{""default"":""Other Maintenance"",""es"":""Otro mantenimiento""}}"
 Column,other_repair,displayName,object,"{""text"":{""default"":""Other Repair"",""es"":""Otra Reparación""}}"

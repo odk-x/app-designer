@@ -7,9 +7,6 @@ model_row_id,model_row_id,string,[]
 power_source,power_source,string,[]
 reason_not_working,reason_not_working,array,"[""reason_not_working_items""]"
 reason_not_working_items,items,string,[]
-refrigerator_image,refrigerator_image,mimeUri,"[""refrigerator_image_contentType"",""refrigerator_image_uriFragment""]"
-refrigerator_image_contentType,contentType,mimeType,[]
-refrigerator_image_uriFragment,uriFragment,rowpath,[]
 serial_number,serial_number,string,[]
 serial_number_image,serial_number_image,mimeUri,"[""serial_number_image_contentType"",""serial_number_image_uriFragment""]"
 serial_number_image_contentType,contentType,mimeType,[]

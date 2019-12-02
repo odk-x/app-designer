@@ -184,33 +184,6 @@
         "_row_num": 13
       },
       {
-        "type": "image",
-        "name": "cold_room_image",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Cold Room Image",
-              "es": "Imagen del cuarto frio"
-            }
-          },
-          "prompt": {
-            "text": {
-              "default": "Take a picture of the cold room:",
-              "es": "Tome una foto del cuarto frio"
-            }
-          }
-        },
-        "_row_num": 14
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 15
-      },
-      {
-        "clause": "begin screen",
-        "_row_num": 16
-      },
-      {
         "type": "integer",
         "name": "storage_temperature",
         "display": {
@@ -233,7 +206,7 @@
             }
           }
         },
-        "_row_num": 17
+        "_row_num": 14
       },
       {
         "type": "integer",
@@ -258,7 +231,7 @@
             }
           }
         },
-        "_row_num": 18
+        "_row_num": 15
       },
       {
         "type": "integer",
@@ -283,7 +256,7 @@
             }
           }
         },
-        "_row_num": 19
+        "_row_num": 16
       },
       {
         "type": "text",
@@ -308,15 +281,15 @@
             }
           }
         },
-        "_row_num": 20
+        "_row_num": 17
       },
       {
         "clause": "end screen",
-        "_row_num": 21
+        "_row_num": 18
       },
       {
         "clause": "begin screen",
-        "_row_num": 22
+        "_row_num": 19
       },
       {
         "type": "select_one",
@@ -336,7 +309,7 @@
             }
           }
         },
-        "_row_num": 23
+        "_row_num": 20
       },
       {
         "type": "select_one",
@@ -356,7 +329,7 @@
             }
           }
         },
-        "_row_num": 24
+        "_row_num": 21
       },
       {
         "type": "select_multiple",
@@ -376,7 +349,7 @@
             }
           }
         },
-        "_row_num": 25
+        "_row_num": 22
       },
       {
         "type": "select_one",
@@ -396,15 +369,15 @@
             }
           }
         },
-        "_row_num": 26
+        "_row_num": 23
       },
       {
         "clause": "end screen",
-        "_row_num": 27
+        "_row_num": 24
       },
       {
         "clause": "begin screen",
-        "_row_num": 28
+        "_row_num": 25
       },
       {
         "type": "select_one",
@@ -424,12 +397,12 @@
             }
           }
         },
-        "_row_num": 29
+        "_row_num": 26
       },
       {
         "clause": "if",
         "condition": "data('temperature_monitoring_device') === 'yes'",
-        "_row_num": 30
+        "_row_num": 27
       },
       {
         "type": "text",
@@ -448,7 +421,7 @@
             }
           }
         },
-        "_row_num": 31
+        "_row_num": 28
       },
       {
         "type": "select_one",
@@ -468,19 +441,19 @@
             }
           }
         },
-        "_row_num": 32
+        "_row_num": 29
       },
       {
         "clause": "end if",
-        "_row_num": 33
+        "_row_num": 30
       },
       {
         "clause": "end screen",
-        "_row_num": 34
+        "_row_num": 31
       },
       {
         "clause": "begin screen",
-        "_row_num": 35
+        "_row_num": 32
       },
       {
         "type": "select_one",
@@ -500,12 +473,12 @@
             }
           }
         },
-        "_row_num": 36
+        "_row_num": 33
       },
       {
         "clause": "if",
         "condition": "data('backup_generator') === 'yes'",
-        "_row_num": 37
+        "_row_num": 34
       },
       {
         "type": "select_one",
@@ -525,15 +498,15 @@
             }
           }
         },
-        "_row_num": 38
+        "_row_num": 35
       },
       {
         "clause": "end if",
-        "_row_num": 39
+        "_row_num": 36
       },
       {
         "clause": "end screen",
-        "_row_num": 40
+        "_row_num": 37
       }
     ],
     "choices": [
@@ -1657,40 +1630,10 @@
         },
         "elementKey": "year"
       },
-      "cold_room_image": {
-        "_defn": [
-          {
-            "_row_num": 14,
-            "section_name": "survey"
-          }
-        ],
-        "type": "object",
-        "elementType": "mimeUri",
-        "properties": {
-          "uriFragment": {
-            "type": "string",
-            "elementType": "rowpath",
-            "elementKey": "cold_room_image_uriFragment"
-          },
-          "contentType": {
-            "type": "string",
-            "elementType": "mimeType",
-            "default": "image/*",
-            "elementKey": "cold_room_image_contentType"
-          }
-        },
-        "displayName": {
-          "text": {
-            "default": "Cold Room Image",
-            "es": "Imagen del cuarto frio"
-          }
-        },
-        "elementKey": "cold_room_image"
-      },
       "storage_temperature": {
         "_defn": [
           {
-            "_row_num": 17,
+            "_row_num": 14,
             "section_name": "survey"
           }
         ],
@@ -1706,7 +1649,7 @@
       "net_volume": {
         "_defn": [
           {
-            "_row_num": 18,
+            "_row_num": 15,
             "section_name": "survey"
           }
         ],
@@ -1722,7 +1665,7 @@
       "gross_volume": {
         "_defn": [
           {
-            "_row_num": 19,
+            "_row_num": 16,
             "section_name": "survey"
           }
         ],
@@ -1738,7 +1681,7 @@
       "dimensions": {
         "_defn": [
           {
-            "_row_num": 20,
+            "_row_num": 17,
             "section_name": "survey"
           }
         ],
@@ -1754,7 +1697,7 @@
       "utilization": {
         "_defn": [
           {
-            "_row_num": 23,
+            "_row_num": 20,
             "section_name": "survey"
           }
         ],
@@ -1771,7 +1714,7 @@
       "functional_status": {
         "_defn": [
           {
-            "_row_num": 24,
+            "_row_num": 21,
             "section_name": "survey"
           }
         ],
@@ -1788,7 +1731,7 @@
       "reason_not_working": {
         "_defn": [
           {
-            "_row_num": 25,
+            "_row_num": 22,
             "section_name": "survey"
           }
         ],
@@ -1809,7 +1752,7 @@
       "maintenance_priority": {
         "_defn": [
           {
-            "_row_num": 26,
+            "_row_num": 23,
             "section_name": "survey"
           }
         ],
@@ -1826,7 +1769,7 @@
       "temperature_monitoring_device": {
         "_defn": [
           {
-            "_row_num": 29,
+            "_row_num": 26,
             "section_name": "survey"
           }
         ],
@@ -1843,7 +1786,7 @@
       "temperature_monitoring_device_type": {
         "_defn": [
           {
-            "_row_num": 31,
+            "_row_num": 28,
             "section_name": "survey"
           }
         ],
@@ -1859,7 +1802,7 @@
       "temperature_monitoring_device_functional_status": {
         "_defn": [
           {
-            "_row_num": 32,
+            "_row_num": 29,
             "section_name": "survey"
           }
         ],
@@ -1876,7 +1819,7 @@
       "backup_generator": {
         "_defn": [
           {
-            "_row_num": 36,
+            "_row_num": 33,
             "section_name": "survey"
           }
         ],
@@ -1893,7 +1836,7 @@
       "backup_generator_functional_status": {
         "_defn": [
           {
-            "_row_num": 38,
+            "_row_num": 35,
             "section_name": "survey"
           }
         ],
@@ -2215,30 +2158,6 @@
             "promptIdx": 6
           },
           {
-            "type": "image",
-            "name": "cold_room_image",
-            "display": {
-              "title": {
-                "text": {
-                  "default": "Cold Room Image",
-                  "es": "Imagen del cuarto frio"
-                }
-              },
-              "prompt": {
-                "text": {
-                  "default": "Take a picture of the cold room:",
-                  "es": "Tome una foto del cuarto frio"
-                }
-              }
-            },
-            "_row_num": 14,
-            "__rowNum__": 13,
-            "_token_type": "prompt",
-            "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen13",
-            "promptIdx": 7
-          },
-          {
             "type": "integer",
             "name": "storage_temperature",
             "display": {
@@ -2261,12 +2180,12 @@
                 }
               }
             },
-            "_row_num": 17,
-            "__rowNum__": 16,
+            "_row_num": 14,
+            "__rowNum__": 13,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen16",
-            "promptIdx": 8
+            "_branch_label_enclosing_screen": "survey/_screen13",
+            "promptIdx": 7
           },
           {
             "type": "integer",
@@ -2291,12 +2210,12 @@
                 }
               }
             },
-            "_row_num": 18,
-            "__rowNum__": 17,
+            "_row_num": 15,
+            "__rowNum__": 14,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen16",
-            "promptIdx": 9
+            "_branch_label_enclosing_screen": "survey/_screen13",
+            "promptIdx": 8
           },
           {
             "type": "integer",
@@ -2321,12 +2240,12 @@
                 }
               }
             },
-            "_row_num": 19,
-            "__rowNum__": 18,
+            "_row_num": 16,
+            "__rowNum__": 15,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen16",
-            "promptIdx": 10
+            "_branch_label_enclosing_screen": "survey/_screen13",
+            "promptIdx": 9
           },
           {
             "type": "text",
@@ -2351,12 +2270,12 @@
                 }
               }
             },
-            "_row_num": 20,
-            "__rowNum__": 19,
+            "_row_num": 17,
+            "__rowNum__": 16,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen16",
-            "promptIdx": 11
+            "_branch_label_enclosing_screen": "survey/_screen13",
+            "promptIdx": 10
           },
           {
             "type": "select_one",
@@ -2376,12 +2295,12 @@
                 }
               }
             },
-            "_row_num": 23,
-            "__rowNum__": 22,
+            "_row_num": 20,
+            "__rowNum__": 19,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen22",
-            "promptIdx": 12
+            "_branch_label_enclosing_screen": "survey/_screen19",
+            "promptIdx": 11
           },
           {
             "type": "select_one",
@@ -2401,12 +2320,12 @@
                 }
               }
             },
-            "_row_num": 24,
-            "__rowNum__": 23,
+            "_row_num": 21,
+            "__rowNum__": 20,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen22",
-            "promptIdx": 13
+            "_branch_label_enclosing_screen": "survey/_screen19",
+            "promptIdx": 12
           },
           {
             "type": "select_multiple",
@@ -2426,12 +2345,12 @@
                 }
               }
             },
-            "_row_num": 25,
-            "__rowNum__": 24,
+            "_row_num": 22,
+            "__rowNum__": 21,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen22",
-            "promptIdx": 14
+            "_branch_label_enclosing_screen": "survey/_screen19",
+            "promptIdx": 13
           },
           {
             "type": "select_one",
@@ -2451,12 +2370,12 @@
                 }
               }
             },
-            "_row_num": 26,
-            "__rowNum__": 25,
+            "_row_num": 23,
+            "__rowNum__": 22,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen22",
-            "promptIdx": 15
+            "_branch_label_enclosing_screen": "survey/_screen19",
+            "promptIdx": 14
           },
           {
             "type": "select_one",
@@ -2476,12 +2395,12 @@
                 }
               }
             },
-            "_row_num": 29,
-            "__rowNum__": 28,
+            "_row_num": 26,
+            "__rowNum__": 25,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen28",
-            "promptIdx": 16
+            "_branch_label_enclosing_screen": "survey/_screen25",
+            "promptIdx": 15
           },
           {
             "type": "text",
@@ -2500,12 +2419,12 @@
                 }
               }
             },
-            "_row_num": 31,
-            "__rowNum__": 30,
+            "_row_num": 28,
+            "__rowNum__": 27,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen28",
-            "promptIdx": 17
+            "_branch_label_enclosing_screen": "survey/_screen25",
+            "promptIdx": 16
           },
           {
             "type": "select_one",
@@ -2525,12 +2444,12 @@
                 }
               }
             },
-            "_row_num": 32,
-            "__rowNum__": 31,
+            "_row_num": 29,
+            "__rowNum__": 28,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen28",
-            "promptIdx": 18
+            "_branch_label_enclosing_screen": "survey/_screen25",
+            "promptIdx": 17
           },
           {
             "type": "select_one",
@@ -2550,12 +2469,12 @@
                 }
               }
             },
-            "_row_num": 36,
-            "__rowNum__": 35,
+            "_row_num": 33,
+            "__rowNum__": 32,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen35",
-            "promptIdx": 19
+            "_branch_label_enclosing_screen": "survey/_screen32",
+            "promptIdx": 18
           },
           {
             "type": "select_one",
@@ -2575,20 +2494,20 @@
                 }
               }
             },
-            "_row_num": 38,
-            "__rowNum__": 37,
+            "_row_num": 35,
+            "__rowNum__": 34,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen35",
-            "promptIdx": 20
+            "_branch_label_enclosing_screen": "survey/_screen32",
+            "promptIdx": 19
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 41,
-            "_branch_label_enclosing_screen": "survey/_screen41",
-            "promptIdx": 21
+            "_row_num": 38,
+            "_branch_label_enclosing_screen": "survey/_screen38",
+            "promptIdx": 20
           }
         ],
         "validation_tag_map": {
@@ -2620,100 +2539,85 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 15,
-              "__rowNum__": 14,
+              "_row_num": 18,
+              "__rowNum__": 17,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 1
           },
           {
             "clause": "begin screen",
-            "_row_num": 16,
-            "__rowNum__": 15,
+            "_row_num": 19,
+            "__rowNum__": 18,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 21,
-              "__rowNum__": 20,
+              "_row_num": 24,
+              "__rowNum__": 23,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 2
           },
           {
             "clause": "begin screen",
-            "_row_num": 22,
-            "__rowNum__": 21,
+            "_row_num": 25,
+            "__rowNum__": 24,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 27,
-              "__rowNum__": 26,
+              "_row_num": 31,
+              "__rowNum__": 30,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\nactivePromptIndicies.push(14);\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\nif (data('temperature_monitoring_device') === 'yes') {\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 3
           },
           {
             "clause": "begin screen",
-            "_row_num": 28,
-            "__rowNum__": 27,
+            "_row_num": 32,
+            "__rowNum__": 31,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 34,
-              "__rowNum__": 33,
+              "_row_num": 37,
+              "__rowNum__": 36,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\nif (data('temperature_monitoring_device') === 'yes') {\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\nif (data('backup_generator') === 'yes') {\nactivePromptIndicies.push(19);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 4
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 35,
-            "__rowNum__": 34,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 40,
-              "__rowNum__": 39,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\nif (data('backup_generator') === 'yes') {\nactivePromptIndicies.push(20);\n}\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 5
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 41,
-            "operationIdx": 6
+            "_row_num": 38,
+            "operationIdx": 5
           },
           {
-            "_row_num": 41,
+            "_row_num": 38,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 7
+            "operationIdx": 6
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 41,
-            "operationIdx": 8
+            "_row_num": 38,
+            "operationIdx": 7
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
           "_screen13": 1,
-          "_screen16": 2,
-          "_screen22": 3,
-          "_screen28": 4,
-          "_screen35": 5,
-          "_contents": 7,
-          "_screen41": 7
+          "_screen19": 2,
+          "_screen25": 3,
+          "_screen32": 4,
+          "_contents": 6,
+          "_screen38": 6
         }
       }
     },
@@ -2853,54 +2757,10 @@
         "elementSet": "data",
         "elementPath": "year"
       },
-      "cold_room_image": {
-        "_defn": [
-          {
-            "_row_num": 14,
-            "section_name": "survey"
-          }
-        ],
-        "type": "object",
-        "elementType": "mimeUri",
-        "properties": {
-          "uriFragment": {
-            "type": "string",
-            "elementType": "rowpath",
-            "elementKey": "cold_room_image_uriFragment",
-            "elementName": "uriFragment",
-            "elementSet": "data",
-            "elementPath": "cold_room_image.uriFragment"
-          },
-          "contentType": {
-            "type": "string",
-            "elementType": "mimeType",
-            "default": "image/*",
-            "elementKey": "cold_room_image_contentType",
-            "elementName": "contentType",
-            "elementSet": "data",
-            "elementPath": "cold_room_image.contentType"
-          }
-        },
-        "displayName": {
-          "text": {
-            "default": "Cold Room Image",
-            "es": "Imagen del cuarto frio"
-          }
-        },
-        "elementKey": "cold_room_image",
-        "elementName": "cold_room_image",
-        "elementSet": "data",
-        "elementPath": "cold_room_image",
-        "listChildElementKeys": [
-          "cold_room_image_contentType",
-          "cold_room_image_uriFragment"
-        ],
-        "notUnitOfRetention": true
-      },
       "storage_temperature": {
         "_defn": [
           {
-            "_row_num": 17,
+            "_row_num": 14,
             "section_name": "survey"
           }
         ],
@@ -2919,7 +2779,7 @@
       "net_volume": {
         "_defn": [
           {
-            "_row_num": 18,
+            "_row_num": 15,
             "section_name": "survey"
           }
         ],
@@ -2938,7 +2798,7 @@
       "gross_volume": {
         "_defn": [
           {
-            "_row_num": 19,
+            "_row_num": 16,
             "section_name": "survey"
           }
         ],
@@ -2957,7 +2817,7 @@
       "dimensions": {
         "_defn": [
           {
-            "_row_num": 20,
+            "_row_num": 17,
             "section_name": "survey"
           }
         ],
@@ -2976,7 +2836,7 @@
       "utilization": {
         "_defn": [
           {
-            "_row_num": 23,
+            "_row_num": 20,
             "section_name": "survey"
           }
         ],
@@ -2996,7 +2856,7 @@
       "functional_status": {
         "_defn": [
           {
-            "_row_num": 24,
+            "_row_num": 21,
             "section_name": "survey"
           }
         ],
@@ -3016,7 +2876,7 @@
       "reason_not_working": {
         "_defn": [
           {
-            "_row_num": 25,
+            "_row_num": 22,
             "section_name": "survey"
           }
         ],
@@ -3047,7 +2907,7 @@
       "maintenance_priority": {
         "_defn": [
           {
-            "_row_num": 26,
+            "_row_num": 23,
             "section_name": "survey"
           }
         ],
@@ -3067,7 +2927,7 @@
       "temperature_monitoring_device": {
         "_defn": [
           {
-            "_row_num": 29,
+            "_row_num": 26,
             "section_name": "survey"
           }
         ],
@@ -3087,7 +2947,7 @@
       "temperature_monitoring_device_type": {
         "_defn": [
           {
-            "_row_num": 31,
+            "_row_num": 28,
             "section_name": "survey"
           }
         ],
@@ -3106,7 +2966,7 @@
       "temperature_monitoring_device_functional_status": {
         "_defn": [
           {
-            "_row_num": 32,
+            "_row_num": 29,
             "section_name": "survey"
           }
         ],
@@ -3126,7 +2986,7 @@
       "backup_generator": {
         "_defn": [
           {
-            "_row_num": 36,
+            "_row_num": 33,
             "section_name": "survey"
           }
         ],
@@ -3146,7 +3006,7 @@
       "backup_generator_functional_status": {
         "_defn": [
           {
-            "_row_num": 38,
+            "_row_num": 35,
             "section_name": "survey"
           }
         ],
@@ -3162,23 +3022,6 @@
         "elementName": "backup_generator_functional_status",
         "elementSet": "data",
         "elementPath": "backup_generator_functional_status"
-      },
-      "cold_room_image_uriFragment": {
-        "type": "string",
-        "elementType": "rowpath",
-        "elementKey": "cold_room_image_uriFragment",
-        "elementName": "uriFragment",
-        "elementSet": "data",
-        "elementPath": "cold_room_image.uriFragment"
-      },
-      "cold_room_image_contentType": {
-        "type": "string",
-        "elementType": "mimeType",
-        "default": "image/*",
-        "elementKey": "cold_room_image_contentType",
-        "elementName": "contentType",
-        "elementSet": "data",
-        "elementPath": "cold_room_image.contentType"
       },
       "reason_not_working_items": {
         "type": "string",
@@ -3329,13 +3172,6 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":{\"default\":\"Backup Generator Functional\",\"es\":\"Generador de respaldo funcional\"}}"
-      },
-      {
-        "_partition": "Column",
-        "_aspect": "cold_room_image",
-        "_key": "displayName",
-        "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Cold Room Image\",\"es\":\"Imagen del cuarto frio\"}}"
       },
       {
         "_partition": "Column",

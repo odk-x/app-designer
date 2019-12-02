@@ -1,7 +1,6 @@
 _partition,_aspect,_key,_type,_value
 Column,cold_room_id,displayName,object,"{""text"":{""default"":""Cold Room ID"",""es"":""ID de Cuarto Frio""}}"
 Column,date_serviced,displayName,object,"{""text"":{""default"":""Date Serviced"",""es"":""Fecha de Servicio""}}"
-Column,maintenance_log_image,displayName,object,"{""text"":{""default"":""Image"",""es"":""Imagen""}}"
 Column,notes,displayName,object,"{""text"":{""default"":""Notes"",""es"":""Notas""}}"
 Column,other_maintenance,displayName,object,"{""text"":{""default"":""Other Maintenance"",""es"":""Otro mantenimiento""}}"
 Column,other_repair,displayName,object,"{""text"":{""default"":""Other Repair"",""es"":""Otra Reparación""}}"
