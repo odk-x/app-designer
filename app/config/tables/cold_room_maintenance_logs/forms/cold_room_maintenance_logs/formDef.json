@@ -710,8 +710,8 @@
         "display": {
           "title": {
             "text": {
-              "default": "Check evaporator",
-              "es": "Comprobar evaporador"
+              "default": "Check/clean/tighten evaporator",
+              "es": "Comprobar/limpiar/apretar evaporador"
             }
           }
         },
@@ -723,8 +723,8 @@
         "display": {
           "title": {
             "text": {
-              "default": "Check duty-sharing system",
-              "es": "Comprobar el sistema de reparto de tareas"
+              "default": "Check/clean/tighten duty-sharing system",
+              "es": "Comprobar/limpiar/apretar el sistema de reparto de tareas"
             }
           }
         },
@@ -736,8 +736,8 @@
         "display": {
           "title": {
             "text": {
-              "default": "Check temperature monitoring system",
-              "es": "Comprobar el sistema de monitoreo de temperatura"
+              "default": "Check/clean/tighten temperature monitoring system",
+              "es": "Comprobar/limpiar/apretar el sistema de monitoreo de temperatura"
             }
           }
         },
@@ -749,8 +749,8 @@
         "display": {
           "title": {
             "text": {
-              "default": "Check enclosure",
-              "es": "Comprobar el recinto"
+              "default": "Check/clean/tighten enclosure",
+              "es": "Comprobar/limpiar/apretar el recinto"
             }
           }
         },
@@ -762,8 +762,8 @@
         "display": {
           "title": {
             "text": {
-              "default": "Check door and lock",
-              "es": "Comprobar puerta y cerradura"
+              "default": "Check/clean/tighten door and lock",
+              "es": "Comprobar/limpiar/apretar puerta y cerradura"
             }
           }
         },
@@ -775,8 +775,8 @@
         "display": {
           "title": {
             "text": {
-              "default": "Check freezer pressure release vent",
-              "es": "Comprobar ventilación de liberación de presión del congelador"
+              "default": "Check/clean/tighten freezer pressure release vent",
+              "es": "Comprobar/limpiar/apretar ventilación de liberación de presión del congelador"
             }
           }
         },
@@ -788,8 +788,8 @@
         "display": {
           "title": {
             "text": {
-              "default": "Check spare parts inventory",
-              "es": "Comprobar inventario de repuestos"
+              "default": "Check/clean/tighten spare parts inventory",
+              "es": "Comprobar/limpiar/apretar inventario de repuestos"
             }
           }
         },
@@ -1402,8 +1402,8 @@
           "display": {
             "title": {
               "text": {
-                "default": "Check evaporator",
-                "es": "Comprobar evaporador"
+                "default": "Check/clean/tighten evaporator",
+                "es": "Comprobar/limpiar/apretar evaporador"
               }
             }
           },
@@ -1415,8 +1415,8 @@
           "display": {
             "title": {
               "text": {
-                "default": "Check duty-sharing system",
-                "es": "Comprobar el sistema de reparto de tareas"
+                "default": "Check/clean/tighten duty-sharing system",
+                "es": "Comprobar/limpiar/apretar el sistema de reparto de tareas"
               }
             }
           },
@@ -1428,8 +1428,8 @@
           "display": {
             "title": {
               "text": {
-                "default": "Check temperature monitoring system",
-                "es": "Comprobar el sistema de monitoreo de temperatura"
+                "default": "Check/clean/tighten temperature monitoring system",
+                "es": "Comprobar/limpiar/apretar el sistema de monitoreo de temperatura"
               }
             }
           },
@@ -1441,8 +1441,8 @@
           "display": {
             "title": {
               "text": {
-                "default": "Check enclosure",
-                "es": "Comprobar el recinto"
+                "default": "Check/clean/tighten enclosure",
+                "es": "Comprobar/limpiar/apretar el recinto"
               }
             }
           },
@@ -1454,8 +1454,8 @@
           "display": {
             "title": {
               "text": {
-                "default": "Check door and lock",
-                "es": "Comprobar puerta y cerradura"
+                "default": "Check/clean/tighten door and lock",
+                "es": "Comprobar/limpiar/apretar puerta y cerradura"
               }
             }
           },
@@ -1467,8 +1467,8 @@
           "display": {
             "title": {
               "text": {
-                "default": "Check freezer pressure release vent",
-                "es": "Comprobar ventilación de liberación de presión del congelador"
+                "default": "Check/clean/tighten freezer pressure release vent",
+                "es": "Comprobar/limpiar/apretar ventilación de liberación de presión del congelador"
               }
             }
           },
@@ -1480,8 +1480,8 @@
           "display": {
             "title": {
               "text": {
-                "default": "Check spare parts inventory",
-                "es": "Comprobar inventario de repuestos"
+                "default": "Check/clean/tighten spare parts inventory",
+                "es": "Comprobar/limpiar/apretar inventario de repuestos"
               }
             }
           },
@@ -2974,7 +2974,7 @@
         "_aspect": "type_of_preventative_maintenance",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_evaporator\",\"display\":{\"title\":{\"text\":{\"default\":\"Check evaporator\",\"es\":\"Comprobar evaporador\"}}},\"_row_num\":30},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_duty_sharing_system\",\"display\":{\"title\":{\"text\":{\"default\":\"Check duty-sharing system\",\"es\":\"Comprobar el sistema de reparto de tareas\"}}},\"_row_num\":31},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_temperature_monitoring_system\",\"display\":{\"title\":{\"text\":{\"default\":\"Check temperature monitoring system\",\"es\":\"Comprobar el sistema de monitoreo de temperatura\"}}},\"_row_num\":32},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_enclosure\",\"display\":{\"title\":{\"text\":{\"default\":\"Check enclosure\",\"es\":\"Comprobar el recinto\"}}},\"_row_num\":33},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_door_and_lock\",\"display\":{\"title\":{\"text\":{\"default\":\"Check door and lock\",\"es\":\"Comprobar puerta y cerradura\"}}},\"_row_num\":34},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_freezer_pressure_release_vent\",\"display\":{\"title\":{\"text\":{\"default\":\"Check freezer pressure release vent\",\"es\":\"Comprobar ventilación de liberación de presión del congelador\"}}},\"_row_num\":35},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_spare_parts_inventory\",\"display\":{\"title\":{\"text\":{\"default\":\"Check spare parts inventory\",\"es\":\"Comprobar inventario de repuestos\"}}},\"_row_num\":36}]"
+        "_value": "[{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_evaporator\",\"display\":{\"title\":{\"text\":{\"default\":\"Check/clean/tighten evaporator\",\"es\":\"Comprobar/limpiar/apretar evaporador\"}}},\"_row_num\":30},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_duty_sharing_system\",\"display\":{\"title\":{\"text\":{\"default\":\"Check/clean/tighten duty-sharing system\",\"es\":\"Comprobar/limpiar/apretar el sistema de reparto de tareas\"}}},\"_row_num\":31},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_temperature_monitoring_system\",\"display\":{\"title\":{\"text\":{\"default\":\"Check/clean/tighten temperature monitoring system\",\"es\":\"Comprobar/limpiar/apretar el sistema de monitoreo de temperatura\"}}},\"_row_num\":32},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_enclosure\",\"display\":{\"title\":{\"text\":{\"default\":\"Check/clean/tighten enclosure\",\"es\":\"Comprobar/limpiar/apretar el recinto\"}}},\"_row_num\":33},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_door_and_lock\",\"display\":{\"title\":{\"text\":{\"default\":\"Check/clean/tighten door and lock\",\"es\":\"Comprobar/limpiar/apretar puerta y cerradura\"}}},\"_row_num\":34},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_freezer_pressure_release_vent\",\"display\":{\"title\":{\"text\":{\"default\":\"Check/clean/tighten freezer pressure release vent\",\"es\":\"Comprobar/limpiar/apretar ventilación de liberación de presión del congelador\"}}},\"_row_num\":35},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_spare_parts_inventory\",\"display\":{\"title\":{\"text\":{\"default\":\"Check/clean/tighten spare parts inventory\",\"es\":\"Comprobar/limpiar/apretar inventario de repuestos\"}}},\"_row_num\":36}]"
       },
       {
         "_partition": "Column",
