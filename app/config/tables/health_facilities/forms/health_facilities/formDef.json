@@ -90,6 +90,31 @@
         "_row_num": 7
       },
       {
+        "type": "select_one",
+        "values_list": "yes_no",
+        "name": "change_admin_region",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Change Admin Region",
+              "es": "Cambiar región administrativa"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Do you want to move this facility to a different region/district?",
+              "es": "¿Desea mover esta facilidad a una región / distrito diferente?"
+            }
+          }
+        },
+        "_row_num": 8
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('change_admin_region'), 'yes')",
+        "_row_num": 9
+      },
+      {
         "type": "select_one_dropdown",
         "values_list": "admin_region_list",
         "name": "admin_region_id",
@@ -110,15 +135,19 @@
           }
         },
         "required": 1,
-        "_row_num": 8
+        "_row_num": 10
+      },
+      {
+        "clause": "end if",
+        "_row_num": 11
       },
       {
         "clause": "end screen",
-        "_row_num": 9
+        "_row_num": 12
       },
       {
         "clause": "begin screen",
-        "_row_num": 10
+        "_row_num": 13
       },
       {
         "type": "select_one",
@@ -140,7 +169,7 @@
             }
           }
         },
-        "_row_num": 11
+        "_row_num": 14
       },
       {
         "type": "select_one",
@@ -162,7 +191,7 @@
             }
           }
         },
-        "_row_num": 12
+        "_row_num": 15
       },
       {
         "type": "integer",
@@ -183,15 +212,15 @@
             }
           }
         },
-        "_row_num": 13
+        "_row_num": 16
       },
       {
         "clause": "end screen",
-        "_row_num": 14
+        "_row_num": 17
       },
       {
         "clause": "begin screen",
-        "_row_num": 15
+        "_row_num": 18
       },
       {
         "type": "select_one",
@@ -213,12 +242,12 @@
             }
           }
         },
-        "_row_num": 16
+        "_row_num": 19
       },
       {
         "clause": "if",
         "condition": "(selected(data('electricity_source'), 'grid') || selected(data('electricity_source'), 'both_grid_and_generator') || selected(data('electricity_source'), 'both_grid_and_solar'))",
-        "_row_num": 17
+        "_row_num": 20
       },
       {
         "type": "select_one",
@@ -246,11 +275,11 @@
             }
           }
         },
-        "_row_num": 18
+        "_row_num": 21
       },
       {
         "clause": "end if",
-        "_row_num": 19
+        "_row_num": 22
       },
       {
         "type": "select_one",
@@ -272,15 +301,15 @@
             }
           }
         },
-        "_row_num": 20
+        "_row_num": 23
       },
       {
         "clause": "end screen",
-        "_row_num": 21
+        "_row_num": 24
       },
       {
         "clause": "begin screen",
-        "_row_num": 22
+        "_row_num": 25
       },
       {
         "type": "decimal",
@@ -307,7 +336,7 @@
             }
           }
         },
-        "_row_num": 23
+        "_row_num": 26
       },
       {
         "type": "select_one",
@@ -329,15 +358,15 @@
             }
           }
         },
-        "_row_num": 24
+        "_row_num": 27
       },
       {
         "clause": "end screen",
-        "_row_num": 25
+        "_row_num": 28
       },
       {
         "clause": "begin screen",
-        "_row_num": 26
+        "_row_num": 29
       },
       {
         "type": "integer",
@@ -358,7 +387,7 @@
             }
           }
         },
-        "_row_num": 27
+        "_row_num": 30
       },
       {
         "type": "select_one",
@@ -380,15 +409,15 @@
             }
           }
         },
-        "_row_num": 28
+        "_row_num": 31
       },
       {
         "clause": "end screen",
-        "_row_num": 29
+        "_row_num": 32
       },
       {
         "clause": "begin screen",
-        "_row_num": 30
+        "_row_num": 33
       },
       {
         "type": "text",
@@ -409,7 +438,7 @@
             }
           }
         },
-        "_row_num": 31
+        "_row_num": 34
       },
       {
         "type": "text",
@@ -430,7 +459,7 @@
             }
           }
         },
-        "_row_num": 32
+        "_row_num": 35
       },
       {
         "type": "text",
@@ -451,15 +480,15 @@
             }
           }
         },
-        "_row_num": 33
+        "_row_num": 36
       },
       {
         "clause": "end screen",
-        "_row_num": 34
+        "_row_num": 37
       },
       {
         "clause": "begin screen",
-        "_row_num": 35
+        "_row_num": 38
       },
       {
         "type": "integer",
@@ -480,7 +509,7 @@
             }
           }
         },
-        "_row_num": 36
+        "_row_num": 39
       },
       {
         "type": "integer",
@@ -501,15 +530,15 @@
             }
           }
         },
-        "_row_num": 37
+        "_row_num": 40
       },
       {
         "clause": "end screen",
-        "_row_num": 38
+        "_row_num": 41
       },
       {
         "clause": "begin screen",
-        "_row_num": 39
+        "_row_num": 42
       },
       {
         "type": "integer",
@@ -530,7 +559,7 @@
             }
           }
         },
-        "_row_num": 40
+        "_row_num": 43
       },
       {
         "type": "integer",
@@ -551,11 +580,19 @@
             }
           }
         },
-        "_row_num": 41
+        "_row_num": 44
       },
       {
         "clause": "end screen",
-        "_row_num": 42
+        "_row_num": 45
+      }
+    ],
+    "model": [
+      {
+        "type": "select_one",
+        "name": "change_admin_region",
+        "isSessionVariable": true,
+        "_row_num": 2
       }
     ],
     "choices": [
@@ -2830,6 +2867,28 @@
     },
     "calculates": {},
     "model": {
+      "change_admin_region": {
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Change Admin Region",
+            "es": "Cambiar región administrativa"
+          }
+        },
+        "valuesList": "yes_no",
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 2,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": true,
+        "elementKey": "change_admin_region"
+      },
       "facility_name": {
         "_defn": [
           {
@@ -2903,7 +2962,7 @@
       "admin_region_id": {
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 10,
             "section_name": "survey"
           }
         ],
@@ -2921,7 +2980,7 @@
       "facility_type": {
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 14,
             "section_name": "survey"
           }
         ],
@@ -2939,7 +2998,7 @@
       "facility_ownership": {
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 15,
             "section_name": "survey"
           }
         ],
@@ -2957,7 +3016,7 @@
       "catchment_population": {
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 16,
             "section_name": "survey"
           }
         ],
@@ -2974,7 +3033,7 @@
       "electricity_source": {
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 19,
             "section_name": "survey"
           }
         ],
@@ -2992,7 +3051,7 @@
       "grid_power_availability": {
         "_defn": [
           {
-            "_row_num": 18,
+            "_row_num": 21,
             "section_name": "survey"
           }
         ],
@@ -3010,7 +3069,7 @@
       "fuel_availability": {
         "_defn": [
           {
-            "_row_num": 20,
+            "_row_num": 23,
             "section_name": "survey"
           }
         ],
@@ -3028,7 +3087,7 @@
       "distance_to_supply": {
         "_defn": [
           {
-            "_row_num": 23,
+            "_row_num": 26,
             "section_name": "survey"
           }
         ],
@@ -3045,7 +3104,7 @@
       "immunization_services_offered": {
         "_defn": [
           {
-            "_row_num": 24,
+            "_row_num": 27,
             "section_name": "survey"
           }
         ],
@@ -3063,7 +3122,7 @@
       "vaccine_supply_interval": {
         "_defn": [
           {
-            "_row_num": 27,
+            "_row_num": 30,
             "section_name": "survey"
           }
         ],
@@ -3080,7 +3139,7 @@
       "vaccine_supply_mode": {
         "_defn": [
           {
-            "_row_num": 28,
+            "_row_num": 31,
             "section_name": "survey"
           }
         ],
@@ -3098,7 +3157,7 @@
       "contact_name": {
         "_defn": [
           {
-            "_row_num": 31,
+            "_row_num": 34,
             "section_name": "survey"
           }
         ],
@@ -3115,7 +3174,7 @@
       "contact_title": {
         "_defn": [
           {
-            "_row_num": 32,
+            "_row_num": 35,
             "section_name": "survey"
           }
         ],
@@ -3132,7 +3191,7 @@
       "contact_phone_number": {
         "_defn": [
           {
-            "_row_num": 33,
+            "_row_num": 36,
             "section_name": "survey"
           }
         ],
@@ -3149,7 +3208,7 @@
       "number_of_cold_boxes": {
         "_defn": [
           {
-            "_row_num": 36,
+            "_row_num": 39,
             "section_name": "survey"
           }
         ],
@@ -3166,7 +3225,7 @@
       "number_of_fs_cold_boxes": {
         "_defn": [
           {
-            "_row_num": 37,
+            "_row_num": 40,
             "section_name": "survey"
           }
         ],
@@ -3183,7 +3242,7 @@
       "number_of_vaccine_carriers": {
         "_defn": [
           {
-            "_row_num": 40,
+            "_row_num": 43,
             "section_name": "survey"
           }
         ],
@@ -3200,7 +3259,7 @@
       "number_of_fs_vaccine_carriers": {
         "_defn": [
           {
-            "_row_num": 41,
+            "_row_num": 44,
             "section_name": "survey"
           }
         ],
@@ -3418,6 +3477,31 @@
             "promptIdx": 2
           },
           {
+            "type": "select_one",
+            "values_list": "yes_no",
+            "name": "change_admin_region",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Change Admin Region",
+                  "es": "Cambiar región administrativa"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Do you want to move this facility to a different region/district?",
+                  "es": "¿Desea mover esta facilidad a una región / distrito diferente?"
+                }
+              }
+            },
+            "_row_num": 8,
+            "__rowNum__": 7,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen6",
+            "promptIdx": 3
+          },
+          {
             "type": "select_one_dropdown",
             "values_list": "admin_region_list",
             "name": "admin_region_id",
@@ -3438,12 +3522,12 @@
               }
             },
             "required": 1,
-            "_row_num": 8,
-            "__rowNum__": 7,
+            "_row_num": 10,
+            "__rowNum__": 9,
             "_token_type": "prompt",
             "_type": "select_one_dropdown",
             "_branch_label_enclosing_screen": "survey/_screen6",
-            "promptIdx": 3
+            "promptIdx": 4
           },
           {
             "type": "select_one",
@@ -3465,12 +3549,12 @@
                 }
               }
             },
-            "_row_num": 11,
-            "__rowNum__": 10,
+            "_row_num": 14,
+            "__rowNum__": 13,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen10",
-            "promptIdx": 4
+            "_branch_label_enclosing_screen": "survey/_screen13",
+            "promptIdx": 5
           },
           {
             "type": "select_one",
@@ -3492,12 +3576,12 @@
                 }
               }
             },
-            "_row_num": 12,
-            "__rowNum__": 11,
+            "_row_num": 15,
+            "__rowNum__": 14,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen10",
-            "promptIdx": 5
+            "_branch_label_enclosing_screen": "survey/_screen13",
+            "promptIdx": 6
           },
           {
             "type": "integer",
@@ -3518,12 +3602,12 @@
                 }
               }
             },
-            "_row_num": 13,
-            "__rowNum__": 12,
+            "_row_num": 16,
+            "__rowNum__": 15,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen10",
-            "promptIdx": 6
+            "_branch_label_enclosing_screen": "survey/_screen13",
+            "promptIdx": 7
           },
           {
             "type": "select_one",
@@ -3545,12 +3629,12 @@
                 }
               }
             },
-            "_row_num": 16,
-            "__rowNum__": 15,
+            "_row_num": 19,
+            "__rowNum__": 18,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen15",
-            "promptIdx": 7
+            "_branch_label_enclosing_screen": "survey/_screen18",
+            "promptIdx": 8
           },
           {
             "type": "select_one",
@@ -3578,12 +3662,12 @@
                 }
               }
             },
-            "_row_num": 18,
-            "__rowNum__": 17,
+            "_row_num": 21,
+            "__rowNum__": 20,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen15",
-            "promptIdx": 8
+            "_branch_label_enclosing_screen": "survey/_screen18",
+            "promptIdx": 9
           },
           {
             "type": "select_one",
@@ -3605,12 +3689,12 @@
                 }
               }
             },
-            "_row_num": 20,
-            "__rowNum__": 19,
+            "_row_num": 23,
+            "__rowNum__": 22,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen15",
-            "promptIdx": 9
+            "_branch_label_enclosing_screen": "survey/_screen18",
+            "promptIdx": 10
           },
           {
             "type": "decimal",
@@ -3637,12 +3721,12 @@
                 }
               }
             },
-            "_row_num": 23,
-            "__rowNum__": 22,
+            "_row_num": 26,
+            "__rowNum__": 25,
             "_token_type": "prompt",
             "_type": "decimal",
-            "_branch_label_enclosing_screen": "survey/_screen22",
-            "promptIdx": 10
+            "_branch_label_enclosing_screen": "survey/_screen25",
+            "promptIdx": 11
           },
           {
             "type": "select_one",
@@ -3664,12 +3748,12 @@
                 }
               }
             },
-            "_row_num": 24,
-            "__rowNum__": 23,
+            "_row_num": 27,
+            "__rowNum__": 26,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen22",
-            "promptIdx": 11
+            "_branch_label_enclosing_screen": "survey/_screen25",
+            "promptIdx": 12
           },
           {
             "type": "integer",
@@ -3690,12 +3774,12 @@
                 }
               }
             },
-            "_row_num": 27,
-            "__rowNum__": 26,
+            "_row_num": 30,
+            "__rowNum__": 29,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen26",
-            "promptIdx": 12
+            "_branch_label_enclosing_screen": "survey/_screen29",
+            "promptIdx": 13
           },
           {
             "type": "select_one",
@@ -3717,12 +3801,12 @@
                 }
               }
             },
-            "_row_num": 28,
-            "__rowNum__": 27,
+            "_row_num": 31,
+            "__rowNum__": 30,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen26",
-            "promptIdx": 13
+            "_branch_label_enclosing_screen": "survey/_screen29",
+            "promptIdx": 14
           },
           {
             "type": "text",
@@ -3743,12 +3827,12 @@
                 }
               }
             },
-            "_row_num": 31,
-            "__rowNum__": 30,
+            "_row_num": 34,
+            "__rowNum__": 33,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen30",
-            "promptIdx": 14
+            "_branch_label_enclosing_screen": "survey/_screen33",
+            "promptIdx": 15
           },
           {
             "type": "text",
@@ -3769,12 +3853,12 @@
                 }
               }
             },
-            "_row_num": 32,
-            "__rowNum__": 31,
+            "_row_num": 35,
+            "__rowNum__": 34,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen30",
-            "promptIdx": 15
+            "_branch_label_enclosing_screen": "survey/_screen33",
+            "promptIdx": 16
           },
           {
             "type": "text",
@@ -3795,12 +3879,12 @@
                 }
               }
             },
-            "_row_num": 33,
-            "__rowNum__": 32,
+            "_row_num": 36,
+            "__rowNum__": 35,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen30",
-            "promptIdx": 16
+            "_branch_label_enclosing_screen": "survey/_screen33",
+            "promptIdx": 17
           },
           {
             "type": "integer",
@@ -3821,12 +3905,12 @@
                 }
               }
             },
-            "_row_num": 36,
-            "__rowNum__": 35,
+            "_row_num": 39,
+            "__rowNum__": 38,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen35",
-            "promptIdx": 17
+            "_branch_label_enclosing_screen": "survey/_screen38",
+            "promptIdx": 18
           },
           {
             "type": "integer",
@@ -3847,12 +3931,12 @@
                 }
               }
             },
-            "_row_num": 37,
-            "__rowNum__": 36,
+            "_row_num": 40,
+            "__rowNum__": 39,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen35",
-            "promptIdx": 18
+            "_branch_label_enclosing_screen": "survey/_screen38",
+            "promptIdx": 19
           },
           {
             "type": "integer",
@@ -3873,12 +3957,12 @@
                 }
               }
             },
-            "_row_num": 40,
-            "__rowNum__": 39,
+            "_row_num": 43,
+            "__rowNum__": 42,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen39",
-            "promptIdx": 19
+            "_branch_label_enclosing_screen": "survey/_screen42",
+            "promptIdx": 20
           },
           {
             "type": "integer",
@@ -3899,27 +3983,27 @@
                 }
               }
             },
-            "_row_num": 41,
-            "__rowNum__": 40,
+            "_row_num": 44,
+            "__rowNum__": 43,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen39",
-            "promptIdx": 20
+            "_branch_label_enclosing_screen": "survey/_screen42",
+            "promptIdx": 21
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 43,
-            "_branch_label_enclosing_screen": "survey/_screen43",
-            "promptIdx": 21
+            "_row_num": 46,
+            "_branch_label_enclosing_screen": "survey/_screen46",
+            "promptIdx": 22
           }
         ],
         "validation_tag_map": {
           "finalize": [
             0,
             1,
-            3
+            4
           ]
         },
         "operations": [
@@ -3944,121 +4028,121 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 9,
-              "__rowNum__": 8,
+              "_row_num": 12,
+              "__rowNum__": 11,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\nif (selected(data('change_admin_region'), 'yes')) {\nactivePromptIndicies.push(4);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 1
           },
           {
             "clause": "begin screen",
-            "_row_num": 10,
-            "__rowNum__": 9,
+            "_row_num": 13,
+            "__rowNum__": 12,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 14,
-              "__rowNum__": 13,
+              "_row_num": 17,
+              "__rowNum__": 16,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 2
           },
           {
             "clause": "begin screen",
-            "_row_num": 15,
-            "__rowNum__": 14,
+            "_row_num": 18,
+            "__rowNum__": 17,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 21,
-              "__rowNum__": 20,
+              "_row_num": 24,
+              "__rowNum__": 23,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\nif ((selected(data('electricity_source'), 'grid') || selected(data('electricity_source'), 'both_grid_and_generator') || selected(data('electricity_source'), 'both_grid_and_solar'))) {\nactivePromptIndicies.push(8);\n}\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\nif ((selected(data('electricity_source'), 'grid') || selected(data('electricity_source'), 'both_grid_and_generator') || selected(data('electricity_source'), 'both_grid_and_solar'))) {\nactivePromptIndicies.push(9);\n}\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 3
           },
           {
             "clause": "begin screen",
-            "_row_num": 22,
-            "__rowNum__": 21,
+            "_row_num": 25,
+            "__rowNum__": 24,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 25,
-              "__rowNum__": 24,
+              "_row_num": 28,
+              "__rowNum__": 27,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 4
           },
           {
             "clause": "begin screen",
-            "_row_num": 26,
-            "__rowNum__": 25,
+            "_row_num": 29,
+            "__rowNum__": 28,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 29,
-              "__rowNum__": 28,
+              "_row_num": 32,
+              "__rowNum__": 31,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 5
           },
           {
             "clause": "begin screen",
-            "_row_num": 30,
-            "__rowNum__": 29,
+            "_row_num": 33,
+            "__rowNum__": 32,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 34,
-              "__rowNum__": 33,
+              "_row_num": 37,
+              "__rowNum__": 36,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\nactivePromptIndicies.push(15);\nactivePromptIndicies.push(16);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 6
           },
           {
             "clause": "begin screen",
-            "_row_num": 35,
-            "__rowNum__": 34,
+            "_row_num": 38,
+            "__rowNum__": 37,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 38,
-              "__rowNum__": 37,
+              "_row_num": 41,
+              "__rowNum__": 40,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 7
           },
           {
             "clause": "begin screen",
-            "_row_num": 39,
-            "__rowNum__": 38,
+            "_row_num": 42,
+            "__rowNum__": 41,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 42,
-              "__rowNum__": 41,
+              "_row_num": 45,
+              "__rowNum__": 44,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 8
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 43,
+            "_row_num": 46,
             "operationIdx": 9
           },
           {
-            "_row_num": 43,
+            "_row_num": 46,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
@@ -4067,26 +4151,51 @@
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 43,
+            "_row_num": 46,
             "operationIdx": 11
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
           "_screen6": 1,
-          "_screen10": 2,
-          "_screen15": 3,
-          "_screen22": 4,
-          "_screen26": 5,
-          "_screen30": 6,
-          "_screen35": 7,
-          "_screen39": 8,
+          "_screen13": 2,
+          "_screen18": 3,
+          "_screen25": 4,
+          "_screen29": 5,
+          "_screen33": 6,
+          "_screen38": 7,
+          "_screen42": 8,
           "_contents": 10,
-          "_screen43": 10
+          "_screen46": 10
         }
       }
     },
     "dataTableModel": {
+      "change_admin_region": {
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Change Admin Region",
+            "es": "Cambiar región administrativa"
+          }
+        },
+        "valuesList": "yes_no",
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 2,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": true,
+        "elementKey": "change_admin_region",
+        "elementName": "change_admin_region",
+        "elementSet": "data",
+        "elementPath": "change_admin_region"
+      },
       "facility_name": {
         "_defn": [
           {
@@ -4188,7 +4297,7 @@
       "admin_region_id": {
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 10,
             "section_name": "survey"
           }
         ],
@@ -4209,7 +4318,7 @@
       "facility_type": {
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 14,
             "section_name": "survey"
           }
         ],
@@ -4230,7 +4339,7 @@
       "facility_ownership": {
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 15,
             "section_name": "survey"
           }
         ],
@@ -4251,7 +4360,7 @@
       "catchment_population": {
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 16,
             "section_name": "survey"
           }
         ],
@@ -4271,7 +4380,7 @@
       "electricity_source": {
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 19,
             "section_name": "survey"
           }
         ],
@@ -4292,7 +4401,7 @@
       "grid_power_availability": {
         "_defn": [
           {
-            "_row_num": 18,
+            "_row_num": 21,
             "section_name": "survey"
           }
         ],
@@ -4313,7 +4422,7 @@
       "fuel_availability": {
         "_defn": [
           {
-            "_row_num": 20,
+            "_row_num": 23,
             "section_name": "survey"
           }
         ],
@@ -4334,7 +4443,7 @@
       "distance_to_supply": {
         "_defn": [
           {
-            "_row_num": 23,
+            "_row_num": 26,
             "section_name": "survey"
           }
         ],
@@ -4354,7 +4463,7 @@
       "immunization_services_offered": {
         "_defn": [
           {
-            "_row_num": 24,
+            "_row_num": 27,
             "section_name": "survey"
           }
         ],
@@ -4375,7 +4484,7 @@
       "vaccine_supply_interval": {
         "_defn": [
           {
-            "_row_num": 27,
+            "_row_num": 30,
             "section_name": "survey"
           }
         ],
@@ -4395,7 +4504,7 @@
       "vaccine_supply_mode": {
         "_defn": [
           {
-            "_row_num": 28,
+            "_row_num": 31,
             "section_name": "survey"
           }
         ],
@@ -4416,7 +4525,7 @@
       "contact_name": {
         "_defn": [
           {
-            "_row_num": 31,
+            "_row_num": 34,
             "section_name": "survey"
           }
         ],
@@ -4436,7 +4545,7 @@
       "contact_title": {
         "_defn": [
           {
-            "_row_num": 32,
+            "_row_num": 35,
             "section_name": "survey"
           }
         ],
@@ -4456,7 +4565,7 @@
       "contact_phone_number": {
         "_defn": [
           {
-            "_row_num": 33,
+            "_row_num": 36,
             "section_name": "survey"
           }
         ],
@@ -4476,7 +4585,7 @@
       "number_of_cold_boxes": {
         "_defn": [
           {
-            "_row_num": 36,
+            "_row_num": 39,
             "section_name": "survey"
           }
         ],
@@ -4496,7 +4605,7 @@
       "number_of_fs_cold_boxes": {
         "_defn": [
           {
-            "_row_num": 37,
+            "_row_num": 40,
             "section_name": "survey"
           }
         ],
@@ -4516,7 +4625,7 @@
       "number_of_vaccine_carriers": {
         "_defn": [
           {
-            "_row_num": 40,
+            "_row_num": 43,
             "section_name": "survey"
           }
         ],
@@ -4536,7 +4645,7 @@
       "number_of_fs_vaccine_carriers": {
         "_defn": [
           {
-            "_row_num": 41,
+            "_row_num": 44,
             "section_name": "survey"
           }
         ],
