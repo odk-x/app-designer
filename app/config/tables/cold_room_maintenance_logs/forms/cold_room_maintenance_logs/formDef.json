@@ -550,12 +550,12 @@
       },
       {
         "choice_list_name": "common_spare_parts",
-        "data_value": "high_pressure_switch",
+        "data_value": "high_low_pressure_switch",
         "display": {
           "title": {
             "text": {
-              "default": "High Pressure Switch",
-              "es": "Interruptor de alta presión"
+              "default": "High/Low Pressure Switch",
+              "es": "interruptor de alta/baja presión"
             }
           }
         },
@@ -563,29 +563,16 @@
       },
       {
         "choice_list_name": "common_spare_parts",
-        "data_value": "low_pressure_switch",
+        "data_value": "refrigerant",
         "display": {
           "title": {
             "text": {
-              "default": "Low Pressure Switch",
-              "es": "Interruptor de baja presión"
+              "default": "Refrigerant",
+              "es": "Refrigerante"
             }
           }
         },
         "_row_num": 17
-      },
-      {
-        "choice_list_name": "common_spare_parts",
-        "data_value": "refrigerant_404a",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Refrigerant 404A - Cylinder gas with 10kg cylinder",
-              "es": "Refrigerante 404A - Cilindro de gas con cilindro de 10 kg"
-            }
-          }
-        },
-        "_row_num": 18
       },
       {
         "choice_list_name": "common_spare_parts",
@@ -598,7 +585,7 @@
             }
           }
         },
-        "_row_num": 19
+        "_row_num": 18
       },
       {
         "choice_list_name": "common_spare_parts",
@@ -611,7 +598,7 @@
             }
           }
         },
-        "_row_num": 20
+        "_row_num": 19
       },
       {
         "choice_list_name": "repair_types",
@@ -624,7 +611,7 @@
             }
           }
         },
-        "_row_num": 22
+        "_row_num": 21
       },
       {
         "choice_list_name": "repair_types",
@@ -637,7 +624,7 @@
             }
           }
         },
-        "_row_num": 23
+        "_row_num": 22
       },
       {
         "choice_list_name": "repair_types",
@@ -650,7 +637,7 @@
             }
           }
         },
-        "_row_num": 24
+        "_row_num": 23
       },
       {
         "choice_list_name": "repair_types",
@@ -663,7 +650,7 @@
             }
           }
         },
-        "_row_num": 25
+        "_row_num": 24
       },
       {
         "choice_list_name": "repair_types",
@@ -676,7 +663,7 @@
             }
           }
         },
-        "_row_num": 26
+        "_row_num": 25
       },
       {
         "choice_list_name": "repair_types",
@@ -689,7 +676,7 @@
             }
           }
         },
-        "_row_num": 27
+        "_row_num": 26
       },
       {
         "choice_list_name": "repair_types",
@@ -702,7 +689,7 @@
             }
           }
         },
-        "_row_num": 28
+        "_row_num": 27
       },
       {
         "choice_list_name": "preventative_maint_types",
@@ -715,7 +702,7 @@
             }
           }
         },
-        "_row_num": 30
+        "_row_num": 29
       },
       {
         "choice_list_name": "preventative_maint_types",
@@ -728,7 +715,7 @@
             }
           }
         },
-        "_row_num": 31
+        "_row_num": 30
       },
       {
         "choice_list_name": "preventative_maint_types",
@@ -741,7 +728,7 @@
             }
           }
         },
-        "_row_num": 32
+        "_row_num": 31
       },
       {
         "choice_list_name": "preventative_maint_types",
@@ -754,7 +741,7 @@
             }
           }
         },
-        "_row_num": 33
+        "_row_num": 32
       },
       {
         "choice_list_name": "preventative_maint_types",
@@ -767,7 +754,7 @@
             }
           }
         },
-        "_row_num": 34
+        "_row_num": 33
       },
       {
         "choice_list_name": "preventative_maint_types",
@@ -780,7 +767,7 @@
             }
           }
         },
-        "_row_num": 35
+        "_row_num": 34
       },
       {
         "choice_list_name": "preventative_maint_types",
@@ -793,7 +780,7 @@
             }
           }
         },
-        "_row_num": 36
+        "_row_num": 35
       }
     ],
     "queries": [
@@ -1238,12 +1225,12 @@
         },
         {
           "choice_list_name": "common_spare_parts",
-          "data_value": "high_pressure_switch",
+          "data_value": "high_low_pressure_switch",
           "display": {
             "title": {
               "text": {
-                "default": "High Pressure Switch",
-                "es": "Interruptor de alta presión"
+                "default": "High/Low Pressure Switch",
+                "es": "interruptor de alta/baja presión"
               }
             }
           },
@@ -1251,29 +1238,16 @@
         },
         {
           "choice_list_name": "common_spare_parts",
-          "data_value": "low_pressure_switch",
+          "data_value": "refrigerant",
           "display": {
             "title": {
               "text": {
-                "default": "Low Pressure Switch",
-                "es": "Interruptor de baja presión"
+                "default": "Refrigerant",
+                "es": "Refrigerante"
               }
             }
           },
           "_row_num": 17
-        },
-        {
-          "choice_list_name": "common_spare_parts",
-          "data_value": "refrigerant_404a",
-          "display": {
-            "title": {
-              "text": {
-                "default": "Refrigerant 404A - Cylinder gas with 10kg cylinder",
-                "es": "Refrigerante 404A - Cilindro de gas con cilindro de 10 kg"
-              }
-            }
-          },
-          "_row_num": 18
         },
         {
           "choice_list_name": "common_spare_parts",
@@ -1286,7 +1260,7 @@
               }
             }
           },
-          "_row_num": 19
+          "_row_num": 18
         },
         {
           "choice_list_name": "common_spare_parts",
@@ -1299,7 +1273,7 @@
               }
             }
           },
-          "_row_num": 20
+          "_row_num": 19
         }
       ],
       "repair_types": [
@@ -1314,7 +1288,7 @@
               }
             }
           },
-          "_row_num": 22
+          "_row_num": 21
         },
         {
           "choice_list_name": "repair_types",
@@ -1327,7 +1301,7 @@
               }
             }
           },
-          "_row_num": 23
+          "_row_num": 22
         },
         {
           "choice_list_name": "repair_types",
@@ -1340,7 +1314,7 @@
               }
             }
           },
-          "_row_num": 24
+          "_row_num": 23
         },
         {
           "choice_list_name": "repair_types",
@@ -1353,7 +1327,7 @@
               }
             }
           },
-          "_row_num": 25
+          "_row_num": 24
         },
         {
           "choice_list_name": "repair_types",
@@ -1366,7 +1340,7 @@
               }
             }
           },
-          "_row_num": 26
+          "_row_num": 25
         },
         {
           "choice_list_name": "repair_types",
@@ -1379,7 +1353,7 @@
               }
             }
           },
-          "_row_num": 27
+          "_row_num": 26
         },
         {
           "choice_list_name": "repair_types",
@@ -1392,7 +1366,7 @@
               }
             }
           },
-          "_row_num": 28
+          "_row_num": 27
         }
       ],
       "preventative_maint_types": [
@@ -1407,7 +1381,7 @@
               }
             }
           },
-          "_row_num": 30
+          "_row_num": 29
         },
         {
           "choice_list_name": "preventative_maint_types",
@@ -1420,7 +1394,7 @@
               }
             }
           },
-          "_row_num": 31
+          "_row_num": 30
         },
         {
           "choice_list_name": "preventative_maint_types",
@@ -1433,7 +1407,7 @@
               }
             }
           },
-          "_row_num": 32
+          "_row_num": 31
         },
         {
           "choice_list_name": "preventative_maint_types",
@@ -1446,7 +1420,7 @@
               }
             }
           },
-          "_row_num": 33
+          "_row_num": 32
         },
         {
           "choice_list_name": "preventative_maint_types",
@@ -1459,7 +1433,7 @@
               }
             }
           },
-          "_row_num": 34
+          "_row_num": 33
         },
         {
           "choice_list_name": "preventative_maint_types",
@@ -1472,7 +1446,7 @@
               }
             }
           },
-          "_row_num": 35
+          "_row_num": 34
         },
         {
           "choice_list_name": "preventative_maint_types",
@@ -1485,7 +1459,7 @@
               }
             }
           },
-          "_row_num": 36
+          "_row_num": 35
         }
       ]
     },
@@ -2932,7 +2906,7 @@
         "_aspect": "spare_parts",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"evaporator_fan_motor\",\"display\":{\"title\":{\"text\":{\"default\":\"Evaporator Fan Motor\",\"es\":\"Motor del ventilador del evaporador\"}}},\"_row_num\":10},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"condenser_fan_motor\",\"display\":{\"title\":{\"text\":{\"default\":\"Condenser Fan Motor\",\"es\":\"Motor del ventilador del condensador\"}}},\"_row_num\":11},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"evaporator_probe\",\"display\":{\"title\":{\"text\":{\"default\":\"Evaporator Probe\",\"es\":\"Sonda de evaporador\"}}},\"_row_num\":12},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"filter_drier\",\"display\":{\"title\":{\"text\":{\"default\":\"Filter Drier\",\"es\":\"Filtro deshidratador\"}}},\"_row_num\":13},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"refrigeration_expansive_valve_capillary\",\"display\":{\"title\":{\"text\":{\"default\":\"Refrigeration Expansion Valve/Capillary\",\"es\":\"Válvula de expansión de refrigeración/capilar\"}}},\"_row_num\":14},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"controllers_complete_with_display\",\"display\":{\"title\":{\"text\":{\"default\":\"Controllers with Display\",\"es\":\"Controladores con pantalla\"}}},\"_row_num\":15},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"high_pressure_switch\",\"display\":{\"title\":{\"text\":{\"default\":\"High Pressure Switch\",\"es\":\"Interruptor de alta presión\"}}},\"_row_num\":16},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"low_pressure_switch\",\"display\":{\"title\":{\"text\":{\"default\":\"Low Pressure Switch\",\"es\":\"Interruptor de baja presión\"}}},\"_row_num\":17},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"refrigerant_404a\",\"display\":{\"title\":{\"text\":{\"default\":\"Refrigerant 404A - Cylinder gas with 10kg cylinder\",\"es\":\"Refrigerante 404A - Cilindro de gas con cilindro de 10 kg\"}}},\"_row_num\":18},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"compressors\",\"display\":{\"title\":{\"text\":{\"default\":\"Compressors\",\"es\":\"Compresores\"}}},\"_row_num\":19},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"compressor_oil\",\"display\":{\"title\":{\"text\":{\"default\":\"Compressor Oil\",\"es\":\"Aceite del compresor\"}}},\"_row_num\":20}]"
+        "_value": "[{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"evaporator_fan_motor\",\"display\":{\"title\":{\"text\":{\"default\":\"Evaporator Fan Motor\",\"es\":\"Motor del ventilador del evaporador\"}}},\"_row_num\":10},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"condenser_fan_motor\",\"display\":{\"title\":{\"text\":{\"default\":\"Condenser Fan Motor\",\"es\":\"Motor del ventilador del condensador\"}}},\"_row_num\":11},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"evaporator_probe\",\"display\":{\"title\":{\"text\":{\"default\":\"Evaporator Probe\",\"es\":\"Sonda de evaporador\"}}},\"_row_num\":12},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"filter_drier\",\"display\":{\"title\":{\"text\":{\"default\":\"Filter Drier\",\"es\":\"Filtro deshidratador\"}}},\"_row_num\":13},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"refrigeration_expansive_valve_capillary\",\"display\":{\"title\":{\"text\":{\"default\":\"Refrigeration Expansion Valve/Capillary\",\"es\":\"Válvula de expansión de refrigeración/capilar\"}}},\"_row_num\":14},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"controllers_complete_with_display\",\"display\":{\"title\":{\"text\":{\"default\":\"Controllers with Display\",\"es\":\"Controladores con pantalla\"}}},\"_row_num\":15},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"high_low_pressure_switch\",\"display\":{\"title\":{\"text\":{\"default\":\"High/Low Pressure Switch\",\"es\":\"interruptor de alta/baja presión\"}}},\"_row_num\":16},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"refrigerant\",\"display\":{\"title\":{\"text\":{\"default\":\"Refrigerant\",\"es\":\"Refrigerante\"}}},\"_row_num\":17},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"compressors\",\"display\":{\"title\":{\"text\":{\"default\":\"Compressors\",\"es\":\"Compresores\"}}},\"_row_num\":18},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"compressor_oil\",\"display\":{\"title\":{\"text\":{\"default\":\"Compressor Oil\",\"es\":\"Aceite del compresor\"}}},\"_row_num\":19}]"
       },
       {
         "_partition": "Column",
@@ -2974,7 +2948,7 @@
         "_aspect": "type_of_preventative_maintenance",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_evaporator\",\"display\":{\"title\":{\"text\":{\"default\":\"Check/clean/tighten evaporator\",\"es\":\"Comprobar/limpiar/apretar evaporador\"}}},\"_row_num\":30},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_duty_sharing_system\",\"display\":{\"title\":{\"text\":{\"default\":\"Check/clean/tighten duty-sharing system\",\"es\":\"Comprobar/limpiar/apretar el sistema de reparto de tareas\"}}},\"_row_num\":31},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_temperature_monitoring_system\",\"display\":{\"title\":{\"text\":{\"default\":\"Check/clean/tighten temperature monitoring system\",\"es\":\"Comprobar/limpiar/apretar el sistema de monitoreo de temperatura\"}}},\"_row_num\":32},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_enclosure\",\"display\":{\"title\":{\"text\":{\"default\":\"Check/clean/tighten enclosure\",\"es\":\"Comprobar/limpiar/apretar el recinto\"}}},\"_row_num\":33},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_door_and_lock\",\"display\":{\"title\":{\"text\":{\"default\":\"Check/clean/tighten door and lock\",\"es\":\"Comprobar/limpiar/apretar puerta y cerradura\"}}},\"_row_num\":34},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_freezer_pressure_release_vent\",\"display\":{\"title\":{\"text\":{\"default\":\"Check/clean/tighten freezer pressure release vent\",\"es\":\"Comprobar/limpiar/apretar ventilación de liberación de presión del congelador\"}}},\"_row_num\":35},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_spare_parts_inventory\",\"display\":{\"title\":{\"text\":{\"default\":\"Check/clean/tighten spare parts inventory\",\"es\":\"Comprobar/limpiar/apretar inventario de repuestos\"}}},\"_row_num\":36}]"
+        "_value": "[{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_evaporator\",\"display\":{\"title\":{\"text\":{\"default\":\"Check/clean/tighten evaporator\",\"es\":\"Comprobar/limpiar/apretar evaporador\"}}},\"_row_num\":29},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_duty_sharing_system\",\"display\":{\"title\":{\"text\":{\"default\":\"Check/clean/tighten duty-sharing system\",\"es\":\"Comprobar/limpiar/apretar el sistema de reparto de tareas\"}}},\"_row_num\":30},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_temperature_monitoring_system\",\"display\":{\"title\":{\"text\":{\"default\":\"Check/clean/tighten temperature monitoring system\",\"es\":\"Comprobar/limpiar/apretar el sistema de monitoreo de temperatura\"}}},\"_row_num\":31},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_enclosure\",\"display\":{\"title\":{\"text\":{\"default\":\"Check/clean/tighten enclosure\",\"es\":\"Comprobar/limpiar/apretar el recinto\"}}},\"_row_num\":32},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_door_and_lock\",\"display\":{\"title\":{\"text\":{\"default\":\"Check/clean/tighten door and lock\",\"es\":\"Comprobar/limpiar/apretar puerta y cerradura\"}}},\"_row_num\":33},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_freezer_pressure_release_vent\",\"display\":{\"title\":{\"text\":{\"default\":\"Check/clean/tighten freezer pressure release vent\",\"es\":\"Comprobar/limpiar/apretar ventilación de liberación de presión del congelador\"}}},\"_row_num\":34},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"check_spare_parts_inventory\",\"display\":{\"title\":{\"text\":{\"default\":\"Check/clean/tighten spare parts inventory\",\"es\":\"Comprobar/limpiar/apretar inventario de repuestos\"}}},\"_row_num\":35}]"
       },
       {
         "_partition": "Column",
@@ -2988,7 +2962,7 @@
         "_aspect": "type_of_repair",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"repair_types\",\"data_value\":\"electrical_and_control_system\",\"display\":{\"title\":{\"text\":{\"default\":\"Electrical and Control System\",\"es\":\"Sistema electrico y de control\"}}},\"_row_num\":22},{\"choice_list_name\":\"repair_types\",\"data_value\":\"cabinet\",\"display\":{\"title\":{\"text\":{\"default\":\"Cabinet\",\"es\":\"Gabinete\"}}},\"_row_num\":23},{\"choice_list_name\":\"repair_types\",\"data_value\":\"refrigeration_system\",\"display\":{\"title\":{\"text\":{\"default\":\"Refrigeration System\",\"es\":\"Sistema de refrigeración\"}}},\"_row_num\":24},{\"choice_list_name\":\"repair_types\",\"data_value\":\"power\",\"display\":{\"title\":{\"text\":{\"default\":\"Power\",\"es\":\"Energía\"}}},\"_row_num\":25},{\"choice_list_name\":\"repair_types\",\"data_value\":\"solar\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar\",\"es\":\"Solar\"}}},\"_row_num\":26},{\"choice_list_name\":\"repair_types\",\"data_value\":\"temperature_monitoring\",\"display\":{\"title\":{\"text\":{\"default\":\"Temperature Monitoring\",\"es\":\"Monitoreo de temperatura\"}}},\"_row_num\":27},{\"choice_list_name\":\"repair_types\",\"data_value\":\"other\",\"display\":{\"title\":{\"text\":{\"default\":\"Other\",\"es\":\"Otro\"}}},\"_row_num\":28}]"
+        "_value": "[{\"choice_list_name\":\"repair_types\",\"data_value\":\"electrical_and_control_system\",\"display\":{\"title\":{\"text\":{\"default\":\"Electrical and Control System\",\"es\":\"Sistema electrico y de control\"}}},\"_row_num\":21},{\"choice_list_name\":\"repair_types\",\"data_value\":\"cabinet\",\"display\":{\"title\":{\"text\":{\"default\":\"Cabinet\",\"es\":\"Gabinete\"}}},\"_row_num\":22},{\"choice_list_name\":\"repair_types\",\"data_value\":\"refrigeration_system\",\"display\":{\"title\":{\"text\":{\"default\":\"Refrigeration System\",\"es\":\"Sistema de refrigeración\"}}},\"_row_num\":23},{\"choice_list_name\":\"repair_types\",\"data_value\":\"power\",\"display\":{\"title\":{\"text\":{\"default\":\"Power\",\"es\":\"Energía\"}}},\"_row_num\":24},{\"choice_list_name\":\"repair_types\",\"data_value\":\"solar\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar\",\"es\":\"Solar\"}}},\"_row_num\":25},{\"choice_list_name\":\"repair_types\",\"data_value\":\"temperature_monitoring\",\"display\":{\"title\":{\"text\":{\"default\":\"Temperature Monitoring\",\"es\":\"Monitoreo de temperatura\"}}},\"_row_num\":26},{\"choice_list_name\":\"repair_types\",\"data_value\":\"other\",\"display\":{\"title\":{\"text\":{\"default\":\"Other\",\"es\":\"Otro\"}}},\"_row_num\":27}]"
       },
       {
         "_partition": "Column",
