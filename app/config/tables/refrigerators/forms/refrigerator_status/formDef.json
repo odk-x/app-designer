@@ -166,12 +166,12 @@
       },
       {
         "choice_list_name": "reasons",
-        "data_value": "lack_of_power",
+        "data_value": "lack_of_power_fuel",
         "display": {
           "title": {
             "text": {
-              "default": "Lack of Power",
-              "es": "Falta de poder",
+              "default": "Lack of Power/Fuel",
+              "es": "Falta de poder/combustible",
               "fr": "Absence d'énergie"
             }
           }
@@ -639,12 +639,12 @@
         },
         {
           "choice_list_name": "reasons",
-          "data_value": "lack_of_power",
+          "data_value": "lack_of_power_fuel",
           "display": {
             "title": {
               "text": {
-                "default": "Lack of Power",
-                "es": "Falta de poder",
+                "default": "Lack of Power/Fuel",
+                "es": "Falta de poder/combustible",
                 "fr": "Absence d'énergie"
               }
             }
