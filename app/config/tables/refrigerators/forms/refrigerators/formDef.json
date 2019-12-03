@@ -55,6 +55,11 @@
         "_row_num": 6
       },
       {
+        "clause": "if",
+        "condition": "data('model_row_id') !== null && data('model_row_id') !== undefined",
+        "_row_num": 7
+      },
+      {
         "type": "select_one",
         "values_list": "refrigerator_model_list",
         "name": "model_row_id",
@@ -74,7 +79,11 @@
             }
           }
         },
-        "_row_num": 7
+        "_row_num": 8
+      },
+      {
+        "clause": "end if",
+        "_row_num": 9
       },
       {
         "type": "select_one",
@@ -94,12 +103,12 @@
             }
           }
         },
-        "_row_num": 8
+        "_row_num": 10
       },
       {
         "clause": "if",
         "condition": "data('change_model') === 'yes'",
-        "_row_num": 9
+        "_row_num": 11
       },
       {
         "type": "text",
@@ -121,7 +130,7 @@
             }
           }
         },
-        "_row_num": 10
+        "_row_num": 12
       },
       {
         "type": "note",
@@ -133,24 +142,24 @@
             }
           }
         },
-        "_row_num": 11
+        "_row_num": 13
       },
       {
         "clause": "end if",
-        "_row_num": 12
+        "_row_num": 14
       },
       {
         "clause": "end screen",
-        "_row_num": 13
+        "_row_num": 15
       },
       {
         "clause": "if",
         "condition": "data('change_model') === 'yes'",
-        "_row_num": 14
+        "_row_num": 16
       },
       {
         "clause": "begin screen",
-        "_row_num": 15
+        "_row_num": 17
       },
       {
         "type": "select_one",
@@ -173,19 +182,19 @@
           }
         },
         "required": "data('change_model') === 'yes'",
-        "_row_num": 16
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 17
-      },
-      {
-        "clause": "end if",
         "_row_num": 18
       },
       {
-        "clause": "begin screen",
+        "clause": "end screen",
         "_row_num": 19
+      },
+      {
+        "clause": "end if",
+        "_row_num": 20
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 21
       },
       {
         "type": "text",
@@ -207,7 +216,7 @@
           }
         },
         "required": 1,
-        "_row_num": 20
+        "_row_num": 22
       },
       {
         "type": "integer",
@@ -241,7 +250,7 @@
           }
         },
         "constraint": "calculates.valid_installed_refrigerator_year()",
-        "_row_num": 21
+        "_row_num": 23
       },
       {
         "type": "integer",
@@ -275,11 +284,11 @@
           }
         },
         "constraint": "calculates.valid_procured_refrigerator_year()",
-        "_row_num": 22
+        "_row_num": 24
       },
       {
         "clause": "end screen",
-        "_row_num": 23
+        "_row_num": 25
       },
       {
         "type": "image",
@@ -298,7 +307,7 @@
             }
           }
         },
-        "_row_num": 24
+        "_row_num": 26
       },
       {
         "type": "text",
@@ -319,11 +328,11 @@
             }
           }
         },
-        "_row_num": 25
+        "_row_num": 27
       },
       {
         "clause": "begin screen",
-        "_row_num": 26
+        "_row_num": 28
       },
       {
         "type": "select_one",
@@ -345,12 +354,12 @@
             }
           }
         },
-        "_row_num": 27
+        "_row_num": 29
       },
       {
         "clause": "if",
         "condition": "data('under_warranty') === 'yes'",
-        "_row_num": 28
+        "_row_num": 30
       },
       {
         "type": "text",
@@ -371,7 +380,7 @@
             }
           }
         },
-        "_row_num": 29
+        "_row_num": 31
       },
       {
         "type": "text",
@@ -379,32 +388,32 @@
         "display": {
           "title": {
             "text": {
-              "default": "Warranty Service Provider Contact",
-              "es": "Contacto del proveedor de servicios de garantía",
+              "default": "Warranty Service Provider Contact Phone Number",
+              "es": "Número de teléfono de contacto del proveedor de servicios de garantía",
               "fr": "Coordonnées du prestataire de services dans le cadre de la garantie"
             }
           },
           "prompt": {
             "text": {
-              "default": "Enter warranty service provider contact:",
-              "es": "Ingrese al contacto del proveedor de servicios de garantía",
+              "default": "Enter warranty service provider contact phone number:",
+              "es": "Ingrese el número de teléfono de contacto del proveedor de servicios de garantía:",
               "fr": "Entrer les coordonnées du prestataire de services dans le cadre de la garantie :"
             }
           }
         },
-        "_row_num": 30
-      },
-      {
-        "clause": "end if",
-        "_row_num": 31
-      },
-      {
-        "clause": "end screen",
         "_row_num": 32
       },
       {
-        "clause": "begin screen",
+        "clause": "end if",
         "_row_num": 33
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 34
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 35
       },
       {
         "type": "select_one",
@@ -426,7 +435,7 @@
             }
           }
         },
-        "_row_num": 34
+        "_row_num": 36
       },
       {
         "type": "select_one",
@@ -448,7 +457,7 @@
             }
           }
         },
-        "_row_num": 35
+        "_row_num": 37
       },
       {
         "type": "select_one",
@@ -470,7 +479,7 @@
             }
           }
         },
-        "_row_num": 36
+        "_row_num": 38
       },
       {
         "type": "select_multiple",
@@ -492,7 +501,7 @@
             }
           }
         },
-        "_row_num": 37
+        "_row_num": 39
       },
       {
         "type": "select_one",
@@ -514,20 +523,20 @@
             }
           }
         },
-        "_row_num": 38
+        "_row_num": 40
       },
       {
         "clause": "end screen",
-        "_row_num": 39
+        "_row_num": 41
       },
       {
         "clause": "if",
         "condition": "data('power_source') === 'electricity'",
-        "_row_num": 40
+        "_row_num": 42
       },
       {
         "clause": "begin screen",
-        "_row_num": 41
+        "_row_num": 43
       },
       {
         "type": "select_one",
@@ -549,12 +558,31 @@
             }
           }
         },
-        "_row_num": 42
+        "_row_num": 44
       },
       {
         "clause": "if",
         "condition": "data('voltage_regulator') === 'yes'",
-        "_row_num": 43
+        "_row_num": 45
+      },
+      {
+        "type": "text",
+        "name": "voltage_regulator_serial_number",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Voltage Regulator Serial Number",
+              "es": "Número de serie del regulador de voltaje"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Voltage regulator serial number?",
+              "es": "¿Número de serie del regulador de voltaje?"
+            }
+          }
+        },
+        "_row_num": 46
       },
       {
         "type": "select_one",
@@ -576,23 +604,23 @@
             }
           }
         },
-        "_row_num": 44
-      },
-      {
-        "clause": "end if",
-        "_row_num": 45
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 46
-      },
-      {
-        "clause": "end if",
         "_row_num": 47
       },
       {
-        "clause": "begin screen",
+        "clause": "end if",
         "_row_num": 48
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 49
+      },
+      {
+        "clause": "end if",
+        "_row_num": 50
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 51
       },
       {
         "type": "select_one",
@@ -614,12 +642,12 @@
             }
           }
         },
-        "_row_num": 49
+        "_row_num": 52
       },
       {
         "clause": "if",
         "condition": "data('temperature_monitoring_device') === 'yes'",
-        "_row_num": 50
+        "_row_num": 53
       },
       {
         "type": "text",
@@ -640,7 +668,7 @@
             }
           }
         },
-        "_row_num": 51
+        "_row_num": 54
       },
       {
         "type": "select_one",
@@ -660,51 +688,24 @@
             }
           }
         },
-        "_row_num": 52
-      },
-      {
-        "clause": "end if",
-        "_row_num": 53
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 54
-      },
-      {
-        "clause": "if",
-        "condition": "data('power_source') === 'solar'",
         "_row_num": 55
       },
       {
-        "clause": "begin screen",
+        "clause": "end if",
         "_row_num": 56
       },
       {
-        "type": "select_one",
-        "values_list": "yes_no",
-        "name": "solar_energy_harvesting",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Solar Energy Harvesting",
-              "es": "Cosecha de energía solar",
-              "fr": "Récupération de l'énergie solaire"
-            }
-          },
-          "prompt": {
-            "text": {
-              "default": "Is solar harvesting used?",
-              "es": "¿Se utiliza la cosecha solar?",
-              "fr": "L'énergie solaire est-elle récupérée ?"
-            }
-          }
-        },
+        "clause": "end screen",
         "_row_num": 57
       },
       {
         "clause": "if",
-        "condition": "data('solar_energy_harvesting') === 'yes'",
+        "condition": "data('power_source') === 'solar'",
         "_row_num": 58
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 59
       },
       {
         "type": "select_one",
@@ -724,10 +725,6 @@
             }
           }
         },
-        "_row_num": 59
-      },
-      {
-        "clause": "end if",
         "_row_num": 60
       },
       {
@@ -2257,11 +2254,11 @@
         "valuesList": "refrigerator_model_list",
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 8,
             "section_name": "survey"
           },
           {
-            "_row_num": 16,
+            "_row_num": 18,
             "section_name": "survey"
           },
           {
@@ -2281,7 +2278,7 @@
         },
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 12,
             "section_name": "survey"
           },
           {
@@ -2303,7 +2300,7 @@
         "valuesList": "yes_no",
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 10,
             "section_name": "survey"
           },
           {
@@ -2335,7 +2332,7 @@
       "tracking_id": {
         "_defn": [
           {
-            "_row_num": 20,
+            "_row_num": 22,
             "section_name": "survey"
           }
         ],
@@ -2352,7 +2349,7 @@
       "year_installed": {
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 23,
             "section_name": "survey"
           }
         ],
@@ -2369,7 +2366,7 @@
       "year_procured": {
         "_defn": [
           {
-            "_row_num": 22,
+            "_row_num": 24,
             "section_name": "survey"
           }
         ],
@@ -2386,7 +2383,7 @@
       "serial_number_image": {
         "_defn": [
           {
-            "_row_num": 24,
+            "_row_num": 26,
             "section_name": "survey"
           }
         ],
@@ -2416,7 +2413,7 @@
       "serial_number": {
         "_defn": [
           {
-            "_row_num": 25,
+            "_row_num": 27,
             "section_name": "survey"
           }
         ],
@@ -2433,7 +2430,7 @@
       "under_warranty": {
         "_defn": [
           {
-            "_row_num": 27,
+            "_row_num": 29,
             "section_name": "survey"
           }
         ],
@@ -2451,7 +2448,7 @@
       "warranty_service_provider_name": {
         "_defn": [
           {
-            "_row_num": 29,
+            "_row_num": 31,
             "section_name": "survey"
           }
         ],
@@ -2468,15 +2465,15 @@
       "warranty_service_provider_contact": {
         "_defn": [
           {
-            "_row_num": 30,
+            "_row_num": 32,
             "section_name": "survey"
           }
         ],
         "type": "string",
         "displayName": {
           "text": {
-            "default": "Warranty Service Provider Contact",
-            "es": "Contacto del proveedor de servicios de garantía",
+            "default": "Warranty Service Provider Contact Phone Number",
+            "es": "Número de teléfono de contacto del proveedor de servicios de garantía",
             "fr": "Coordonnées du prestataire de services dans le cadre de la garantie"
           }
         },
@@ -2485,7 +2482,7 @@
       "power_source": {
         "_defn": [
           {
-            "_row_num": 34,
+            "_row_num": 36,
             "section_name": "survey"
           }
         ],
@@ -2503,7 +2500,7 @@
       "utilization": {
         "_defn": [
           {
-            "_row_num": 35,
+            "_row_num": 37,
             "section_name": "survey"
           }
         ],
@@ -2521,7 +2518,7 @@
       "functional_status": {
         "_defn": [
           {
-            "_row_num": 36,
+            "_row_num": 38,
             "section_name": "survey"
           }
         ],
@@ -2539,7 +2536,7 @@
       "reason_not_working": {
         "_defn": [
           {
-            "_row_num": 37,
+            "_row_num": 39,
             "section_name": "survey"
           }
         ],
@@ -2561,7 +2558,7 @@
       "maintenance_priority": {
         "_defn": [
           {
-            "_row_num": 38,
+            "_row_num": 40,
             "section_name": "survey"
           }
         ],
@@ -2579,7 +2576,7 @@
       "voltage_regulator": {
         "_defn": [
           {
-            "_row_num": 42,
+            "_row_num": 44,
             "section_name": "survey"
           }
         ],
@@ -2594,10 +2591,26 @@
         "valuesList": "yes_no_na",
         "elementKey": "voltage_regulator"
       },
+      "voltage_regulator_serial_number": {
+        "_defn": [
+          {
+            "_row_num": 46,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Voltage Regulator Serial Number",
+            "es": "Número de serie del regulador de voltaje"
+          }
+        },
+        "elementKey": "voltage_regulator_serial_number"
+      },
       "voltage_regulator_functional_status": {
         "_defn": [
           {
-            "_row_num": 44,
+            "_row_num": 47,
             "section_name": "survey"
           }
         ],
@@ -2615,7 +2628,7 @@
       "temperature_monitoring_device": {
         "_defn": [
           {
-            "_row_num": 49,
+            "_row_num": 52,
             "section_name": "survey"
           }
         ],
@@ -2633,7 +2646,7 @@
       "temperature_monitoring_device_type": {
         "_defn": [
           {
-            "_row_num": 51,
+            "_row_num": 54,
             "section_name": "survey"
           }
         ],
@@ -2650,7 +2663,7 @@
       "temperature_monitoring_device_functional_status": {
         "_defn": [
           {
-            "_row_num": 52,
+            "_row_num": 55,
             "section_name": "survey"
           }
         ],
@@ -2664,28 +2677,10 @@
         "valuesList": "status",
         "elementKey": "temperature_monitoring_device_functional_status"
       },
-      "solar_energy_harvesting": {
-        "_defn": [
-          {
-            "_row_num": 57,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "displayName": {
-          "text": {
-            "default": "Solar Energy Harvesting",
-            "es": "Cosecha de energía solar",
-            "fr": "Récupération de l'énergie solaire"
-          }
-        },
-        "valuesList": "yes_no",
-        "elementKey": "solar_energy_harvesting"
-      },
       "ehc_powered_devices": {
         "_defn": [
           {
-            "_row_num": 59,
+            "_row_num": 60,
             "section_name": "survey"
           }
         ],
@@ -2870,8 +2865,8 @@
                 }
               }
             },
-            "_row_num": 7,
-            "__rowNum__": 6,
+            "_row_num": 8,
+            "__rowNum__": 7,
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen2",
@@ -2895,8 +2890,8 @@
                 }
               }
             },
-            "_row_num": 8,
-            "__rowNum__": 7,
+            "_row_num": 10,
+            "__rowNum__": 9,
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen2",
@@ -2922,8 +2917,8 @@
                 }
               }
             },
-            "_row_num": 10,
-            "__rowNum__": 9,
+            "_row_num": 12,
+            "__rowNum__": 11,
             "_token_type": "prompt",
             "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen2",
@@ -2939,8 +2934,8 @@
                 }
               }
             },
-            "_row_num": 11,
-            "__rowNum__": 10,
+            "_row_num": 13,
+            "__rowNum__": 12,
             "_token_type": "prompt",
             "_type": "note",
             "_branch_label_enclosing_screen": "survey/_screen2",
@@ -2967,11 +2962,11 @@
               }
             },
             "required": "data('change_model') === 'yes'",
-            "_row_num": 16,
-            "__rowNum__": 15,
+            "_row_num": 18,
+            "__rowNum__": 17,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen15",
+            "_branch_label_enclosing_screen": "survey/_screen17",
             "promptIdx": 5
           },
           {
@@ -2994,11 +2989,11 @@
               }
             },
             "required": 1,
-            "_row_num": 20,
-            "__rowNum__": 19,
+            "_row_num": 22,
+            "__rowNum__": 21,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen19",
+            "_branch_label_enclosing_screen": "survey/_screen21",
             "promptIdx": 6
           },
           {
@@ -3033,11 +3028,11 @@
               }
             },
             "constraint": "calculates.valid_installed_refrigerator_year()",
-            "_row_num": 21,
-            "__rowNum__": 20,
+            "_row_num": 23,
+            "__rowNum__": 22,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen19",
+            "_branch_label_enclosing_screen": "survey/_screen21",
             "promptIdx": 7
           },
           {
@@ -3072,11 +3067,11 @@
               }
             },
             "constraint": "calculates.valid_procured_refrigerator_year()",
-            "_row_num": 22,
-            "__rowNum__": 21,
+            "_row_num": 24,
+            "__rowNum__": 23,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen19",
+            "_branch_label_enclosing_screen": "survey/_screen21",
             "promptIdx": 8
           },
           {
@@ -3096,11 +3091,11 @@
                 }
               }
             },
-            "_row_num": 24,
-            "__rowNum__": 23,
+            "_row_num": 26,
+            "__rowNum__": 25,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen24",
+            "_branch_label_enclosing_screen": "survey/_screen26",
             "promptIdx": 9
           },
           {
@@ -3122,11 +3117,11 @@
                 }
               }
             },
-            "_row_num": 25,
-            "__rowNum__": 24,
+            "_row_num": 27,
+            "__rowNum__": 26,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen25",
+            "_branch_label_enclosing_screen": "survey/_screen27",
             "promptIdx": 10
           },
           {
@@ -3149,11 +3144,11 @@
                 }
               }
             },
-            "_row_num": 27,
-            "__rowNum__": 26,
+            "_row_num": 29,
+            "__rowNum__": 28,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen26",
+            "_branch_label_enclosing_screen": "survey/_screen28",
             "promptIdx": 11
           },
           {
@@ -3175,11 +3170,11 @@
                 }
               }
             },
-            "_row_num": 29,
-            "__rowNum__": 28,
+            "_row_num": 31,
+            "__rowNum__": 30,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen26",
+            "_branch_label_enclosing_screen": "survey/_screen28",
             "promptIdx": 12
           },
           {
@@ -3188,24 +3183,24 @@
             "display": {
               "title": {
                 "text": {
-                  "default": "Warranty Service Provider Contact",
-                  "es": "Contacto del proveedor de servicios de garantía",
+                  "default": "Warranty Service Provider Contact Phone Number",
+                  "es": "Número de teléfono de contacto del proveedor de servicios de garantía",
                   "fr": "Coordonnées du prestataire de services dans le cadre de la garantie"
                 }
               },
               "prompt": {
                 "text": {
-                  "default": "Enter warranty service provider contact:",
-                  "es": "Ingrese al contacto del proveedor de servicios de garantía",
+                  "default": "Enter warranty service provider contact phone number:",
+                  "es": "Ingrese el número de teléfono de contacto del proveedor de servicios de garantía:",
                   "fr": "Entrer les coordonnées du prestataire de services dans le cadre de la garantie :"
                 }
               }
             },
-            "_row_num": 30,
-            "__rowNum__": 29,
+            "_row_num": 32,
+            "__rowNum__": 31,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen26",
+            "_branch_label_enclosing_screen": "survey/_screen28",
             "promptIdx": 13
           },
           {
@@ -3228,11 +3223,11 @@
                 }
               }
             },
-            "_row_num": 34,
-            "__rowNum__": 33,
+            "_row_num": 36,
+            "__rowNum__": 35,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen33",
+            "_branch_label_enclosing_screen": "survey/_screen35",
             "promptIdx": 14
           },
           {
@@ -3255,11 +3250,11 @@
                 }
               }
             },
-            "_row_num": 35,
-            "__rowNum__": 34,
+            "_row_num": 37,
+            "__rowNum__": 36,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen33",
+            "_branch_label_enclosing_screen": "survey/_screen35",
             "promptIdx": 15
           },
           {
@@ -3282,11 +3277,11 @@
                 }
               }
             },
-            "_row_num": 36,
-            "__rowNum__": 35,
+            "_row_num": 38,
+            "__rowNum__": 37,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen33",
+            "_branch_label_enclosing_screen": "survey/_screen35",
             "promptIdx": 16
           },
           {
@@ -3309,11 +3304,11 @@
                 }
               }
             },
-            "_row_num": 37,
-            "__rowNum__": 36,
+            "_row_num": 39,
+            "__rowNum__": 38,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen33",
+            "_branch_label_enclosing_screen": "survey/_screen35",
             "promptIdx": 17
           },
           {
@@ -3336,11 +3331,11 @@
                 }
               }
             },
-            "_row_num": 38,
-            "__rowNum__": 37,
+            "_row_num": 40,
+            "__rowNum__": 39,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen33",
+            "_branch_label_enclosing_screen": "survey/_screen35",
             "promptIdx": 18
           },
           {
@@ -3363,12 +3358,36 @@
                 }
               }
             },
-            "_row_num": 42,
-            "__rowNum__": 41,
+            "_row_num": 44,
+            "__rowNum__": 43,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen41",
+            "_branch_label_enclosing_screen": "survey/_screen43",
             "promptIdx": 19
+          },
+          {
+            "type": "text",
+            "name": "voltage_regulator_serial_number",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Voltage Regulator Serial Number",
+                  "es": "Número de serie del regulador de voltaje"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Voltage regulator serial number?",
+                  "es": "¿Número de serie del regulador de voltaje?"
+                }
+              }
+            },
+            "_row_num": 46,
+            "__rowNum__": 45,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen43",
+            "promptIdx": 20
           },
           {
             "type": "select_one",
@@ -3390,12 +3409,12 @@
                 }
               }
             },
-            "_row_num": 44,
-            "__rowNum__": 43,
+            "_row_num": 47,
+            "__rowNum__": 46,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen41",
-            "promptIdx": 20
+            "_branch_label_enclosing_screen": "survey/_screen43",
+            "promptIdx": 21
           },
           {
             "type": "select_one",
@@ -3417,12 +3436,12 @@
                 }
               }
             },
-            "_row_num": 49,
-            "__rowNum__": 48,
+            "_row_num": 52,
+            "__rowNum__": 51,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen48",
-            "promptIdx": 21
+            "_branch_label_enclosing_screen": "survey/_screen51",
+            "promptIdx": 22
           },
           {
             "type": "text",
@@ -3443,12 +3462,12 @@
                 }
               }
             },
-            "_row_num": 51,
-            "__rowNum__": 50,
+            "_row_num": 54,
+            "__rowNum__": 53,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen48",
-            "promptIdx": 22
+            "_branch_label_enclosing_screen": "survey/_screen51",
+            "promptIdx": 23
           },
           {
             "type": "select_one",
@@ -3468,38 +3487,11 @@
                 }
               }
             },
-            "_row_num": 52,
-            "__rowNum__": 51,
+            "_row_num": 55,
+            "__rowNum__": 54,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen48",
-            "promptIdx": 23
-          },
-          {
-            "type": "select_one",
-            "values_list": "yes_no",
-            "name": "solar_energy_harvesting",
-            "display": {
-              "title": {
-                "text": {
-                  "default": "Solar Energy Harvesting",
-                  "es": "Cosecha de energía solar",
-                  "fr": "Récupération de l'énergie solaire"
-                }
-              },
-              "prompt": {
-                "text": {
-                  "default": "Is solar harvesting used?",
-                  "es": "¿Se utiliza la cosecha solar?",
-                  "fr": "L'énergie solaire est-elle récupérée ?"
-                }
-              }
-            },
-            "_row_num": 57,
-            "__rowNum__": 56,
-            "_token_type": "prompt",
-            "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen56",
+            "_branch_label_enclosing_screen": "survey/_screen51",
             "promptIdx": 24
           },
           {
@@ -3520,11 +3512,11 @@
                 }
               }
             },
-            "_row_num": 59,
-            "__rowNum__": 58,
+            "_row_num": 60,
+            "__rowNum__": 59,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen56",
+            "_branch_label_enclosing_screen": "survey/_screen59",
             "promptIdx": 25
           },
           {
@@ -3553,38 +3545,38 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 13,
-              "__rowNum__": 12,
+              "_row_num": 15,
+              "__rowNum__": 14,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nassign('model_search_text', data('model_row_id'));\nif (data('facility_row_id') == null) {\nactivePromptIndicies.push(0);\n}\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\nif (data('change_model') === 'yes') {\nactivePromptIndicies.push(3);\nactivePromptIndicies.push(4);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nassign('model_search_text', data('model_row_id'));\nif (data('facility_row_id') == null) {\nactivePromptIndicies.push(0);\n}\nif (data('model_row_id') !== null && data('model_row_id') !== undefined) {\nactivePromptIndicies.push(1);\n}\nactivePromptIndicies.push(2);\nif (data('change_model') === 'yes') {\nactivePromptIndicies.push(3);\nactivePromptIndicies.push(4);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 0
           },
           {
             "clause": "if",
             "condition": "data('change_model') === 'yes'",
-            "_row_num": 14,
-            "__rowNum__": 13,
+            "_row_num": 16,
+            "__rowNum__": 15,
             "_token_type": "goto_label",
-            "_branch_label": "_then14",
+            "_branch_label": "_then16",
             "operationIdx": 1
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else18",
-            "_row_num": 18,
+            "_branch_label": "_else20",
+            "_row_num": 20,
             "operationIdx": 2
           },
           {
             "clause": "begin screen",
-            "_row_num": 15,
-            "__rowNum__": 14,
+            "_row_num": 17,
+            "__rowNum__": 16,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 17,
-              "__rowNum__": 16,
+              "_row_num": 19,
+              "__rowNum__": 18,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
@@ -3593,45 +3585,45 @@
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif18",
-            "_row_num": 18,
+            "_branch_label": "_endif20",
+            "_row_num": 20,
             "operationIdx": 4
           },
           {
             "clause": "begin screen",
-            "_row_num": 19,
-            "__rowNum__": 18,
+            "_row_num": 21,
+            "__rowNum__": 20,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 23,
-              "__rowNum__": 22,
+              "_row_num": 25,
+              "__rowNum__": 24,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 5
           },
           {
-            "_row_num": 24,
+            "_row_num": 26,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 6
           },
           {
-            "_row_num": 25,
+            "_row_num": 27,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 7
           },
           {
             "clause": "begin screen",
-            "_row_num": 26,
-            "__rowNum__": 25,
+            "_row_num": 28,
+            "__rowNum__": 27,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 32,
-              "__rowNum__": 31,
+              "_row_num": 34,
+              "__rowNum__": 33,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\nif (data('under_warranty') === 'yes') {\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\n}\n\nreturn activePromptIndicies;\n}\n",
@@ -3639,13 +3631,13 @@
           },
           {
             "clause": "begin screen",
-            "_row_num": 33,
-            "__rowNum__": 32,
+            "_row_num": 35,
+            "__rowNum__": 34,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 39,
-              "__rowNum__": 38,
+              "_row_num": 41,
+              "__rowNum__": 40,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\nactivePromptIndicies.push(15);\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\n\nreturn activePromptIndicies;\n}\n",
@@ -3654,61 +3646,61 @@
           {
             "clause": "if",
             "condition": "data('power_source') === 'electricity'",
-            "_row_num": 40,
-            "__rowNum__": 39,
+            "_row_num": 42,
+            "__rowNum__": 41,
             "_token_type": "goto_label",
-            "_branch_label": "_then40",
+            "_branch_label": "_then42",
             "operationIdx": 10
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else47",
-            "_row_num": 47,
+            "_branch_label": "_else50",
+            "_row_num": 50,
             "operationIdx": 11
           },
           {
             "clause": "begin screen",
-            "_row_num": 41,
-            "__rowNum__": 40,
+            "_row_num": 43,
+            "__rowNum__": 42,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 46,
-              "__rowNum__": 45,
+              "_row_num": 49,
+              "__rowNum__": 48,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\nif (data('voltage_regulator') === 'yes') {\nactivePromptIndicies.push(20);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\nif (data('voltage_regulator') === 'yes') {\nactivePromptIndicies.push(20);\nactivePromptIndicies.push(21);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 12
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif47",
-            "_row_num": 47,
+            "_branch_label": "_endif50",
+            "_row_num": 50,
             "operationIdx": 13
           },
           {
             "clause": "begin screen",
-            "_row_num": 48,
-            "__rowNum__": 47,
+            "_row_num": 51,
+            "__rowNum__": 50,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 54,
-              "__rowNum__": 53,
+              "_row_num": 57,
+              "__rowNum__": 56,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\nif (data('temperature_monitoring_device') === 'yes') {\nactivePromptIndicies.push(22);\nactivePromptIndicies.push(23);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\nif (data('temperature_monitoring_device') === 'yes') {\nactivePromptIndicies.push(23);\nactivePromptIndicies.push(24);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 14
           },
           {
             "clause": "if",
             "condition": "data('power_source') === 'solar'",
-            "_row_num": 55,
-            "__rowNum__": 54,
+            "_row_num": 58,
+            "__rowNum__": 57,
             "_token_type": "goto_label",
-            "_branch_label": "_then55",
+            "_branch_label": "_then58",
             "operationIdx": 15
           },
           {
@@ -3720,8 +3712,8 @@
           },
           {
             "clause": "begin screen",
-            "_row_num": 56,
-            "__rowNum__": 55,
+            "_row_num": 59,
+            "__rowNum__": 58,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
@@ -3729,7 +3721,7 @@
               "__rowNum__": 60,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(24);\nif (data('solar_energy_harvesting') === 'yes') {\nactivePromptIndicies.push(25);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(25);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 17
           },
           {
@@ -3763,22 +3755,22 @@
         ],
         "branch_label_map": {
           "_screen2": 0,
-          "_then14": 3,
-          "_screen15": 3,
-          "_else18": 5,
-          "_endif18": 5,
-          "_screen19": 5,
-          "_screen24": 6,
-          "_screen25": 7,
-          "_screen26": 8,
-          "_screen33": 9,
-          "_then40": 12,
-          "_screen41": 12,
-          "_else47": 14,
-          "_endif47": 14,
-          "_screen48": 14,
-          "_then55": 17,
-          "_screen56": 17,
+          "_then16": 3,
+          "_screen17": 3,
+          "_else20": 5,
+          "_endif20": 5,
+          "_screen21": 5,
+          "_screen26": 6,
+          "_screen27": 7,
+          "_screen28": 8,
+          "_screen35": 9,
+          "_then42": 12,
+          "_screen43": 12,
+          "_else50": 14,
+          "_endif50": 14,
+          "_screen51": 14,
+          "_then58": 17,
+          "_screen59": 17,
           "_else62": 19,
           "_endif62": 19,
           "_contents": 20,
@@ -3799,11 +3791,11 @@
         "valuesList": "refrigerator_model_list",
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 8,
             "section_name": "survey"
           },
           {
-            "_row_num": 16,
+            "_row_num": 18,
             "section_name": "survey"
           },
           {
@@ -3826,7 +3818,7 @@
         },
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 12,
             "section_name": "survey"
           },
           {
@@ -3851,7 +3843,7 @@
         "valuesList": "yes_no",
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 10,
             "section_name": "survey"
           },
           {
@@ -3889,7 +3881,7 @@
       "tracking_id": {
         "_defn": [
           {
-            "_row_num": 20,
+            "_row_num": 22,
             "section_name": "survey"
           }
         ],
@@ -3909,7 +3901,7 @@
       "year_installed": {
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 23,
             "section_name": "survey"
           }
         ],
@@ -3929,7 +3921,7 @@
       "year_procured": {
         "_defn": [
           {
-            "_row_num": 22,
+            "_row_num": 24,
             "section_name": "survey"
           }
         ],
@@ -3949,7 +3941,7 @@
       "serial_number_image": {
         "_defn": [
           {
-            "_row_num": 24,
+            "_row_num": 26,
             "section_name": "survey"
           }
         ],
@@ -3993,7 +3985,7 @@
       "serial_number": {
         "_defn": [
           {
-            "_row_num": 25,
+            "_row_num": 27,
             "section_name": "survey"
           }
         ],
@@ -4013,7 +4005,7 @@
       "under_warranty": {
         "_defn": [
           {
-            "_row_num": 27,
+            "_row_num": 29,
             "section_name": "survey"
           }
         ],
@@ -4034,7 +4026,7 @@
       "warranty_service_provider_name": {
         "_defn": [
           {
-            "_row_num": 29,
+            "_row_num": 31,
             "section_name": "survey"
           }
         ],
@@ -4054,15 +4046,15 @@
       "warranty_service_provider_contact": {
         "_defn": [
           {
-            "_row_num": 30,
+            "_row_num": 32,
             "section_name": "survey"
           }
         ],
         "type": "string",
         "displayName": {
           "text": {
-            "default": "Warranty Service Provider Contact",
-            "es": "Contacto del proveedor de servicios de garantía",
+            "default": "Warranty Service Provider Contact Phone Number",
+            "es": "Número de teléfono de contacto del proveedor de servicios de garantía",
             "fr": "Coordonnées du prestataire de services dans le cadre de la garantie"
           }
         },
@@ -4074,7 +4066,7 @@
       "power_source": {
         "_defn": [
           {
-            "_row_num": 34,
+            "_row_num": 36,
             "section_name": "survey"
           }
         ],
@@ -4095,7 +4087,7 @@
       "utilization": {
         "_defn": [
           {
-            "_row_num": 35,
+            "_row_num": 37,
             "section_name": "survey"
           }
         ],
@@ -4116,7 +4108,7 @@
       "functional_status": {
         "_defn": [
           {
-            "_row_num": 36,
+            "_row_num": 38,
             "section_name": "survey"
           }
         ],
@@ -4137,7 +4129,7 @@
       "reason_not_working": {
         "_defn": [
           {
-            "_row_num": 37,
+            "_row_num": 39,
             "section_name": "survey"
           }
         ],
@@ -4169,7 +4161,7 @@
       "maintenance_priority": {
         "_defn": [
           {
-            "_row_num": 38,
+            "_row_num": 40,
             "section_name": "survey"
           }
         ],
@@ -4190,7 +4182,7 @@
       "voltage_regulator": {
         "_defn": [
           {
-            "_row_num": 42,
+            "_row_num": 44,
             "section_name": "survey"
           }
         ],
@@ -4208,10 +4200,29 @@
         "elementSet": "data",
         "elementPath": "voltage_regulator"
       },
+      "voltage_regulator_serial_number": {
+        "_defn": [
+          {
+            "_row_num": 46,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Voltage Regulator Serial Number",
+            "es": "Número de serie del regulador de voltaje"
+          }
+        },
+        "elementKey": "voltage_regulator_serial_number",
+        "elementName": "voltage_regulator_serial_number",
+        "elementSet": "data",
+        "elementPath": "voltage_regulator_serial_number"
+      },
       "voltage_regulator_functional_status": {
         "_defn": [
           {
-            "_row_num": 44,
+            "_row_num": 47,
             "section_name": "survey"
           }
         ],
@@ -4232,7 +4243,7 @@
       "temperature_monitoring_device": {
         "_defn": [
           {
-            "_row_num": 49,
+            "_row_num": 52,
             "section_name": "survey"
           }
         ],
@@ -4253,7 +4264,7 @@
       "temperature_monitoring_device_type": {
         "_defn": [
           {
-            "_row_num": 51,
+            "_row_num": 54,
             "section_name": "survey"
           }
         ],
@@ -4273,7 +4284,7 @@
       "temperature_monitoring_device_functional_status": {
         "_defn": [
           {
-            "_row_num": 52,
+            "_row_num": 55,
             "section_name": "survey"
           }
         ],
@@ -4290,31 +4301,10 @@
         "elementSet": "data",
         "elementPath": "temperature_monitoring_device_functional_status"
       },
-      "solar_energy_harvesting": {
-        "_defn": [
-          {
-            "_row_num": 57,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "displayName": {
-          "text": {
-            "default": "Solar Energy Harvesting",
-            "es": "Cosecha de energía solar",
-            "fr": "Récupération de l'énergie solaire"
-          }
-        },
-        "valuesList": "yes_no",
-        "elementKey": "solar_energy_harvesting",
-        "elementName": "solar_energy_harvesting",
-        "elementSet": "data",
-        "elementPath": "solar_energy_harvesting"
-      },
       "ehc_powered_devices": {
         "_defn": [
           {
-            "_row_num": 59,
+            "_row_num": 60,
             "section_name": "survey"
           }
         ],
@@ -4570,20 +4560,6 @@
       },
       {
         "_partition": "Column",
-        "_aspect": "solar_energy_harvesting",
-        "_key": "displayChoicesList",
-        "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Sí\",\"fr\":\"Oui\"}}},\"_row_num\":48},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\",\"fr\":\"Non\"}}},\"_row_num\":49}]"
-      },
-      {
-        "_partition": "Column",
-        "_aspect": "solar_energy_harvesting",
-        "_key": "displayName",
-        "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Solar Energy Harvesting\",\"es\":\"Cosecha de energía solar\",\"fr\":\"Récupération de l'énergie solaire\"}}"
-      },
-      {
-        "_partition": "Column",
         "_aspect": "temperature_monitoring_device",
         "_key": "displayChoicesList",
         "_type": "object",
@@ -4682,10 +4658,17 @@
       },
       {
         "_partition": "Column",
+        "_aspect": "voltage_regulator_serial_number",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Voltage Regulator Serial Number\",\"es\":\"Número de serie del regulador de voltaje\"}}"
+      },
+      {
+        "_partition": "Column",
         "_aspect": "warranty_service_provider_contact",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Warranty Service Provider Contact\",\"es\":\"Contacto del proveedor de servicios de garantía\",\"fr\":\"Coordonnées du prestataire de services dans le cadre de la garantie\"}}"
+        "_value": "{\"text\":{\"default\":\"Warranty Service Provider Contact Phone Number\",\"es\":\"Número de teléfono de contacto del proveedor de servicios de garantía\",\"fr\":\"Coordonnées du prestataire de services dans le cadre de la garantie\"}}"
       },
       {
         "_partition": "Column",
