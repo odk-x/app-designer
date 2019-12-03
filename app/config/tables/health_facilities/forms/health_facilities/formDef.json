@@ -604,6 +604,71 @@
       {
         "clause": "end screen",
         "_row_num": 46
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 47
+      },
+      {
+        "type": "integer",
+        "name": "number_of_l3_packs",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Number of 0.3 liter ice/water packs",
+              "es": "Número de paquetes de hielo/agua de 0.3 litros"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Total number of 0.3 liter ice/water packs?",
+              "es": "Número total de paquetes de hielo/agua de 0.3 litros?"
+            }
+          }
+        },
+        "_row_num": 48
+      },
+      {
+        "type": "integer",
+        "name": "number_of_l4_packs",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Number of 0.4 liter ice/water packs",
+              "es": "Número de paquetes de hielo/agua de 0.4 litros"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Total number of 0.4 liter ice/water packs?",
+              "es": "Número total de paquetes de hielo/agua de 0.4 litros?"
+            }
+          }
+        },
+        "_row_num": 49
+      },
+      {
+        "type": "integer",
+        "name": "number_of_l6_packs",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Number of 0.6 liter ice/water packs",
+              "es": "Número de paquetes de hielo/agua de 0.6 litros"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Total number of 0.6 liter ice/water packs?",
+              "es": "Número total de paquetes de hielo/agua de 0.6 litros?"
+            }
+          }
+        },
+        "_row_num": 50
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 51
       }
     ],
     "model": [
@@ -3333,6 +3398,54 @@
           }
         },
         "elementKey": "number_of_fs_vaccine_carriers"
+      },
+      "number_of_l3_packs": {
+        "_defn": [
+          {
+            "_row_num": 48,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": {
+          "text": {
+            "default": "Number of 0.3 liter ice/water packs",
+            "es": "Número de paquetes de hielo/agua de 0.3 litros"
+          }
+        },
+        "elementKey": "number_of_l3_packs"
+      },
+      "number_of_l4_packs": {
+        "_defn": [
+          {
+            "_row_num": 49,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": {
+          "text": {
+            "default": "Number of 0.4 liter ice/water packs",
+            "es": "Número de paquetes de hielo/agua de 0.4 litros"
+          }
+        },
+        "elementKey": "number_of_l4_packs"
+      },
+      "number_of_l6_packs": {
+        "_defn": [
+          {
+            "_row_num": 50,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": {
+          "text": {
+            "default": "Number of 0.6 liter ice/water packs",
+            "es": "Número de paquetes de hielo/agua de 0.6 litros"
+          }
+        },
+        "elementKey": "number_of_l6_packs"
       }
     },
     "section_names": [
@@ -4076,12 +4189,84 @@
             "promptIdx": 22
           },
           {
+            "type": "integer",
+            "name": "number_of_l3_packs",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Number of 0.3 liter ice/water packs",
+                  "es": "Número de paquetes de hielo/agua de 0.3 litros"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Total number of 0.3 liter ice/water packs?",
+                  "es": "Número total de paquetes de hielo/agua de 0.3 litros?"
+                }
+              }
+            },
+            "_row_num": 48,
+            "__rowNum__": 47,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen47",
+            "promptIdx": 23
+          },
+          {
+            "type": "integer",
+            "name": "number_of_l4_packs",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Number of 0.4 liter ice/water packs",
+                  "es": "Número de paquetes de hielo/agua de 0.4 litros"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Total number of 0.4 liter ice/water packs?",
+                  "es": "Número total de paquetes de hielo/agua de 0.4 litros?"
+                }
+              }
+            },
+            "_row_num": 49,
+            "__rowNum__": 48,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen47",
+            "promptIdx": 24
+          },
+          {
+            "type": "integer",
+            "name": "number_of_l6_packs",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Number of 0.6 liter ice/water packs",
+                  "es": "Número de paquetes de hielo/agua de 0.6 litros"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Total number of 0.6 liter ice/water packs?",
+                  "es": "Número total de paquetes de hielo/agua de 0.6 litros?"
+                }
+              }
+            },
+            "_row_num": 50,
+            "__rowNum__": 49,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen47",
+            "promptIdx": 25
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 47,
-            "_branch_label_enclosing_screen": "survey/_screen47",
-            "promptIdx": 23
+            "_row_num": 52,
+            "_branch_label_enclosing_screen": "survey/_screen52",
+            "promptIdx": 26
           }
         ],
         "validation_tag_map": {
@@ -4225,25 +4410,39 @@
             "operationIdx": 9
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
+            "clause": "begin screen",
             "_row_num": 47,
+            "__rowNum__": 46,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 51,
+              "__rowNum__": 50,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\nactivePromptIndicies.push(24);\nactivePromptIndicies.push(25);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 10
           },
           {
-            "_row_num": 47,
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 52,
+            "operationIdx": 11
+          },
+          {
+            "_row_num": 52,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(26);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 11
+            "operationIdx": 12
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 47,
-            "operationIdx": 12
+            "_row_num": 52,
+            "operationIdx": 13
           }
         ],
         "branch_label_map": {
@@ -4257,8 +4456,9 @@
           "_screen38": 7,
           "_screen39": 8,
           "_screen43": 9,
-          "_contents": 11,
-          "_screen47": 11
+          "_screen47": 10,
+          "_contents": 12,
+          "_screen52": 12
         }
       }
     },
@@ -4773,6 +4973,63 @@
         "elementSet": "data",
         "elementPath": "number_of_fs_vaccine_carriers"
       },
+      "number_of_l3_packs": {
+        "_defn": [
+          {
+            "_row_num": 48,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": {
+          "text": {
+            "default": "Number of 0.3 liter ice/water packs",
+            "es": "Número de paquetes de hielo/agua de 0.3 litros"
+          }
+        },
+        "elementKey": "number_of_l3_packs",
+        "elementName": "number_of_l3_packs",
+        "elementSet": "data",
+        "elementPath": "number_of_l3_packs"
+      },
+      "number_of_l4_packs": {
+        "_defn": [
+          {
+            "_row_num": 49,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": {
+          "text": {
+            "default": "Number of 0.4 liter ice/water packs",
+            "es": "Número de paquetes de hielo/agua de 0.4 litros"
+          }
+        },
+        "elementKey": "number_of_l4_packs",
+        "elementName": "number_of_l4_packs",
+        "elementSet": "data",
+        "elementPath": "number_of_l4_packs"
+      },
+      "number_of_l6_packs": {
+        "_defn": [
+          {
+            "_row_num": 50,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": {
+          "text": {
+            "default": "Number of 0.6 liter ice/water packs",
+            "es": "Número de paquetes de hielo/agua de 0.6 litros"
+          }
+        },
+        "elementKey": "number_of_l6_packs",
+        "elementName": "number_of_l6_packs",
+        "elementSet": "data",
+        "elementPath": "number_of_l6_packs"
+      },
       "Location_latitude": {
         "type": "number",
         "elementKey": "Location_latitude",
@@ -5082,6 +5339,27 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":{\"default\":\"Number of freeze safe vaccine carriers at facility\",\"es\":\"Número de portadores de vacunas a congelación segura en la facilidad\",\"fr\":\"Nombre de porte-vaccins pour congélation sûre dans l'établissement\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "number_of_l3_packs",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Number of 0.3 liter ice/water packs\",\"es\":\"Número de paquetes de hielo/agua de 0.3 litros\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "number_of_l4_packs",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Number of 0.4 liter ice/water packs\",\"es\":\"Número de paquetes de hielo/agua de 0.4 litros\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "number_of_l6_packs",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Number of 0.6 liter ice/water packs\",\"es\":\"Número de paquetes de hielo/agua de 0.6 litros\"}}"
       },
       {
         "_partition": "Column",
