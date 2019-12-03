@@ -474,7 +474,7 @@
           },
           "prompt": {
             "text": {
-              "default": "Contact Phone Number",
+              "default": "Contact Phone Number?",
               "es": "Teléfono de contacto?",
               "fr": "Numéro de téléphone de la personne à contacter"
             }
@@ -487,8 +487,27 @@
         "_row_num": 37
       },
       {
-        "clause": "begin screen",
+        "type": "integer",
+        "name": "spare_fuel_cylinders_available",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Number of spare fuel cylinders available",
+              "es": "Número de cilindros de combustible de repuesto disponibles"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Number of spare fuel cylinders available?",
+              "es": "Número de cilindros de combustible de repuesto disponibles?"
+            }
+          }
+        },
         "_row_num": 38
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 39
       },
       {
         "type": "integer",
@@ -509,7 +528,7 @@
             }
           }
         },
-        "_row_num": 39
+        "_row_num": 40
       },
       {
         "type": "integer",
@@ -530,15 +549,15 @@
             }
           }
         },
-        "_row_num": 40
-      },
-      {
-        "clause": "end screen",
         "_row_num": 41
       },
       {
-        "clause": "begin screen",
+        "clause": "end screen",
         "_row_num": 42
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 43
       },
       {
         "type": "integer",
@@ -559,7 +578,7 @@
             }
           }
         },
-        "_row_num": 43
+        "_row_num": 44
       },
       {
         "type": "integer",
@@ -580,11 +599,11 @@
             }
           }
         },
-        "_row_num": 44
+        "_row_num": 45
       },
       {
         "clause": "end screen",
-        "_row_num": 45
+        "_row_num": 46
       }
     ],
     "model": [
@@ -3231,10 +3250,26 @@
         },
         "elementKey": "contact_phone_number"
       },
+      "spare_fuel_cylinders_available": {
+        "_defn": [
+          {
+            "_row_num": 38,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": {
+          "text": {
+            "default": "Number of spare fuel cylinders available",
+            "es": "Número de cilindros de combustible de repuesto disponibles"
+          }
+        },
+        "elementKey": "spare_fuel_cylinders_available"
+      },
       "number_of_cold_boxes": {
         "_defn": [
           {
-            "_row_num": 39,
+            "_row_num": 40,
             "section_name": "survey"
           }
         ],
@@ -3251,7 +3286,7 @@
       "number_of_fs_cold_boxes": {
         "_defn": [
           {
-            "_row_num": 40,
+            "_row_num": 41,
             "section_name": "survey"
           }
         ],
@@ -3268,7 +3303,7 @@
       "number_of_vaccine_carriers": {
         "_defn": [
           {
-            "_row_num": 43,
+            "_row_num": 44,
             "section_name": "survey"
           }
         ],
@@ -3285,7 +3320,7 @@
       "number_of_fs_vaccine_carriers": {
         "_defn": [
           {
-            "_row_num": 44,
+            "_row_num": 45,
             "section_name": "survey"
           }
         ],
@@ -3899,7 +3934,7 @@
               },
               "prompt": {
                 "text": {
-                  "default": "Contact Phone Number",
+                  "default": "Contact Phone Number?",
                   "es": "Teléfono de contacto?",
                   "fr": "Numéro de téléphone de la personne à contacter"
                 }
@@ -3911,6 +3946,30 @@
             "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen33",
             "promptIdx": 17
+          },
+          {
+            "type": "integer",
+            "name": "spare_fuel_cylinders_available",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Number of spare fuel cylinders available",
+                  "es": "Número de cilindros de combustible de repuesto disponibles"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Number of spare fuel cylinders available?",
+                  "es": "Número de cilindros de combustible de repuesto disponibles?"
+                }
+              }
+            },
+            "_row_num": 38,
+            "__rowNum__": 37,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen38",
+            "promptIdx": 18
           },
           {
             "type": "integer",
@@ -3931,12 +3990,12 @@
                 }
               }
             },
-            "_row_num": 39,
-            "__rowNum__": 38,
+            "_row_num": 40,
+            "__rowNum__": 39,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen38",
-            "promptIdx": 18
+            "_branch_label_enclosing_screen": "survey/_screen39",
+            "promptIdx": 19
           },
           {
             "type": "integer",
@@ -3957,12 +4016,12 @@
                 }
               }
             },
-            "_row_num": 40,
-            "__rowNum__": 39,
+            "_row_num": 41,
+            "__rowNum__": 40,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen38",
-            "promptIdx": 19
+            "_branch_label_enclosing_screen": "survey/_screen39",
+            "promptIdx": 20
           },
           {
             "type": "integer",
@@ -3983,12 +4042,12 @@
                 }
               }
             },
-            "_row_num": 43,
-            "__rowNum__": 42,
+            "_row_num": 44,
+            "__rowNum__": 43,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen42",
-            "promptIdx": 20
+            "_branch_label_enclosing_screen": "survey/_screen43",
+            "promptIdx": 21
           },
           {
             "type": "integer",
@@ -4009,20 +4068,20 @@
                 }
               }
             },
-            "_row_num": 44,
-            "__rowNum__": 43,
+            "_row_num": 45,
+            "__rowNum__": 44,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen42",
-            "promptIdx": 21
+            "_branch_label_enclosing_screen": "survey/_screen43",
+            "promptIdx": 22
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 46,
-            "_branch_label_enclosing_screen": "survey/_screen46",
-            "promptIdx": 22
+            "_row_num": 47,
+            "_branch_label_enclosing_screen": "survey/_screen47",
+            "promptIdx": 23
           }
         ],
         "validation_tag_map": {
@@ -4132,53 +4191,59 @@
             "operationIdx": 6
           },
           {
-            "clause": "begin screen",
             "_row_num": 38,
-            "__rowNum__": 37,
             "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 41,
-              "__rowNum__": 40,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 7
           },
           {
             "clause": "begin screen",
-            "_row_num": 42,
-            "__rowNum__": 41,
+            "_row_num": 39,
+            "__rowNum__": 38,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 45,
-              "__rowNum__": 44,
+              "_row_num": 42,
+              "__rowNum__": 41,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 8
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 43,
+            "__rowNum__": 42,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 46,
+              "__rowNum__": 45,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 9
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 46,
-            "operationIdx": 9
+            "_row_num": 47,
+            "operationIdx": 10
           },
           {
-            "_row_num": 46,
+            "_row_num": 47,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 10
+            "operationIdx": 11
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 46,
-            "operationIdx": 11
+            "_row_num": 47,
+            "operationIdx": 12
           }
         ],
         "branch_label_map": {
@@ -4190,9 +4255,10 @@
           "_screen29": 5,
           "_screen33": 6,
           "_screen38": 7,
-          "_screen42": 8,
-          "_contents": 10,
-          "_screen46": 10
+          "_screen39": 8,
+          "_screen43": 9,
+          "_contents": 11,
+          "_screen47": 11
         }
       }
     },
@@ -4608,10 +4674,29 @@
         "elementSet": "data",
         "elementPath": "contact_phone_number"
       },
+      "spare_fuel_cylinders_available": {
+        "_defn": [
+          {
+            "_row_num": 38,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": {
+          "text": {
+            "default": "Number of spare fuel cylinders available",
+            "es": "Número de cilindros de combustible de repuesto disponibles"
+          }
+        },
+        "elementKey": "spare_fuel_cylinders_available",
+        "elementName": "spare_fuel_cylinders_available",
+        "elementSet": "data",
+        "elementPath": "spare_fuel_cylinders_available"
+      },
       "number_of_cold_boxes": {
         "_defn": [
           {
-            "_row_num": 39,
+            "_row_num": 40,
             "section_name": "survey"
           }
         ],
@@ -4631,7 +4716,7 @@
       "number_of_fs_cold_boxes": {
         "_defn": [
           {
-            "_row_num": 40,
+            "_row_num": 41,
             "section_name": "survey"
           }
         ],
@@ -4651,7 +4736,7 @@
       "number_of_vaccine_carriers": {
         "_defn": [
           {
-            "_row_num": 43,
+            "_row_num": 44,
             "section_name": "survey"
           }
         ],
@@ -4671,7 +4756,7 @@
       "number_of_fs_vaccine_carriers": {
         "_defn": [
           {
-            "_row_num": 44,
+            "_row_num": 45,
             "section_name": "survey"
           }
         ],
@@ -5004,6 +5089,13 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":{\"default\":\"Total number of vaccine carriers at facility\",\"es\":\"Número total de portadores de vacunas en la facilidad\",\"fr\":\"Nombre de porte-vaccins dans l'établissement\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "spare_fuel_cylinders_available",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Number of spare fuel cylinders available\",\"es\":\"Número de cilindros de combustible de repuesto disponibles\"}}"
       },
       {
         "_partition": "Column",
