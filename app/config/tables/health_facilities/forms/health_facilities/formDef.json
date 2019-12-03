@@ -487,8 +487,12 @@
         "_row_num": 37
       },
       {
+        "clause": "begin screen",
+        "_row_num": 38
+      },
+      {
         "type": "integer",
-        "name": "spare_fuel_cylinders_available",
+        "name": "spare_fuel_cylinders",
         "display": {
           "title": {
             "text": {
@@ -503,11 +507,34 @@
             }
           }
         },
-        "_row_num": 38
+        "_row_num": 39
+      },
+      {
+        "type": "integer",
+        "name": "spare_temp_monitoring_devices",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Number of spare/replacement temperature monitoring devices",
+              "es": "Número de dispositivos de monitoreo de temperatura de repuesto/reemplazo"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Number of spare/replacement temperature monitoring devices?",
+              "es": "Número de dispositivos de monitoreo de temperatura de repuesto/reemplazo?"
+            }
+          }
+        },
+        "_row_num": 40
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 41
       },
       {
         "clause": "begin screen",
-        "_row_num": 39
+        "_row_num": 42
       },
       {
         "type": "integer",
@@ -528,7 +555,7 @@
             }
           }
         },
-        "_row_num": 40
+        "_row_num": 43
       },
       {
         "type": "integer",
@@ -549,15 +576,15 @@
             }
           }
         },
-        "_row_num": 41
+        "_row_num": 44
       },
       {
         "clause": "end screen",
-        "_row_num": 42
+        "_row_num": 45
       },
       {
         "clause": "begin screen",
-        "_row_num": 43
+        "_row_num": 46
       },
       {
         "type": "integer",
@@ -578,7 +605,7 @@
             }
           }
         },
-        "_row_num": 44
+        "_row_num": 47
       },
       {
         "type": "integer",
@@ -599,15 +626,15 @@
             }
           }
         },
-        "_row_num": 45
+        "_row_num": 48
       },
       {
         "clause": "end screen",
-        "_row_num": 46
+        "_row_num": 49
       },
       {
         "clause": "begin screen",
-        "_row_num": 47
+        "_row_num": 50
       },
       {
         "type": "integer",
@@ -626,7 +653,7 @@
             }
           }
         },
-        "_row_num": 48
+        "_row_num": 51
       },
       {
         "type": "integer",
@@ -645,7 +672,7 @@
             }
           }
         },
-        "_row_num": 49
+        "_row_num": 52
       },
       {
         "type": "integer",
@@ -664,11 +691,11 @@
             }
           }
         },
-        "_row_num": 50
+        "_row_num": 53
       },
       {
         "clause": "end screen",
-        "_row_num": 51
+        "_row_num": 54
       }
     ],
     "model": [
@@ -3315,10 +3342,10 @@
         },
         "elementKey": "contact_phone_number"
       },
-      "spare_fuel_cylinders_available": {
+      "spare_fuel_cylinders": {
         "_defn": [
           {
-            "_row_num": 38,
+            "_row_num": 39,
             "section_name": "survey"
           }
         ],
@@ -3329,12 +3356,28 @@
             "es": "Número de cilindros de combustible de repuesto disponibles"
           }
         },
-        "elementKey": "spare_fuel_cylinders_available"
+        "elementKey": "spare_fuel_cylinders"
+      },
+      "spare_temp_monitoring_devices": {
+        "_defn": [
+          {
+            "_row_num": 40,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": {
+          "text": {
+            "default": "Number of spare/replacement temperature monitoring devices",
+            "es": "Número de dispositivos de monitoreo de temperatura de repuesto/reemplazo"
+          }
+        },
+        "elementKey": "spare_temp_monitoring_devices"
       },
       "number_of_cold_boxes": {
         "_defn": [
           {
-            "_row_num": 40,
+            "_row_num": 43,
             "section_name": "survey"
           }
         ],
@@ -3351,7 +3394,7 @@
       "number_of_fs_cold_boxes": {
         "_defn": [
           {
-            "_row_num": 41,
+            "_row_num": 44,
             "section_name": "survey"
           }
         ],
@@ -3368,7 +3411,7 @@
       "number_of_vaccine_carriers": {
         "_defn": [
           {
-            "_row_num": 44,
+            "_row_num": 47,
             "section_name": "survey"
           }
         ],
@@ -3385,7 +3428,7 @@
       "number_of_fs_vaccine_carriers": {
         "_defn": [
           {
-            "_row_num": 45,
+            "_row_num": 48,
             "section_name": "survey"
           }
         ],
@@ -3402,7 +3445,7 @@
       "number_of_l3_packs": {
         "_defn": [
           {
-            "_row_num": 48,
+            "_row_num": 51,
             "section_name": "survey"
           }
         ],
@@ -3418,7 +3461,7 @@
       "number_of_l4_packs": {
         "_defn": [
           {
-            "_row_num": 49,
+            "_row_num": 52,
             "section_name": "survey"
           }
         ],
@@ -3434,7 +3477,7 @@
       "number_of_l6_packs": {
         "_defn": [
           {
-            "_row_num": 50,
+            "_row_num": 53,
             "section_name": "survey"
           }
         ],
@@ -4062,7 +4105,7 @@
           },
           {
             "type": "integer",
-            "name": "spare_fuel_cylinders_available",
+            "name": "spare_fuel_cylinders",
             "display": {
               "title": {
                 "text": {
@@ -4077,12 +4120,36 @@
                 }
               }
             },
-            "_row_num": 38,
-            "__rowNum__": 37,
+            "_row_num": 39,
+            "__rowNum__": 38,
             "_token_type": "prompt",
             "_type": "integer",
             "_branch_label_enclosing_screen": "survey/_screen38",
             "promptIdx": 18
+          },
+          {
+            "type": "integer",
+            "name": "spare_temp_monitoring_devices",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Number of spare/replacement temperature monitoring devices",
+                  "es": "Número de dispositivos de monitoreo de temperatura de repuesto/reemplazo"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Number of spare/replacement temperature monitoring devices?",
+                  "es": "Número de dispositivos de monitoreo de temperatura de repuesto/reemplazo?"
+                }
+              }
+            },
+            "_row_num": 40,
+            "__rowNum__": 39,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen38",
+            "promptIdx": 19
           },
           {
             "type": "integer",
@@ -4103,12 +4170,12 @@
                 }
               }
             },
-            "_row_num": 40,
-            "__rowNum__": 39,
+            "_row_num": 43,
+            "__rowNum__": 42,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen39",
-            "promptIdx": 19
+            "_branch_label_enclosing_screen": "survey/_screen42",
+            "promptIdx": 20
           },
           {
             "type": "integer",
@@ -4129,12 +4196,12 @@
                 }
               }
             },
-            "_row_num": 41,
-            "__rowNum__": 40,
+            "_row_num": 44,
+            "__rowNum__": 43,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen39",
-            "promptIdx": 20
+            "_branch_label_enclosing_screen": "survey/_screen42",
+            "promptIdx": 21
           },
           {
             "type": "integer",
@@ -4155,12 +4222,12 @@
                 }
               }
             },
-            "_row_num": 44,
-            "__rowNum__": 43,
+            "_row_num": 47,
+            "__rowNum__": 46,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen43",
-            "promptIdx": 21
+            "_branch_label_enclosing_screen": "survey/_screen46",
+            "promptIdx": 22
           },
           {
             "type": "integer",
@@ -4181,12 +4248,12 @@
                 }
               }
             },
-            "_row_num": 45,
-            "__rowNum__": 44,
+            "_row_num": 48,
+            "__rowNum__": 47,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen43",
-            "promptIdx": 22
+            "_branch_label_enclosing_screen": "survey/_screen46",
+            "promptIdx": 23
           },
           {
             "type": "integer",
@@ -4205,12 +4272,12 @@
                 }
               }
             },
-            "_row_num": 48,
-            "__rowNum__": 47,
+            "_row_num": 51,
+            "__rowNum__": 50,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen47",
-            "promptIdx": 23
+            "_branch_label_enclosing_screen": "survey/_screen50",
+            "promptIdx": 24
           },
           {
             "type": "integer",
@@ -4229,12 +4296,12 @@
                 }
               }
             },
-            "_row_num": 49,
-            "__rowNum__": 48,
+            "_row_num": 52,
+            "__rowNum__": 51,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen47",
-            "promptIdx": 24
+            "_branch_label_enclosing_screen": "survey/_screen50",
+            "promptIdx": 25
           },
           {
             "type": "integer",
@@ -4253,20 +4320,20 @@
                 }
               }
             },
-            "_row_num": 50,
-            "__rowNum__": 49,
+            "_row_num": 53,
+            "__rowNum__": 52,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen47",
-            "promptIdx": 25
+            "_branch_label_enclosing_screen": "survey/_screen50",
+            "promptIdx": 26
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 52,
-            "_branch_label_enclosing_screen": "survey/_screen52",
-            "promptIdx": 26
+            "_row_num": 55,
+            "_branch_label_enclosing_screen": "survey/_screen55",
+            "promptIdx": 27
           }
         ],
         "validation_tag_map": {
@@ -4376,63 +4443,71 @@
             "operationIdx": 6
           },
           {
+            "clause": "begin screen",
             "_row_num": 38,
+            "__rowNum__": 37,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\n\nreturn activePromptIndicies;\n}\n",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 41,
+              "__rowNum__": 40,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 7
           },
           {
             "clause": "begin screen",
-            "_row_num": 39,
-            "__rowNum__": 38,
+            "_row_num": 42,
+            "__rowNum__": 41,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 42,
-              "__rowNum__": 41,
+              "_row_num": 45,
+              "__rowNum__": 44,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 8
           },
           {
             "clause": "begin screen",
-            "_row_num": 43,
-            "__rowNum__": 42,
+            "_row_num": 46,
+            "__rowNum__": 45,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 46,
-              "__rowNum__": 45,
+              "_row_num": 49,
+              "__rowNum__": 48,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 9
           },
           {
             "clause": "begin screen",
-            "_row_num": 47,
-            "__rowNum__": 46,
+            "_row_num": 50,
+            "__rowNum__": 49,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 51,
-              "__rowNum__": 50,
+              "_row_num": 54,
+              "__rowNum__": 53,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\nactivePromptIndicies.push(24);\nactivePromptIndicies.push(25);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(24);\nactivePromptIndicies.push(25);\nactivePromptIndicies.push(26);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 10
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 52,
+            "_row_num": 55,
             "operationIdx": 11
           },
           {
-            "_row_num": 52,
+            "_row_num": 55,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(26);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(27);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
@@ -4441,7 +4516,7 @@
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 52,
+            "_row_num": 55,
             "operationIdx": 13
           }
         ],
@@ -4454,11 +4529,11 @@
           "_screen29": 5,
           "_screen33": 6,
           "_screen38": 7,
-          "_screen39": 8,
-          "_screen43": 9,
-          "_screen47": 10,
+          "_screen42": 8,
+          "_screen46": 9,
+          "_screen50": 10,
           "_contents": 12,
-          "_screen52": 12
+          "_screen55": 12
         }
       }
     },
@@ -4874,10 +4949,10 @@
         "elementSet": "data",
         "elementPath": "contact_phone_number"
       },
-      "spare_fuel_cylinders_available": {
+      "spare_fuel_cylinders": {
         "_defn": [
           {
-            "_row_num": 38,
+            "_row_num": 39,
             "section_name": "survey"
           }
         ],
@@ -4888,15 +4963,34 @@
             "es": "Número de cilindros de combustible de repuesto disponibles"
           }
         },
-        "elementKey": "spare_fuel_cylinders_available",
-        "elementName": "spare_fuel_cylinders_available",
+        "elementKey": "spare_fuel_cylinders",
+        "elementName": "spare_fuel_cylinders",
         "elementSet": "data",
-        "elementPath": "spare_fuel_cylinders_available"
+        "elementPath": "spare_fuel_cylinders"
+      },
+      "spare_temp_monitoring_devices": {
+        "_defn": [
+          {
+            "_row_num": 40,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": {
+          "text": {
+            "default": "Number of spare/replacement temperature monitoring devices",
+            "es": "Número de dispositivos de monitoreo de temperatura de repuesto/reemplazo"
+          }
+        },
+        "elementKey": "spare_temp_monitoring_devices",
+        "elementName": "spare_temp_monitoring_devices",
+        "elementSet": "data",
+        "elementPath": "spare_temp_monitoring_devices"
       },
       "number_of_cold_boxes": {
         "_defn": [
           {
-            "_row_num": 40,
+            "_row_num": 43,
             "section_name": "survey"
           }
         ],
@@ -4916,7 +5010,7 @@
       "number_of_fs_cold_boxes": {
         "_defn": [
           {
-            "_row_num": 41,
+            "_row_num": 44,
             "section_name": "survey"
           }
         ],
@@ -4936,7 +5030,7 @@
       "number_of_vaccine_carriers": {
         "_defn": [
           {
-            "_row_num": 44,
+            "_row_num": 47,
             "section_name": "survey"
           }
         ],
@@ -4956,7 +5050,7 @@
       "number_of_fs_vaccine_carriers": {
         "_defn": [
           {
-            "_row_num": 45,
+            "_row_num": 48,
             "section_name": "survey"
           }
         ],
@@ -4976,7 +5070,7 @@
       "number_of_l3_packs": {
         "_defn": [
           {
-            "_row_num": 48,
+            "_row_num": 51,
             "section_name": "survey"
           }
         ],
@@ -4995,7 +5089,7 @@
       "number_of_l4_packs": {
         "_defn": [
           {
-            "_row_num": 49,
+            "_row_num": 52,
             "section_name": "survey"
           }
         ],
@@ -5014,7 +5108,7 @@
       "number_of_l6_packs": {
         "_defn": [
           {
-            "_row_num": 50,
+            "_row_num": 53,
             "section_name": "survey"
           }
         ],
@@ -5370,10 +5464,17 @@
       },
       {
         "_partition": "Column",
-        "_aspect": "spare_fuel_cylinders_available",
+        "_aspect": "spare_fuel_cylinders",
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":{\"default\":\"Number of spare fuel cylinders available\",\"es\":\"Número de cilindros de combustible de repuesto disponibles\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "spare_temp_monitoring_devices",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Number of spare/replacement temperature monitoring devices\",\"es\":\"Número de dispositivos de monitoreo de temperatura de repuesto/reemplazo\"}}"
       },
       {
         "_partition": "Column",
