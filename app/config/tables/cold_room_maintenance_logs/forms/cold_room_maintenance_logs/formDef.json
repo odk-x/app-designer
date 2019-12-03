@@ -373,6 +373,52 @@
         "_row_num": 32
       },
       {
+        "clause": "begin screen",
+        "_row_num": 33
+      },
+      {
+        "type": "integer",
+        "name": "total_hrs_of_operation_unit1",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Total Hours of Operation Unit 1",
+              "es": "Total de horas de operación unidad 1"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Enter total hours of operation for unit 1",
+              "es": "Ingrese el total de horas de operación para la unidad 1"
+            }
+          }
+        },
+        "_row_num": 34
+      },
+      {
+        "type": "integer",
+        "name": "total_hrs_of_operation_unit2",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Total Hours of Operation Unit 2",
+              "es": "Total de horas de operación unidad 2"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Enter total hours of operation for unit 2",
+              "es": "Ingrese el total de horas de operación para la unidad 2"
+            }
+          }
+        },
+        "_row_num": 35
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 36
+      },
+      {
         "type": "note",
         "display": {
           "title": {
@@ -388,7 +434,7 @@
             }
           }
         },
-        "_row_num": 33
+        "_row_num": 37
       }
     ],
     "choices": [
@@ -1742,6 +1788,38 @@
           }
         },
         "elementKey": "other_spare_parts"
+      },
+      "total_hrs_of_operation_unit1": {
+        "_defn": [
+          {
+            "_row_num": 34,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": {
+          "text": {
+            "default": "Total Hours of Operation Unit 1",
+            "es": "Total de horas de operación unidad 1"
+          }
+        },
+        "elementKey": "total_hrs_of_operation_unit1"
+      },
+      "total_hrs_of_operation_unit2": {
+        "_defn": [
+          {
+            "_row_num": 35,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": {
+          "text": {
+            "default": "Total Hours of Operation Unit 2",
+            "es": "Total de horas de operación unidad 2"
+          }
+        },
+        "elementKey": "total_hrs_of_operation_unit2"
       }
     },
     "section_names": [
@@ -2232,6 +2310,54 @@
             "promptIdx": 14
           },
           {
+            "type": "integer",
+            "name": "total_hrs_of_operation_unit1",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Total Hours of Operation Unit 1",
+                  "es": "Total de horas de operación unidad 1"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Enter total hours of operation for unit 1",
+                  "es": "Ingrese el total de horas de operación para la unidad 1"
+                }
+              }
+            },
+            "_row_num": 34,
+            "__rowNum__": 33,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen33",
+            "promptIdx": 15
+          },
+          {
+            "type": "integer",
+            "name": "total_hrs_of_operation_unit2",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Total Hours of Operation Unit 2",
+                  "es": "Total de horas de operación unidad 2"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Enter total hours of operation for unit 2",
+                  "es": "Ingrese el total de horas de operación para la unidad 2"
+                }
+              }
+            },
+            "_row_num": 35,
+            "__rowNum__": 34,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen33",
+            "promptIdx": 16
+          },
+          {
             "type": "note",
             "display": {
               "title": {
@@ -2247,20 +2373,20 @@
                 }
               }
             },
-            "_row_num": 33,
-            "__rowNum__": 32,
+            "_row_num": 37,
+            "__rowNum__": 36,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen33",
-            "promptIdx": 15
+            "_branch_label_enclosing_screen": "survey/_screen37",
+            "promptIdx": 17
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 34,
-            "_branch_label_enclosing_screen": "survey/_screen34",
-            "promptIdx": 16
+            "_row_num": 38,
+            "_branch_label_enclosing_screen": "survey/_screen38",
+            "promptIdx": 18
           }
         ],
         "validation_tag_map": {
@@ -2312,31 +2438,45 @@
             "operationIdx": 2
           },
           {
+            "clause": "begin screen",
             "_row_num": 33,
+            "__rowNum__": 32,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 36,
+              "__rowNum__": 35,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\nactivePromptIndicies.push(16);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 3
+          },
+          {
+            "_row_num": 37,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(17);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 4
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 34,
-            "operationIdx": 4
+            "_row_num": 38,
+            "operationIdx": 5
           },
           {
-            "_row_num": 34,
+            "_row_num": 38,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 5
+            "operationIdx": 6
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 34,
-            "operationIdx": 6
+            "_row_num": 38,
+            "operationIdx": 7
           }
         ],
         "branch_label_map": {
@@ -2344,8 +2484,9 @@
           "_screen10": 1,
           "_screen29": 2,
           "_screen33": 3,
-          "_contents": 5,
-          "_screen34": 5
+          "_screen37": 4,
+          "_contents": 6,
+          "_screen38": 6
         }
       }
     },
@@ -2685,6 +2826,44 @@
         "elementSet": "data",
         "elementPath": "other_spare_parts"
       },
+      "total_hrs_of_operation_unit1": {
+        "_defn": [
+          {
+            "_row_num": 34,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": {
+          "text": {
+            "default": "Total Hours of Operation Unit 1",
+            "es": "Total de horas de operación unidad 1"
+          }
+        },
+        "elementKey": "total_hrs_of_operation_unit1",
+        "elementName": "total_hrs_of_operation_unit1",
+        "elementSet": "data",
+        "elementPath": "total_hrs_of_operation_unit1"
+      },
+      "total_hrs_of_operation_unit2": {
+        "_defn": [
+          {
+            "_row_num": 35,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": {
+          "text": {
+            "default": "Total Hours of Operation Unit 2",
+            "es": "Total de horas de operación unidad 2"
+          }
+        },
+        "elementKey": "total_hrs_of_operation_unit2",
+        "elementName": "total_hrs_of_operation_unit2",
+        "elementSet": "data",
+        "elementPath": "total_hrs_of_operation_unit2"
+      },
       "type_of_maintenance_items": {
         "type": "string",
         "elementKey": "type_of_maintenance_items",
@@ -2928,6 +3107,20 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":{\"default\":\"Technician Phone Number\",\"es\":\"Número de teléfono del técnico\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "total_hrs_of_operation_unit1",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Total Hours of Operation Unit 1\",\"es\":\"Total de horas de operación unidad 1\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "total_hrs_of_operation_unit2",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Total Hours of Operation Unit 2\",\"es\":\"Total de horas de operación unidad 2\"}}"
       },
       {
         "_partition": "Column",

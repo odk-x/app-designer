@@ -12,6 +12,8 @@ spare_parts,spare_parts,array,"[""spare_parts_items""]"
 spare_parts_items,items,string,[]
 technician_name,technician_name,string,[]
 technician_phone,technician_phone,string,[]
+total_hrs_of_operation_unit1,total_hrs_of_operation_unit1,integer,[]
+total_hrs_of_operation_unit2,total_hrs_of_operation_unit2,integer,[]
 type_of_maintenance,type_of_maintenance,array,"[""type_of_maintenance_items""]"
 type_of_maintenance_items,items,string,[]
 type_of_preventative_maintenance,type_of_preventative_maintenance,array,"[""type_of_preventative_maintenance_items""]"
