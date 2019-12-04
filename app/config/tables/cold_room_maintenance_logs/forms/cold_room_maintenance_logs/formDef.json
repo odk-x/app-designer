@@ -131,19 +131,19 @@
         "_row_num": 11
       },
       {
-        "type": "string",
-        "name": "notes",
+        "type": "text",
+        "name": "actions_taken",
         "display": {
           "title": {
             "text": {
-              "default": "Notes",
-              "es": "Notas"
+              "default": "Actions Taken",
+              "es": "Acciones tomadas"
             }
           },
           "prompt": {
             "text": {
-              "default": "Enter any extra notes",
-              "es": "Notas extras"
+              "default": "Enter actions taken",
+              "es": "Ingrese las acciones tomadas"
             }
           }
         },
@@ -176,18 +176,18 @@
       },
       {
         "type": "text",
-        "name": "other_maintenance",
+        "name": "other_maintenance_notes",
         "display": {
           "title": {
             "text": {
-              "default": "Other Maintenance",
-              "es": "Otro mantenimiento"
+              "default": "Additional Notes for Other Maintenance",
+              "es": "Notas adicionales para otro mantenimiento"
             }
           },
           "prompt": {
             "text": {
-              "default": "Enter other maintenance",
-              "es": "Ingrese otro mantenimiento"
+              "default": "Enter additional notes for other maintenance",
+              "es": "Ingrese notas adicionales para otro mantenimiento"
             }
           }
         },
@@ -229,18 +229,18 @@
       },
       {
         "type": "text",
-        "name": "other_repair",
+        "name": "other_repair_notes",
         "display": {
           "title": {
             "text": {
-              "default": "Other Repair",
-              "es": "Otra Reparación"
+              "default": "Notes for Other Repair Maintenance",
+              "es": "Notas para otro mantenimiento de reparación"
             }
           },
           "prompt": {
             "text": {
-              "default": "Enter other repair",
-              "es": "Ingrese otra reparación"
+              "default": "Enter notes for other repair maintenance",
+              "es": "Ingrese notas para otro mantenimiento de reparación"
             }
           }
         },
@@ -251,19 +251,19 @@
         "_row_num": 21
       },
       {
-        "type": "text",
-        "name": "repair_activities",
+        "type": "string",
+        "name": "repair_notes",
         "display": {
           "title": {
             "text": {
-              "default": "Repair Activities",
-              "es": "Actividades de Reparacion"
+              "default": "Additional Repair Notes",
+              "es": "Notas de reparación adicionales"
             }
           },
           "prompt": {
             "text": {
-              "default": "Enter actions taken",
-              "es": "Ingrese las acciones tomadas"
+              "default": "Enter additional repair notes",
+              "es": "Ingrese notas de reparación adicionales"
             }
           }
         },
@@ -300,18 +300,18 @@
       },
       {
         "type": "text",
-        "name": "preventative_comments",
+        "name": "preventative_notes",
         "display": {
           "title": {
             "text": {
-              "default": "Comments",
-              "es": "Comentarios"
+              "default": "Additional Preventative Maintenance Notes",
+              "es": "Notas de mantenimiento preventivo adicionales"
             }
           },
           "prompt": {
             "text": {
-              "default": "Enter comments",
-              "es": "Ingrese comentarios"
+              "default": "Enter additional preventative maintenance notes",
+              "es": "Ingrese notas de mantenimiento preventivo adicionales"
             }
           }
         },
@@ -1609,7 +1609,7 @@
         },
         "elementKey": "date_serviced"
       },
-      "notes": {
+      "actions_taken": {
         "_defn": [
           {
             "_row_num": 12,
@@ -1619,11 +1619,11 @@
         "type": "string",
         "displayName": {
           "text": {
-            "default": "Notes",
-            "es": "Notas"
+            "default": "Actions Taken",
+            "es": "Acciones tomadas"
           }
         },
-        "elementKey": "notes"
+        "elementKey": "actions_taken"
       },
       "type_of_maintenance": {
         "_defn": [
@@ -1646,7 +1646,7 @@
         "valuesList": "maint_types",
         "elementKey": "type_of_maintenance"
       },
-      "other_maintenance": {
+      "other_maintenance_notes": {
         "_defn": [
           {
             "_row_num": 15,
@@ -1656,11 +1656,11 @@
         "type": "string",
         "displayName": {
           "text": {
-            "default": "Other Maintenance",
-            "es": "Otro mantenimiento"
+            "default": "Additional Notes for Other Maintenance",
+            "es": "Notas adicionales para otro mantenimiento"
           }
         },
-        "elementKey": "other_maintenance"
+        "elementKey": "other_maintenance_notes"
       },
       "type_of_repair": {
         "_defn": [
@@ -1683,7 +1683,7 @@
         "valuesList": "repair_types",
         "elementKey": "type_of_repair"
       },
-      "other_repair": {
+      "other_repair_notes": {
         "_defn": [
           {
             "_row_num": 20,
@@ -1693,13 +1693,13 @@
         "type": "string",
         "displayName": {
           "text": {
-            "default": "Other Repair",
-            "es": "Otra Reparación"
+            "default": "Notes for Other Repair Maintenance",
+            "es": "Notas para otro mantenimiento de reparación"
           }
         },
-        "elementKey": "other_repair"
+        "elementKey": "other_repair_notes"
       },
-      "repair_activities": {
+      "repair_notes": {
         "_defn": [
           {
             "_row_num": 22,
@@ -1709,11 +1709,11 @@
         "type": "string",
         "displayName": {
           "text": {
-            "default": "Repair Activities",
-            "es": "Actividades de Reparacion"
+            "default": "Additional Repair Notes",
+            "es": "Notas de reparación adicionales"
           }
         },
-        "elementKey": "repair_activities"
+        "elementKey": "repair_notes"
       },
       "type_of_preventative_maintenance": {
         "_defn": [
@@ -1736,7 +1736,7 @@
         "valuesList": "preventative_maint_types",
         "elementKey": "type_of_preventative_maintenance"
       },
-      "preventative_comments": {
+      "preventative_notes": {
         "_defn": [
           {
             "_row_num": 26,
@@ -1746,11 +1746,11 @@
         "type": "string",
         "displayName": {
           "text": {
-            "default": "Comments",
-            "es": "Comentarios"
+            "default": "Additional Preventative Maintenance Notes",
+            "es": "Notas de mantenimiento preventivo adicionales"
           }
         },
-        "elementKey": "preventative_comments"
+        "elementKey": "preventative_notes"
       },
       "spare_parts": {
         "_defn": [
@@ -2066,26 +2066,26 @@
             "promptIdx": 4
           },
           {
-            "type": "string",
-            "name": "notes",
+            "type": "text",
+            "name": "actions_taken",
             "display": {
               "title": {
                 "text": {
-                  "default": "Notes",
-                  "es": "Notas"
+                  "default": "Actions Taken",
+                  "es": "Acciones tomadas"
                 }
               },
               "prompt": {
                 "text": {
-                  "default": "Enter any extra notes",
-                  "es": "Notas extras"
+                  "default": "Enter actions taken",
+                  "es": "Ingrese las acciones tomadas"
                 }
               }
             },
             "_row_num": 12,
             "__rowNum__": 11,
             "_token_type": "prompt",
-            "_type": "string",
+            "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen10",
             "promptIdx": 5
           },
@@ -2116,18 +2116,18 @@
           },
           {
             "type": "text",
-            "name": "other_maintenance",
+            "name": "other_maintenance_notes",
             "display": {
               "title": {
                 "text": {
-                  "default": "Other Maintenance",
-                  "es": "Otro mantenimiento"
+                  "default": "Additional Notes for Other Maintenance",
+                  "es": "Notas adicionales para otro mantenimiento"
                 }
               },
               "prompt": {
                 "text": {
-                  "default": "Enter other maintenance",
-                  "es": "Ingrese otro mantenimiento"
+                  "default": "Enter additional notes for other maintenance",
+                  "es": "Ingrese notas adicionales para otro mantenimiento"
                 }
               }
             },
@@ -2165,18 +2165,18 @@
           },
           {
             "type": "text",
-            "name": "other_repair",
+            "name": "other_repair_notes",
             "display": {
               "title": {
                 "text": {
-                  "default": "Other Repair",
-                  "es": "Otra Reparación"
+                  "default": "Notes for Other Repair Maintenance",
+                  "es": "Notas para otro mantenimiento de reparación"
                 }
               },
               "prompt": {
                 "text": {
-                  "default": "Enter other repair",
-                  "es": "Ingrese otra reparación"
+                  "default": "Enter notes for other repair maintenance",
+                  "es": "Ingrese notas para otro mantenimiento de reparación"
                 }
               }
             },
@@ -2188,26 +2188,26 @@
             "promptIdx": 9
           },
           {
-            "type": "text",
-            "name": "repair_activities",
+            "type": "string",
+            "name": "repair_notes",
             "display": {
               "title": {
                 "text": {
-                  "default": "Repair Activities",
-                  "es": "Actividades de Reparacion"
+                  "default": "Additional Repair Notes",
+                  "es": "Notas de reparación adicionales"
                 }
               },
               "prompt": {
                 "text": {
-                  "default": "Enter actions taken",
-                  "es": "Ingrese las acciones tomadas"
+                  "default": "Enter additional repair notes",
+                  "es": "Ingrese notas de reparación adicionales"
                 }
               }
             },
             "_row_num": 22,
             "__rowNum__": 21,
             "_token_type": "prompt",
-            "_type": "text",
+            "_type": "string",
             "_branch_label_enclosing_screen": "survey/_screen10",
             "promptIdx": 10
           },
@@ -2238,18 +2238,18 @@
           },
           {
             "type": "text",
-            "name": "preventative_comments",
+            "name": "preventative_notes",
             "display": {
               "title": {
                 "text": {
-                  "default": "Comments",
-                  "es": "Comentarios"
+                  "default": "Additional Preventative Maintenance Notes",
+                  "es": "Notas de mantenimiento preventivo adicionales"
                 }
               },
               "prompt": {
                 "text": {
-                  "default": "Enter comments",
-                  "es": "Ingrese comentarios"
+                  "default": "Enter additional preventative maintenance notes",
+                  "es": "Ingrese notas de mantenimiento preventivo adicionales"
                 }
               }
             },
@@ -2588,7 +2588,7 @@
         "elementSet": "data",
         "elementPath": "date_serviced"
       },
-      "notes": {
+      "actions_taken": {
         "_defn": [
           {
             "_row_num": 12,
@@ -2598,14 +2598,14 @@
         "type": "string",
         "displayName": {
           "text": {
-            "default": "Notes",
-            "es": "Notas"
+            "default": "Actions Taken",
+            "es": "Acciones tomadas"
           }
         },
-        "elementKey": "notes",
-        "elementName": "notes",
+        "elementKey": "actions_taken",
+        "elementName": "actions_taken",
         "elementSet": "data",
-        "elementPath": "notes"
+        "elementPath": "actions_taken"
       },
       "type_of_maintenance": {
         "_defn": [
@@ -2638,7 +2638,7 @@
           "type_of_maintenance_items"
         ]
       },
-      "other_maintenance": {
+      "other_maintenance_notes": {
         "_defn": [
           {
             "_row_num": 15,
@@ -2648,14 +2648,14 @@
         "type": "string",
         "displayName": {
           "text": {
-            "default": "Other Maintenance",
-            "es": "Otro mantenimiento"
+            "default": "Additional Notes for Other Maintenance",
+            "es": "Notas adicionales para otro mantenimiento"
           }
         },
-        "elementKey": "other_maintenance",
-        "elementName": "other_maintenance",
+        "elementKey": "other_maintenance_notes",
+        "elementName": "other_maintenance_notes",
         "elementSet": "data",
-        "elementPath": "other_maintenance"
+        "elementPath": "other_maintenance_notes"
       },
       "type_of_repair": {
         "_defn": [
@@ -2688,7 +2688,7 @@
           "type_of_repair_items"
         ]
       },
-      "other_repair": {
+      "other_repair_notes": {
         "_defn": [
           {
             "_row_num": 20,
@@ -2698,16 +2698,16 @@
         "type": "string",
         "displayName": {
           "text": {
-            "default": "Other Repair",
-            "es": "Otra Reparación"
+            "default": "Notes for Other Repair Maintenance",
+            "es": "Notas para otro mantenimiento de reparación"
           }
         },
-        "elementKey": "other_repair",
-        "elementName": "other_repair",
+        "elementKey": "other_repair_notes",
+        "elementName": "other_repair_notes",
         "elementSet": "data",
-        "elementPath": "other_repair"
+        "elementPath": "other_repair_notes"
       },
-      "repair_activities": {
+      "repair_notes": {
         "_defn": [
           {
             "_row_num": 22,
@@ -2717,14 +2717,14 @@
         "type": "string",
         "displayName": {
           "text": {
-            "default": "Repair Activities",
-            "es": "Actividades de Reparacion"
+            "default": "Additional Repair Notes",
+            "es": "Notas de reparación adicionales"
           }
         },
-        "elementKey": "repair_activities",
-        "elementName": "repair_activities",
+        "elementKey": "repair_notes",
+        "elementName": "repair_notes",
         "elementSet": "data",
-        "elementPath": "repair_activities"
+        "elementPath": "repair_notes"
       },
       "type_of_preventative_maintenance": {
         "_defn": [
@@ -2757,7 +2757,7 @@
           "type_of_preventative_maintenance_items"
         ]
       },
-      "preventative_comments": {
+      "preventative_notes": {
         "_defn": [
           {
             "_row_num": 26,
@@ -2767,14 +2767,14 @@
         "type": "string",
         "displayName": {
           "text": {
-            "default": "Comments",
-            "es": "Comentarios"
+            "default": "Additional Preventative Maintenance Notes",
+            "es": "Notas de mantenimiento preventivo adicionales"
           }
         },
-        "elementKey": "preventative_comments",
-        "elementName": "preventative_comments",
+        "elementKey": "preventative_notes",
+        "elementName": "preventative_notes",
         "elementSet": "data",
-        "elementPath": "preventative_comments"
+        "elementPath": "preventative_notes"
       },
       "spare_parts": {
         "_defn": [
@@ -3012,6 +3012,13 @@
     "properties": [
       {
         "_partition": "Column",
+        "_aspect": "actions_taken",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Actions Taken\",\"es\":\"Acciones tomadas\"}}"
+      },
+      {
+        "_partition": "Column",
         "_aspect": "cold_room_id",
         "_key": "displayName",
         "_type": "object",
@@ -3026,24 +3033,17 @@
       },
       {
         "_partition": "Column",
-        "_aspect": "notes",
+        "_aspect": "other_maintenance_notes",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Notes\",\"es\":\"Notas\"}}"
+        "_value": "{\"text\":{\"default\":\"Additional Notes for Other Maintenance\",\"es\":\"Notas adicionales para otro mantenimiento\"}}"
       },
       {
         "_partition": "Column",
-        "_aspect": "other_maintenance",
+        "_aspect": "other_repair_notes",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Other Maintenance\",\"es\":\"Otro mantenimiento\"}}"
-      },
-      {
-        "_partition": "Column",
-        "_aspect": "other_repair",
-        "_key": "displayName",
-        "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Other Repair\",\"es\":\"Otra Reparación\"}}"
+        "_value": "{\"text\":{\"default\":\"Notes for Other Repair Maintenance\",\"es\":\"Notas para otro mantenimiento de reparación\"}}"
       },
       {
         "_partition": "Column",
@@ -3054,17 +3054,17 @@
       },
       {
         "_partition": "Column",
-        "_aspect": "preventative_comments",
+        "_aspect": "preventative_notes",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Comments\",\"es\":\"Comentarios\"}}"
+        "_value": "{\"text\":{\"default\":\"Additional Preventative Maintenance Notes\",\"es\":\"Notas de mantenimiento preventivo adicionales\"}}"
       },
       {
         "_partition": "Column",
-        "_aspect": "repair_activities",
+        "_aspect": "repair_notes",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Repair Activities\",\"es\":\"Actividades de Reparacion\"}}"
+        "_value": "{\"text\":{\"default\":\"Additional Repair Notes\",\"es\":\"Notas de reparación adicionales\"}}"
       },
       {
         "_partition": "Column",
