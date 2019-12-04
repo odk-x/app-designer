@@ -248,22 +248,23 @@ module.exports = function (grunt) {
         open: {
             server: {
                 path: 'http://localhost:<%= connect.options.port %>/index.html',
-                app: (function() {
+                app: {app: (function() {
                     var platform = require('os').platform();
                     // windows: *win*
                     // mac: darwin
                     if (platform.search('win') >= 0 &&
-                        platform.search('darwin') < 0) {
-                        // Windows expects chrome.
-                        grunt.log.writeln('detected Windows environment');
-                        return 'chrome';
+                      platform.search('darwin') < 0) {
+                      // Windows expects chrome.
+                      grunt.log.writeln('detected Windows environment');
+                      return 'chrome';
                     } else {
-                        // Mac (and maybe others--add as discovered), expects
-                        // Google Chrome
-                        grunt.log.writeln('detected non-Windows environment');
-                        return 'Google Chrome';
+                      // Mac (and maybe others--add as discovered), expects
+                      // Google Chrome
+                      grunt.log.writeln('detected non-Windows environment');
+                      return 'Google Chrome';
                     }
-                })()
+                  })()
+                }
             }
         },
     });
