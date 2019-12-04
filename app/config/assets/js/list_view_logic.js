@@ -27,6 +27,7 @@ window.listViewLogic = {
     listQueryParams: null,
 
     searchParams: null,
+    orderBy: null,
 
     listElemId: null,
     imgId: null,
@@ -99,6 +100,18 @@ window.listViewLogic = {
         var that = this;
 
         that.searchParams = searchParamsToUse;
+    },
+
+    setOrderBy: function(orderByToUse) {
+        if (orderByToUse === null || orderByToUse === undefined ||
+            orderByToUse.length === 0) {
+            console.log('setOrderBy: invalid order by to use');
+            return;
+        }
+
+        var that = this;
+
+        that.orderBy = orderByToUse;
     },
 
     setListElement: function(listElemIdToUse) {
@@ -335,6 +348,16 @@ window.listViewLogic = {
         return sqlUriParamStmt;
     },
 
+    appendOrderByToListQuery: function(queryToUse) {
+        var resQuery = queryToUse;
+
+        var that = this;
+        if(that.orderBy !== null && that.orderBy !== undefined && that.orderBy.length > 0) {
+            resQuery += ' ' + that.orderBy;
+        }
+        return resQuery;
+    },
+
     getUriQueryParams: function() {
         var uriArgs = [];
         var retUriParams = util.getAllQueryParameters();
@@ -434,6 +457,7 @@ window.listViewLogic = {
                 that.queryToRunParams = that.queryToRunParams.concat(that.getUriQueryParams());
 
                 that.queryToRun = that.listQuery + addSql;
+                that.queryToRun = that.appendOrderByToListQuery(that.queryToRun);
                 queryToRunParts[that.queryStmt] = that.queryToRun;
                 queryToRunParts[that.queryArgs] = that.queryToRunParams;
                 odkCommon.setSessionVariable(that.queryKey, JSON.stringify(queryToRunParts));

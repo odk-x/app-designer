@@ -1528,6 +1528,22 @@ window.odkCommonDefinitions = {
         "es": "UVRI"
       },
       "_row_num": 175
+    },
+    "view_map_of_all_health_facilities": {
+      "string_token": "view_map_of_all_health_facilities",
+      "text": {
+        "default": "View Map of All Health Facilities",
+        "es": "Ver mapa de todas las instalaciones de salud"
+      },
+      "_row_num": 176
+    },
+    "view_list_of_all_health_facilities": {
+      "string_token": "view_list_of_all_health_facilities",
+      "text": {
+        "default": "View List of All Health Facilities",
+        "es": "Ver la lista de todas las instalaciones de salud"
+      },
+      "_row_num": 177
     }
   },
   "_locales": {

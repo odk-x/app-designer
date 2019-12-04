@@ -8,6 +8,7 @@ var listQuery = 'SELECT * FROM health_facilities WHERE _sync_state != ?';
 
 var listQueryParams = [util.deletedSyncState];
 var searchParams = '(facility_id LIKE ? OR facility_name LIKE ?)';
+var orderBy = 'ORDER BY facility_name ASC';
 
 function resumeFunc(state) {
     if (state === 'init') {
@@ -24,6 +25,7 @@ function resumeFunc(state) {
         listViewLogic.setListQuery(listQuery);
         listViewLogic.setListQueryParams(listQueryParams);
         listViewLogic.setSearchParams(searchParams);
+        listViewLogic.setOrderBy(orderBy);
         listViewLogic.setListElement('#list');
         listViewLogic.setSearchTextElement('#search');
         listViewLogic.setHeaderElement('#header');

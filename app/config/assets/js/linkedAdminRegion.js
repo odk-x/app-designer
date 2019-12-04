@@ -13,7 +13,8 @@ async function display() {
     body.css('background-image', 'url(img/hallway.jpg)');
 
     var locale = odkCommon.getPreferredLocale();
-    $('#view-facilities').text(odkCommon.localizeText(locale, "view_all_health_facilities"));
+    $('#view-facilities-map').text(odkCommon.localizeText(locale, "view_map_of_all_health_facilities"));
+    $('#view-facilities-list').text(odkCommon.localizeText(locale, "view_list_of_all_health_facilities"));
     $('#filter-facilities').text(odkCommon.localizeText(locale, "filter_health_facilities_by_type"));
     $('#view-all-refrigerators').text(odkCommon.localizeText(locale, "view_all_refrigerators"));
     $('#view-service-refrigerators').text(odkCommon.localizeText(locale, "view_all_refrigerators_needing_service"));
@@ -43,14 +44,23 @@ async function display() {
     }
 
 
-    var viewFacilitiesButton = $('#view-facilities');
-    viewFacilitiesButton.on(
+    var viewFacilitiesMapButton = $('#view-facilities-map');
+    viewFacilitiesMapButton.on(
         'click',
         function() {
             var uriParams = util.getKeyToAppendToColdChainURL(util.adminRegionId, linkedRegionId);
              odkTables.openTableToMapView(null, 'health_facilities',
                 adminRegionQueryStr, [linkedRegionId, util.deletedSyncState],
                  'config/tables/health_facilities/html/hFacilities_list.html' + uriParams);
+        }
+    );
+
+    var viewFacilitiesListButton = $('#view-facilities-list');
+    viewFacilitiesListButton.on(
+        'click',
+        function() {
+            var uriParams = util.getKeyToAppendToColdChainURL(util.adminRegionId, linkedRegionId);
+            odkTables.launchHTML(null,'config/tables/health_facilities/html/health_facilities_list.html' + uriParams);
         }
     );
 
