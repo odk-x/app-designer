@@ -1544,6 +1544,14 @@ window.odkCommonDefinitions = {
         "es": "Ver la lista de todas las instalaciones de salud"
       },
       "_row_num": 177
+    },
+    "temperature_monitoring_device": {
+      "string_token": "temperature_monitoring_device",
+      "text": {
+        "default": "Temperature Monitoring Device?",
+        "es": "¿Dispositivo de monitoreo de temperatura?"
+      },
+      "_row_num": 178
     }
   },
   "_locales": {

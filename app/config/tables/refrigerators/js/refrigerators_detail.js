@@ -26,6 +26,8 @@ function processFrigPromises(facilityResult, typeResult, logResult) {
     util.showIdForDetail('#voltage_regulator', 'voltage_regulator', refrigeratorsResultSet, true);
     util.showIdForDetail('#maintenance_priority', 'maintenance_priority', refrigeratorsResultSet, true);
     util.showIdForDetail('#date_serviced', 'date_serviced', logResult, true);
+    util.showIdForDetail('#temperature_monitoring_device', 'temperature_monitoring_device', refrigeratorsResultSet, true);
+
 }
 
 function cbSuccess(result) {
@@ -99,6 +101,7 @@ function display() {
     $('#frig-id').text(odkCommon.localizeText(locale, "refrigerator_id"));
     $('#ser-num').text(odkCommon.localizeText(locale, "serial_number"));
     $('#volt-reg').text(odkCommon.localizeText(locale, "voltage_regulator"));
+    $('#temp-mon').text(odkCommon.localizeText(locale, "temperature_monitoring_device"));
     $('#date-srv').text(odkCommon.localizeText(locale, "date_serviced"));
 
     $('#vw-mdl-info').text(odkCommon.localizeText(locale, "view_model_information"));
