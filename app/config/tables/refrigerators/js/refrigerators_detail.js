@@ -23,10 +23,15 @@ function processFrigPromises(facilityResult, typeResult, logResult) {
     util.showIdForDetail('#install_year', 'year_installed', refrigeratorsResultSet, false);
     util.showIdForDetail('#functional_status', 'functional_status', refrigeratorsResultSet, true);
     util.showIdForDetail('#reason_not_working', 'reason_not_working', refrigeratorsResultSet, true);
-    util.showIdForDetail('#voltage_regulator', 'voltage_regulator', refrigeratorsResultSet, true);
     util.showIdForDetail('#maintenance_priority', 'maintenance_priority', refrigeratorsResultSet, true);
     util.showIdForDetail('#date_serviced', 'date_serviced', logResult, true);
-    util.showIdForDetail('#temperature_monitoring_device', 'temperature_monitoring_device', refrigeratorsResultSet, true);
+
+    // Show N/A if value is null
+    var NOT_APPLICABLE = 'N/A';
+    util.showIdForDetail('#temperature_monitoring_device',
+        'temperature_monitoring_device_functional_status', refrigeratorsResultSet, true, NOT_APPLICABLE);
+    util.showIdForDetail('#voltage_regulator', 'voltage_regulator_functional_status', refrigeratorsResultSet, true,
+        NOT_APPLICABLE);
 
 }
 
@@ -112,7 +117,7 @@ function display() {
     $('#ed-frig').text(odkCommon.localizeText(locale, "edit_refrigerator"));
     $('#del-frig').text(odkCommon.localizeText(locale, "delete_refrigerator"));
     $('#add-sent-survey').text(odkCommon.localizeText(locale, "add_sentinel_survey"));
-    $('#vw-sent-survey').text(odkCommon.localizeText(locale, "view_sentinel_survey"))
+    $('#vw-sent-survey').text(odkCommon.localizeText(locale, "view_sentinel_survey"));
 
     odkData.getViewData(cbSuccess, cbFailure);
 }

@@ -616,7 +616,7 @@ util.formatColIdForDisplay = function(colId, index, resultSet, applyFormat) {
 
 };
 
-util.showIdForDetail = function(idOfElement, colId, resultSet, applyFormat) {
+util.showIdForDetail = function(idOfElement, colId, resultSet, applyFormat, defaultValue) {
     if (idOfElement === null || idOfElement === undefined ||
         idOfElement.length === 0) {
         return;
@@ -652,6 +652,10 @@ util.showIdForDetail = function(idOfElement, colId, resultSet, applyFormat) {
         }
 
         $(idOfElement).text(textToDisplay);
+    } else {
+        if (defaultValue !== null && defaultValue !== undefined) {
+            $(idOfElement).text(defaultValue);
+        }
     }
 
 };
