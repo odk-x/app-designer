@@ -1560,6 +1560,14 @@ window.odkCommonDefinitions = {
         "es": "Acciones tomadas:"
       },
       "_row_num": 179
+    },
+    "not_applicable": {
+      "string_token": "not_applicable",
+      "text": {
+        "default": "Not Applicable",
+        "es": "No Aplica"
+      },
+      "_row_num": 180
     }
   },
   "_locales": {

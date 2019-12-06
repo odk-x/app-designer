@@ -27,11 +27,12 @@ function processFrigPromises(facilityResult, typeResult, logResult) {
     util.showIdForDetail('#date_serviced', 'date_serviced', logResult, true);
 
     // Show N/A if value is null
-    var NOT_APPLICABLE = 'N/A';
+    var locale = odkCommon.getPreferredLocale();
     util.showIdForDetail('#temperature_monitoring_device',
-        'temperature_monitoring_device_functional_status', refrigeratorsResultSet, true, NOT_APPLICABLE);
+        'temperature_monitoring_device_functional_status', refrigeratorsResultSet, true,
+        odkCommon.localizeText(locale, 'not_applicable'));
     util.showIdForDetail('#voltage_regulator', 'voltage_regulator_functional_status', refrigeratorsResultSet, true,
-        NOT_APPLICABLE);
+        odkCommon.localizeText(locale, 'not_applicable'));
 
 }
 
