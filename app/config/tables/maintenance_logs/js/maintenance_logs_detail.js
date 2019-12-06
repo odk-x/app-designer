@@ -25,7 +25,7 @@ function cbFrigSuccess(result) {
     util.showIdForDetail('#spare_parts_solar', 'spare_parts_solar', maintenanceLogsResultSet, true);
 
     util.showIdForDetail('#addtl_spare_parts', 'other_spare_parts', maintenanceLogsResultSet, true);
-    util.showIdForDetail('#notes', 'notes', maintenanceLogsResultSet, false);
+    util.showIdForDetail('#actions_taken', 'actions_taken', maintenanceLogsResultSet, false);
 
 }
 
@@ -101,7 +101,7 @@ function display() {
     $('#date-srv').text(odkCommon.localizeText(locale, "date_serviced"));
     $('#type-of-mnt').text(odkCommon.localizeText(locale, "type_of_maintenance"));
     $('#add-sp-prt').text(odkCommon.localizeText(locale, "additional_spare_parts"));
-    $('#notes-lbl').text(odkCommon.localizeText(locale, "notes"));
+    $('#act-tkn-lbl').text(odkCommon.localizeText(locale, "actions_taken"));
 
     $('#sp-prt-elec').text(odkCommon.localizeText(locale, "spare_parts_electrical"));
     $('#sp-prt-hard').text(odkCommon.localizeText(locale, "spare_parts_hardware"));

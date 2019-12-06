@@ -19,7 +19,7 @@ function cbCRSuccess(result) {
     util.showIdForDetail('#spare_parts', 'spare_parts', crMaintenanceLogsResultSet, true);
 
     util.showIdForDetail('#addtl_spare_parts', 'other_spare_parts', crMaintenanceLogsResultSet, true);
-    util.showIdForDetail('#notes', 'notes', crMaintenanceLogsResultSet, false);
+    util.showIdForDetail('#actions_taken', 'actions_taken', crMaintenanceLogsResultSet, false);
 
 }
 
@@ -89,7 +89,7 @@ function display() {
     $('#type-of-mnt').text(odkCommon.localizeText(locale, "type_of_maintenance"));
     $('#sp-prt').text(odkCommon.localizeText(locale, "spare_parts"));
     $('#add-sp-prt').text(odkCommon.localizeText(locale, "additional_spare_parts"));
-    $('#notes-lbl').text(odkCommon.localizeText(locale, "notes"));
+    $('#act-tkn-lbl').text(odkCommon.localizeText(locale, "actions_taken"));
 
     $('#edit-log').text(odkCommon.localizeText(locale, "edit_log"));
     $('#del-log').text(odkCommon.localizeText(locale, "delete_log"));

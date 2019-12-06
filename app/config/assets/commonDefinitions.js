@@ -1552,6 +1552,14 @@ window.odkCommonDefinitions = {
         "es": "¿Dispositivo de monitoreo de temperatura?"
       },
       "_row_num": 178
+    },
+    "actions_taken": {
+      "string_token": "actions_taken",
+      "text": {
+        "default": "Actions Taken:",
+        "es": "Acciones tomadas:"
+      },
+      "_row_num": 179
     }
   },
   "_locales": {
