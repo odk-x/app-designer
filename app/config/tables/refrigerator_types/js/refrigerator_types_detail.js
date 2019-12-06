@@ -36,14 +36,12 @@ function cbFailure(error) {
 function refrigeratorsCBSuccess(invData) {
     var locale = odkCommon.getPreferredLocale();
 
-    $('#model_name').text(refrigeratorTypeResultSet.get('model_id'));
-    $('#catalog_id').text(refrigeratorTypeResultSet.get('catalog_id'));
+    util.showIdForDetail('#model_name', 'model_id', refrigeratorTypeResultSet, false);
+    util.showIdForDetail('#catalog_id', 'catalog_id', refrigeratorTypeResultSet, false);
 
-    $('#manufacturer').text(refrigeratorTypeResultSet.get('manufacturer'));
+    util.showIdForDetail('#manufacturer', 'manufacturer', refrigeratorTypeResultSet, false);
 
-    // var powerArray = JSON.parse(refrigeratorTypeResultSet.get('power_source'));
-    // $('#power_sources').text(util.formatDisplayText(powerArray.join(', ')));
-    $('#power_sources').text(refrigeratorTypeResultSet.get('power_source'));
+    util.showIdForDetail('#power_sources', 'power_source', refrigeratorTypeResultSet, true);
 
     $('#r_gross_vol').text(refrigeratorTypeResultSet.get('refrigerator_gross_volume') + ' ' +
         odkCommon.localizeText(locale, "liters_unit"));
@@ -51,10 +49,9 @@ function refrigeratorsCBSuccess(invData) {
     $('#f_gross_vol').text(refrigeratorTypeResultSet.get('freezer_gross_volume') + ' ' +
         odkCommon.localizeText(locale, "liters_unit"));
 
-    $('#equipment_type').text(util.formatDisplayText(
-        refrigeratorTypeResultSet.get('equipment_type')));
-    $('#climate_zone').text(util.formatDisplayText(
-        refrigeratorTypeResultSet.get('climate_zone')));
+    util.showIdForDetail('#power_sources', 'power_source', refrigeratorTypeResultSet, true);
+    util.showIdForDetail('#equipment_type', 'equipment_type', refrigeratorTypeResultSet, true);
+    util.showIdForDetail('#climate_zone', 'climate_zone', refrigeratorTypeResultSet, true);
 
     $('#r_net_vol').text(refrigeratorTypeResultSet.get('refrigerator_net_volume') + ' ' +
         odkCommon.localizeText(locale, "liters_unit"));
@@ -78,7 +75,7 @@ function refrigeratorsCBSuccess(invData) {
     refPic.attr('src', src);
     refPic.attr('class', 'img');
 
-    $('#catalogID').text(refrigeratorTypeResultSet.get('catalog_id'));
+    util.showIdForDetail('#catalogID', 'catalog_id', refrigeratorTypeResultSet, false);
     $('#fridge_list').text(invData.getCount());
 }
 

@@ -16,11 +16,7 @@ function cbCRSuccess(result) {
     util.showIdForDetail('#reason_not_working', 'reason_not_working', coldRoomData, true);
     util.showIdForDetail('#date_serviced', 'date_serviced', crMaintenanceLogsResultSet, true);
     util.showIdForDetail('#maint_type', 'type_of_maintenance', crMaintenanceLogsResultSet, true);
-
-    var spareParts = crMaintenanceLogsResultSet.get('spare_parts');
-    if (spareParts !== null && spareParts !== undefined) {
-        $('#spare_parts').text(crMaintenanceLogsResultSet.get('spare_parts'));
-    }
+    util.showIdForDetail('#spare_parts', 'spare_parts', crMaintenanceLogsResultSet, true);
 
     util.showIdForDetail('#addtl_spare_parts', 'other_spare_parts', crMaintenanceLogsResultSet, true);
     util.showIdForDetail('#notes', 'notes', crMaintenanceLogsResultSet, false);

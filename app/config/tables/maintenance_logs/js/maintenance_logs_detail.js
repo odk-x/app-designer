@@ -17,12 +17,12 @@ function cbFrigSuccess(result) {
     util.showIdForDetail('#date_serviced', 'date_serviced', maintenanceLogsResultSet, true);
     util.showIdForDetail('#maint_type', 'type_of_maintenance', maintenanceLogsResultSet, true);
 
-    showIdArrayForDetail('#spare_parts_electrical', maintenanceLogsResultSet, 'spare_parts_electrical');
-    showIdArrayForDetail('#spare_parts_hardware', maintenanceLogsResultSet, 'spare_parts_hardware');
-    showIdArrayForDetail('#spare_parts_monitoring', maintenanceLogsResultSet, 'spare_parts_monitoring');
-    showIdArrayForDetail('#spare_parts_power', maintenanceLogsResultSet, 'spare_parts_power');
-    showIdArrayForDetail('#spare_parts_refrigeration', maintenanceLogsResultSet, 'spare_parts_refrigeration');
-    showIdArrayForDetail('#spare_parts_solar', maintenanceLogsResultSet, 'spare_parts_solar');
+    util.showIdForDetail('#spare_parts_electrical', 'spare_parts_electrical', maintenanceLogsResultSet, true);
+    util.showIdForDetail('#spare_parts_hardware', 'spare_parts_hardware', maintenanceLogsResultSet, true);
+    util.showIdForDetail('#spare_parts_monitoring', 'spare_parts_monitoring', maintenanceLogsResultSet, true);
+    util.showIdForDetail('#spare_parts_power', 'spare_parts_power', maintenanceLogsResultSet, true);
+    util.showIdForDetail('#spare_parts_refrigeration', 'spare_parts_refrigeration', maintenanceLogsResultSet, true);
+    util.showIdForDetail('#spare_parts_solar', 'spare_parts_solar', maintenanceLogsResultSet, true);
 
     util.showIdForDetail('#addtl_spare_parts', 'other_spare_parts', maintenanceLogsResultSet, true);
     util.showIdForDetail('#notes', 'notes', maintenanceLogsResultSet, false);

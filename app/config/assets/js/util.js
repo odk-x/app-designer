@@ -647,6 +647,16 @@ util.showIdForDetail = function(idOfElement, colId, resultSet, applyFormat, defa
 
     var textToDisplay = resultSet.get(colId);
     if (textToDisplay !== null && textToDisplay !== undefined && textToDisplay.length !== 0) {
+        // Additional formatting needed for select_multiple
+        if (elementMetadata.type === 'array') {
+            // Remove square brackets and quotes
+            textToDisplay = '' + textToDisplay
+                .replace(/"/g, '')
+                .replace(/,/g, ', ')
+                .replace(/\[/g, '')
+                .replace(/\]/g, '');
+
+        }
         if (applyFormat) {
            textToDisplay = util.formatDisplayText(textToDisplay);
         }
