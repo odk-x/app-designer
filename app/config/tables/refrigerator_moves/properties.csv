@@ -4,6 +4,10 @@ Column,new_facility_id,displayName,object,"{""text"":""new_facility_id""}"
 Column,old_facility_id,displayName,object,"{""text"":""old_facility_id""}"
 Column,refrigerator_id,displayName,object,"{""text"":""refrigerator_id""}"
 FormType,default,FormType.formType,string,SURVEY
-SurveyUtil,default,SurveyUtil.formId,string,refrigerator_moves
-Table,default,defaultViewType,string,SPREADSHEET
+SurveyUtil,default,SurveyUtil.formId,string,wrong_form
+Table,default,defaultViewType,string,LIST
+Table,default,detailViewFileName,string,config/tables/refrigerator_moves/html/refrigerator_moves_detail.html
 Table,default,displayName,object,"{""text"":""Refrigerator Moves""}"
+Table,default,listViewFileName,string,config/tables/refrigerator_moves/html/refrigerator_moves_list.html
+Table,security,defaultAccessOnCreation,string,HIDDEN
+Table,security,unverifiedUserCanCreate,boolean,false

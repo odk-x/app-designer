@@ -123,6 +123,64 @@
         },
         "_row_num": 9
       }
+    ],
+    "properties": [
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "defaultViewType",
+        "type": "string",
+        "value": "LIST",
+        "_row_num": 2
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "detailViewFileName",
+        "type": "string",
+        "value": "config/tables/refrigerator_moves/html/refrigerator_moves_detail.html",
+        "_row_num": 3
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "listViewFileName",
+        "type": "string",
+        "value": "config/tables/refrigerator_moves/html/refrigerator_moves_list.html",
+        "_row_num": 4
+      },
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "unverifiedUserCanCreate",
+        "type": "boolean",
+        "value": "false",
+        "_row_num": 5
+      },
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "defaultAccessOnCreation",
+        "type": "string",
+        "value": "HIDDEN",
+        "_row_num": 6
+      },
+      {
+        "partition": "FormType",
+        "aspect": "default",
+        "key": "FormType.formType",
+        "type": "string",
+        "value": "SURVEY",
+        "_row_num": 8
+      },
+      {
+        "partition": "SurveyUtil",
+        "aspect": "default",
+        "key": "SurveyUtil.formId",
+        "type": "string",
+        "value": "wrong_form",
+        "_row_num": 9
+      }
     ]
   },
   "specification": {
@@ -848,14 +906,21 @@
         "_aspect": "default",
         "_key": "SurveyUtil.formId",
         "_type": "string",
-        "_value": "refrigerator_moves"
+        "_value": "wrong_form"
       },
       {
         "_partition": "Table",
         "_aspect": "default",
         "_key": "defaultViewType",
         "_type": "string",
-        "_value": "SPREADSHEET"
+        "_value": "LIST"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "detailViewFileName",
+        "_type": "string",
+        "_value": "config/tables/refrigerator_moves/html/refrigerator_moves_detail.html"
       },
       {
         "_partition": "Table",
@@ -863,6 +928,27 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":\"Refrigerator Moves\"}"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "listViewFileName",
+        "_type": "string",
+        "_value": "config/tables/refrigerator_moves/html/refrigerator_moves_list.html"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "defaultAccessOnCreation",
+        "_type": "string",
+        "_value": "HIDDEN"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "unverifiedUserCanCreate",
+        "_type": "boolean",
+        "_value": "false"
       }
     ]
   }

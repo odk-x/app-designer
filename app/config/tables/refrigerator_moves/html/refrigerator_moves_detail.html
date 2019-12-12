@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!-- TBL_IV_REF Detailed View -->
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="../../../assets/css/detail.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../../../assets/commonDefinitions.js"></script>
+        <script type="text/javascript" src="../../../assets/libs/jquery-3.4.1.js"></script>
+        <script type="text/javascript" src="../../../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="../../../assets/js/util.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript" src="../js/refrigerator_moves_detail.js"></script>
+
+        <div class="header col-12">
+            <h1><span id="ref-mv-hdr">Refrigerator Move</span> <span id="tracking_id" class=""></span></h1>
+        </div>
+
+        <br>
+
+        <div class="detail col-12">
+            <h3 id="ref-mv-info">Refrigerator Move Information</span></h3>
+        </div>
+
+
+        <p><span class="detailHdr" id="mv-frm-fac">Moved From Facility:</span> <span id="old_facility_id"></span>
+        <p><span class="detailHdr" id="mv-to-fac">Moved To Facility:</span> <span id="new_facility_id"></span></p>
+        <p><span class="detailHdr" id="mv-date">Move Date:</span> <span id="move_date"></span></p>
+
+        <div id="delMvBtn" class="button buttonDelete hideButton">
+            <h3 id="del-mv" href="#" onclick="onDeleteMove()">Delete Move</h3>
+        </div>
+
+        <script>
+            $(function() { display(); });
+        </script>
+    </body>
+</html>

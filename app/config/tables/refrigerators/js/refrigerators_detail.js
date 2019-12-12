@@ -180,6 +180,17 @@ function onMovFrig() {
     }
 }
 
+function onClickViewAllFrigMoves() {
+    if (!$.isEmptyObject(refrigeratorsResultSet)) {
+
+        var keyToAppend = 'refrigerator_moves.refrigerator_id';
+
+        var frigIdQueryParams = util.getKeyToAppendToColdChainURL(keyToAppend, refrigeratorsResultSet.get('_id'));
+        odkTables.launchHTML(null,
+            'config/tables/refrigerator_moves/html/refrigerator_moves_list.html' + frigIdQueryParams);
+    }
+}
+
 function onClickAddMntRec() {
     if (!$.isEmptyObject(refrigeratorsResultSet)) {
 
