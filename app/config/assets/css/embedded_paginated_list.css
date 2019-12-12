@@ -1,0 +1,112 @@
+#wrapper {
+    overflow: auto;
+    margin-bottom: 50px;
+}
+
+li {
+    list-style-type: none;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+
+ul {
+    padding: 0;
+}
+
+.item_space {
+    font-size: 12pt;
+    padding: 5px;
+    width: 95%;
+    padding-top: 16px;
+    padding-bottom: 8px;
+    display: inline-block;
+    background: cadetblue;
+    color: white;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.item_space:active {
+    background-color: teal;
+}
+
+.detail {
+    font-size: 16pt;
+    color: #fff;
+    font-weight: normal;
+}
+
+.chevron {
+    float: right;
+    padding-right: 15px;
+    padding-top: 15px;
+    margin: 0;
+    height: 40px;
+}
+
+.divider {
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: darkslategray;
+    width: 95%;
+    height: 2px;
+    margin-bottom: 0px;
+}
+
+#searchBox {
+    font-size: 15pt;
+    text-align: center;
+    width: 100%;
+    border-bottom: 2px solid teal;
+    margin: auto;
+    padding-top: 1px;
+}
+
+#form {
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#search {
+    padding: 5px;
+    height: 35px;
+    border: 1px solid darkslategray;
+    width: 250px;
+    margin: auto;
+}
+
+#submit {
+    padding: 5px;
+    border: 1px solid #808080;
+    width: 100px;
+    height: 47px;
+    background-color: darkslategray;
+    color: white;
+    margin: auto;
+}
+
+.btnDiv{
+    display:inline-block;
+    width: 90%;
+    margin: 10px;
+}
+
+.prevBtnDiv{
+    width: 15%;
+    float: left;
+}
+
+.nextBtnDiv{
+    width: 15%;
+    float: right;
+}
+
+.dropdownLimit {
+    background-color: white;
+    padding: 10px;
+    margin: 5px;
+}
+
+.navTextStyle {
+    font-size: 10pt;
+}

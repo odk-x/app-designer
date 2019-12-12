@@ -16,7 +16,7 @@ window.listViewLogic = {
     queryStmt: 'stmt',
     queryArgs: 'args',
 
-    rowCount: 0,  
+    rowCount: 0,
     limit: -1,
     offset: 0,
 
@@ -47,7 +47,33 @@ window.listViewLogic = {
     firstDetColId: null,
     secondDetLabel: null,
     secondDetColId: null,
-    
+
+    useUriParams: true,
+
+    onClickHandler: null,
+
+    setOnClickHandler: function(clickHandler) {
+        if (clickHandler === null || clickHandler === undefined) {
+            console.log('setOnClickHandler: invalid onClickHandler');
+            return;
+        }
+
+        var that = this;
+
+        that.onClickHandler = clickHandler;
+    },
+
+    setUseUriParams: function(shouldUseUriParams) {
+        if (shouldUseUriParams === null || shouldUseUriParams === undefined) {
+            console.log('setUseUriParams: invalid use uri params');
+            return;
+        }
+
+        var that = this;
+
+        that.useUriParams = shouldUseUriParams;
+    },
+
     setTableId: function(tableName) {
         if (tableName === null || tableName === undefined ||
             tableName.length === 0) {
@@ -65,7 +91,7 @@ window.listViewLogic = {
         that.queryKey = that.tableId + ':query';
         that.searchKey = that.tableId + ':search';
     },
-    
+
     setListQuery: function(queryToUse) {
         if (queryToUse === null || queryToUse === undefined ||
             queryToUse.length === 0) {
@@ -169,7 +195,7 @@ window.listViewLogic = {
             return;
         }
 
-        if (nextBtnIdToUse === null || nextBtnIdToUse === undefined || 
+        if (nextBtnIdToUse === null || nextBtnIdToUse === undefined ||
             nextBtnIdToUse.length === 0) {
             console.log('setPrevAndNextButtons: invalid next button id');
             return;
@@ -188,13 +214,13 @@ window.listViewLogic = {
             return;
         }
 
-        if (txtOffset === null || txtOffset === undefined || 
+        if (txtOffset === null || txtOffset === undefined ||
             txtOffset.length === 0) {
             console.log('setNavTextElements: invalid text offset id');
             return;
         }
 
-        if (txtCnt === null || txtCnt === undefined || 
+        if (txtCnt === null || txtCnt === undefined ||
             txtCnt.length === 0) {
             console.log('setNavTextElements: invalid text cnt id');
             return;
@@ -221,7 +247,7 @@ window.listViewLogic = {
         }
     },
 
-    setColIdsToDisplayInList: function(headerLabel, headerColId, 
+    setColIdsToDisplayInList: function(headerLabel, headerColId,
             firstDetailLabel, firstDetailColId, secondDetailLabel, secondDetailColId) {
         var that = this;
 
@@ -247,7 +273,7 @@ window.listViewLogic = {
 
         if (secondDetailColId !== null && secondDetailColId !== undefined && secondDetailColId.length !== 0) {
             that.secondDetColId = secondDetailColId;
-        }  
+        }
     },
 
     setImageToDisplayInList: function(imgIdToUse) {
@@ -298,7 +324,7 @@ window.listViewLogic = {
 
         // Display the results in the list
         that.updateNavButtons();
-        
+
         // Right now we have a problem with having the count(*)
         // respect group privileges
         // This is a hack until I can fix this!
@@ -335,16 +361,16 @@ window.listViewLogic = {
         } else {
             sqlUriParamStmt = ' AND ';
         }
-        
+
         for (var i = 0; i < uriKeys.length; i++) {
             var uKey = uriKeys[i];
 
             sqlUriParamStmt += uKey + ' = ?';
-            
+
             if (i < uriKeys.length - 1) {
                 sqlUriParamStmt += ' AND ';
             }
-        } 
+        }
         return sqlUriParamStmt;
     },
 
@@ -367,11 +393,11 @@ window.listViewLogic = {
         }
 
         var uriKeys = Object.keys(retUriParams);
-        
+
         for (var i = 0; i < uriKeys.length; i++) {
             var uKey = uriKeys[i];
             uriArgs.push(retUriParams[uKey]);
-        } 
+        }
 
         return uriArgs;
     },
@@ -385,7 +411,7 @@ window.listViewLogic = {
             var searchText = odkCommon.getSessionVariable(that.searchKey);
             if (searchText !== null && searchText !== undefined && searchText.length !== 0) {
                 $(that.searchTxtId).val(searchText);
-            } 
+            }
 
             that.rowCount = odkCommon.getSessionVariable(that.rowCountKey);
             if (that.rowCount === null || that.rowCount === undefined) {
@@ -402,11 +428,11 @@ window.listViewLogic = {
             } else {
                 that.offset = parseInt(that.offset);
             }
-    
+
             that.limit = odkCommon.getSessionVariable(that.limitKey);
             if (that.limit === null || that.limit === undefined) {
                 that.limit = -1;
-                if (that.limitId !== null && that.limitId !== undefined && 
+                if (that.limitId !== null && that.limitId !== undefined &&
                     that.limitId.length !== 0) {
                     var limitSelected = that.limitId + ' option:selected';
                     that.limit = parseInt($(limitSelected).text());
@@ -414,11 +440,11 @@ window.listViewLogic = {
 
                 odkCommon.setSessionVariable(that.limitKey, that.limit);
             } else {
-                if (that.limitId !== null && that.limitId !== undefined && 
+                if (that.limitId !== null && that.limitId !== undefined &&
                     that.limitId.length !== 0) {
                     $(that.limitId).val(that.limit);
                 }
- 
+
                 that.limit = parseInt(that.limit);
             }
 
@@ -453,26 +479,27 @@ window.listViewLogic = {
                     that.listQueryParams.length !== 0) {
                     that.queryToRunParams = that.queryToRunParams.concat(that.listQueryParams);
                 }
-                var addSql = that.appendUriParamsToListQuery();
-                that.queryToRunParams = that.queryToRunParams.concat(that.getUriQueryParams());
 
-                that.queryToRun = that.listQuery + addSql;
+                that.queryToRun = that.listQuery;
+                that.addUriSqlAndParamsToQuery();
+
                 that.queryToRun = that.appendOrderByToListQuery(that.queryToRun);
+
                 queryToRunParts[that.queryStmt] = that.queryToRun;
                 queryToRunParts[that.queryArgs] = that.queryToRunParams;
                 odkCommon.setSessionVariable(that.queryKey, JSON.stringify(queryToRunParts));
-            } 
+            }
         }
 
         var cntQueryToRun = that.makeCntQuery(that.queryToRun);
 
         var cntQueryPromise = new Promise(function(resolve, reject) {
-            odkData.arbitraryQuery(that.tableId, 
+            odkData.arbitraryQuery(that.tableId,
                 cntQueryToRun, that.queryToRunParams, null, null, resolve, reject);
         });
 
         var queryPromise = new Promise(function(resolve, reject)  {
-            odkData.arbitraryQuery(that.tableId, 
+            odkData.arbitraryQuery(that.tableId,
                 that.queryToRun, that.queryToRunParams, that.limit, that.offset, resolve, reject);
         });
 
@@ -497,8 +524,13 @@ window.listViewLogic = {
                 // make sure we retrieved the rowId
                 if (rowId !== null && rowId !== undefined) {
                     // we'll pass null as the relative path to use the default file
-                    odkTables.openDetailView(null, that.tableId, rowId, null);
-                    console.log('opened detail view');
+                    if (that.onClickHandler === null || that.onClickHandler === undefined) {
+                        odkTables.openDetailView(null, that.tableId, rowId, null);
+                        console.log('opened detail view');
+                    } else {
+                        that.onClickHandler(rowId, containingDiv.text());
+                        console.log('onClickHandler called');
+                    }
                 }
             });
         }
@@ -571,7 +603,7 @@ window.listViewLogic = {
                     });
 
                     deleteButton.text(deleteTxt);
-            
+
                     item.append(deleteButton);
                 }
 
@@ -593,10 +625,10 @@ window.listViewLogic = {
                     });
 
                     editButton.text(editTxt);
-            
+
                     item.append(editButton);
                 }
-            } 
+            }
 
             if (that.secondDetColId !== null && that.secondDetColId !== undefined && that.secondDetColId.length !== 0) {
                 var field2 = $('<li>');
@@ -613,7 +645,7 @@ window.listViewLogic = {
                     var uriAbsolute = odkCommon.getRowFileAsUrl(that.tableId, resultSet.getRowId(i), uriRelative);
                     src = uriAbsolute;
                 }
-                
+
                 var thumbnail = $('<img>');
                 thumbnail.attr('src', src);
                 thumbnail.attr('class', 'imgWrapper');
@@ -668,9 +700,9 @@ window.listViewLogic = {
                 that.navTextLimit.length !== 0) {
 
                 // Hack until group permissions can be respected
-                // We need a special case for when limit > actualResultSet and 
+                // We need a special case for when limit > actualResultSet and
                 // offset + actualResultSet < rowCount - then we need to display something else
-                
+
                 if (actualResultSetCnt < that.limit) {
                     var actualCnt = that.offset + actualResultSetCnt;
                     if (actualCnt < that.rowCount) {
@@ -690,7 +722,7 @@ window.listViewLogic = {
         if (that.prevBtnId !== null && that.prevBtnId !== undefined &&
             that.prevBtnId.length !== 0) {
             if (that.offset <= 0) {
-                $(that.prevBtnId).prop('disabled',true);  
+                $(that.prevBtnId).prop('disabled',true);
             } else {
                 $(that.prevBtnId).prop('disabled',false);
             }
@@ -699,9 +731,9 @@ window.listViewLogic = {
         if (that.nextBtnId !== null && that.nextBtnId !== undefined &&
             that.nextBtnId.length !== 0) {
             if (that.offset + that.limit >= that.rowCount) {
-                $(that.nextBtnId).prop('disabled',true);  
+                $(that.nextBtnId).prop('disabled',true);
             } else {
-                $(that.nextBtnId).prop('disabled',false);  
+                $(that.nextBtnId).prop('disabled',false);
             }
         }
     },
@@ -737,7 +769,7 @@ window.listViewLogic = {
 
         that.updateNavButtons();
 
-        if (that.offset + that.limit >= that.rowCount) {  
+        if (that.offset + that.limit >= that.rowCount) {
             return;
         }
 
@@ -761,7 +793,7 @@ window.listViewLogic = {
 
     getSearchResults :function() {
         var that = this;
-        if (that.searchTxtId === null || that.searchTxtId === undefined || 
+        if (that.searchTxtId === null || that.searchTxtId === undefined ||
             that.searchTxtId.length === 0) {
             return;
         }
@@ -778,17 +810,18 @@ window.listViewLogic = {
                 that.queryToRunParams = that.queryToRunParams.concat(that.listQueryParams);
             }
 
-            var addSql = that.appendUriParamsToListQuery();
-            var queryWithParams = that.listQuery + addSql;
-            that.queryToRun = that.makeSearchQuery(queryWithParams);
-            that.queryToRunParams = that.queryToRunParams.concat(that.getUriQueryParams());
+            that.queryToRun = that.listQuery;
+            that.addUriSqlAndParamsToQuery();
+            that.queryToRun = that.makeSearchQuery(that.queryToRun);
 
-            // Count the number of ?'s in queryToRun and 
+            that.queryToRun = that.appendOrderByToListQuery(that.queryToRun);
+
+            // Count the number of ?'s in queryToRun and
             // append that to queryToRunParams
             var searchParamsToAdd = that.searchParams.split('?').length - 1;
             for (var i = 0; i < searchParamsToAdd; i++) {
                 that.queryToRunParams.push(searchText);
-            } 
+            }
 
             var queryToRunParts = {};
             queryToRunParts[that.queryStmt] = that.queryToRun;
@@ -805,7 +838,7 @@ window.listViewLogic = {
 
     clearResults: function() {
         var that = this;
-        if (that.searchTxtId === null || that.searchTxtId === undefined || 
+        if (that.searchTxtId === null || that.searchTxtId === undefined ||
             that.searchTxtId.length === 0) {
             return;
         }
@@ -821,10 +854,10 @@ window.listViewLogic = {
                 that.listQueryParams.length > 0) {
                 that.queryToRunParams = that.queryToRunParams.concat(that.listQueryParams);
             }
+            that.queryToRun = that.listQuery;
+            that.addUriSqlAndParamsToQuery();
 
-            var addSql = that.appendUriParamsToListQuery();
-            that.queryToRun = that.listQuery + addSql;
-            that.queryToRunParams = that.queryToRunParams.concat(that.getUriQueryParams());
+            that.queryToRun = that.appendOrderByToListQuery(that.queryToRun);
 
             var queryToRunParts = {};
             queryToRunParts[that.queryStmt] = that.queryToRun;
@@ -835,8 +868,17 @@ window.listViewLogic = {
             that.offset = 0;
             odkCommon.setSessionVariable(that.offsetKey, that.offset);
 
-            that.resumeFn('undoSearch');  
-        }  
+            that.resumeFn('undoSearch');
+        }
+    },
+
+    addUriSqlAndParamsToQuery: function() {
+        var that = this;
+        if (that.useUriParams) {
+            var addSql = that.appendUriParamsToListQuery();
+            that.queryToRun = that.listQuery + addSql;
+            that.queryToRunParams = that.queryToRunParams.concat(that.getUriQueryParams());
+        }
     }
 };
 })();

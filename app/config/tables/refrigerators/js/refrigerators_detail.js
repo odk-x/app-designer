@@ -47,6 +47,9 @@ function cbSuccess(result) {
 
         var editStatusButton = $('#editFrigStatusBtn');
         editStatusButton.removeClass('hideButton');
+
+        var moveButton = $('#movFrigBtn');
+        moveButton.removeClass('hideButton');
     }
 
     if (access.indexOf('d') !== -1) {
@@ -166,6 +169,14 @@ function onDeleteFrig() {
                 refrigeratorsResultSet.getRowId(0),
                 cbDeleteSuccess, cbDeleteFailure);
         }
+    }
+}
+
+function onMovFrig() {
+    if (!$.isEmptyObject(refrigeratorsResultSet)) {
+        var frigIdQueryParams = util.getKeyToAppendToColdChainURL(util.refrigeratorRowId, refrigeratorsResultSet.get('_id'));
+        odkTables.launchHTML(null,
+            'config/tables/refrigerators/html/refrigerators_move.html' + frigIdQueryParams);
     }
 }
 

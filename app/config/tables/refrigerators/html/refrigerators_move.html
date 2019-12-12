@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../../assets/css/detail.css" type="text/css" rel="stylesheet" />
+    <link href="../../../assets/css/embedded_paginated_list.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="../../../assets/commonDefinitions.js"></script>
+    <script type="text/javascript" src="../../../assets/libs/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="../../../../system/js/odkCommon.js"></script>
+    <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
+    <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
+    <script type="text/javascript" src="../../../assets/js/util.js"></script>
+    <script type="text/javascript" src="../../../assets/js/list_view_logic.js"></script>
+</head>
+<body>
+<script type="text/javascript" src="../js/refrigerators_move.js"></script>
+
+<div class="header col-12">
+    <h1><span id="frig-hdr">Refrigerator</span> <span id="tracking_id" class=""></span></h1>
+</div>
+
+<br>
+
+<div class="detail col-12">
+    <h3 id="frig-info">Refrigerator Information</span></h3>
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <p><span class="detailHdr" id="manu-id">Manufacturer:</span> <span id="manufacturer_id"></span></p>
+        <p><span class="detailHdr" id="mdl-id">Model ID:</span> <span id="model_id"></span></p>
+        <p><span class="detailHdr" id="frig-id">Refrigerator ID:</span> <span id="refrigerator_id"></span>
+        <p><span class="detailHdr" id="ser-num">Serial Number:</span> <span id="serial_number"></span>
+    </div>
+
+    <div class="col-6">
+        <p ><span class="detailHdr" id="curr-fac">Current Facility:</span> <span id="facility_name"></span></p>
+        <p ><span class="detailHdr" id="fac-to-move-to">Facility to Move To:</span> <span id="facility_to_move_to_name"></span></p>
+    </div>
+</div>
+
+<div id="searchBox">
+    <form id="form" action="javascript:getSearchListResults();">
+        <input id="search" type="text" name="query" onblur="clearListResults()"/>
+        <input id="submit" type="submit" value="Search" />
+    </form>
+    <div class="btnDiv">
+        <div class="prevBtnDiv"><button id="prevButton" class="btn" onclick="prevListResults()">Prev</button></div>
+        <select id="limitDropdown" class="dropdownLimit" onchange="newListLimit();">
+            <option value="5">5</option>
+            <option value="10">10</option>
+        </select>
+        <span id="navigation-text" class="navTextStyle"><span id="showing">Showing</span> <span id="navTextOffset"></span>-<span id="navTextLimit"></span> <span id="of">of</span> <span id="navTextCnt"></span></span>
+        <div class="nextBtnDiv"><button id="nextButton"class="btn" onclick="nextListResults()">Next</button></div>
+    </div>
+</div>
+
+<div id="wrapper">
+    <div id="list"></div>
+</div>
+
+
+<div id="mvRefBtn" class="button hideButton">
+    <h3 id="mv-ref" href="#" onclick="onMoveRefrigerator()">Move Refrigerator</h3>
+</div>
+
+<script>
+    $(function() { resumeFunc('init'); });
+</script>
+</body>
+</html>

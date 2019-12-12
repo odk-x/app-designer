@@ -28,6 +28,7 @@ util.groupPrivileged = 'groupPrivileged';
 util.hiddenDefaultAccess = 'HIDDEN';
 util.deletedSyncState = 'deleted';
 util.separator = '/';
+util.refrigeratorRowId = 'refrigerator_row_id';
 
 util.translateAdminRegionName = function(locale, regionName) {
     if (regionName === null || regionName === undefined) {

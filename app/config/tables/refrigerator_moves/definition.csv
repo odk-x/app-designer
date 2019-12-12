@@ -1,0 +1,5 @@
+_element_key,_element_name,_element_type,_list_child_element_keys
+move_date,move_date,date,[]
+new_facility_id,new_facility_id,string,[]
+old_facility_id,old_facility_id,string,[]
+refrigerator_id,refrigerator_id,string,[]
