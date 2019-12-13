@@ -1591,24 +1591,6 @@ window.odkFrameworkDefinitions = {
         "fr": "Supprimer le réfrigérateur"
       },
       "_row_num": 179
-    },
-    "add_sentinel_survey": {
-      "string_token": "add_sentinel_survey",
-      "text": {
-        "default": "Add Sentinel Survey",
-        "es": "Añadir Encuesta Centinela",
-        "fr": "Nombre de réfrigérateurs"
-      },
-      "_row_num": 180
-    },
-    "view_sentinel_survey": {
-      "string_token": "view_sentinel_survey",
-      "text": {
-        "default": "View Sentinel Surveys",
-        "es": "Ver encuestas de Centinela",
-        "fr": "Voir les enquêtes sentinelles"
-      },
-      "_row_num": 181
     }
   }
 }

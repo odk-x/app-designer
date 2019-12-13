@@ -121,7 +121,10 @@ function onEditCRStatus() {
 function onDeleteCR() {
     if (!$.isEmptyObject(coldRoomsResultSet)) {
 
-        if (confirm('Are you sure you want to delete this cold room?')) {
+        var locale = odkCommon.getPreferredLocale();
+        var confirmMsg = odkCommon.localizeText(locale, 'are_you_sure_you_want_to_delete_this_cold_room');
+
+        if (confirm(confirmMsg)) {
 
             odkData.deleteRow(
                 'cold_rooms',

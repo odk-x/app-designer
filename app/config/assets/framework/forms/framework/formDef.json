@@ -1806,24 +1806,6 @@
           "fr": "Supprimer le réfrigérateur"
         },
         "_row_num": 179
-      },
-      {
-        "string_token": "add_sentinel_survey",
-        "text": {
-          "default": "Add Sentinel Survey",
-          "es": "Añadir Encuesta Centinela",
-          "fr": "Nombre de réfrigérateurs"
-        },
-        "_row_num": 180
-      },
-      {
-        "string_token": "view_sentinel_survey",
-        "text": {
-          "default": "View Sentinel Surveys",
-          "es": "Ver encuestas de Centinela",
-          "fr": "Voir les enquêtes sentinelles"
-        },
-        "_row_num": 181
       }
     ],
     "common_translations": [
@@ -3395,6 +3377,264 @@
           "es": "No Aplica"
         },
         "_row_num": 180
+      },
+      {
+        "string_token": "move_refrigerator",
+        "text": {
+          "default": "Move Refrigerator",
+          "es": "Mover Refrigerador"
+        },
+        "_row_num": 181
+      },
+      {
+        "string_token": "view_all_refrigerator_moves",
+        "text": {
+          "default": "View All Refrigerator Moves",
+          "es": "Ver Todos Los Movimientos Del Refrigerador"
+        },
+        "_row_num": 182
+      },
+      {
+        "string_token": "refrigerator_move",
+        "text": {
+          "default": "Refrigerator Move",
+          "es": "Refrigerador Move"
+        },
+        "_row_num": 183
+      },
+      {
+        "string_token": "refrigerator_move_information",
+        "text": {
+          "default": "Refrigerator Move Information",
+          "es": "Información De Movimiento Del Refrigerador"
+        },
+        "_row_num": 184
+      },
+      {
+        "string_token": "moved_from_facility",
+        "text": {
+          "default": "Moved From Facility:",
+          "es": "Movido de la instalación:"
+        },
+        "_row_num": 185
+      },
+      {
+        "string_token": "moved_to_facility",
+        "text": {
+          "default": "Moved To Facility:",
+          "es": "Movido a la instalación:"
+        },
+        "_row_num": 186
+      },
+      {
+        "string_token": "move_date",
+        "text": {
+          "default": "Move Date:",
+          "es": "Fecha de mudanza:"
+        },
+        "_row_num": 187
+      },
+      {
+        "string_token": "delete_move",
+        "text": {
+          "default": "Delete Move",
+          "es": "Eliminar mover"
+        },
+        "_row_num": 188
+      },
+      {
+        "string_token": "facility_to_move_to",
+        "text": {
+          "default": "Facility To Move To:",
+          "es": "Facilidad para mudarse a:"
+        },
+        "_row_num": 189
+      },
+      {
+        "string_token": "current_facility",
+        "text": {
+          "default": "Current Facility:",
+          "es": "Instalación actual:"
+        },
+        "_row_num": 190
+      },
+      {
+        "string_token": "are_you_sure_you_want_to_delete_this_maintenance_log",
+        "text": {
+          "default": "Are you sure you want to delete this mainenance log?",
+          "es": "¿Está seguro de que desea eliminar este registro de mantenimiento?"
+        },
+        "_row_num": 191
+      },
+      {
+        "string_token": "are_you_sure_you_want_to_delete_this_cold_room",
+        "text": {
+          "default": "Are you sure you want to delete this cold room?",
+          "es": "¿Estás seguro de que deseas eliminar esta cámara fría?"
+        },
+        "_row_num": 192
+      },
+      {
+        "string_token": "are_you_sure_you_want_to_delete_this_facility",
+        "text": {
+          "default": "Are you sure you want to delete this facility?",
+          "es": "¿Estás seguro de que deseas eliminar esta instalación?"
+        },
+        "_row_num": 193
+      },
+      {
+        "string_token": "are_you_sure_you_want_to_delete_this_sentinel_survey",
+        "text": {
+          "default": "Are you sure you want to delete this Sentinel survey?",
+          "es": "¿Seguro que quieres eliminar esta encuesta de Sentinel?"
+        },
+        "_row_num": 194
+      },
+      {
+        "string_token": "are_you_sure_you_want_to_delete_this_refrigerator_move",
+        "text": {
+          "default": "Are you sure you want to delete this refrigerator move?",
+          "es": "¿Estás seguro de que deseas eliminar este movimiento de refrigerador?"
+        },
+        "_row_num": 195
+      },
+      {
+        "string_token": "are_you_sure_you_want_to_delete_this_refrigerator",
+        "text": {
+          "default": "Are you sure you want to delete this refrigerator?",
+          "es": "¿Estás seguro de que deseas eliminar este refrigerador?"
+        },
+        "_row_num": 196
+      },
+      {
+        "string_token": "are_you_sure_you_want_to_move_this_refrigerator",
+        "text": {
+          "default": "Are you sure you want to move this refrigerator?",
+          "es": "¿Estás seguro de que quieres mover este refrigerador?"
+        },
+        "_row_num": 197
+      },
+      {
+        "string_token": "add_sentinel_survey",
+        "text": {
+          "default": "Add Sentinel Survey",
+          "es": "Añadir Encuesta Centinela",
+          "fr": "Nombre de réfrigérateurs"
+        },
+        "_row_num": 198
+      },
+      {
+        "string_token": "view_all_sentinel_surveys",
+        "text": {
+          "default": "View All Sentinel Surveys",
+          "es": "Ver todas las encuestas de Centinela",
+          "fr": "Voir les enquêtes sentinelles"
+        },
+        "_row_num": 199
+      },
+      {
+        "string_token": "refrigerator_moves",
+        "text": {
+          "default": "Refrigerator Moves",
+          "es": "Refrigerador Mueve"
+        },
+        "_row_num": 200
+      },
+      {
+        "string_token": "indicators",
+        "text": {
+          "default": "Indicators",
+          "es": "Indicadores"
+        },
+        "_row_num": 201
+      },
+      {
+        "string_token": "sentinel_survey_information",
+        "text": {
+          "default": "Sentinel Survey Information",
+          "es": "Información de la Encuesta Centinela"
+        },
+        "_row_num": 202
+      },
+      {
+        "string_token": "voltage_stabilizer_working",
+        "text": {
+          "default": "Voltage Stabilizer Working:",
+          "es": "Estabilizador de Voltaje en Funcionamiento:"
+        },
+        "_row_num": 203
+      },
+      {
+        "string_token": "voltage_stabilizer_replaced",
+        "text": {
+          "default": "Voltage Stabilizer Replaced:",
+          "es": "Estabilizador de Voltaje Reemplazado:"
+        },
+        "_row_num": 204
+      },
+      {
+        "string_token": "warranty_claim_made",
+        "text": {
+          "default": "Warranty Claim Made:",
+          "es": "Reclamación de Garantía Hecha:"
+        },
+        "_row_num": 205
+      },
+      {
+        "string_token": "edit_sentinel_survey",
+        "text": {
+          "default": "Edit Sentinel Survey",
+          "es": "Editar Encuesta Centinela"
+        },
+        "_row_num": 206
+      },
+      {
+        "string_token": "delete_sentinel_survey",
+        "text": {
+          "default": "Delete Sentinel Survey",
+          "es": "Eliminar Encuesta Centinela"
+        },
+        "_row_num": 207
+      },
+      {
+        "string_token": "contact_name",
+        "text": {
+          "default": "Contact Name:",
+          "es": "Nombre de contacto:"
+        },
+        "_row_num": 208
+      },
+      {
+        "string_token": "contact_phone_number",
+        "text": {
+          "default": "Contact Phone Number:",
+          "es": "Teléfono de contacto:"
+        },
+        "_row_num": 209
+      },
+      {
+        "string_token": "fuel_availability",
+        "text": {
+          "default": "Fuel Availability:",
+          "es": "Disponibilidad de combustible:"
+        },
+        "_row_num": 210
+      },
+      {
+        "string_token": "select_a_region_to_add_a_facility",
+        "text": {
+          "default": "Select a region to add a facility",
+          "es": "Seleccione una región para agregar una instalación"
+        },
+        "_row_num": 211
+      },
+      {
+        "string_token": "move_will_not_be_performed",
+        "text": {
+          "default": "Move will not be performed: new facility id not valid",
+          "es": "El movimiento no se realizará: la nueva identificación de la instalación no es válida"
+        },
+        "_row_num": 212
       }
     ]
   },
@@ -5191,24 +5431,6 @@
             "fr": "Supprimer le réfrigérateur"
           },
           "_row_num": 179
-        },
-        "add_sentinel_survey": {
-          "string_token": "add_sentinel_survey",
-          "text": {
-            "default": "Add Sentinel Survey",
-            "es": "Añadir Encuesta Centinela",
-            "fr": "Nombre de réfrigérateurs"
-          },
-          "_row_num": 180
-        },
-        "view_sentinel_survey": {
-          "string_token": "view_sentinel_survey",
-          "text": {
-            "default": "View Sentinel Surveys",
-            "es": "Ver encuestas de Centinela",
-            "fr": "Voir les enquêtes sentinelles"
-          },
-          "_row_num": 181
         }
       }
     },
@@ -6782,6 +7004,264 @@
             "es": "No Aplica"
           },
           "_row_num": 180
+        },
+        "move_refrigerator": {
+          "string_token": "move_refrigerator",
+          "text": {
+            "default": "Move Refrigerator",
+            "es": "Mover Refrigerador"
+          },
+          "_row_num": 181
+        },
+        "view_all_refrigerator_moves": {
+          "string_token": "view_all_refrigerator_moves",
+          "text": {
+            "default": "View All Refrigerator Moves",
+            "es": "Ver Todos Los Movimientos Del Refrigerador"
+          },
+          "_row_num": 182
+        },
+        "refrigerator_move": {
+          "string_token": "refrigerator_move",
+          "text": {
+            "default": "Refrigerator Move",
+            "es": "Refrigerador Move"
+          },
+          "_row_num": 183
+        },
+        "refrigerator_move_information": {
+          "string_token": "refrigerator_move_information",
+          "text": {
+            "default": "Refrigerator Move Information",
+            "es": "Información De Movimiento Del Refrigerador"
+          },
+          "_row_num": 184
+        },
+        "moved_from_facility": {
+          "string_token": "moved_from_facility",
+          "text": {
+            "default": "Moved From Facility:",
+            "es": "Movido de la instalación:"
+          },
+          "_row_num": 185
+        },
+        "moved_to_facility": {
+          "string_token": "moved_to_facility",
+          "text": {
+            "default": "Moved To Facility:",
+            "es": "Movido a la instalación:"
+          },
+          "_row_num": 186
+        },
+        "move_date": {
+          "string_token": "move_date",
+          "text": {
+            "default": "Move Date:",
+            "es": "Fecha de mudanza:"
+          },
+          "_row_num": 187
+        },
+        "delete_move": {
+          "string_token": "delete_move",
+          "text": {
+            "default": "Delete Move",
+            "es": "Eliminar mover"
+          },
+          "_row_num": 188
+        },
+        "facility_to_move_to": {
+          "string_token": "facility_to_move_to",
+          "text": {
+            "default": "Facility To Move To:",
+            "es": "Facilidad para mudarse a:"
+          },
+          "_row_num": 189
+        },
+        "current_facility": {
+          "string_token": "current_facility",
+          "text": {
+            "default": "Current Facility:",
+            "es": "Instalación actual:"
+          },
+          "_row_num": 190
+        },
+        "are_you_sure_you_want_to_delete_this_maintenance_log": {
+          "string_token": "are_you_sure_you_want_to_delete_this_maintenance_log",
+          "text": {
+            "default": "Are you sure you want to delete this mainenance log?",
+            "es": "¿Está seguro de que desea eliminar este registro de mantenimiento?"
+          },
+          "_row_num": 191
+        },
+        "are_you_sure_you_want_to_delete_this_cold_room": {
+          "string_token": "are_you_sure_you_want_to_delete_this_cold_room",
+          "text": {
+            "default": "Are you sure you want to delete this cold room?",
+            "es": "¿Estás seguro de que deseas eliminar esta cámara fría?"
+          },
+          "_row_num": 192
+        },
+        "are_you_sure_you_want_to_delete_this_facility": {
+          "string_token": "are_you_sure_you_want_to_delete_this_facility",
+          "text": {
+            "default": "Are you sure you want to delete this facility?",
+            "es": "¿Estás seguro de que deseas eliminar esta instalación?"
+          },
+          "_row_num": 193
+        },
+        "are_you_sure_you_want_to_delete_this_sentinel_survey": {
+          "string_token": "are_you_sure_you_want_to_delete_this_sentinel_survey",
+          "text": {
+            "default": "Are you sure you want to delete this Sentinel survey?",
+            "es": "¿Seguro que quieres eliminar esta encuesta de Sentinel?"
+          },
+          "_row_num": 194
+        },
+        "are_you_sure_you_want_to_delete_this_refrigerator_move": {
+          "string_token": "are_you_sure_you_want_to_delete_this_refrigerator_move",
+          "text": {
+            "default": "Are you sure you want to delete this refrigerator move?",
+            "es": "¿Estás seguro de que deseas eliminar este movimiento de refrigerador?"
+          },
+          "_row_num": 195
+        },
+        "are_you_sure_you_want_to_delete_this_refrigerator": {
+          "string_token": "are_you_sure_you_want_to_delete_this_refrigerator",
+          "text": {
+            "default": "Are you sure you want to delete this refrigerator?",
+            "es": "¿Estás seguro de que deseas eliminar este refrigerador?"
+          },
+          "_row_num": 196
+        },
+        "are_you_sure_you_want_to_move_this_refrigerator": {
+          "string_token": "are_you_sure_you_want_to_move_this_refrigerator",
+          "text": {
+            "default": "Are you sure you want to move this refrigerator?",
+            "es": "¿Estás seguro de que quieres mover este refrigerador?"
+          },
+          "_row_num": 197
+        },
+        "add_sentinel_survey": {
+          "string_token": "add_sentinel_survey",
+          "text": {
+            "default": "Add Sentinel Survey",
+            "es": "Añadir Encuesta Centinela",
+            "fr": "Nombre de réfrigérateurs"
+          },
+          "_row_num": 198
+        },
+        "view_all_sentinel_surveys": {
+          "string_token": "view_all_sentinel_surveys",
+          "text": {
+            "default": "View All Sentinel Surveys",
+            "es": "Ver todas las encuestas de Centinela",
+            "fr": "Voir les enquêtes sentinelles"
+          },
+          "_row_num": 199
+        },
+        "refrigerator_moves": {
+          "string_token": "refrigerator_moves",
+          "text": {
+            "default": "Refrigerator Moves",
+            "es": "Refrigerador Mueve"
+          },
+          "_row_num": 200
+        },
+        "indicators": {
+          "string_token": "indicators",
+          "text": {
+            "default": "Indicators",
+            "es": "Indicadores"
+          },
+          "_row_num": 201
+        },
+        "sentinel_survey_information": {
+          "string_token": "sentinel_survey_information",
+          "text": {
+            "default": "Sentinel Survey Information",
+            "es": "Información de la Encuesta Centinela"
+          },
+          "_row_num": 202
+        },
+        "voltage_stabilizer_working": {
+          "string_token": "voltage_stabilizer_working",
+          "text": {
+            "default": "Voltage Stabilizer Working:",
+            "es": "Estabilizador de Voltaje en Funcionamiento:"
+          },
+          "_row_num": 203
+        },
+        "voltage_stabilizer_replaced": {
+          "string_token": "voltage_stabilizer_replaced",
+          "text": {
+            "default": "Voltage Stabilizer Replaced:",
+            "es": "Estabilizador de Voltaje Reemplazado:"
+          },
+          "_row_num": 204
+        },
+        "warranty_claim_made": {
+          "string_token": "warranty_claim_made",
+          "text": {
+            "default": "Warranty Claim Made:",
+            "es": "Reclamación de Garantía Hecha:"
+          },
+          "_row_num": 205
+        },
+        "edit_sentinel_survey": {
+          "string_token": "edit_sentinel_survey",
+          "text": {
+            "default": "Edit Sentinel Survey",
+            "es": "Editar Encuesta Centinela"
+          },
+          "_row_num": 206
+        },
+        "delete_sentinel_survey": {
+          "string_token": "delete_sentinel_survey",
+          "text": {
+            "default": "Delete Sentinel Survey",
+            "es": "Eliminar Encuesta Centinela"
+          },
+          "_row_num": 207
+        },
+        "contact_name": {
+          "string_token": "contact_name",
+          "text": {
+            "default": "Contact Name:",
+            "es": "Nombre de contacto:"
+          },
+          "_row_num": 208
+        },
+        "contact_phone_number": {
+          "string_token": "contact_phone_number",
+          "text": {
+            "default": "Contact Phone Number:",
+            "es": "Teléfono de contacto:"
+          },
+          "_row_num": 209
+        },
+        "fuel_availability": {
+          "string_token": "fuel_availability",
+          "text": {
+            "default": "Fuel Availability:",
+            "es": "Disponibilidad de combustible:"
+          },
+          "_row_num": 210
+        },
+        "select_a_region_to_add_a_facility": {
+          "string_token": "select_a_region_to_add_a_facility",
+          "text": {
+            "default": "Select a region to add a facility",
+            "es": "Seleccione una región para agregar una instalación"
+          },
+          "_row_num": 211
+        },
+        "move_will_not_be_performed": {
+          "string_token": "move_will_not_be_performed",
+          "text": {
+            "default": "Move will not be performed: new facility id not valid",
+            "es": "El movimiento no se realizará: la nueva identificación de la instalación no es válida"
+          },
+          "_row_num": 212
         }
       },
       "_locales": {

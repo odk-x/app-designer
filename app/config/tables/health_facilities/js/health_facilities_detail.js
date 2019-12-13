@@ -65,7 +65,9 @@ function onEditFacility() {
 
 function onDeleteFacility() {
     if (!$.isEmptyObject(healthFacilityResultSet)) {
-        if (confirm('Are you sure you want to delete this health facility?')) {
+        var locale = odkCommon.getPreferredLocale();
+        var confirmMsg = odkCommon.localizeText(locale, 'are_you_sure_you_want_to_delete_this_facility');
+        if (confirm(confirmMsg)) {
 
             odkData.deleteRow(healthFacilityResultSet.getTableId(),
                 null,
@@ -130,6 +132,8 @@ function cbFailure(error) {
 
 function display() {
     var locale = odkCommon.getPreferredLocale();
+
+    $('#view-summary').text(odkCommon.localizeText(locale, "view_facility_information"));
 
     $('#refrig-inv').text(odkCommon.localizeText(locale, "refrigerator_inventory"));
     $('#add-fridge').text(odkCommon.localizeText(locale, "add_refrigerator"));

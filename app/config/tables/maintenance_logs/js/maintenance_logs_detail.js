@@ -54,7 +54,9 @@ function cbDeleteFailure(error) {
 function onDeleteLog() {
     if (!$.isEmptyObject(maintenanceLogsResultSet)) {
 
-        if (confirm('Are you sure you want to delete this maintenance log?')) {
+        var locale = odkCommon.getPreferredLocale();
+        var confirmMsg = odkCommon.localizeText(locale, 'are_you_sure_you_want_to_delete_this_maintenance_log');
+        if (confirm(confirmMsg)) {
 
             odkData.deleteRow(
                 maintenanceLogsResultSet.getTableId(),

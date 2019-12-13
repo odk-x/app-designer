@@ -27,7 +27,8 @@ async function display() {
             // Get the appropriate admin region
             var facilityRegionJson = regionDisplayUtil.getLowestAdminRegionInfo(maxAdminRegionLevelNumber);
             if (facilityRegionJson === null || facilityRegionJson === undefined) {
-                alert('Select a region to add a health facility');
+                var alertMsg = odkCommon.localizeText(locale, "select_a_region_to_add_a_facility");
+                alert(alertMsg);
                 return;
             }
 

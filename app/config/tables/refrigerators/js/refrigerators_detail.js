@@ -121,7 +121,10 @@ function display() {
     $('#ed-frig').text(odkCommon.localizeText(locale, "edit_refrigerator"));
     $('#del-frig').text(odkCommon.localizeText(locale, "delete_refrigerator"));
     $('#add-sent-survey').text(odkCommon.localizeText(locale, "add_sentinel_survey"));
-    $('#vw-sent-survey').text(odkCommon.localizeText(locale, "view_sentinel_survey"));
+    $('#vw-sent-survey').text(odkCommon.localizeText(locale, "view_all_sentinel_surveys"));
+
+    $('#mov-frig').text(odkCommon.localizeText(locale, "move_refrigerator"));
+    $('#vw-all-frig-mov').text(odkCommon.localizeText(locale, "view_all_refrigerator_moves"));
 
     odkData.getViewData(cbSuccess, cbFailure);
 }
@@ -161,7 +164,9 @@ function onEditFrigStatus() {
 function onDeleteFrig() {
     if (!$.isEmptyObject(refrigeratorsResultSet)) {
 
-        if (confirm('Are you sure you want to delete this refrigerator?')) {
+        var locale = odkCommon.getPreferredLocale();
+        var confirmMsg = odkCommon.localizeText(locale, 'are_you_sure_you_want_to_delete_this_refrigerator');
+        if (confirm(confirmMsg)) {
 
             odkData.deleteRow(
                 'refrigerators',

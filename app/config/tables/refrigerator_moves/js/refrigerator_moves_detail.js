@@ -17,7 +17,9 @@ function cbDeleteFailure(error) {
 function onDeleteMove() {
     if (!$.isEmptyObject(refrigeratorMovesResultSet)) {
 
-        if (confirm('Are you sure you want to delete this refrigerator move?')) {
+        var locale = odkCommon.getPreferredLocale();
+        var confirmMsg = odkCommon.localizeText(locale, 'are_you_sure_you_want_to_delete_this_refrigerator_move');
+        if (confirm(confirmMsg)) {
 
             odkData.deleteRow(
                 refrigeratorMovesResultSet.getTableId(),
@@ -67,11 +69,14 @@ function cbFailure(error) {
 
 function display() {
     var locale = odkCommon.getPreferredLocale();
-    $('#mv-frm-fac').text('Moved from Facility');
-    $('#mv-to-fac').text('Moved to Facility');
-    $('#mv-date').text('Move Date');
+    $('#ref-mv-hdr').text(odkCommon.localizeText(locale, 'refrigerator_move'));
+    $('#ref-mv-info').text(odkCommon.localizeText(locale, 'refrigerator_move_information'));
 
-    $('#del-log').text(odkCommon.localizeText(locale, "delete_log"));
+    $('#mv-frm-fac').text(odkCommon.localizeText(locale, 'moved_from_facility'));
+    $('#mv-to-fac').text(odkCommon.localizeText(locale, 'moved_to_facility'));
+    $('#mv-date').text(odkCommon.localizeText(locale, 'move_date'));
+
+    $('#del-mv').text(odkCommon.localizeText(locale, 'delete_move'));
 
     odkData.getViewData(cbSuccess, cbFailure);
 }

@@ -35,8 +35,9 @@ function cbDeleteFailure(error) {
 
 function onDeleteSentinelSurvey() {
     if (!$.isEmptyObject(sentinelSurveyResultSet)) {
-
-        if (confirm('Are you sure you want to delete this Sentinel survey?')) {
+        var locale = odkCommon.getPreferredLocale();
+        var confirmMsg = odkCommon.localizeText(locale, 'are_you_sure_you_want_to_delete_this_sentinel_survey');
+        if (confirm(confirmMsg)) {
 
             odkData.deleteRow(
                 sentinelSurveyResultSet.getTableId(),

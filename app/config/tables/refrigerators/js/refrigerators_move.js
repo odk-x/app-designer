@@ -22,16 +22,18 @@ function resumeFunc(state) {
 
         var locale = odkCommon.getPreferredLocale();
         $('#frig-hdr').text(odkCommon.localizeText(locale, "refrigerator"));
-        $('#frig-info').text(odkCommon.localizeText(locale, "refrigerator_information"));
+        $('#frig-info').text(odkCommon.localizeText(locale, "basic_refrigerator_information"));
 
         $('#manu-id').text(odkCommon.localizeText(locale, "manufacturer"));
         $('#mdl-id').text(odkCommon.localizeText(locale, "model_id"));
         $('#frig-id').text(odkCommon.localizeText(locale, "refrigerator_id"));
         $('#ser-num').text(odkCommon.localizeText(locale, "serial_number"));
 
-        $('#curr-fac').text(odkCommon.localizeText(locale, "facility"));
+        $('#curr-fac').text(odkCommon.localizeText(locale, "current_facility"));
+        $('#fac-to-move-to').text(odkCommon.localizeText(locale, "facility_to_move_to"));
 
-        $('#mv-frig').text(odkCommon.localizeText(locale, "move_refrigerator"));
+
+        $('#mv-ref').text(odkCommon.localizeText(locale, "move_refrigerator"));
 
         // Translations
         var locale = odkCommon.getPreferredLocale();
@@ -107,6 +109,7 @@ function processFrigPromises(facilityResult, typeResult) {
     util.showIdForDetail('#facility_name', 'facility_name', facilityData, false);
     util.showIdForDetail('#manufacturer_id', 'manufacturer', typeData, false);
     util.showIdForDetail('#model_id', 'model_id', typeData, false);
+    util.showIdForDetail('#tracking_id', 'tracking_id', refrigeratorsResultSet, false);
 
 }
 
@@ -141,7 +144,9 @@ function getRefrigeratorInfo() {
 
 function onMoveRefrigerator() {
     if (!$.isEmptyObject(refrigeratorsResultSet)) {
-        if (confirm('Are you sure you want to move this refrigerator?')) {
+        var locale = odkCommon.getPreferredLocale();
+        var confirmMsg = odkCommon.localizeText(locale, 'are_you_sure_you_want_to_move_this_refrigerator');
+        if (confirm(confirmMsg)) {
 
             var newFac = $('#facility_to_move_to_name');
 
@@ -149,7 +154,8 @@ function onMoveRefrigerator() {
             var newFacId = newFac.attr('data-fac-row-id');
 
             if (newFacId === null || newFacId === undefined || newFacId === oldFacId) {
-                alert('Move will not be performed: new facility id not valid');
+                var alertMsg = odkCommon.localizeText(locale, 'move_will_not_be_performed');
+                alert(alertMsg);
                 return;
             }
 
