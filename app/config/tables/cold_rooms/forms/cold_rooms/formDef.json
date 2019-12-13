@@ -507,6 +507,25 @@
       {
         "clause": "end screen",
         "_row_num": 37
+      },
+      {
+        "type": "text",
+        "name": "notes",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Notes",
+              "es": "Notas"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Enter notes",
+              "es": "Introduce notas"
+            }
+          }
+        },
+        "_row_num": 38
       }
     ],
     "choices": [
@@ -1849,6 +1868,22 @@
         },
         "valuesList": "status",
         "elementKey": "backup_generator_functional_status"
+      },
+      "notes": {
+        "_defn": [
+          {
+            "_row_num": 38,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Notes",
+            "es": "Notas"
+          }
+        },
+        "elementKey": "notes"
       }
     },
     "section_names": [
@@ -2502,12 +2537,36 @@
             "promptIdx": 19
           },
           {
+            "type": "text",
+            "name": "notes",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Notes",
+                  "es": "Notas"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Enter notes",
+                  "es": "Introduce notas"
+                }
+              }
+            },
+            "_row_num": 38,
+            "__rowNum__": 37,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen38",
+            "promptIdx": 20
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 38,
-            "_branch_label_enclosing_screen": "survey/_screen38",
-            "promptIdx": 20
+            "_row_num": 39,
+            "_branch_label_enclosing_screen": "survey/_screen39",
+            "promptIdx": 21
           }
         ],
         "validation_tag_map": {
@@ -2589,25 +2648,31 @@
             "operationIdx": 4
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 38,
-            "operationIdx": 5
-          },
-          {
             "_row_num": 38,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 5
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 39,
+            "operationIdx": 6
+          },
+          {
+            "_row_num": 39,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 6
+            "operationIdx": 7
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 38,
-            "operationIdx": 7
+            "_row_num": 39,
+            "operationIdx": 8
           }
         ],
         "branch_label_map": {
@@ -2616,8 +2681,9 @@
           "_screen19": 2,
           "_screen25": 3,
           "_screen32": 4,
-          "_contents": 6,
-          "_screen38": 6
+          "_screen38": 5,
+          "_contents": 7,
+          "_screen39": 7
         }
       }
     },
@@ -3023,6 +3089,25 @@
         "elementSet": "data",
         "elementPath": "backup_generator_functional_status"
       },
+      "notes": {
+        "_defn": [
+          {
+            "_row_num": 38,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Notes",
+            "es": "Notas"
+          }
+        },
+        "elementKey": "notes",
+        "elementName": "notes",
+        "elementSet": "data",
+        "elementPath": "notes"
+      },
       "reason_not_working_items": {
         "type": "string",
         "elementKey": "reason_not_working_items",
@@ -3242,6 +3327,13 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":{\"default\":\"Net Volume\",\"es\":\"Volumen neto\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "notes",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Notes\",\"es\":\"Notas\"}}"
       },
       {
         "_partition": "Column",

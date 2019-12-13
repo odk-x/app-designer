@@ -734,6 +734,25 @@
       {
         "clause": "end if",
         "_row_num": 62
+      },
+      {
+        "type": "text",
+        "name": "notes",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Notes",
+              "es": "Notas"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Enter notes",
+              "es": "Introduce notas"
+            }
+          }
+        },
+        "_row_num": 63
       }
     ],
     "choices": [
@@ -2693,6 +2712,22 @@
         },
         "valuesList": "yes_no",
         "elementKey": "ehc_powered_devices"
+      },
+      "notes": {
+        "_defn": [
+          {
+            "_row_num": 63,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Notes",
+            "es": "Notas"
+          }
+        },
+        "elementKey": "notes"
       }
     },
     "section_names": [
@@ -3520,12 +3555,36 @@
             "promptIdx": 25
           },
           {
+            "type": "text",
+            "name": "notes",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Notes",
+                  "es": "Notas"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Enter notes",
+                  "es": "Introduce notas"
+                }
+              }
+            },
+            "_row_num": 63,
+            "__rowNum__": 62,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen63",
+            "promptIdx": 26
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 63,
-            "_branch_label_enclosing_screen": "survey/_screen63",
-            "promptIdx": 26
+            "_row_num": 64,
+            "_branch_label_enclosing_screen": "survey/_screen64",
+            "promptIdx": 27
           }
         ],
         "validation_tag_map": {
@@ -3732,25 +3791,31 @@
             "operationIdx": 18
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 63,
-            "operationIdx": 19
-          },
-          {
             "_row_num": 63,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(26);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 19
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 64,
+            "operationIdx": 20
+          },
+          {
+            "_row_num": 64,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(27);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 20
+            "operationIdx": 21
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 63,
-            "operationIdx": 21
+            "_row_num": 64,
+            "operationIdx": 22
           }
         ],
         "branch_label_map": {
@@ -3773,8 +3838,9 @@
           "_screen59": 17,
           "_else62": 19,
           "_endif62": 19,
-          "_contents": 20,
-          "_screen63": 20
+          "_screen63": 19,
+          "_contents": 21,
+          "_screen64": 21
         }
       }
     },
@@ -4321,6 +4387,25 @@
         "elementSet": "data",
         "elementPath": "ehc_powered_devices"
       },
+      "notes": {
+        "_defn": [
+          {
+            "_row_num": 63,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Notes",
+            "es": "Notas"
+          }
+        },
+        "elementKey": "notes",
+        "elementName": "notes",
+        "elementSet": "data",
+        "elementPath": "notes"
+      },
       "serial_number_image_uriFragment": {
         "type": "string",
         "elementType": "rowpath",
@@ -4515,6 +4600,13 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":{\"default\":\"Model\",\"es\":\"Modelo\",\"fr\":\"Modèle\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "notes",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Notes\",\"es\":\"Notas\"}}"
       },
       {
         "_partition": "Column",
