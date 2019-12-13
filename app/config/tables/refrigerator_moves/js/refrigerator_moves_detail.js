@@ -30,20 +30,12 @@ function onDeleteMove() {
     }
 }
 
-/*
-function cbCRSuccess(result) {
-    coldRoomData = result;
+function processRefMvPromises(refResult, oldHfResult, newHfResult) {
 
-    util.showIdForDetail('#old_facility_id', 'old_facility_id', refrigeratorMovesResultSet, false);
-    util.showIdForDetail('#new_facility_id', 'new_facility_id', refrigeratorMovesResultSet, false);
-    util.showIdForDetail('#move_date', 'move_date', refrigeratorMovesResultSet, true);
-
+    util.showIdForDetail('#tracking_id', 'tracking_id', refResult, false);
+    util.showIdForDetail('#old_facility_id', 'facility_name', oldHfResult, false);
+    util.showIdForDetail('#new_facility_id', 'facility_name', newHfResult, false);
 }
-
-function cbCRFailure(error) {
-    console.log('cbCRFailure: query for cold rooms _id failed with message: ' + error);
-}
-*/
 
 function cbSuccess(result) {
     refrigeratorMovesResultSet = result;
@@ -55,12 +47,31 @@ function cbSuccess(result) {
         deleteButton.removeClass('hideButton');
     }
 
-    util.showIdForDetail('#old_facility_id', 'old_facility_id', refrigeratorMovesResultSet, false);
-    util.showIdForDetail('#new_facility_id', 'new_facility_id', refrigeratorMovesResultSet, false);
     util.showIdForDetail('#move_date', 'move_date', refrigeratorMovesResultSet, true);
 
-    // odkData.query('refrigerator_moves', '_id = ?', [refrigeratorMovesResultSet.get('cold_room_id')],
-    //     null, null, null, null, null, null, true, cbCRSuccess, cbCRFailure);
+
+    var refPromise = new Promise(function(resolve, reject) {
+        odkData.query('refrigerators', '_id = ?', [refrigeratorMovesResultSet.get('refrigerator_id')],
+            null, null, null, null, null, null, true, resolve, reject);
+    });
+
+    var oldHfPromise = new Promise(function(resolve, reject) {
+        odkData.query('health_facilities', '_id = ?', [refrigeratorMovesResultSet.get('old_facility_id')],
+            null, null, null, null, null, null, true, resolve, reject);
+    });
+
+    var newHfPromise = new Promise(function(resolve, reject) {
+        odkData.query('health_facilities', '_id = ?', [refrigeratorMovesResultSet.get('new_facility_id')],
+            null, null, null, null, null, null, true, resolve, reject);
+    });
+
+
+    Promise.all([refPromise, oldHfPromise, newHfPromise]).then(function (resultArray) {
+        processRefMvPromises(resultArray[0], resultArray[1], resultArray[2]);
+
+    }, function(err) {
+        console.log('promises failed with error: ' + err);
+    });
 }
 
 function cbFailure(error) {
