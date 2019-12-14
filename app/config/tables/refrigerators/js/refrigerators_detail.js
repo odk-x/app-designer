@@ -36,12 +36,12 @@ function processFrigPromises(facilityResult, typeResult, logResult, tablesResult
 
     var tableIds = tablesResult.getAllTableIds();
     if (tableIds !== null && tableIds !== undefined && tableIds.length > 0 &&
-        $.inArray('refrigerator_temperature_data', tableIds)) {
-        var addTempDataButton = $('#addTempDataBtn');
-        addTempDataButton.removeClass('hideButton');
+        $.inArray('indicators', tableIds) !== -1) {
+        var addSSButton = $('#addSentSurvBtn');
+        addSSButton.removeClass('hideButton');
 
-        var viewTempDataButton = $('#viewTempDataBtn');
-        viewTempDataButton.removeClass('hideButton');
+        var viewSSButton = $('#viewSentSurvBtn');
+        viewSSButton.removeClass('hideButton');
     }
 
 }
