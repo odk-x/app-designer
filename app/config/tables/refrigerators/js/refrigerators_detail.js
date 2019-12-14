@@ -9,7 +9,7 @@ var typeData = {};
 var facilityData = {};
 
 
-function processFrigPromises(facilityResult, typeResult, logResult) {
+function processFrigPromises(facilityResult, typeResult, logResult, tablesResult) {
     facilityData = facilityResult;
     typeData = typeResult;
 
@@ -33,6 +33,16 @@ function processFrigPromises(facilityResult, typeResult, logResult) {
         odkCommon.localizeText(locale, 'not_applicable'));
     util.showIdForDetail('#voltage_regulator', 'voltage_regulator_functional_status', refrigeratorsResultSet, true,
         odkCommon.localizeText(locale, 'not_applicable'));
+
+    var tableIds = tablesResult.getAllTableIds();
+    if (tableIds !== null && tableIds !== undefined && tableIds.length > 0 &&
+        $.inArray('refrigerator_temperature_data', tableIds)) {
+        var addTempDataButton = $('#addTempDataBtn');
+        addTempDataButton.removeClass('hideButton');
+
+        var viewTempDataButton = $('#viewTempDataBtn');
+        viewTempDataButton.removeClass('hideButton');
+    }
 
 }
 
@@ -75,8 +85,12 @@ function cbSuccess(result) {
         odkData.arbitraryQuery('maintenance_logs', logQuery, logParams, null, null, resolve, reject);
     });
 
-    Promise.all([healthFacilityPromise, typePromise, logPromise]).then(function (resultArray) {
-        processFrigPromises(resultArray[0], resultArray[1], resultArray[2]);
+    var tablesPromise = new Promise(function(resolve, reject) {
+        odkData.getAllTableIds(resolve, reject);
+    });
+
+    Promise.all([healthFacilityPromise, typePromise, logPromise, tablesPromise]).then(function (resultArray) {
+        processFrigPromises(resultArray[0], resultArray[1], resultArray[2], resultArray[3]);
 
     }, function(err) {
         console.log('promises failed with error: ' + err);
