@@ -161,14 +161,14 @@
           },
           "hint": {
             "text": {
-              "default": "Enter -1 if year is unknown",
-              "es": "Ingrese -1 si el año es desconocido"
+              "default": "Enter 0 if year is unknown",
+              "es": "Ingrese 0 si el año es desconocido"
             }
           },
           "constraint_message": {
             "text": {
-              "default": "Year must be between 1950 and the current year or -1 if unknown",
-              "es": "El año debe ser entre 1950 y el año actual o -1 si se desconoce"
+              "default": "Year must be between 1950 and the current year or 0 if unknown",
+              "es": "El año debe ser entre 1950 y el año actual o 0 si se desconoce"
             }
           }
         },
@@ -1017,7 +1017,7 @@
     "calculates": [
       {
         "calculation_name": "valid_refrigerator_year",
-        "calculation": "(function() {\n  var currDate = new Date();\n  var currYear = currDate.getFullYear();\n  \n  return (data('year') >= 1950 && data('year') <= currYear) || parseInt(data('year')) === -1\n  \n})()",
+        "calculation": "(function() {\n  var currDate = new Date();\n  var currYear = currDate.getFullYear();\n  \n  return (data('year') >= 1950 && data('year') <= currYear) || parseInt(data('year')) === 0\n  \n})()",
         "_row_num": 2
       }
     ]
@@ -1530,7 +1530,7 @@
     "calculates": {
       "valid_refrigerator_year": {
         "calculation_name": "valid_refrigerator_year",
-        "calculation": "(function() {\n  var currDate = new Date();\n  var currYear = currDate.getFullYear();\n  \n  return (data('year') >= 1950 && data('year') <= currYear) || parseInt(data('year')) === -1\n  \n})()",
+        "calculation": "(function() {\n  var currDate = new Date();\n  var currYear = currDate.getFullYear();\n  \n  return (data('year') >= 1950 && data('year') <= currYear) || parseInt(data('year')) === 0\n  \n})()",
         "_row_num": 2
       }
     },
@@ -2173,14 +2173,14 @@
               },
               "hint": {
                 "text": {
-                  "default": "Enter -1 if year is unknown",
-                  "es": "Ingrese -1 si el año es desconocido"
+                  "default": "Enter 0 if year is unknown",
+                  "es": "Ingrese 0 si el año es desconocido"
                 }
               },
               "constraint_message": {
                 "text": {
-                  "default": "Year must be between 1950 and the current year or -1 if unknown",
-                  "es": "El año debe ser entre 1950 y el año actual o -1 si se desconoce"
+                  "default": "Year must be between 1950 and the current year or 0 if unknown",
+                  "es": "El año debe ser entre 1950 y el año actual o 0 si se desconoce"
                 }
               }
             },
