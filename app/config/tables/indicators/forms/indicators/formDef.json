@@ -91,7 +91,7 @@
           "prompt": {
             "text": {
               "default": "How many heat alarms with over 10 hour duration above 8°C show in the termperature log from the first day of the month to the last day of the month?",
-              "fr": "Combien d'alarmes de haute température (supérieure à 8°C et ayant durée 10 heures) enregistré dans le releve de température du mois dernier?"
+              "fr": "Combien d'alarmes de haute température (supérieure à 8°C et ayant duré 10 heures ou plus) enregistrées dans le relevé de température du mois dernier?"
             }
           }
         },
@@ -105,7 +105,7 @@
           "prompt": {
             "text": {
               "default": "How many freeze alarms with over 1 hour duration below -0.5°C show in the temperature log from the first day of the month to the last day of the month?",
-              "fr": "Combien d'alarmes de basse température (-0,5°C ayant dur au moins 1 heure) apparaissent/enregistrées dans le releve de température du mois dernier?"
+              "fr": "Combien d'alarmes de basse température (-0,5°C ayant duré au moins 1 heure) apparaissent/enregistrées dans le relevé de température du mois dernier?"
             }
           }
         },
@@ -123,7 +123,7 @@
           "prompt": {
             "text": {
               "default": "How many heat alarms with 48 hour or longer duration in the temperature log from the first day of the month to the last day of the month?",
-              "fr": "Combien d'alarmes de haute température d'une durée de 48h ou plus apparaissent dans le releve de température du mois dernier ?"
+              "fr": "Combien d'alarmes de haute température d'une durée de 48h ou plus apparaissent dans le relevé de température du mois dernier ?"
             }
           }
         },
@@ -169,7 +169,7 @@
           "prompt": {
             "text": {
               "default": "Why did the refrigerator fail?",
-              "fr": "Pourquoi le réfrigérateur est-t-il tombe en panne?"
+              "fr": "Quelle est la cause de la panne du refrigerateur ?"
             }
           }
         },
@@ -207,7 +207,7 @@
           "prompt": {
             "text": {
               "default": "If yes, what condition was observed related to the issue?",
-              "fr": "Si oui, quelle condition a été observée liée à la défaillance?"
+              "fr": "Si oui, quelle signe de defaillance a-t-on observée ?"
             }
           }
         },
@@ -234,7 +234,7 @@
           "prompt": {
             "text": {
               "default": "Please enter the component that failed",
-              "fr": "Veuillez entrer le composant qui a échoué"
+              "fr": "Veuillez entrer le composant qui defectuex"
             }
           }
         },
@@ -314,7 +314,7 @@
           "prompt": {
             "text": {
               "default": "If yes, what condition was observed related to the second failure?",
-              "fr": "Si oui, quelle condition a été observée liée à la défaillance?"
+              "fr": "Si oui, quelle signe de defaillance a-t-on observée ?"
             }
           }
         },
@@ -341,7 +341,7 @@
           "prompt": {
             "text": {
               "default": "Please enter the second component that failed",
-              "fr": "Veuillez entrer le composant qui a échoué"
+              "fr": "Veuillez entrer le composant qui defectuex"
             }
           }
         },
@@ -425,7 +425,7 @@
           "prompt": {
             "text": {
               "default": "If yes, what condition was observed related to the third failure?",
-              "fr": "Si oui, quelle condition a été observée liée à la défaillance?"
+              "fr": "Si oui, quelle signe de defaillance a-t-on observée ?"
             }
           }
         },
@@ -452,7 +452,7 @@
           "prompt": {
             "text": {
               "default": "Please enter the third component that failed",
-              "fr": "Veuillez entrer le composant qui a échoué"
+              "fr": "Veuillez entrer le composant qui defectuex"
             }
           }
         },
@@ -517,7 +517,7 @@
           "prompt": {
             "text": {
               "default": "Is the voltage stabilizer working?",
-              "fr": "Le stabilisateur de tension fonctionne-t-il?"
+              "fr": "Le stabilisateur de tension fonctionne-t-il normalement ?"
             }
           }
         },
@@ -664,7 +664,7 @@
           "prompt": {
             "text": {
               "default": "How many days elapsed between when the claim was made and when the repair occurred?",
-              "fr": "Combien de jours se sont écoulés entre le moment où la demande de garantie a été faite et le moment où la réparation a eu lieu?"
+              "fr": "Combien de jours se sont écoulés entre le moment où la demande de garantie  a été faite et le moment où la réparation a eu lieu?"
             }
           }
         },
@@ -761,7 +761,7 @@
             "text": {
               "default": "Non-functional",
               "es": "No Funcional",
-              "fr": "Non-functionnel"
+              "fr": "Non-fonctionnel"
             }
           }
         },
@@ -1406,7 +1406,7 @@
               "text": {
                 "default": "Non-functional",
                 "es": "No Funcional",
-                "fr": "Non-functionnel"
+                "fr": "Non-fonctionnel"
               }
             }
           },
@@ -2392,7 +2392,7 @@
               "prompt": {
                 "text": {
                   "default": "How many heat alarms with over 10 hour duration above 8°C show in the termperature log from the first day of the month to the last day of the month?",
-                  "fr": "Combien d'alarmes de haute température (supérieure à 8°C et ayant durée 10 heures) enregistré dans le releve de température du mois dernier?"
+                  "fr": "Combien d'alarmes de haute température (supérieure à 8°C et ayant duré 10 heures ou plus) enregistrées dans le relevé de température du mois dernier?"
                 }
               }
             },
@@ -2411,7 +2411,7 @@
               "prompt": {
                 "text": {
                   "default": "How many freeze alarms with over 1 hour duration below -0.5°C show in the temperature log from the first day of the month to the last day of the month?",
-                  "fr": "Combien d'alarmes de basse température (-0,5°C ayant dur au moins 1 heure) apparaissent/enregistrées dans le releve de température du mois dernier?"
+                  "fr": "Combien d'alarmes de basse température (-0,5°C ayant duré au moins 1 heure) apparaissent/enregistrées dans le relevé de température du mois dernier?"
                 }
               }
             },
@@ -2430,7 +2430,7 @@
               "prompt": {
                 "text": {
                   "default": "How many heat alarms with 48 hour or longer duration in the temperature log from the first day of the month to the last day of the month?",
-                  "fr": "Combien d'alarmes de haute température d'une durée de 48h ou plus apparaissent dans le releve de température du mois dernier ?"
+                  "fr": "Combien d'alarmes de haute température d'une durée de 48h ou plus apparaissent dans le relevé de température du mois dernier ?"
                 }
               }
             },
@@ -2467,7 +2467,7 @@
               "prompt": {
                 "text": {
                   "default": "Why did the refrigerator fail?",
-                  "fr": "Pourquoi le réfrigérateur est-t-il tombe en panne?"
+                  "fr": "Quelle est la cause de la panne du refrigerateur ?"
                 }
               }
             },
@@ -2506,7 +2506,7 @@
               "prompt": {
                 "text": {
                   "default": "If yes, what condition was observed related to the issue?",
-                  "fr": "Si oui, quelle condition a été observée liée à la défaillance?"
+                  "fr": "Si oui, quelle signe de defaillance a-t-on observée ?"
                 }
               }
             },
@@ -2543,7 +2543,7 @@
               "prompt": {
                 "text": {
                   "default": "Please enter the component that failed",
-                  "fr": "Veuillez entrer le composant qui a échoué"
+                  "fr": "Veuillez entrer le composant qui defectuex"
                 }
               }
             },
@@ -2599,7 +2599,7 @@
               "prompt": {
                 "text": {
                   "default": "If yes, what condition was observed related to the second failure?",
-                  "fr": "Si oui, quelle condition a été observée liée à la défaillance?"
+                  "fr": "Si oui, quelle signe de defaillance a-t-on observée ?"
                 }
               }
             },
@@ -2636,7 +2636,7 @@
               "prompt": {
                 "text": {
                   "default": "Please enter the second component that failed",
-                  "fr": "Veuillez entrer le composant qui a échoué"
+                  "fr": "Veuillez entrer le composant qui defectuex"
                 }
               }
             },
@@ -2692,7 +2692,7 @@
               "prompt": {
                 "text": {
                   "default": "If yes, what condition was observed related to the third failure?",
-                  "fr": "Si oui, quelle condition a été observée liée à la défaillance?"
+                  "fr": "Si oui, quelle signe de defaillance a-t-on observée ?"
                 }
               }
             },
@@ -2729,7 +2729,7 @@
               "prompt": {
                 "text": {
                   "default": "Please enter the third component that failed",
-                  "fr": "Veuillez entrer le composant qui a échoué"
+                  "fr": "Veuillez entrer le composant qui defectuex"
                 }
               }
             },
@@ -2766,7 +2766,7 @@
               "prompt": {
                 "text": {
                   "default": "Is the voltage stabilizer working?",
-                  "fr": "Le stabilisateur de tension fonctionne-t-il?"
+                  "fr": "Le stabilisateur de tension fonctionne-t-il normalement ?"
                 }
               }
             },
@@ -2895,7 +2895,7 @@
               "prompt": {
                 "text": {
                   "default": "How many days elapsed between when the claim was made and when the repair occurred?",
-                  "fr": "Combien de jours se sont écoulés entre le moment où la demande de garantie a été faite et le moment où la réparation a eu lieu?"
+                  "fr": "Combien de jours se sont écoulés entre le moment où la demande de garantie  a été faite et le moment où la réparation a eu lieu?"
                 }
               }
             },
