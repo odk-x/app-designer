@@ -1826,6 +1826,110 @@ window.odkCommonDefinitions = {
         "es": "El movimiento no se realizará: la nueva identificación de la instalación no es válida"
       },
       "_row_num": 212
+    },
+    "refrigerator_temperature_data": {
+      "string_token": "refrigerator_temperature_data",
+      "text": {
+        "default": "Refrigerator Temperature Data",
+        "es": "Datos de temperatura del refrigerador"
+      },
+      "_row_num": 213
+    },
+    "average_temperature": {
+      "string_token": "average_temperature",
+      "text": {
+        "default": "Average Temperature:",
+        "es": "Temperatura media:"
+      },
+      "_row_num": 214
+    },
+    "lower_alarm_status": {
+      "string_token": "lower_alarm_status",
+      "text": {
+        "default": "Lower Alarm Status:",
+        "es": "Estado de alarma inferior:"
+      },
+      "_row_num": 215
+    },
+    "minimum_temperature": {
+      "string_token": "minimum_temperature",
+      "text": {
+        "default": "Minimum Temperature:",
+        "es": "Temperatura mínima:"
+      },
+      "_row_num": 216
+    },
+    "cumulative_duration_below_lower_limit": {
+      "string_token": "cumulative_duration_below_lower_limit",
+      "text": {
+        "default": "Cumulative Duration Below Lower Limit:",
+        "es": "Duración acumulativa por debajo del límite inferior:"
+      },
+      "_row_num": 217
+    },
+    "upper_alarm_status": {
+      "string_token": "upper_alarm_status",
+      "text": {
+        "default": "Upper Alarm Status:",
+        "es": "Estado de alarma superior:"
+      },
+      "_row_num": 218
+    },
+    "maximum_temperature": {
+      "string_token": "maximum_temperature",
+      "text": {
+        "default": "Maximum Temperature:",
+        "es": "Temperatura máxima:"
+      },
+      "_row_num": 219
+    },
+    "cumulative_duration_above_upper_limit": {
+      "string_token": "cumulative_duration_above_upper_limit",
+      "text": {
+        "default": "Cumulative Duration Above Upper Limit:",
+        "es": "Duración acumulativa por encima del límite superior:"
+      },
+      "_row_num": 220
+    },
+    "edit_temperature_data": {
+      "string_token": "edit_temperature_data",
+      "text": {
+        "default": "Edit Temperature Data",
+        "es": "Editar datos de temperatura"
+      },
+      "_row_num": 221
+    },
+    "delete_temperature_data": {
+      "string_token": "delete_temperature_data",
+      "text": {
+        "default": "Delete Temperature Data",
+        "es": "Eliminar datos de temperatura"
+      },
+      "_row_num": 222
+    },
+    "add_temperature_data": {
+      "string_token": "add_temperature_data",
+      "text": {
+        "default": "Add Temperature Data",
+        "es": "Agregar datos de temperatura"
+      },
+      "_row_num": 223
+    },
+    "view_all_temperature_data": {
+      "string_token": "view_all_temperature_data",
+      "text": {
+        "default": "View All Temperature Data",
+        "es": "Ver todos los datos de temperatura"
+      },
+      "_row_num": 224
+    },
+    "are_you_sure_you_want_to_delete_this_temperature_data": {
+      "string_token": "are_you_sure_you_want_to_delete_this_temperature_data",
+      "text": {
+        "default": "Are you sure you want to delete this temperature data?",
+        "es": "¿Está seguro de que desea eliminar estos datos de temperatura?"
+      },
+      "_row_num": 225
     }
   },
   "_locales": {

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- TBL_IV_REF Detailed View -->
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="../../../assets/css/detail.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../../../assets/commonDefinitions.js"></script>
+        <script type="text/javascript" src="../../../assets/libs/jquery-3.4.1.js"></script>
+        <script type="text/javascript" src="../../../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="../../../assets/js/util.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript" src="../js/refrigerator_temperature_data_detail.js"></script>
+
+        <div class="header col-12">
+            <h1><span id="frig-hdr">Refrigerator</span> <span id="tracking_id" class=""></span></h1>
+        </div>
+
+        <br>
+
+        <div class="detail col-12">
+            <h3 id="ref-temp-data">Refrigerator Temperature Data</span></h3>
+        </div>
+
+        <p><span class="detailHdr" id="frig-id">Refrigerator ID:</span> <span id="refrigerator_id"></span>
+        <p><span class="detailHdr" id="rep-period">Reporting Period:</span> <span id="reporting_id"></span>
+
+        <p><span class="detailHdr" id="avg-temp">Average Temperature:</span> <span id="average_temperature"></span></p>
+
+        <p><span class="detailHdr" id="low-ala-stat">Lower Alarm Status:</span> <span id="lower_alarm_status"></span></p>
+        <p><span class="detailHdr" id="min-temp">Minimum Temperature:</span> <span id="minimum_temperature"></span></p>
+        <p><span class="detailHdr" id="cum-dur-bel-low-lim">Cumulative Duration Below Lower Limit:</span>
+            <span id="cumulative_duration_below_lower_limit"></span></p>
+
+
+        <p><span class="detailHdr" id="up-ala-stat">Upper Alarm Status:</span> <span id="upper_alarm_status"></span></p>
+        <p><span class="detailHdr" id="max-temp">Maximum Temperature:</span> <span id="maximum_temperature"></span></p>
+        <p><span class="detailHdr" id="cum-dur-abo-up-lim">Cumulative Duration Above Upper Limit:</span>
+            <span id="cumulative_duration_above_upper_limit"></span></p>
+
+        <div id="editTempDataBtn" class="button hideButton">
+            <h3 id="edit-temp-data" href="#" onclick="onEditTempData()">Edit Temperature Data</h3>
+        </div>
+
+        <div id="delTempDataBtn" class="button buttonDelete hideButton">
+            <h3 id="del-temp-data" href="#" onclick="onDeleteTempData()">Delete Temperature Data</h3>
+        </div>
+
+        <script>
+            $(function() { display(); });
+        </script>
+    </body>
+</html>

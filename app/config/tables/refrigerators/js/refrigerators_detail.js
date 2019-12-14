@@ -123,6 +123,9 @@ function display() {
     $('#add-sent-survey').text(odkCommon.localizeText(locale, "add_sentinel_survey"));
     $('#vw-sent-survey').text(odkCommon.localizeText(locale, "view_all_sentinel_surveys"));
 
+    $('#add-temp-data').text(odkCommon.localizeText(locale, "add_temperature_data"));
+    $('#vw-all-temp-data').text(odkCommon.localizeText(locale, "view_all_temperature_data"));
+
     $('#mov-frig').text(odkCommon.localizeText(locale, "move_refrigerator"));
     $('#vw-all-frig-mov').text(odkCommon.localizeText(locale, "view_all_refrigerator_moves"));
 
@@ -199,7 +202,8 @@ function onClickViewAllFrigMoves() {
 function onClickAddMntRec() {
     if (!$.isEmptyObject(refrigeratorsResultSet)) {
 
-		var defaults = {'refrigerator_id': refrigeratorsResultSet.get('_id'), 'date_serviced': odkCommon.toOdkTimeStampFromDate(new Date())};
+		var defaults = {'refrigerator_id': refrigeratorsResultSet.get('_id'),
+            'date_serviced': odkCommon.toOdkTimeStampFromDate(new Date())};
 		defaults['_default_access'] = refrigeratorsResultSet.get('_default_access');
 		defaults['_group_read_only'] = refrigeratorsResultSet.get('_group_read_only');
 		defaults['_group_modify'] = refrigeratorsResultSet.get('_group_modify');
@@ -245,5 +249,30 @@ function onClickViewSentinelSurvey() {
         var frigIdQueryParams = util.getKeyToAppendToColdChainURL(keyToAppend, refrigeratorsResultSet.get('_id'));
         odkTables.launchHTML(null,
             'config/tables/indicators/html/indicators_list.html' + frigIdQueryParams);
+    }
+}
+
+function onClickAddTempData() {
+    if (!$.isEmptyObject(refrigeratorsResultSet)) {
+
+        var defaults = {'refrigerator_id': refrigeratorsResultSet.get('_id'),
+            'reporting_period': odkCommon.toOdkTimeStampFromDate(new Date())};
+        defaults['_default_access'] = refrigeratorsResultSet.get('_default_access');
+        defaults['_group_read_only'] = refrigeratorsResultSet.get('_group_read_only');
+        defaults['_group_modify'] = refrigeratorsResultSet.get('_group_modify');
+        defaults['_group_privileged'] = refrigeratorsResultSet.get('_group_privileged');
+
+        odkTables.addRowWithSurvey(null, 'refrigerator_temperature_data', 'refrigerator_temperature_data', null, defaults);
+    }
+}
+
+function onClickViewAllTempData() {
+    if (!$.isEmptyObject(refrigeratorsResultSet)) {
+
+        var keyToAppend = 'refrigerator_temperature_data.refrigerator_id';
+
+        var frigIdQueryParams = util.getKeyToAppendToColdChainURL(keyToAppend, refrigeratorsResultSet.get('_id'));
+        odkTables.launchHTML(null,
+            'config/tables/refrigerator_temperature_data/html/refrigerator_temperature_data_list.html' + frigIdQueryParams);
     }
 }
