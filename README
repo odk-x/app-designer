@@ -1,7 +1,7 @@
-This repository contains the ODK-x Application Designer software.
+This repository contains the ODK-X Application Designer software.
 
 Complete Android apps, including data entry, synchronization, and distribution,
-can be written using HTML and JavaScript files. ODK-x Tables and ODK-x Survey will
+can be written using HTML and JavaScript files. ODK-X Tables and ODK-X Survey will
 serve these files as the skin of your app.
 
 Projects intending to write a Tables app can clone this repository and use it
