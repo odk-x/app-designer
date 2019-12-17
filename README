@@ -1,7 +1,7 @@
-This repository contains the ODK Application Designer 2.0 software.
+This repository contains the ODK-x Application Designer software.
 
 Complete Android apps, including data entry, synchronization, and distribution,
-can be written using HTML and JavaScript files. ODK Tables and ODK Survey will
+can be written using HTML and JavaScript files. ODK-x Tables and ODK-x Survey will
 serve these files as the skin of your app.
 
 Projects intending to write a Tables app can clone this repository and use it
@@ -13,10 +13,6 @@ tasks specified in the Gruntfile.
 For a more complete description of how to use this repository, please see our
 user documentation at:
 
-https://opendatakit.org/use/2_0_tools/odk-application-designer-2-0-rev126/
+https://docs.opendatakit.org/odk-x/app-designer-intro/
 
-Suggestions and corrections are welcomed in our efforts to make the
-documentation more complete and the data collection application design 
-process easier. Please send to:
-
-opendatakit@googlegroups.com
+Requires NodeJS 12 or higher.
