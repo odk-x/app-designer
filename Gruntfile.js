@@ -2,8 +2,10 @@
 var LIVERELOAD_PORT = 35729;
 var SERVER_PORT = 8000;
 var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
+var serveStatic = require('serve-static');
+var serveIndex = require('serve-index');
 var mountFolder = function (connect, dir) {
-    return connect.static(
+    return serveStatic(
         require('path').resolve(dir),
         {
             // We need to specify a file that will be displayed in place of
@@ -13,7 +15,7 @@ var mountFolder = function (connect, dir) {
     );
 };
 var mountDirectory = function(connect, dir) {
-    return connect.directory(
+    return serveIndex(
         require('path').resolve(dir),
         {
             icons: true,
@@ -246,22 +248,23 @@ module.exports = function (grunt) {
         open: {
             server: {
                 path: 'http://localhost:<%= connect.options.port %>/index.html',
-                app: (function() {
+                app: {app: (function() {
                     var platform = require('os').platform();
                     // windows: *win*
                     // mac: darwin
                     if (platform.search('win') >= 0 &&
-                        platform.search('darwin') < 0) {
-                        // Windows expects chrome.
-                        grunt.log.writeln('detected Windows environment');
-                        return 'chrome';
+                      platform.search('darwin') < 0) {
+                      // Windows expects chrome.
+                      grunt.log.writeln('detected Windows environment');
+                      return 'chrome';
                     } else {
-                        // Mac (and maybe others--add as discovered), expects
-                        // Google Chrome
-                        grunt.log.writeln('detected non-Windows environment');
-                        return 'Google Chrome';
+                      // Mac (and maybe others--add as discovered), expects
+                      // Google Chrome
+                      grunt.log.writeln('detected non-Windows environment');
+                      return 'Google Chrome';
                     }
-                })()
+                  })()
+                }
             }
         },
     });
