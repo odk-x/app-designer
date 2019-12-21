@@ -172,10 +172,12 @@
                 twoDigit = this.options.template.indexOf('DD') !== -1,
                 daysCount = 31;
 
-            // Prepopulate the current month as the top option
-            var day = new Date().getDate();
-            name = twoDigit ? this.leadZero(day) : day;
-            items.push([day, name]);
+            // Prepopulate the current day as the top option
+			if(this.options.hideCurrentDay === null || this.options.hideCurrentDay != new Boolean(true)) {
+				var day = new Date().getDate();
+				name = twoDigit ? this.leadZero(day) : day;
+				items.push([day, name]);
+			}
 
             // detect days count (depends on month and year)
             // originally https://github.com/vitalets/combodate/pull/7
@@ -207,22 +209,24 @@
                 twoDigit = this.options.template.indexOf('MM') !== -1;
 
             // Prepopulate the current month as the top option
-            var monthNum = new Date().getMonth();
-            if (longNamesNum) {
-                name = moment().date(1).month(monthNum).format('MM - MMMM');
-            } else if (shortNamesNum) {
-                name = moment().date(1).month(monthNum).format('MM - MMM');
-            } else if(longNames) {
-                //see https://github.com/timrwood/momentjs.com/pull/36
-                name = moment().date(1).month(monthNum).format('MMMM');
-            } else if(shortNames) {
-                name = moment().date(1).month(monthNum).format('MMM');
-            } else if(twoDigit) {
-                name = this.leadZero(monthNum+1);
-            } else {
-                name = monthNum+1;
-            }
-            items.push([monthNum, name]);
+            if(this.options.hideCurrentMonth === null || this.options.hideCurrentMonth != new Boolean(true)) {
+				var monthNum = new Date().getMonth();
+				if (longNamesNum) {
+					name = moment().date(1).month(monthNum).format('MM - MMMM');
+				} else if (shortNamesNum) {
+					name = moment().date(1).month(monthNum).format('MM - MMM');
+				} else if(longNames) {
+					//see https://github.com/timrwood/momentjs.com/pull/36
+					name = moment().date(1).month(monthNum).format('MMMM');
+				} else if(shortNames) {
+					name = moment().date(1).month(monthNum).format('MMM');
+				} else if(twoDigit) {
+					name = this.leadZero(monthNum+1);
+				} else {
+					name = monthNum+1;
+				}
+				items.push([monthNum, name]);
+			}
 
             for(i=0; i<=11; i++) {
                 if (longNamesNum) {
