@@ -168,7 +168,7 @@ util.getMenuOptions = function (nextLevel, currAdminRegion, maxLevel) {
         // If there is only 1 choice, make it
             // Assuming that this only happens between no more than 2 levels
         if (result.getCount() === 1 && nextLevel < util.maxLevelAppDepth &&
-            (maxLevel !== null && maxLevel !== undefined && nextLevel <= maxLevel)) {
+            (maxLevel !== null && maxLevel !== undefined && nextLevel < maxLevel)) {
             var nextNextLevel = parseInt(nextLevel) + 1;
             var promiseRegionLevelVal = util.regionLevel + nextLevel;
             var nextRegion = result.get(promiseRegionLevelVal);
