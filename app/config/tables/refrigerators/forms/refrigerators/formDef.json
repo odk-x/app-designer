@@ -215,7 +215,6 @@
             }
           }
         },
-        "required": 1,
         "_row_num": 22
       },
       {
@@ -304,6 +303,12 @@
             "text": {
               "default": "Take a picture of the refrigerator serial number",
               "es": "Tome una fotografía del número de serie del refrigerador"
+            }
+          },
+          "hint": {
+            "text": {
+              "default": "Only take photo if needed for verification",
+              "es": "Solo tome una foto si es necesario para la verificación"
             }
           }
         },
@@ -1492,7 +1497,7 @@
       },
       {
         "calculation_name": "valid_procured_refrigerator_year",
-        "calculation": "(function() {\n  var currDate = new Date();\n  var currYear = currDate.getFullYear();\n  \n  return (data('year_procured') >= 1950 && data('year_procured') <= currYear) || parseInt(data('year_procured')) === 0\n  \n})()",
+        "calculation": "(function() {\n  var currDate = new Date();\n  var currYear = currDate.getFullYear();\n  \n  return (data('year_procured') >= 1950 && data('year_procured') <= currYear) || parseInt(data('year_procured')) === 0 || (data('year_procured') === undefined || data('year_procured') === null)\n  \n})()",
         "_row_num": 3
       }
     ]
@@ -2256,7 +2261,7 @@
       },
       "valid_procured_refrigerator_year": {
         "calculation_name": "valid_procured_refrigerator_year",
-        "calculation": "(function() {\n  var currDate = new Date();\n  var currYear = currDate.getFullYear();\n  \n  return (data('year_procured') >= 1950 && data('year_procured') <= currYear) || parseInt(data('year_procured')) === 0\n  \n})()",
+        "calculation": "(function() {\n  var currDate = new Date();\n  var currYear = currDate.getFullYear();\n  \n  return (data('year_procured') >= 1950 && data('year_procured') <= currYear) || parseInt(data('year_procured')) === 0 || (data('year_procured') === undefined || data('year_procured') === null)\n  \n})()",
         "_row_num": 3
       }
     },
@@ -3023,7 +3028,6 @@
                 }
               }
             },
-            "required": 1,
             "_row_num": 22,
             "__rowNum__": 21,
             "_token_type": "prompt",
@@ -3123,6 +3127,12 @@
                 "text": {
                   "default": "Take a picture of the refrigerator serial number",
                   "es": "Tome una fotografía del número de serie del refrigerador"
+                }
+              },
+              "hint": {
+                "text": {
+                  "default": "Only take photo if needed for verification",
+                  "es": "Solo tome una foto si es necesario para la verificación"
                 }
               }
             },
@@ -3591,7 +3601,6 @@
           "finalize": [
             0,
             5,
-            6,
             7,
             8
           ]

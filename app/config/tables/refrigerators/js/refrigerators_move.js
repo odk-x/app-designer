@@ -35,6 +35,10 @@ function resumeFunc(state) {
 
         $('#mv-ref').text(odkCommon.localizeText(locale, "move_refrigerator"));
 
+        var defNewFac = $('#facility_to_move_to_name');
+        defNewFac.text("");
+        defNewFac.removeAttr('data-fac-row-id');
+
         // Translations
         var locale = odkCommon.getPreferredLocale();
         $('#showing').text(odkCommon.localizeText(locale, "showing"));
@@ -183,6 +187,10 @@ function onMoveRefrigerator() {
                 });
             }).then(function(result){
                 console.log('Added a row to refrigerator_moves');
+                var alertMsg = odkCommon.localizeText(locale, 'move_performed_successfully');
+                alert(alertMsg);
+                resumeFunc('init');
+
             }).catch( function(reason) {
                 error = 'onMoveRefrigerator failed: ' + reason;
                 console.log(error);

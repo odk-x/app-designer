@@ -121,7 +121,6 @@
             }
           }
         },
-        "required": 1,
         "_row_num": 9
       },
       {
@@ -184,7 +183,7 @@
         "_row_num": 13
       },
       {
-        "type": "integer",
+        "type": "decimal",
         "name": "storage_temperature",
         "display": {
           "title": {
@@ -209,7 +208,7 @@
         "_row_num": 14
       },
       {
-        "type": "integer",
+        "type": "decimal",
         "name": "net_volume",
         "display": {
           "title": {
@@ -234,7 +233,7 @@
         "_row_num": 15
       },
       {
-        "type": "integer",
+        "type": "decimal",
         "name": "gross_volume",
         "display": {
           "title": {
@@ -1656,7 +1655,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "integer",
+        "type": "number",
         "displayName": {
           "text": {
             "default": "Storage Temperature",
@@ -1672,7 +1671,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "integer",
+        "type": "number",
         "displayName": {
           "text": {
             "default": "Net Volume",
@@ -1688,7 +1687,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "integer",
+        "type": "number",
         "displayName": {
           "text": {
             "default": "Gross Volume",
@@ -2123,7 +2122,6 @@
                 }
               }
             },
-            "required": 1,
             "_row_num": 9,
             "__rowNum__": 8,
             "_token_type": "prompt",
@@ -2193,7 +2191,7 @@
             "promptIdx": 6
           },
           {
-            "type": "integer",
+            "type": "decimal",
             "name": "storage_temperature",
             "display": {
               "title": {
@@ -2218,12 +2216,12 @@
             "_row_num": 14,
             "__rowNum__": 13,
             "_token_type": "prompt",
-            "_type": "integer",
+            "_type": "decimal",
             "_branch_label_enclosing_screen": "survey/_screen13",
             "promptIdx": 7
           },
           {
-            "type": "integer",
+            "type": "decimal",
             "name": "net_volume",
             "display": {
               "title": {
@@ -2248,12 +2246,12 @@
             "_row_num": 15,
             "__rowNum__": 14,
             "_token_type": "prompt",
-            "_type": "integer",
+            "_type": "decimal",
             "_branch_label_enclosing_screen": "survey/_screen13",
             "promptIdx": 8
           },
           {
-            "type": "integer",
+            "type": "decimal",
             "name": "gross_volume",
             "display": {
               "title": {
@@ -2278,7 +2276,7 @@
             "_row_num": 16,
             "__rowNum__": 15,
             "_token_type": "prompt",
-            "_type": "integer",
+            "_type": "decimal",
             "_branch_label_enclosing_screen": "survey/_screen13",
             "promptIdx": 9
           },
@@ -2572,7 +2570,6 @@
         "validation_tag_map": {
           "finalize": [
             0,
-            4,
             6
           ]
         },
@@ -2830,7 +2827,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "integer",
+        "type": "number",
         "displayName": {
           "text": {
             "default": "Storage Temperature",
@@ -2849,7 +2846,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "integer",
+        "type": "number",
         "displayName": {
           "text": {
             "default": "Net Volume",
@@ -2868,7 +2865,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "integer",
+        "type": "number",
         "displayName": {
           "text": {
             "default": "Gross Volume",

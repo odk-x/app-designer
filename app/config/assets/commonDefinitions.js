@@ -1930,6 +1930,14 @@ window.odkCommonDefinitions = {
         "es": "¿Está seguro de que desea eliminar estos datos de temperatura?"
       },
       "_row_num": 225
+    },
+    "move_performed_successfully": {
+      "string_token": "move_performed_successfully",
+      "text": {
+        "default": "Move performed successfully",
+        "es": "Movimiento realizado con éxito"
+      },
+      "_row_num": 226
     }
   },
   "_locales": {
