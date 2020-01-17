@@ -7,6 +7,7 @@ var locale = null;
 var supervisorGroup = 'GROUP_SUPERVISOR';
 var workerGroup = 'GROUP_WORKER';
 var administratorGroup = 'ROLE_ADMINISTER_TABLES';
+var adminGroup = 'GROUP_ADMIN';
 var GROUP_REGION_ = 'GROUP_REGION_';
 var maxLevelValue;
 var VIEW_HEALTH_FACILITIES_REFRIGERATORS = 'View Health Facilities/Refrigerators';
@@ -161,13 +162,13 @@ async function checkDefaultGroupForMenuOptions() {
 
         // We have an admin - we would show everything
         // Or we have a supervisor or worker - show everything but admin options
-    } else if (r.indexOf(administratorGroup) === 0 ||
+    } else if (r.indexOf(administratorGroup) === 0 || r.indexOf(adminGroup) === 0 ||
         r.indexOf(supervisorGroup) === 0 || r.indexOf(workerGroup) === 0) {
         // Start at the beginning
         regionJSON = await util.getMenuOptions(util.firstLevelNumber);
         showRegionButtonsAndTitle(regionJSON);
 
-        if (r.indexOf(administratorGroup) === 0) {
+        if (r.indexOf(administratorGroup) === 0 || r.indexOf(adminGroup) === 0) {
             var adminTxt = adminValue;
             var localizeAdminTxt = odkCommon.localizeText(locale, "administrator_options");
             if (localizeAdminTxt !== null && localizeAdminTxt !== undefined) {
