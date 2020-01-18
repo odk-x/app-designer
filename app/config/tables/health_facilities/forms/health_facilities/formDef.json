@@ -704,6 +704,21 @@
         "name": "change_admin_region",
         "isSessionVariable": true,
         "_row_num": 2
+      },
+      {
+        "type": "text",
+        "name": "cceGroupPrivileged",
+        "_row_num": 3
+      },
+      {
+        "type": "text",
+        "name": "cceGroupModify",
+        "_row_num": 4
+      },
+      {
+        "type": "text",
+        "name": "cceGroupReadOnly",
+        "_row_num": 5
       }
     ],
     "choices": [
@@ -3026,6 +3041,36 @@
         "isSessionVariable": true,
         "elementKey": "change_admin_region"
       },
+      "cceGroupPrivileged": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "cceGroupPrivileged"
+      },
+      "cceGroupModify": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "cceGroupModify"
+      },
+      "cceGroupReadOnly": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "cceGroupReadOnly"
+      },
       "facility_name": {
         "_defn": [
           {
@@ -4562,6 +4607,45 @@
         "elementName": "change_admin_region",
         "elementSet": "data",
         "elementPath": "change_admin_region"
+      },
+      "cceGroupPrivileged": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "cceGroupPrivileged",
+        "elementName": "cceGroupPrivileged",
+        "elementSet": "data",
+        "elementPath": "cceGroupPrivileged"
+      },
+      "cceGroupModify": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "cceGroupModify",
+        "elementName": "cceGroupModify",
+        "elementSet": "data",
+        "elementPath": "cceGroupModify"
+      },
+      "cceGroupReadOnly": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "cceGroupReadOnly",
+        "elementName": "cceGroupReadOnly",
+        "elementSet": "data",
+        "elementPath": "cceGroupReadOnly"
       },
       "facility_name": {
         "_defn": [

@@ -29,9 +29,27 @@ function onAddFridgeClick() {
     var jsonMap = {};
     jsonMap.facility_row_id = healthFacilityResultSet.getRowId(0);
 	jsonMap._default_access = healthFacilityResultSet.get('_default_access');
-	jsonMap._group_read_only = healthFacilityResultSet.get('_group_read_only');
-	jsonMap._group_modify = healthFacilityResultSet.get('_group_modify');
-	jsonMap._group_privileged = healthFacilityResultSet.get('_group_privileged');
+
+    var customGroupReadOnly = healthFacilityResultSet.get('cceGroupReadOnly');
+    if (customGroupReadOnly !== null && customGroupReadOnly !== undefined) {
+        jsonMap._group_read_only = healthFacilityResultSet.get('cceGroupReadOnly');
+    } else {
+        jsonMap._group_read_only = healthFacilityResultSet.get('_group_read_only');
+    }
+
+    var customGroupModify = healthFacilityResultSet.get('cceGroupModify');
+    if (customGroupModify !== null && customGroupModify !== undefined) {
+        jsonMap._group_modify = healthFacilityResultSet.get('cceGroupModify');
+    } else {
+        jsonMap._group_modify = healthFacilityResultSet.get('_group_modify');
+    }
+
+    var customGroupPrivileged = healthFacilityResultSet.get('cceGroupPrivileged');
+    if (customGroupPrivileged !== null && customGroupPrivileged !== undefined) {
+        jsonMap._group_privileged = healthFacilityResultSet.get('cceGroupPrivileged');
+    } else {
+        jsonMap._group_privileged = healthFacilityResultSet.get('_group_privileged');
+    }
 
     odkTables.addRowWithSurvey(null, 'refrigerators', 'refrigerators', null, jsonMap);
 }
@@ -50,9 +68,27 @@ function onAddCRClick() {
     var jsonMap = {};
     jsonMap.facility_row_id = healthFacilityResultSet.getRowId(0);
     jsonMap._default_access = healthFacilityResultSet.get('_default_access');
-    jsonMap._group_read_only = healthFacilityResultSet.get('_group_read_only');
-    jsonMap._group_modify = healthFacilityResultSet.get('_group_modify');
-    jsonMap._group_privileged = healthFacilityResultSet.get('_group_privileged');
+
+    var customGroupReadOnly = healthFacilityResultSet.get('cceGroupReadOnly');
+    if (customGroupReadOnly !== null && customGroupReadOnly !== undefined) {
+        jsonMap._group_read_only = healthFacilityResultSet.get('cceGroupReadOnly');
+    } else {
+        jsonMap._group_read_only = healthFacilityResultSet.get('_group_read_only');
+    }
+
+    var customGroupModify = healthFacilityResultSet.get('cceGroupModify');
+    if (customGroupModify !== null && customGroupModify !== undefined) {
+        jsonMap._group_modify = healthFacilityResultSet.get('cceGroupModify');
+    } else {
+        jsonMap._group_modify = healthFacilityResultSet.get('_group_modify');
+    }
+
+    var customGroupPrivileged = healthFacilityResultSet.get('cceGroupPrivileged');
+    if (customGroupPrivileged !== null && customGroupPrivileged !== undefined) {
+        jsonMap._group_privileged = healthFacilityResultSet.get('cceGroupPrivileged');
+    } else {
+        jsonMap._group_privileged = healthFacilityResultSet.get('_group_privileged');
+    }
 
     odkTables.addRowWithSurvey(null, 'cold_rooms', 'cold_rooms', null, jsonMap);
 }
