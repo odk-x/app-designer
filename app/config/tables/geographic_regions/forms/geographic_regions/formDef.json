@@ -228,7 +228,7 @@
     "calculates": [
       {
         "calculation_name": "getDisplayName",
-        "calculation": "(function() {\n  var name = '';\n  var maxLevel = 5;\n  for (var i = 1; i <= maxLevel; i++) {\n    var regionData = 'regionLevel' + i;\n    if (data(regionData) !== null && data(regionData) !== undefined) {\n      name += data(regionData);\n   if (i < maxLevel) { name += '/'; }\n    }\n  } \n  return name;\n})()",
+        "calculation": "(function() {\n  var name = '';\n  var maxLevel = 5;\n  for (var i = 1; i <= maxLevel; i++) {\n    var regionData = 'regionLevel' + i;\n    if (data(regionData) !== null && data(regionData) !== undefined) {\n      name += data(regionData);\n   if (i < maxLevel) { name += '/'; }\n    }\n  } \n  if (name.length > 0 && name.charAt(name.length - 1) === '/') {name = name.substr(0, name.length - 1)}\n  return name;\n})()",
         "_row_num": 2
       }
     ],
@@ -495,7 +495,7 @@
     "calculates": {
       "getDisplayName": {
         "calculation_name": "getDisplayName",
-        "calculation": "(function() {\n  var name = '';\n  var maxLevel = 5;\n  for (var i = 1; i <= maxLevel; i++) {\n    var regionData = 'regionLevel' + i;\n    if (data(regionData) !== null && data(regionData) !== undefined) {\n      name += data(regionData);\n   if (i < maxLevel) { name += '/'; }\n    }\n  } \n  return name;\n})()",
+        "calculation": "(function() {\n  var name = '';\n  var maxLevel = 5;\n  for (var i = 1; i <= maxLevel; i++) {\n    var regionData = 'regionLevel' + i;\n    if (data(regionData) !== null && data(regionData) !== undefined) {\n      name += data(regionData);\n   if (i < maxLevel) { name += '/'; }\n    }\n  } \n  if (name.length > 0 && name.charAt(name.length - 1) === '/') {name = name.substr(0, name.length - 1)}\n  return name;\n})()",
         "_row_num": 2
       }
     },
