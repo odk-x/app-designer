@@ -31,21 +31,21 @@ function onAddFridgeClick() {
 	jsonMap._default_access = healthFacilityResultSet.get('_default_access');
 
     var customGroupReadOnly = healthFacilityResultSet.get('cceGroupReadOnly');
-    if (customGroupReadOnly !== null && customGroupReadOnly !== undefined) {
+    if (customGroupReadOnly !== null && customGroupReadOnly !== undefined && customGroupReadOnly.length > 0) {
         jsonMap._group_read_only = healthFacilityResultSet.get('cceGroupReadOnly');
     } else {
         jsonMap._group_read_only = healthFacilityResultSet.get('_group_read_only');
     }
 
     var customGroupModify = healthFacilityResultSet.get('cceGroupModify');
-    if (customGroupModify !== null && customGroupModify !== undefined) {
+    if (customGroupModify !== null && customGroupModify !== undefined && customGroupModify.length > 0) {
         jsonMap._group_modify = healthFacilityResultSet.get('cceGroupModify');
     } else {
         jsonMap._group_modify = healthFacilityResultSet.get('_group_modify');
     }
 
     var customGroupPrivileged = healthFacilityResultSet.get('cceGroupPrivileged');
-    if (customGroupPrivileged !== null && customGroupPrivileged !== undefined) {
+    if (customGroupPrivileged !== null && customGroupPrivileged !== undefined && customGroupPrivileged.length > 0) {
         jsonMap._group_privileged = healthFacilityResultSet.get('cceGroupPrivileged');
     } else {
         jsonMap._group_privileged = healthFacilityResultSet.get('_group_privileged');
@@ -70,21 +70,21 @@ function onAddCRClick() {
     jsonMap._default_access = healthFacilityResultSet.get('_default_access');
 
     var customGroupReadOnly = healthFacilityResultSet.get('cceGroupReadOnly');
-    if (customGroupReadOnly !== null && customGroupReadOnly !== undefined) {
+    if (customGroupReadOnly !== null && customGroupReadOnly !== undefined && customGroupReadOnly.length > 0) {
         jsonMap._group_read_only = healthFacilityResultSet.get('cceGroupReadOnly');
     } else {
         jsonMap._group_read_only = healthFacilityResultSet.get('_group_read_only');
     }
 
     var customGroupModify = healthFacilityResultSet.get('cceGroupModify');
-    if (customGroupModify !== null && customGroupModify !== undefined) {
+    if (customGroupModify !== null && customGroupModify !== undefined && customGroupModify.length > 0) {
         jsonMap._group_modify = healthFacilityResultSet.get('cceGroupModify');
     } else {
         jsonMap._group_modify = healthFacilityResultSet.get('_group_modify');
     }
 
     var customGroupPrivileged = healthFacilityResultSet.get('cceGroupPrivileged');
-    if (customGroupPrivileged !== null && customGroupPrivileged !== undefined) {
+    if (customGroupPrivileged !== null && customGroupPrivileged !== undefined && customGroupPrivileged.length > 0) {
         jsonMap._group_privileged = healthFacilityResultSet.get('cceGroupPrivileged');
     } else {
         jsonMap._group_privileged = healthFacilityResultSet.get('_group_privileged');
