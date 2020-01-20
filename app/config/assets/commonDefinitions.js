@@ -1938,6 +1938,86 @@ window.odkCommonDefinitions = {
         "es": "Movimiento realizado con éxito"
       },
       "_row_num": 226
+    },
+    "row_deleted_successfully": {
+      "string_token": "row_deleted_successfully",
+      "text": {
+        "default": "Row deleted successfully",
+        "es": "Fila eliminada con éxito"
+      },
+      "_row_num": 227
+    },
+    "cold_room_deleted_successfully": {
+      "string_token": "cold_room_deleted_successfully",
+      "text": {
+        "default": "Cold room deleted successfully",
+        "es": "Cuarto frío eliminado con éxito"
+      },
+      "_row_num": 228
+    },
+    "health_facility_deleted_successfully": {
+      "string_token": "health_facility_deleted_successfully",
+      "text": {
+        "default": "Health facility deleted successfully",
+        "es": "Centro de salud eliminado con éxito"
+      },
+      "_row_num": 229
+    },
+    "sentinel_data_deleted_successfully": {
+      "string_token": "sentinel_data_deleted_successfully",
+      "text": {
+        "default": "Sentinel data deleted successfully",
+        "es": "Los datos del centinela se eliminaron correctamente"
+      },
+      "_row_num": 230
+    },
+    "maintenance_log_deleted_successfully": {
+      "string_token": "maintenance_log_deleted_successfully",
+      "text": {
+        "default": "Maintenance log deleted successfully",
+        "es": "Registro de mantenimiento eliminado con éxito"
+      },
+      "_row_num": 231
+    },
+    "refrigerator_move_deleted_successfully": {
+      "string_token": "refrigerator_move_deleted_successfully",
+      "text": {
+        "default": "Refrigerator move deleted successfully",
+        "es": "Movimiento del refrigerador eliminado con éxito"
+      },
+      "_row_num": 232
+    },
+    "temperature_data_deleted_successfully": {
+      "string_token": "temperature_data_deleted_successfully",
+      "text": {
+        "default": "Temperature data deleted successfully",
+        "es": "Datos de temperatura eliminados con éxito"
+      },
+      "_row_num": 233
+    },
+    "refrigerator_deleted_successfully": {
+      "string_token": "refrigerator_deleted_successfully",
+      "text": {
+        "default": "Refrigerator deleted successfully",
+        "es": "Refrigerador eliminado con éxito"
+      },
+      "_row_num": 234
+    },
+    "deletion_failed": {
+      "string_token": "deletion_failed",
+      "text": {
+        "default": "Deletion failed",
+        "es": "Eliminación fallida"
+      },
+      "_row_num": 235
+    },
+    "actions_taken_no_colon": {
+      "string_token": "actions_taken_no_colon",
+      "text": {
+        "default": "Actions Taken",
+        "es": "Acciones Tomadas"
+      },
+      "_row_num": 236
     }
   },
   "_locales": {

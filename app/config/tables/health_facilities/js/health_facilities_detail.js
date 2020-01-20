@@ -115,11 +115,18 @@ function onDeleteFacility() {
 
 function cbDeleteSuccess() {
     console.log('health facility deleted successfully');
+    var locale = odkCommon.getPreferredLocale();
+    var successMsg = odkCommon.localizeText(locale, 'health_facility_deleted_successfully');
+    alert(successMsg);
+    odkCommon.closeWindow(-1);
 }
 
 function cbDeleteFailure(error) {
-
     console.log('health facility delete failure CB error : ' + error);
+    var locale = odkCommon.getPreferredLocale();
+    var failMsg = odkCommon.localizeText(locale, 'deletion_failed');
+    alert(failMsg);
+    odkCommon.closeWindow(-1);
 }
 
 function cbSuccess(result) {

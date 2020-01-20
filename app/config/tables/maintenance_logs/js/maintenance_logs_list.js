@@ -36,10 +36,10 @@ function resumeFunc(state) {
 
         var dateSrvTxt = odkCommon.localizeText(locale, "date_serviced_no_colon");
         var refIDTxt = odkCommon.localizeText(locale, "refrigerator_id_no_colon");
-        var notesTxt = odkCommon.localizeText(locale, "notes_no_colon");
+        var actionsTakenTxt = odkCommon.localizeText(locale, "actions_taken_no_colon");
 
         listViewLogic.setColIdsToDisplayInList(dateSrvTxt, 'date_serviced',
-            refIDTxt, 'refrigerator_id', notesTxt, 'notes');
+            refIDTxt, 'refrigerator_id', actionsTakenTxt, 'actions_taken');
     }
 
     listViewLogic.resumeFn(state);

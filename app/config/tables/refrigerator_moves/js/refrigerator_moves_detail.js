@@ -8,10 +8,18 @@ var refrigeratorMovesResultSet = {};
 
 function cbDeleteSuccess() {
     console.log('cbDeleteSuccess: successfully deleted row');
+    var locale = odkCommon.getPreferredLocale();
+    var successMsg = odkCommon.localizeText(locale, 'refrigerator_move_deleted_successfully');
+    alert(successMsg);
+    odkCommon.closeWindow(-1);
 }
 
 function cbDeleteFailure(error) {
     console.log('cbDeleteFailure: deleteRow failed with message: ' + error);
+    var locale = odkCommon.getPreferredLocale();
+    var failMsg = odkCommon.localizeText(locale, 'deletion_failed');
+    alert(failMsg);
+    odkCommon.closeWindow(-1);
 }
 
 function onDeleteMove() {

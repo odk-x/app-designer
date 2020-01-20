@@ -551,6 +551,8 @@ window.listViewLogic = {
         var editTxt = odkCommon.localizeText(locale, "edit");
         var deleteTxt = odkCommon.localizeText(locale, "delete");
         var delRowTxt = odkCommon.localizeText(locale, "are_you_sure_you_want_to_delete_row");
+        var delRowCnfTxt = odkCommon.localizeText(locale, "row_deleted_successfully");
+        var delRowFailTxt = odkCommon.localizeText(locale, "deletion_failed");
         /* Number of rows displayed per 'chunk' - can modify this value */
         for (var i = 0; i < resultSet.getCount(); i++) {
 
@@ -594,10 +596,11 @@ window.listViewLogic = {
 
                         if (confirm(delRowTxt + ' ' + rowId)) {
                             odkData.deleteRow(that.tableId, null, rowId, function(d) {
+                                alert(delRowCnfTxt);
                                 that.resumeFn('rowDeleted');
                             }, function(error) {
                                 console.log('Failed to delete row ' +  rowId + ' with error ' + error);
-                                alert('Unable to delete row - ' + rowId);
+                                alert(delRowFailTxt + ' - ' + rowId);
                             });
                         }
                     });
