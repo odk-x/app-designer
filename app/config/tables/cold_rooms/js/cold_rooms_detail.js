@@ -12,6 +12,7 @@ function processCRPromises(facilityResult, logResult) {
     facilityData = facilityResult;
 
     util.showIdForDetail('#cold_room_id', '_id', coldRoomsResultSet, false);
+    util.showIdForDetail('#serial_number', 'serial_number', coldRoomsResultSet, false);
     util.showIdForDetail('#facility_name', 'facility_name', facilityData, false);
     util.showIdForDetail('#model_id', 'model', coldRoomsResultSet, false);
     util.showIdForDetail('#tracking_id', 'tracking_id', coldRoomsResultSet, false);
@@ -91,6 +92,7 @@ function display() {
     $('#rsn-not-work').text(odkCommon.localizeText(locale, "reason_not_working"));
     $('#srv-pri').text(odkCommon.localizeText(locale, "service_priority"));
     $('#mdl-id').text(odkCommon.localizeText(locale, "model_id"));
+    $('#ser-num').text(odkCommon.localizeText(locale, "serial_number"));
     $('#cold-id').text(odkCommon.localizeText(locale, "cold_room_id"));
     $('#date-srv').text(odkCommon.localizeText(locale, "date_serviced"));
 
