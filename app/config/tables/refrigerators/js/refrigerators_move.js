@@ -40,7 +40,6 @@ function resumeFunc(state) {
         defNewFac.removeAttr('data-fac-row-id');
 
         // Translations
-        var locale = odkCommon.getPreferredLocale();
         $('#showing').text(odkCommon.localizeText(locale, "showing"));
         $('#of').text(odkCommon.localizeText(locale, "of"));
         $('#prevButton').text(odkCommon.localizeText(locale, "previous"));

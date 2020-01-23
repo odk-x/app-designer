@@ -84,7 +84,7 @@ function cbDeleteFailure(error) {
 function display() {
     var locale = odkCommon.getPreferredLocale();
     $('#cold-hdr').text(odkCommon.localizeText(locale, "cold_room"));
-    $('#basic-cr-info').text(odkCommon.localizeText(locale, "basic_cold_room_information"));
+    $('#basic-cold-info').text(odkCommon.localizeText(locale, "basic_cold_room_information"));
     $('#fac').text(odkCommon.localizeText(locale, "facility"));
     $('#yr-install').text(odkCommon.localizeText(locale, "year_installed"));
     $('#stat').text(odkCommon.localizeText(locale, "status"));
