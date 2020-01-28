@@ -85,51 +85,39 @@
         "_row_num": 8
       },
       {
-        "type": "decimal",
-        "name": "average_temperature",
+        "type": "integer",
+        "name": "number_of_high_alarms_30",
         "display": {
           "prompt": {
             "text": {
-              "default": "Average Temperature",
-              "es": "Temperatura media"
-            }
-          },
-          "hint": {
-            "text": {
-              "default": "(degrees Celsius)",
-              "es": "(grados Celsius)"
+              "default": "Number of High Alarms Over Last 30 Days",
+              "es": "Número de alarmas altas en los últimos 30 días"
             }
           }
         },
         "_row_num": 9
       },
       {
-        "type": "text",
-        "name": "lower_alarm_status",
+        "type": "integer",
+        "name": "number_of_low_alarms_30",
         "display": {
           "prompt": {
             "text": {
-              "default": "Lower Alarm Status",
-              "es": "Estado de alarma inferior"
+              "default": "Number of Low Alarms Over Last 30 Days",
+              "es": "Número de alarmas bajas en los últimos 30 días"
             }
           }
         },
         "_row_num": 10
       },
       {
-        "type": "decimal",
-        "name": "minimum_temperature",
+        "type": "integer",
+        "name": "days_temp_above_8_30",
         "display": {
           "prompt": {
             "text": {
-              "default": "Minimum Temperature",
-              "es": "Temperatura mínima"
-            }
-          },
-          "hint": {
-            "text": {
-              "default": "(degrees Celsius)",
-              "es": "(grados Celsius)"
+              "default": "Days with Temperatures Above 8°C, Last 30 Days",
+              "es": "Días con temperaturas superiores a 8 ° C, últimos 30 días"
             }
           }
         },
@@ -137,73 +125,16 @@
       },
       {
         "type": "integer",
-        "name": "cumulative_duration_below_lower_limit",
+        "name": "days_temp_below_2_30",
         "display": {
           "prompt": {
             "text": {
-              "default": "Cumulative Duration Below Lower Limit",
-              "es": "Duración acumulativa por debajo del límite inferior"
-            }
-          },
-          "hint": {
-            "text": {
-              "default": "(minutes)",
-              "es": "(minutos)"
+              "default": "Days with Temperature Below 2°C, Last 30 Days",
+              "es": "Días con temperatura inferior a 2 ° C, últimos 30 días"
             }
           }
         },
         "_row_num": 12
-      },
-      {
-        "type": "text",
-        "name": "upper_alarm_status",
-        "display": {
-          "prompt": {
-            "text": {
-              "default": "Upper Alarm Status",
-              "es": "Estado de alarma superior"
-            }
-          }
-        },
-        "_row_num": 13
-      },
-      {
-        "type": "decimal",
-        "name": "maximum_temperature",
-        "display": {
-          "prompt": {
-            "text": {
-              "default": "Maximum Temperature",
-              "es": "Temperatura máxima"
-            }
-          },
-          "hint": {
-            "text": {
-              "default": "(degrees Celsius)",
-              "es": "(grados Celsius)"
-            }
-          }
-        },
-        "_row_num": 14
-      },
-      {
-        "type": "integer",
-        "name": "cumulative_duration_above_upper_limit",
-        "display": {
-          "prompt": {
-            "text": {
-              "default": "Cumulative Duration Above Upper Limit",
-              "es": "Duración acumulativa por encima del límite superior"
-            }
-          },
-          "hint": {
-            "text": {
-              "default": "(minutes)",
-              "es": "(minutos)"
-            }
-          }
-        },
-        "_row_num": 15
       }
     ],
     "settings": [
@@ -499,37 +430,37 @@
         "elementType": "date",
         "elementKey": "reporting_period"
       },
-      "average_temperature": {
+      "number_of_high_alarms_30": {
         "_defn": [
           {
             "_row_num": 9,
             "section_name": "survey"
           }
         ],
-        "type": "number",
-        "elementKey": "average_temperature"
+        "type": "integer",
+        "elementKey": "number_of_high_alarms_30"
       },
-      "lower_alarm_status": {
+      "number_of_low_alarms_30": {
         "_defn": [
           {
             "_row_num": 10,
             "section_name": "survey"
           }
         ],
-        "type": "string",
-        "elementKey": "lower_alarm_status"
+        "type": "integer",
+        "elementKey": "number_of_low_alarms_30"
       },
-      "minimum_temperature": {
+      "days_temp_above_8_30": {
         "_defn": [
           {
             "_row_num": 11,
             "section_name": "survey"
           }
         ],
-        "type": "number",
-        "elementKey": "minimum_temperature"
+        "type": "integer",
+        "elementKey": "days_temp_above_8_30"
       },
-      "cumulative_duration_below_lower_limit": {
+      "days_temp_below_2_30": {
         "_defn": [
           {
             "_row_num": 12,
@@ -537,37 +468,7 @@
           }
         ],
         "type": "integer",
-        "elementKey": "cumulative_duration_below_lower_limit"
-      },
-      "upper_alarm_status": {
-        "_defn": [
-          {
-            "_row_num": 13,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "elementKey": "upper_alarm_status"
-      },
-      "maximum_temperature": {
-        "_defn": [
-          {
-            "_row_num": 14,
-            "section_name": "survey"
-          }
-        ],
-        "type": "number",
-        "elementKey": "maximum_temperature"
-      },
-      "cumulative_duration_above_upper_limit": {
-        "_defn": [
-          {
-            "_row_num": 15,
-            "section_name": "survey"
-          }
-        ],
-        "type": "integer",
-        "elementKey": "cumulative_duration_above_upper_limit"
+        "elementKey": "days_temp_below_2_30"
       }
     },
     "section_names": [
@@ -762,85 +663,67 @@
             "promptIdx": 2
           },
           {
-            "type": "decimal",
-            "name": "average_temperature",
+            "type": "integer",
+            "name": "number_of_high_alarms_30",
             "display": {
               "prompt": {
                 "text": {
-                  "default": "Average Temperature",
-                  "es": "Temperatura media"
-                }
-              },
-              "hint": {
-                "text": {
-                  "default": "(degrees Celsius)",
-                  "es": "(grados Celsius)"
+                  "default": "Number of High Alarms Over Last 30 Days",
+                  "es": "Número de alarmas altas en los últimos 30 días"
                 }
               }
             },
             "_row_num": 9,
             "__rowNum__": 8,
             "_token_type": "prompt",
-            "_type": "decimal",
+            "_type": "integer",
             "_branch_label_enclosing_screen": "survey/_screen9",
             "promptIdx": 3
           },
           {
-            "type": "text",
-            "name": "lower_alarm_status",
+            "type": "integer",
+            "name": "number_of_low_alarms_30",
             "display": {
               "prompt": {
                 "text": {
-                  "default": "Lower Alarm Status",
-                  "es": "Estado de alarma inferior"
+                  "default": "Number of Low Alarms Over Last 30 Days",
+                  "es": "Número de alarmas bajas en los últimos 30 días"
                 }
               }
             },
             "_row_num": 10,
             "__rowNum__": 9,
             "_token_type": "prompt",
-            "_type": "text",
+            "_type": "integer",
             "_branch_label_enclosing_screen": "survey/_screen10",
             "promptIdx": 4
           },
           {
-            "type": "decimal",
-            "name": "minimum_temperature",
+            "type": "integer",
+            "name": "days_temp_above_8_30",
             "display": {
               "prompt": {
                 "text": {
-                  "default": "Minimum Temperature",
-                  "es": "Temperatura mínima"
-                }
-              },
-              "hint": {
-                "text": {
-                  "default": "(degrees Celsius)",
-                  "es": "(grados Celsius)"
+                  "default": "Days with Temperatures Above 8°C, Last 30 Days",
+                  "es": "Días con temperaturas superiores a 8 ° C, últimos 30 días"
                 }
               }
             },
             "_row_num": 11,
             "__rowNum__": 10,
             "_token_type": "prompt",
-            "_type": "decimal",
+            "_type": "integer",
             "_branch_label_enclosing_screen": "survey/_screen11",
             "promptIdx": 5
           },
           {
             "type": "integer",
-            "name": "cumulative_duration_below_lower_limit",
+            "name": "days_temp_below_2_30",
             "display": {
               "prompt": {
                 "text": {
-                  "default": "Cumulative Duration Below Lower Limit",
-                  "es": "Duración acumulativa por debajo del límite inferior"
-                }
-              },
-              "hint": {
-                "text": {
-                  "default": "(minutes)",
-                  "es": "(minutos)"
+                  "default": "Days with Temperature Below 2°C, Last 30 Days",
+                  "es": "Días con temperatura inferior a 2 ° C, últimos 30 días"
                 }
               }
             },
@@ -852,78 +735,12 @@
             "promptIdx": 6
           },
           {
-            "type": "text",
-            "name": "upper_alarm_status",
-            "display": {
-              "prompt": {
-                "text": {
-                  "default": "Upper Alarm Status",
-                  "es": "Estado de alarma superior"
-                }
-              }
-            },
-            "_row_num": 13,
-            "__rowNum__": 12,
-            "_token_type": "prompt",
-            "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen13",
-            "promptIdx": 7
-          },
-          {
-            "type": "decimal",
-            "name": "maximum_temperature",
-            "display": {
-              "prompt": {
-                "text": {
-                  "default": "Maximum Temperature",
-                  "es": "Temperatura máxima"
-                }
-              },
-              "hint": {
-                "text": {
-                  "default": "(degrees Celsius)",
-                  "es": "(grados Celsius)"
-                }
-              }
-            },
-            "_row_num": 14,
-            "__rowNum__": 13,
-            "_token_type": "prompt",
-            "_type": "decimal",
-            "_branch_label_enclosing_screen": "survey/_screen14",
-            "promptIdx": 8
-          },
-          {
-            "type": "integer",
-            "name": "cumulative_duration_above_upper_limit",
-            "display": {
-              "prompt": {
-                "text": {
-                  "default": "Cumulative Duration Above Upper Limit",
-                  "es": "Duración acumulativa por encima del límite superior"
-                }
-              },
-              "hint": {
-                "text": {
-                  "default": "(minutes)",
-                  "es": "(minutos)"
-                }
-              }
-            },
-            "_row_num": 15,
-            "__rowNum__": 14,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen15",
-            "promptIdx": 9
-          },
-          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 16,
-            "_branch_label_enclosing_screen": "survey/_screen16",
-            "promptIdx": 10
+            "_row_num": 13,
+            "_branch_label_enclosing_screen": "survey/_screen13",
+            "promptIdx": 7
           }
         ],
         "validation_tag_map": {
@@ -972,43 +789,25 @@
             "operationIdx": 4
           },
           {
+            "_token_type": "exit_section",
+            "clause": "exit section",
             "_row_num": 13,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 5
           },
           {
-            "_row_num": 14,
+            "_row_num": 13,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 6
-          },
-          {
-            "_row_num": 15,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 7
-          },
-          {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 16,
-            "operationIdx": 8
-          },
-          {
-            "_row_num": 16,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 9
+            "operationIdx": 6
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 16,
-            "operationIdx": 10
+            "_row_num": 13,
+            "operationIdx": 7
           }
         ],
         "branch_label_map": {
@@ -1017,11 +816,8 @@
           "_screen10": 2,
           "_screen11": 3,
           "_screen12": 4,
-          "_screen13": 5,
-          "_screen14": 6,
-          "_screen15": 7,
-          "_contents": 9,
-          "_screen16": 9
+          "_contents": 6,
+          "_screen13": 6
         }
       }
     },
@@ -1053,46 +849,46 @@
         "elementSet": "data",
         "elementPath": "reporting_period"
       },
-      "average_temperature": {
+      "number_of_high_alarms_30": {
         "_defn": [
           {
             "_row_num": 9,
             "section_name": "survey"
           }
         ],
-        "type": "number",
-        "elementKey": "average_temperature",
-        "elementName": "average_temperature",
+        "type": "integer",
+        "elementKey": "number_of_high_alarms_30",
+        "elementName": "number_of_high_alarms_30",
         "elementSet": "data",
-        "elementPath": "average_temperature"
+        "elementPath": "number_of_high_alarms_30"
       },
-      "lower_alarm_status": {
+      "number_of_low_alarms_30": {
         "_defn": [
           {
             "_row_num": 10,
             "section_name": "survey"
           }
         ],
-        "type": "string",
-        "elementKey": "lower_alarm_status",
-        "elementName": "lower_alarm_status",
+        "type": "integer",
+        "elementKey": "number_of_low_alarms_30",
+        "elementName": "number_of_low_alarms_30",
         "elementSet": "data",
-        "elementPath": "lower_alarm_status"
+        "elementPath": "number_of_low_alarms_30"
       },
-      "minimum_temperature": {
+      "days_temp_above_8_30": {
         "_defn": [
           {
             "_row_num": 11,
             "section_name": "survey"
           }
         ],
-        "type": "number",
-        "elementKey": "minimum_temperature",
-        "elementName": "minimum_temperature",
+        "type": "integer",
+        "elementKey": "days_temp_above_8_30",
+        "elementName": "days_temp_above_8_30",
         "elementSet": "data",
-        "elementPath": "minimum_temperature"
+        "elementPath": "days_temp_above_8_30"
       },
-      "cumulative_duration_below_lower_limit": {
+      "days_temp_below_2_30": {
         "_defn": [
           {
             "_row_num": 12,
@@ -1100,49 +896,10 @@
           }
         ],
         "type": "integer",
-        "elementKey": "cumulative_duration_below_lower_limit",
-        "elementName": "cumulative_duration_below_lower_limit",
+        "elementKey": "days_temp_below_2_30",
+        "elementName": "days_temp_below_2_30",
         "elementSet": "data",
-        "elementPath": "cumulative_duration_below_lower_limit"
-      },
-      "upper_alarm_status": {
-        "_defn": [
-          {
-            "_row_num": 13,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "elementKey": "upper_alarm_status",
-        "elementName": "upper_alarm_status",
-        "elementSet": "data",
-        "elementPath": "upper_alarm_status"
-      },
-      "maximum_temperature": {
-        "_defn": [
-          {
-            "_row_num": 14,
-            "section_name": "survey"
-          }
-        ],
-        "type": "number",
-        "elementKey": "maximum_temperature",
-        "elementName": "maximum_temperature",
-        "elementSet": "data",
-        "elementPath": "maximum_temperature"
-      },
-      "cumulative_duration_above_upper_limit": {
-        "_defn": [
-          {
-            "_row_num": 15,
-            "section_name": "survey"
-          }
-        ],
-        "type": "integer",
-        "elementKey": "cumulative_duration_above_upper_limit",
-        "elementName": "cumulative_duration_above_upper_limit",
-        "elementSet": "data",
-        "elementPath": "cumulative_duration_above_upper_limit"
+        "elementPath": "days_temp_below_2_30"
       },
       "_id": {
         "type": "string",
