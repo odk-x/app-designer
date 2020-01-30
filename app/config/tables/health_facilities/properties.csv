@@ -26,7 +26,7 @@ Column,number_of_fs_vaccine_carriers,displayName,object,"{""text"":{""default"":
 Column,number_of_l3_packs,displayName,object,"{""text"":{""default"":""Number of 0.3 liter ice/water packs"",""es"":""Número de paquetes de hielo/agua de 0.3 litros""}}"
 Column,number_of_l4_packs,displayName,object,"{""text"":{""default"":""Number of 0.4 liter ice/water packs"",""es"":""Número de paquetes de hielo/agua de 0.4 litros""}}"
 Column,number_of_l6_packs,displayName,object,"{""text"":{""default"":""Number of 0.6 liter ice/water packs"",""es"":""Número de paquetes de hielo/agua de 0.6 litros""}}"
-Column,number_of_vaccine_carriers,displayName,object,"{""text"":{""default"":""Total number of vaccine carriers at facility"",""es"":""Número total de portadores de vacunas en la facilidad"",""fr"":""Nombre de porte-vaccins dans l'établissement""}}"
+Column,number_of_vaccine_carriers,displayName,object,"{""text"":{""default"":""Total number of usable vaccine carriers at facility"",""es"":""Número total de portadores de vacunas utilizables en la facilidad"",""fr"":""Nombre total de porte-vaccins utilisables dans l'établissement""}}"
 Column,spare_fuel_cylinders,displayName,object,"{""text"":{""default"":""Number of stand-by gas cylinders available, if applicable"",""es"":""Número de cilindros de gas de reserva disponibles, si corresponde""}}"
 Column,spare_temp_monitoring_devices,displayName,object,"{""text"":{""default"":""Number of spare/replacement temperature monitoring devices"",""es"":""Número de dispositivos de monitoreo de temperatura de repuesto/reemplazo""}}"
 Column,vaccine_supply_interval,displayName,object,"{""text"":{""default"":""Supply Interval"",""es"":""Intervalo de reabastecimiento"",""fr"":""Intervalle entre chaque approvisionnement""}}"

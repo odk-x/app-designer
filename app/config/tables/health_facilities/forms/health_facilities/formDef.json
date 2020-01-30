@@ -592,16 +592,16 @@
         "display": {
           "title": {
             "text": {
-              "default": "Total number of vaccine carriers at facility",
-              "es": "Número total de portadores de vacunas en la facilidad",
-              "fr": "Nombre de porte-vaccins dans l'établissement"
+              "default": "Total number of usable vaccine carriers at facility",
+              "es": "Número total de portadores de vacunas utilizables en la facilidad",
+              "fr": "Nombre total de porte-vaccins utilisables dans l'établissement"
             }
           },
           "prompt": {
             "text": {
-              "default": "Total number of vaccine carriers at facility?",
-              "es": "Número total de portadores de vacunas en la facilidad?",
-              "fr": "Nombre de porte-vaccins dans l'établissement"
+              "default": "Total number of usable vaccine carriers at facility?",
+              "es": "Número total de portadores de vacunas utilizables en la facilidad?",
+              "fr": "Nombre total de porte-vaccins utilisables dans l'établissement?"
             }
           }
         },
@@ -3463,9 +3463,9 @@
         "type": "integer",
         "displayName": {
           "text": {
-            "default": "Total number of vaccine carriers at facility",
-            "es": "Número total de portadores de vacunas en la facilidad",
-            "fr": "Nombre de porte-vaccins dans l'établissement"
+            "default": "Total number of usable vaccine carriers at facility",
+            "es": "Número total de portadores de vacunas utilizables en la facilidad",
+            "fr": "Nombre total de porte-vaccins utilisables dans l'établissement"
           }
         },
         "elementKey": "number_of_vaccine_carriers"
@@ -4254,16 +4254,16 @@
             "display": {
               "title": {
                 "text": {
-                  "default": "Total number of vaccine carriers at facility",
-                  "es": "Número total de portadores de vacunas en la facilidad",
-                  "fr": "Nombre de porte-vaccins dans l'établissement"
+                  "default": "Total number of usable vaccine carriers at facility",
+                  "es": "Número total de portadores de vacunas utilizables en la facilidad",
+                  "fr": "Nombre total de porte-vaccins utilisables dans l'établissement"
                 }
               },
               "prompt": {
                 "text": {
-                  "default": "Total number of vaccine carriers at facility?",
-                  "es": "Número total de portadores de vacunas en la facilidad?",
-                  "fr": "Nombre de porte-vaccins dans l'établissement"
+                  "default": "Total number of usable vaccine carriers at facility?",
+                  "es": "Número total de portadores de vacunas utilizables en la facilidad?",
+                  "fr": "Nombre total de porte-vaccins utilisables dans l'établissement?"
                 }
               }
             },
@@ -5121,9 +5121,9 @@
         "type": "integer",
         "displayName": {
           "text": {
-            "default": "Total number of vaccine carriers at facility",
-            "es": "Número total de portadores de vacunas en la facilidad",
-            "fr": "Nombre de porte-vaccins dans l'établissement"
+            "default": "Total number of usable vaccine carriers at facility",
+            "es": "Número total de portadores de vacunas utilizables en la facilidad",
+            "fr": "Nombre total de porte-vaccins utilisables dans l'établissement"
           }
         },
         "elementKey": "number_of_vaccine_carriers",
@@ -5544,7 +5544,7 @@
         "_aspect": "number_of_vaccine_carriers",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Total number of vaccine carriers at facility\",\"es\":\"Número total de portadores de vacunas en la facilidad\",\"fr\":\"Nombre de porte-vaccins dans l'établissement\"}}"
+        "_value": "{\"text\":{\"default\":\"Total number of usable vaccine carriers at facility\",\"es\":\"Número total de portadores de vacunas utilizables en la facilidad\",\"fr\":\"Nombre total de porte-vaccins utilisables dans l'établissement\"}}"
       },
       {
         "_partition": "Column",
