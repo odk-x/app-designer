@@ -2018,6 +2018,14 @@ window.odkCommonDefinitions = {
         "es": "Acciones Tomadas"
       },
       "_row_num": 236
+    },
+    "gas_cylinder_availability": {
+      "string_token": "gas_cylinder_availability",
+      "text": {
+        "default": "Gas Cylinder Availability:",
+        "es": "Disponibilidad del cilindro de gas:"
+      },
+      "_row_num": 237
     }
   },
   "_locales": {

@@ -288,16 +288,16 @@
         "display": {
           "title": {
             "text": {
-              "default": "Fuel Availability",
-              "es": "Disponibilidad de combustible",
-              "fr": "Carburant disponible"
+              "default": "Gas Cylinder Availability",
+              "es": "Disponibilidad del cilindro de gas",
+              "fr": "Disponibilité des bouteilles de gaz"
             }
           },
           "prompt": {
             "text": {
-              "default": "Choose the fuel availability",
-              "es": "Disponibilidad de combustible",
-              "fr": "Indiquer si le carburant est disponible"
+              "default": "Choose the gas cylinder availability",
+              "es": "Elija la disponibilidad del cilindro de gas",
+              "fr": "Choisissez la disponibilité de la bouteille de gaz"
             }
           }
         },
@@ -3258,9 +3258,9 @@
         "type": "string",
         "displayName": {
           "text": {
-            "default": "Fuel Availability",
-            "es": "Disponibilidad de combustible",
-            "fr": "Carburant disponible"
+            "default": "Gas Cylinder Availability",
+            "es": "Disponibilidad del cilindro de gas",
+            "fr": "Disponibilité des bouteilles de gaz"
           }
         },
         "valuesList": "fuel_availability_types",
@@ -3938,16 +3938,16 @@
             "display": {
               "title": {
                 "text": {
-                  "default": "Fuel Availability",
-                  "es": "Disponibilidad de combustible",
-                  "fr": "Carburant disponible"
+                  "default": "Gas Cylinder Availability",
+                  "es": "Disponibilidad del cilindro de gas",
+                  "fr": "Disponibilité des bouteilles de gaz"
                 }
               },
               "prompt": {
                 "text": {
-                  "default": "Choose the fuel availability",
-                  "es": "Disponibilidad de combustible",
-                  "fr": "Indiquer si le carburant est disponible"
+                  "default": "Choose the gas cylinder availability",
+                  "es": "Elija la disponibilidad del cilindro de gas",
+                  "fr": "Choisissez la disponibilité de la bouteille de gaz"
                 }
               }
             },
@@ -4880,9 +4880,9 @@
         "type": "string",
         "displayName": {
           "text": {
-            "default": "Fuel Availability",
-            "es": "Disponibilidad de combustible",
-            "fr": "Carburant disponible"
+            "default": "Gas Cylinder Availability",
+            "es": "Disponibilidad del cilindro de gas",
+            "fr": "Disponibilité des bouteilles de gaz"
           }
         },
         "valuesList": "fuel_availability_types",
@@ -5467,7 +5467,7 @@
         "_aspect": "fuel_availability",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Fuel Availability\",\"es\":\"Disponibilidad de combustible\",\"fr\":\"Carburant disponible\"}}"
+        "_value": "{\"text\":{\"default\":\"Gas Cylinder Availability\",\"es\":\"Disponibilidad del cilindro de gas\",\"fr\":\"Disponibilité des bouteilles de gaz\"}}"
       },
       {
         "_partition": "Column",

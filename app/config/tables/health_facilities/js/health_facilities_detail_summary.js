@@ -73,7 +73,7 @@ function display() {
     $('#power-information').text(odkCommon.localizeText(locale, "power_information"));
     $('#elec-source').text(odkCommon.localizeText(locale, "electricity_source"));
     $('#grid-avail').text(odkCommon.localizeText(locale, "grid_availability"));
-    $('#fuel-avail').text(odkCommon.localizeText(locale, "fuel_availability"));
+    $('#fuel-avail').text(odkCommon.localizeText(locale, "gas_cylinder_availability"));
 
     $('#loc-info').text(odkCommon.localizeText(locale, "location_information"));
     $('#lat-gps').text(odkCommon.localizeText(locale, "latitude_gps"));
