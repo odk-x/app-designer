@@ -666,14 +666,14 @@
         "display": {
           "title": {
             "text": {
-              "default": "Number of 0.3 liter ice/water packs",
-              "es": "Número de paquetes de hielo/agua de 0.3 litros"
+              "default": "Number of usable 0.3 liter ice/water packs",
+              "es": "Número de paquetes de hielo/agua de 0.3 litros utilizables"
             }
           },
           "prompt": {
             "text": {
-              "default": "Total number of 0.3 liter ice/water packs?",
-              "es": "Número total de paquetes de hielo/agua de 0.3 litros?"
+              "default": "Total number of usable 0.3 liter ice/water packs?",
+              "es": "Número total de paquetes de hielo/agua de 0.3 litros utilizables?"
             }
           }
         },
@@ -685,14 +685,14 @@
         "display": {
           "title": {
             "text": {
-              "default": "Number of 0.4 liter ice/water packs",
-              "es": "Número de paquetes de hielo/agua de 0.4 litros"
+              "default": "Number of usable 0.4 liter ice/water packs",
+              "es": "Número de paquetes de hielo/agua de 0.4 litros utilizables"
             }
           },
           "prompt": {
             "text": {
-              "default": "Total number of 0.4 liter ice/water packs?",
-              "es": "Número total de paquetes de hielo/agua de 0.4 litros?"
+              "default": "Total number of usable 0.4 liter ice/water packs?",
+              "es": "Número total de paquetes de hielo/agua de 0.4 litros utilizables?"
             }
           }
         },
@@ -704,14 +704,14 @@
         "display": {
           "title": {
             "text": {
-              "default": "Number of 0.6 liter ice/water packs",
-              "es": "Número de paquetes de hielo/agua de 0.6 litros"
+              "default": "Number of usable 0.6 liter ice/water packs",
+              "es": "Número de paquetes de hielo/agua de 0.6 litros utilizables"
             }
           },
           "prompt": {
             "text": {
-              "default": "Total number of 0.6 liter ice/water packs?",
-              "es": "Número total de paquetes de hielo/agua de 0.6 litros?"
+              "default": "Total number of usable 0.6 liter ice/water packs?",
+              "es": "Número total de paquetes de hielo/agua de 0.6 litros utilizables?"
             }
           }
         },
@@ -3525,8 +3525,8 @@
         "type": "integer",
         "displayName": {
           "text": {
-            "default": "Number of 0.3 liter ice/water packs",
-            "es": "Número de paquetes de hielo/agua de 0.3 litros"
+            "default": "Number of usable 0.3 liter ice/water packs",
+            "es": "Número de paquetes de hielo/agua de 0.3 litros utilizables"
           }
         },
         "elementKey": "number_of_l3_packs"
@@ -3541,8 +3541,8 @@
         "type": "integer",
         "displayName": {
           "text": {
-            "default": "Number of 0.4 liter ice/water packs",
-            "es": "Número de paquetes de hielo/agua de 0.4 litros"
+            "default": "Number of usable 0.4 liter ice/water packs",
+            "es": "Número de paquetes de hielo/agua de 0.4 litros utilizables"
           }
         },
         "elementKey": "number_of_l4_packs"
@@ -3557,8 +3557,8 @@
         "type": "integer",
         "displayName": {
           "text": {
-            "default": "Number of 0.6 liter ice/water packs",
-            "es": "Número de paquetes de hielo/agua de 0.6 litros"
+            "default": "Number of usable 0.6 liter ice/water packs",
+            "es": "Número de paquetes de hielo/agua de 0.6 litros utilizables"
           }
         },
         "elementKey": "number_of_l6_packs"
@@ -4334,14 +4334,14 @@
             "display": {
               "title": {
                 "text": {
-                  "default": "Number of 0.3 liter ice/water packs",
-                  "es": "Número de paquetes de hielo/agua de 0.3 litros"
+                  "default": "Number of usable 0.3 liter ice/water packs",
+                  "es": "Número de paquetes de hielo/agua de 0.3 litros utilizables"
                 }
               },
               "prompt": {
                 "text": {
-                  "default": "Total number of 0.3 liter ice/water packs?",
-                  "es": "Número total de paquetes de hielo/agua de 0.3 litros?"
+                  "default": "Total number of usable 0.3 liter ice/water packs?",
+                  "es": "Número total de paquetes de hielo/agua de 0.3 litros utilizables?"
                 }
               }
             },
@@ -4358,14 +4358,14 @@
             "display": {
               "title": {
                 "text": {
-                  "default": "Number of 0.4 liter ice/water packs",
-                  "es": "Número de paquetes de hielo/agua de 0.4 litros"
+                  "default": "Number of usable 0.4 liter ice/water packs",
+                  "es": "Número de paquetes de hielo/agua de 0.4 litros utilizables"
                 }
               },
               "prompt": {
                 "text": {
-                  "default": "Total number of 0.4 liter ice/water packs?",
-                  "es": "Número total de paquetes de hielo/agua de 0.4 litros?"
+                  "default": "Total number of usable 0.4 liter ice/water packs?",
+                  "es": "Número total de paquetes de hielo/agua de 0.4 litros utilizables?"
                 }
               }
             },
@@ -4382,14 +4382,14 @@
             "display": {
               "title": {
                 "text": {
-                  "default": "Number of 0.6 liter ice/water packs",
-                  "es": "Número de paquetes de hielo/agua de 0.6 litros"
+                  "default": "Number of usable 0.6 liter ice/water packs",
+                  "es": "Número de paquetes de hielo/agua de 0.6 litros utilizables"
                 }
               },
               "prompt": {
                 "text": {
-                  "default": "Total number of 0.6 liter ice/water packs?",
-                  "es": "Número total de paquetes de hielo/agua de 0.6 litros?"
+                  "default": "Total number of usable 0.6 liter ice/water packs?",
+                  "es": "Número total de paquetes de hielo/agua de 0.6 litros utilizables?"
                 }
               }
             },
@@ -5202,8 +5202,8 @@
         "type": "integer",
         "displayName": {
           "text": {
-            "default": "Number of 0.3 liter ice/water packs",
-            "es": "Número de paquetes de hielo/agua de 0.3 litros"
+            "default": "Number of usable 0.3 liter ice/water packs",
+            "es": "Número de paquetes de hielo/agua de 0.3 litros utilizables"
           }
         },
         "elementKey": "number_of_l3_packs",
@@ -5221,8 +5221,8 @@
         "type": "integer",
         "displayName": {
           "text": {
-            "default": "Number of 0.4 liter ice/water packs",
-            "es": "Número de paquetes de hielo/agua de 0.4 litros"
+            "default": "Number of usable 0.4 liter ice/water packs",
+            "es": "Número de paquetes de hielo/agua de 0.4 litros utilizables"
           }
         },
         "elementKey": "number_of_l4_packs",
@@ -5240,8 +5240,8 @@
         "type": "integer",
         "displayName": {
           "text": {
-            "default": "Number of 0.6 liter ice/water packs",
-            "es": "Número de paquetes de hielo/agua de 0.6 litros"
+            "default": "Number of usable 0.6 liter ice/water packs",
+            "es": "Número de paquetes de hielo/agua de 0.6 litros utilizables"
           }
         },
         "elementKey": "number_of_l6_packs",
@@ -5564,21 +5564,21 @@
         "_aspect": "number_of_l3_packs",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Number of 0.3 liter ice/water packs\",\"es\":\"Número de paquetes de hielo/agua de 0.3 litros\"}}"
+        "_value": "{\"text\":{\"default\":\"Number of usable 0.3 liter ice/water packs\",\"es\":\"Número de paquetes de hielo/agua de 0.3 litros utilizables\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "number_of_l4_packs",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Number of 0.4 liter ice/water packs\",\"es\":\"Número de paquetes de hielo/agua de 0.4 litros\"}}"
+        "_value": "{\"text\":{\"default\":\"Number of usable 0.4 liter ice/water packs\",\"es\":\"Número de paquetes de hielo/agua de 0.4 litros utilizables\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "number_of_l6_packs",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Number of 0.6 liter ice/water packs\",\"es\":\"Número de paquetes de hielo/agua de 0.6 litros\"}}"
+        "_value": "{\"text\":{\"default\":\"Number of usable 0.6 liter ice/water packs\",\"es\":\"Número de paquetes de hielo/agua de 0.6 litros utilizables\"}}"
       },
       {
         "_partition": "Column",
