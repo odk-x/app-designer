@@ -496,14 +496,14 @@
         "display": {
           "title": {
             "text": {
-              "default": "Number of spare fuel cylinders available",
-              "es": "Número de cilindros de combustible de repuesto disponibles"
+              "default": "Number of stand-by gas cylinders available, if applicable",
+              "es": "Número de cilindros de gas de reserva disponibles, si corresponde"
             }
           },
           "prompt": {
             "text": {
-              "default": "Number of spare fuel cylinders available?",
-              "es": "Número de cilindros de combustible de repuesto disponibles?"
+              "default": "Number of stand-by gas cylinders available, if applicable",
+              "es": "Número de cilindros de gas de reserva disponibles, si corresponde"
             }
           }
         },
@@ -3397,8 +3397,8 @@
         "type": "integer",
         "displayName": {
           "text": {
-            "default": "Number of spare fuel cylinders available",
-            "es": "Número de cilindros de combustible de repuesto disponibles"
+            "default": "Number of stand-by gas cylinders available, if applicable",
+            "es": "Número de cilindros de gas de reserva disponibles, si corresponde"
           }
         },
         "elementKey": "spare_fuel_cylinders"
@@ -4154,14 +4154,14 @@
             "display": {
               "title": {
                 "text": {
-                  "default": "Number of spare fuel cylinders available",
-                  "es": "Número de cilindros de combustible de repuesto disponibles"
+                  "default": "Number of stand-by gas cylinders available, if applicable",
+                  "es": "Número de cilindros de gas de reserva disponibles, si corresponde"
                 }
               },
               "prompt": {
                 "text": {
-                  "default": "Number of spare fuel cylinders available?",
-                  "es": "Número de cilindros de combustible de repuesto disponibles?"
+                  "default": "Number of stand-by gas cylinders available, if applicable",
+                  "es": "Número de cilindros de gas de reserva disponibles, si corresponde"
                 }
               }
             },
@@ -5043,8 +5043,8 @@
         "type": "integer",
         "displayName": {
           "text": {
-            "default": "Number of spare fuel cylinders available",
-            "es": "Número de cilindros de combustible de repuesto disponibles"
+            "default": "Number of stand-by gas cylinders available, if applicable",
+            "es": "Número de cilindros de gas de reserva disponibles, si corresponde"
           }
         },
         "elementKey": "spare_fuel_cylinders",
@@ -5551,7 +5551,7 @@
         "_aspect": "spare_fuel_cylinders",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Number of spare fuel cylinders available\",\"es\":\"Número de cilindros de combustible de repuesto disponibles\"}}"
+        "_value": "{\"text\":{\"default\":\"Number of stand-by gas cylinders available, if applicable\",\"es\":\"Número de cilindros de gas de reserva disponibles, si corresponde\"}}"
       },
       {
         "_partition": "Column",
