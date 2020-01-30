@@ -72,18 +72,10 @@ function cbSuccess(result) {
     util.showIdForDetail('#refrigerator_id', 'refrigerator_id', refTempDataResultSet, false);
     util.showIdForDetail('#reporting_id', 'reporting_period', refTempDataResultSet, true);
 
-    util.showIdForDetail('#average_temperature', 'average_temperature', refTempDataResultSet, true);
-
-    util.showIdForDetail('#lower_alarm_status', 'lower_alarm_status', refTempDataResultSet, true);
-    util.showIdForDetail('#minimum_temperature', 'minimum_temperature', refTempDataResultSet, true);
-    util.showIdForDetail('#cumulative_duration_below_lower_limit', 'cumulative_duration_below_lower_limit',
-        refTempDataResultSet, true);
-
-
-    util.showIdForDetail('#upper_alarm_status', 'upper_alarm_status', refTempDataResultSet, true);
-    util.showIdForDetail('#maximum_temperature', 'maximum_temperature', refTempDataResultSet, true);
-    util.showIdForDetail('#cumulative_duration_above_upper_limit', 'cumulative_duration_above_upper_limit',
-        refTempDataResultSet, true);
+    util.showIdForDetail('#number_of_high_alarms_30', 'number_of_high_alarms_30', refTempDataResultSet, true);
+    util.showIdForDetail('#number_of_low_alarms_30', 'number_of_low_alarms_30', refTempDataResultSet, true);
+    util.showIdForDetail('#days_temp_above_8_30', 'days_temp_above_8_30', refTempDataResultSet, true);
+    util.showIdForDetail('#days_temp_below_2_30', 'days_temp_below_2_30', refTempDataResultSet, true);
 
     odkData.query('refrigerators', '_id = ?', [refTempDataResultSet.get('refrigerator_id')],
         null, null, null, null, null, null, true, cbFrigSuccess, cbFrigFailure);
@@ -100,16 +92,10 @@ function display() {
     $('#frig-id').text(odkCommon.localizeText(locale, "refrigerator_id"));
     $('#rep-period').text(odkCommon.localizeText(locale, "reporting_period"));
 
-    $('#avg-temp').text(odkCommon.localizeText(locale, "average_temperature"));
-
-    $('#low-ala-stat').text(odkCommon.localizeText(locale, "lower_alarm_status"));
-    $('#min-temp').text(odkCommon.localizeText(locale, "minimum_temperature"));
-    $('#cum-dur-bel-low-lim').text(odkCommon.localizeText(locale, "cumulative_duration_below_lower_limit"));
-
-    $('#up-ala-stat').text(odkCommon.localizeText(locale, "upper_alarm_status"));
-    $('#max-temp').text(odkCommon.localizeText(locale, "maximum_temperature"));
-    $('#cum-dur-abo-up-lim').text(odkCommon.localizeText(locale, "cumulative_duration_above_upper_limit"));
-
+    $('#hi-alarms').text(odkCommon.localizeText(locale, "number_of_high_alarms_over_last_30_days"));
+    $('#lo-alarms').text(odkCommon.localizeText(locale, "number_of_low_alarms_over_last_30_days"));
+    $('#days-above-8').text(odkCommon.localizeText(locale, "days_with_temperature_above_8_last_30_days"));
+    $('#days-below-2').text(odkCommon.localizeText(locale, "days_with_temperature_below_2_last_30_days"));
 
     $('#edit-temp-data').text(odkCommon.localizeText(locale, "edit_temperature_data"));
     $('#del-temp-data').text(odkCommon.localizeText(locale, "delete_temperature_data"));

@@ -3835,6 +3835,38 @@
           "es": "Disponibilidad del cilindro de gas:"
         },
         "_row_num": 237
+      },
+      {
+        "string_token": "number_of_high_alarms_over_last_30_days",
+        "text": {
+          "default": "Number of High Alarms Over Last 30 Days",
+          "es": "Número de alarmas altas en los últimos 30 días"
+        },
+        "_row_num": 238
+      },
+      {
+        "string_token": "number_of_low_alarms_over_last_30_days",
+        "text": {
+          "default": "Number of Low Alarms Over Last 30 Days",
+          "es": "Número de alarmas bajas en los últimos 30 días"
+        },
+        "_row_num": 239
+      },
+      {
+        "string_token": "days_with_temperature_above_8_last_30_days",
+        "text": {
+          "default": "Days with Temperature Above 8°C, Last 30 Days",
+          "es": "Días con temperatura superior a 8°C, últimos 30 días"
+        },
+        "_row_num": 240
+      },
+      {
+        "string_token": "days_with_temperature_below_2_last_30_days",
+        "text": {
+          "default": "Days with Temperature Below 2°C, Last 30 Days",
+          "es": "Días con temperatura inferior a 2°C, últimos 30 días"
+        },
+        "_row_num": 241
       }
     ]
   },
@@ -7662,6 +7694,38 @@
             "es": "Disponibilidad del cilindro de gas:"
           },
           "_row_num": 237
+        },
+        "number_of_high_alarms_over_last_30_days": {
+          "string_token": "number_of_high_alarms_over_last_30_days",
+          "text": {
+            "default": "Number of High Alarms Over Last 30 Days",
+            "es": "Número de alarmas altas en los últimos 30 días"
+          },
+          "_row_num": 238
+        },
+        "number_of_low_alarms_over_last_30_days": {
+          "string_token": "number_of_low_alarms_over_last_30_days",
+          "text": {
+            "default": "Number of Low Alarms Over Last 30 Days",
+            "es": "Número de alarmas bajas en los últimos 30 días"
+          },
+          "_row_num": 239
+        },
+        "days_with_temperature_above_8_last_30_days": {
+          "string_token": "days_with_temperature_above_8_last_30_days",
+          "text": {
+            "default": "Days with Temperature Above 8°C, Last 30 Days",
+            "es": "Días con temperatura superior a 8°C, últimos 30 días"
+          },
+          "_row_num": 240
+        },
+        "days_with_temperature_below_2_last_30_days": {
+          "string_token": "days_with_temperature_below_2_last_30_days",
+          "text": {
+            "default": "Days with Temperature Below 2°C, Last 30 Days",
+            "es": "Días con temperatura inferior a 2°C, últimos 30 días"
+          },
+          "_row_num": 241
         }
       },
       "_locales": {
