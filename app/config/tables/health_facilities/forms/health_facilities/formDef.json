@@ -542,16 +542,16 @@
         "display": {
           "title": {
             "text": {
-              "default": "Total number of cold boxes at facility",
-              "es": "Número total de cajas frías en la facilidad",
-              "fr": "Nombre de glacières dans l'établissement"
+              "default": "Total number of usable cold boxes at facility",
+              "es": "Número total de cajas frías utilizables en la facilidad",
+              "fr": "Nombre total de glacières utilisables dans l'installation"
             }
           },
           "prompt": {
             "text": {
-              "default": "Total number of cold boxes at facility?",
-              "es": "Número total de cajas frías en la facilidad?",
-              "fr": "Nombre de glacières dans l'établissement"
+              "default": "Total number of usable cold boxes at facility?",
+              "es": "Número total de cajas frías utilizables en la facilidad?",
+              "fr": "Nombre total de glacières utilisables dans l'installation?"
             }
           }
         },
@@ -3429,9 +3429,9 @@
         "type": "integer",
         "displayName": {
           "text": {
-            "default": "Total number of cold boxes at facility",
-            "es": "Número total de cajas frías en la facilidad",
-            "fr": "Nombre de glacières dans l'établissement"
+            "default": "Total number of usable cold boxes at facility",
+            "es": "Número total de cajas frías utilizables en la facilidad",
+            "fr": "Nombre total de glacières utilisables dans l'installation"
           }
         },
         "elementKey": "number_of_cold_boxes"
@@ -4202,16 +4202,16 @@
             "display": {
               "title": {
                 "text": {
-                  "default": "Total number of cold boxes at facility",
-                  "es": "Número total de cajas frías en la facilidad",
-                  "fr": "Nombre de glacières dans l'établissement"
+                  "default": "Total number of usable cold boxes at facility",
+                  "es": "Número total de cajas frías utilizables en la facilidad",
+                  "fr": "Nombre total de glacières utilisables dans l'installation"
                 }
               },
               "prompt": {
                 "text": {
-                  "default": "Total number of cold boxes at facility?",
-                  "es": "Número total de cajas frías en la facilidad?",
-                  "fr": "Nombre de glacières dans l'établissement"
+                  "default": "Total number of usable cold boxes at facility?",
+                  "es": "Número total de cajas frías utilizables en la facilidad?",
+                  "fr": "Nombre total de glacières utilisables dans l'installation?"
                 }
               }
             },
@@ -5081,9 +5081,9 @@
         "type": "integer",
         "displayName": {
           "text": {
-            "default": "Total number of cold boxes at facility",
-            "es": "Número total de cajas frías en la facilidad",
-            "fr": "Nombre de glacières dans l'établissement"
+            "default": "Total number of usable cold boxes at facility",
+            "es": "Número total de cajas frías utilizables en la facilidad",
+            "fr": "Nombre total de glacières utilisables dans l'installation"
           }
         },
         "elementKey": "number_of_cold_boxes",
@@ -5502,7 +5502,7 @@
         "_aspect": "number_of_cold_boxes",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Total number of cold boxes at facility\",\"es\":\"Número total de cajas frías en la facilidad\",\"fr\":\"Nombre de glacières dans l'établissement\"}}"
+        "_value": "{\"text\":{\"default\":\"Total number of usable cold boxes at facility\",\"es\":\"Número total de cajas frías utilizables en la facilidad\",\"fr\":\"Nombre total de glacières utilisables dans l'installation\"}}"
       },
       {
         "_partition": "Column",
