@@ -121,7 +121,7 @@
           "prompt": {
             "text": {
               "default": "Days with Temperatures Above 8°C, Last 30 Days",
-              "es": "Días con temperaturas superiores a 8 ° C, últimos 30 días"
+              "es": "Días con temperaturas superiores a 8°C, últimos 30 días"
             }
           }
         },
@@ -134,7 +134,7 @@
           "prompt": {
             "text": {
               "default": "Days with Temperature Below 2°C, Last 30 Days",
-              "es": "Días con temperatura inferior a 2 ° C, últimos 30 días"
+              "es": "Días con temperatura inferior a 2°C, últimos 30 días"
             }
           }
         },
@@ -713,7 +713,7 @@
               "prompt": {
                 "text": {
                   "default": "Days with Temperatures Above 8°C, Last 30 Days",
-                  "es": "Días con temperaturas superiores a 8 ° C, últimos 30 días"
+                  "es": "Días con temperaturas superiores a 8°C, últimos 30 días"
                 }
               }
             },
@@ -731,7 +731,7 @@
               "prompt": {
                 "text": {
                   "default": "Days with Temperature Below 2°C, Last 30 Days",
-                  "es": "Días con temperatura inferior a 2 ° C, últimos 30 días"
+                  "es": "Días con temperatura inferior a 2°C, últimos 30 días"
                 }
               }
             },
