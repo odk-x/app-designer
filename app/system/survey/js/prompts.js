@@ -2027,21 +2027,26 @@ promptTypes.datetime = promptTypes.input_type.extend({
     reRender: function(ctxt) {
         this._screen.reRender(ctxt);
     },
+    formatDBVal: function(formattedDateValue) {
+        var that = this;
+        var outputValue = null;
+        if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
+            if (that.type === "time") {
+                var newDate = new Date();
+                formattedDateValue.year(newDate.getUTCFullYear());
+                formattedDateValue.month(newDate.getUTCMonth());
+                formattedDateValue.date(newDate.getUTCDate());
+            }
+            outputValue = new Date(formattedDateValue);
+        }
+        return outputValue;
+    },
     modification: function(evt) {
         var that = this;
         odkCommon.log('D',"prompts." + that.type + ".modification px: " + that.promptIdx);
         if ( !that.insideAfterRender ) {
             var formattedDateValue = that.$('input').combodate('getValue', null);
-            var value = null;
-            if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
-                if (that.type === "time") {
-                    var newDate = new Date();
-                    formattedDateValue.year(newDate.getUTCFullYear());
-                    formattedDateValue.month(newDate.getUTCMonth());
-                    formattedDateValue.date(newDate.getUTCDate());
-                }
-                value = new Date(formattedDateValue);
-            }
+            var value = this.formatDBVal(formattedDateValue);
 
             //
             // we are using a date pop-up.  If an earlier action fails, we should not
@@ -2131,8 +2136,22 @@ promptTypes.date = promptTypes.datetime.extend({
     timeFormat: "MM/DD/YYYY",
     timeTemplate: "YYYY / MM / DD"
 });
+promptTypes.dateshort = promptTypes.datetime.extend({
+    type: "dateShort",
+    showTime: false,
+    timeFormat: "MM/DD/YYYY",
+    timeTemplate: "YYYY / MM / DD",
+    dbDateFormat: "YYYY-MM-DD",
+    formatDBVal: function(formattedDateValue) {
+        var outputValue = null;
+        if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
+            outputValue = formattedDateValue.format(this.dbDateFormat);
+        }
+        return outputValue;
+    },
+})
 
-promptTypes.birthdate = promptTypes.date.extend({
+promptTypes.birthdate = promptTypes.dateshort.extend({
     type: "birthdate",
     afterRender: function() {
         var that = this;

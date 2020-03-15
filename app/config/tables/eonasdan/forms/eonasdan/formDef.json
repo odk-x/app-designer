@@ -170,7 +170,7 @@
           }
         ],
         "type": "string",
-        "elementType": "date",
+        "elementType": "dateShort",
         "elementKey": "example0"
       },
       "example1": {
@@ -538,7 +538,7 @@
           }
         ],
         "type": "string",
-        "elementType": "date",
+        "elementType": "dateShort",
         "elementKey": "example0",
         "elementName": "example0",
         "elementSet": "data",

@@ -427,10 +427,15 @@ var XLSXConverter = {};
             "type": "string",
 			"elementType": "date"
         },
+        "dateshort": {
+            // odk date with no time or timezone information -- stored as YYYY / MM / DD in the Gregorian calendar
+            "type": "string",
+            "elementType": "dateShort"
+        },
 		"birthdate": {
 			// odk time stamp -- UTC timestamp string with 00:00:00.000 time.
             "type": "string",
-			"elementType": "date"
+			"elementType": "dateShort"
         },
         "time": {
 			// odk time -- LOCAL TIME ZONE hh:mm:ss.sss string
