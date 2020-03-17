@@ -1945,16 +1945,10 @@ promptTypes.decimal = promptTypes.input_type.extend({
         }
     }
 });
-promptTypes.datetime = promptTypes.input_type.extend({
-    type: "datetime",
-    templatePath: "templates/datetimepicker.handlebars",
-    // TODO: Use a template?
+promptTypes.base_date = promptTypes.input_type.extend({
+    type: "base_date",
     usePicker: true,
     insideAfterRender: false,
-    timeFormat: "MM/DD/YYYY h:mm A",
-    timeTemplate: "YYYY / MM / DD  HH : mm",
-    showDate: true,
-    showTime: true,
     dtp: null,
     events: {
         "swipeleft input": "stopPropagation",
@@ -2026,20 +2020,6 @@ promptTypes.datetime = promptTypes.input_type.extend({
     // require a full redraw not just replacing the prompt
     reRender: function(ctxt) {
         this._screen.reRender(ctxt);
-    },
-    formatDBVal: function(formattedDateValue) {
-        var that = this;
-        var outputValue = null;
-        if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
-            if (that.type === "time") {
-                var newDate = new Date();
-                formattedDateValue.year(newDate.getUTCFullYear());
-                formattedDateValue.month(newDate.getUTCMonth());
-                formattedDateValue.date(newDate.getUTCDate());
-            }
-            outputValue = new Date(formattedDateValue);
-        }
-        return outputValue;
     },
     modification: function(evt) {
         var that = this;
@@ -2130,29 +2110,49 @@ promptTypes.datetime = promptTypes.input_type.extend({
         return null;
     }
 });
+promptTypes.datetime = promptTypes.base_date.extend({
+    type: "datetime",
+    templatePath: "templates/datetimepicker.handlebars",
+    timeFormat: "MM/DD/YYYY h:mm A",
+    timeTemplate: "YYYY / MM / DD  HH : mm",
+    showDate: true,
+    showTime: true,
+    formatDBVal: function(formattedDateValue) {
+        var that = this;
+        var outputValue = null;
+        if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
+            if (that.type === "time") {
+                var newDate = new Date();
+                formattedDateValue.year(newDate.getUTCFullYear());
+                formattedDateValue.month(newDate.getUTCMonth());
+                formattedDateValue.date(newDate.getUTCDate());
+            }
+            outputValue = new Date(formattedDateValue);
+        }
+        return outputValue;
+    }
+});
 promptTypes.date = promptTypes.datetime.extend({
     type: "date",
     showTime: false,
     timeFormat: "MM/DD/YYYY",
     timeTemplate: "YYYY / MM / DD"
 });
-promptTypes.dateshort = promptTypes.datetime.extend({
-    type: "dateShort",
-    showTime: false,
-    timeFormat: "MM/DD/YYYY",
-    timeTemplate: "YYYY / MM / DD",
-    dbDateFormat: "YYYY-MM-DD",
-    formatDBVal: function(formattedDateValue) {
-        var outputValue = null;
-        if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
-            outputValue = formattedDateValue.format(this.dbDateFormat);
-        }
-        return outputValue;
-    },
-})
-
-promptTypes.birthdate = promptTypes.dateshort.extend({
-    type: "birthdate",
+promptTypes.time = promptTypes.datetime.extend({
+    type: "time",
+    showDate: false,
+    timeFormat: "h:mm A",
+    timeTemplate: "HH : mm",
+    sameValue: function(ref, value) {
+        // these are milliseconds relative to Jan 1 1970...
+        var ref_tod = (ref.valueOf() % 86400000);
+        var value_tod = (value.valueOf() % 86400000);
+        return (ref_tod === value_tod);
+    }
+});
+promptTypes.birthdate = promptTypes.date.extend({
+    // TODO: REMOVE THIS. IT HAS BEEN DEPRACATED IN FAVOR OF BIRTH_DATE
+    type: "birth_date",
     afterRender: function() {
         var that = this;
         if(that.usePicker){
@@ -2171,18 +2171,39 @@ promptTypes.birthdate = promptTypes.dateshort.extend({
         }
     },
 });
+promptTypes.date_no_time = promptTypes.base_date.extend({
+    type: "date_no_time",
+    showTime: false,
+    timeFormat: "MM/DD/YYYY",
+    timeTemplate: "YYYY / MM / DD",
+    dbDateFormat: "YYYY-MM-DD",
+    formatDBVal: function(formattedDateValue) {
+        var outputValue = null;
+        if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
+            outputValue = formattedDateValue.format(this.dbDateFormat);
+        }
+        return outputValue;
+    },
+})
+promptTypes.birth_date = promptTypes.date_no_time.extend({
+    type: "birth_date",
+    afterRender: function() {
+        var that = this;
+        if(that.usePicker){
+            that.insideAfterRender = true;
 
-promptTypes.time = promptTypes.datetime.extend({
-    type: "time",
-    showDate: false,
-    timeFormat: "h:mm A",
-    timeTemplate: "HH : mm",
-    sameValue: function(ref, value) {
-        // these are milliseconds relative to Jan 1 1970...
-        var ref_tod = (ref.valueOf() % 86400000);
-        var value_tod = (value.valueOf() % 86400000);
-        return (ref_tod === value_tod);
-    }
+            if (that.dtp !== null && that.dtp !== undefined) {
+                that.dtp.destroy();
+            }
+
+            that.$('input').combodate({format: this.timeFormat, template: this.timeTemplate, maxYear: new Date().getFullYear(), hideCurrentMonth: true, hideCurrentDay: true });
+
+            var inputElement = that.$('input');
+            that.dtp = inputElement.data('DateTimePicker');
+
+            that.insideAfterRender = false;
+        }
+    },
 });
 /**
  * Media is an abstract object used as a base for image/audio/video

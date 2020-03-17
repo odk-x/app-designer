@@ -552,7 +552,7 @@ return {
         } else if ( jsonType.type === 'number' ) {
             return Number(value);
         } else if ( jsonType.type === 'string' ) {
-            if ( jsonType.elementType === 'dateShort' ) {
+            if ( jsonType.elementType === 'date_no_time' ) {
                 return moment(value);
             } else if ( jsonType.elementType === 'date' ||
                  jsonType.elementType === 'dateTime' ) {
