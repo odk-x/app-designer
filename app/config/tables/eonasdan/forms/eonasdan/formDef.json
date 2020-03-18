@@ -1,55 +1,5 @@
 {
   "xlsx": {
-    "Export Summary": [
-      {
-        "This document was exported from Numbers": {
-          "  Each table was converted to an Excel worksheet": {
-            " All other objects on each Numbers sheet were placed on separate worksheets": {
-              " Please be aware that formula calculations may differ in Excel": {
-                "": "Numbers Sheet Name"
-              }
-            }
-          }
-        },
-        "__EMPTY": "Numbers Table Name",
-        "__EMPTY_1": "Excel Worksheet Name",
-        "_row_num": 7
-      },
-      {
-        "This document was exported from Numbers": {
-          "  Each table was converted to an Excel worksheet": {
-            " All other objects on each Numbers sheet were placed on separate worksheets": {
-              " Please be aware that formula calculations may differ in Excel": {
-                "": "survey"
-              }
-            }
-          }
-        },
-        "_row_num": 9
-      },
-      {
-        "__EMPTY": "Table 1",
-        "__EMPTY_1": "survey",
-        "_row_num": 10
-      },
-      {
-        "This document was exported from Numbers": {
-          "  Each table was converted to an Excel worksheet": {
-            " All other objects on each Numbers sheet were placed on separate worksheets": {
-              " Please be aware that formula calculations may differ in Excel": {
-                "": "settings"
-              }
-            }
-          }
-        },
-        "_row_num": 11
-      },
-      {
-        "__EMPTY": "Table 1",
-        "__EMPTY_1": "settings",
-        "_row_num": 12
-      }
-    ],
     "survey": [
       {
         "type": "birth_date",
@@ -203,13 +153,6 @@
           }
         },
         "_row_num": 4
-      },
-      "Export Summary": {
-        "display": {
-          "title": {
-            "text": "DateTime Picker"
-          }
-        }
       }
     },
     "choices": {},
@@ -265,56 +208,10 @@
       }
     },
     "section_names": [
-      "Export Summary",
       "initial",
       "survey"
     ],
     "sections": {
-      "Export Summary": {
-        "section_name": "Export Summary",
-        "nested_sections": {},
-        "reachable_sections": {},
-        "prompts": [
-          {
-            "_token_type": "prompt",
-            "type": "contents",
-            "_type": "contents",
-            "_row_num": 2,
-            "_branch_label_enclosing_screen": "Export Summary/_screen2",
-            "promptIdx": 0
-          }
-        ],
-        "validation_tag_map": {
-          "finalize": []
-        },
-        "operations": [
-          {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 2,
-            "operationIdx": 0
-          },
-          {
-            "_row_num": 2,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
-            "screen": {
-              "hideInBackHistory": true
-            },
-            "operationIdx": 1
-          },
-          {
-            "_token_type": "resume",
-            "clause": "resume",
-            "_row_num": 2,
-            "operationIdx": 2
-          }
-        ],
-        "branch_label_map": {
-          "_contents": 1,
-          "_screen2": 1
-        }
-      },
       "survey": {
         "section_name": "survey",
         "nested_sections": {},
