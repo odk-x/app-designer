@@ -2113,7 +2113,7 @@ promptTypes.base_date = promptTypes.input_type.extend({
 promptTypes.datetime = promptTypes.base_date.extend({
     type: "datetime",
     templatePath: "templates/datetimepicker.handlebars",
-    timeFormat: "MM/DD/YYYY h:mm A",
+    timeFormat: "YYYY/MM/DD h:mm A",
     timeTemplate: "YYYY / MM / DD  HH : mm",
     showDate: true,
     showTime: true,
@@ -2135,7 +2135,7 @@ promptTypes.datetime = promptTypes.base_date.extend({
 promptTypes.date = promptTypes.datetime.extend({
     type: "date",
     showTime: false,
-    timeFormat: "MM/DD/YYYY",
+    timeFormat: "YYYY/MM/DD",
     timeTemplate: "YYYY / MM / DD"
 });
 promptTypes.time = promptTypes.datetime.extend({
@@ -2174,7 +2174,7 @@ promptTypes.birthdate = promptTypes.date.extend({
 promptTypes.date_no_time = promptTypes.base_date.extend({
     type: "date_no_time",
     showTime: false,
-    timeFormat: "MM/DD/YYYY",
+    timeFormat: "YYYY/MM/DD",
     timeTemplate: "YYYY / MM / DD",
     dbDateFormat: "YYYY-MM-DD",
     formatDBVal: function(formattedDateValue) {
