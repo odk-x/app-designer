@@ -2026,7 +2026,7 @@ promptTypes.base_date = promptTypes.input_type.extend({
         odkCommon.log('D',"prompts." + that.type + ".modification px: " + that.promptIdx);
         if ( !that.insideAfterRender ) {
             var formattedDateValue = that.$('input').combodate('getValue', null);
-            var value = this.formatDBVal(formattedDateValue);
+            var value = that.formatDBVal(formattedDateValue);
 
             //
             // we are using a date pop-up.  If an earlier action fails, we should not
