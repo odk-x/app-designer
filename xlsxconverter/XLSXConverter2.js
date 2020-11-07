@@ -427,8 +427,18 @@ var XLSXConverter = {};
             "type": "string",
 			"elementType": "date"
         },
+        "date_no_time": {
+            // odk date with no time or timezone information
+            "type": "string",
+            "elementType": "date_no_time"
+        },
+        "birth_date": {
+            // odk date with no time or timezone information
+            "type": "string",
+            "elementType": "date_no_time"
+        },
 		"birthdate": {
-			// odk time stamp -- UTC timestamp string with 00:00:00.000 time.
+			// TODO: REMOVE THIS. IT IS DEPRACATED IN FAVOR OF birth_date
             "type": "string",
 			"elementType": "date"
         },

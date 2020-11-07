@@ -2,7 +2,7 @@
   "xlsx": {
     "survey": [
       {
-        "type": "birthdate",
+        "type": "birth_date",
         "name": "example0",
         "display": {
           "prompt": {
@@ -170,7 +170,7 @@
           }
         ],
         "type": "string",
-        "elementType": "date",
+        "elementType": "date_no_time",
         "elementKey": "example0"
       },
       "example1": {
@@ -218,7 +218,7 @@
         "reachable_sections": {},
         "prompts": [
           {
-            "type": "birthdate",
+            "type": "birth_date",
             "name": "example0",
             "display": {
               "prompt": {
@@ -228,7 +228,7 @@
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
-            "_type": "birthdate",
+            "_type": "birth_date",
             "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 0
           },
@@ -538,7 +538,7 @@
           }
         ],
         "type": "string",
-        "elementType": "date",
+        "elementType": "date_no_time",
         "elementKey": "example0",
         "elementName": "example0",
         "elementSet": "data",
