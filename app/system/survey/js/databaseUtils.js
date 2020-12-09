@@ -552,7 +552,9 @@ return {
         } else if ( jsonType.type === 'number' ) {
             return Number(value);
         } else if ( jsonType.type === 'string' ) {
-            if ( jsonType.elementType === 'date' ||
+            if ( jsonType.elementType === 'date_no_time' ) {
+                return moment(value);
+            } else if ( jsonType.elementType === 'date' ||
                  jsonType.elementType === 'dateTime' ) {
                 // convert from a nanosecond-extended iso8601-style UTC date yyyy-mm-ddTHH:MM:SS.sssssssss
                 // this does not preserve the nanosecond field...
