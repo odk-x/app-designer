@@ -13,6 +13,6 @@ tasks specified in the Gruntfile.
 For a more complete description of how to use this repository, please see our
 user documentation at:
 
-https://docs.opendatakit.org/odk-x/app-designer-intro/
+https://docs.odk-x.org/app-designer-intro/
 
 Requires NodeJS 12 or higher.
