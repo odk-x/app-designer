@@ -143,6 +143,8 @@ module.exports = function (grunt) {
         outputCsvDir: 'output/csv',
         // The directory where the device.properties and app.properties objects are stored
         outputPropsDir: 'output/props',
+        // The directory where logs are output
+        outputLogsDir: 'output/logging',
         // The directory where the debug objects are output.
         outputDebugDir: 'output/debug',
         // The db directory path on the phone. %APP% should be replaced by app name
@@ -324,6 +326,16 @@ module.exports = function (grunt) {
             grunt.task.run('exec:adbpull:' + src + ':' + dest);
         });
 
+
+    grunt.registerTask(
+        'adbpull-logs',
+        'Pull any logs stored in the device for debugging purposes',
+        function() {
+            var src = tablesConfig.deviceMount + '/' + tablesConfig.appName + '/' + tablesConfig.outputLogsDir;
+            var dest = tablesConfig.appDir + '/' + tablesConfig.outputLogsDir;
+            grunt.log.writeln('adb pull ' + src + ' ' + dest);
+            grunt.task.run('exec:adbpull:' + src + ':' + dest);
+        });
 
     grunt.registerTask(
         'xlsx-convert-all',
