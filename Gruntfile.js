@@ -278,7 +278,7 @@ module.exports = function (grunt) {
     grunt.registerTask(
         'adbpull',
         'Perform all the adbpull tasks',
-        ['adbpull-debug', 'adbpull-db', 'adbpull-csv']);
+        ['adbpull-debug', 'adbpull-db', 'adbpull-csv', 'adbpull-logs']);
 
     // Just an alias task--shorthand for doing all the pushings
     grunt.registerTask(
