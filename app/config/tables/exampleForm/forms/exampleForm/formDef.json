@@ -10,7 +10,6 @@
             "text": "If the form does not yet have a rating, this will be proposed for the rating value.  This value is not retained in the survey result set and exists only for the duration of this survey session."
           }
         },
-        "constraint": " 1 <= data('default_rating') <= 10",
         "model": {
           "isSessionVariable": true
         },
