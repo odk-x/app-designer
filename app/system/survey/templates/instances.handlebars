@@ -18,7 +18,20 @@
         </fieldset>
         <hr>
     </div>
-
+    
+    <body onload="display()">
+        <script type="text/javascript" src="../js/prompts.js"></script>
+        <div id="searchBox">
+            <form id="form" action="javascript:getResults();">
+                <input id="search" type="text" name="query" size="15" placeholder="Enter Client ID..." />
+                <input id="submit" type="submit" value="Search" />
+            </form>
+        </div>
+        <div id="wrapper">
+            <ul id="list"></ul>
+        </div>
+    </body>
+    
     {{{localizeText display.instances_previously_created_instances_label}}}
     <hr>
     <div class="instanceList">
