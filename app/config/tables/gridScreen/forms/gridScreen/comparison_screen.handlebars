@@ -23,10 +23,18 @@
     
     
 <style>
+     @media (min-width:478px) {
+        .odk-container{
+            width: 95vw;
+            margin: 0 auto 0 auto ;
+        }
+    }
     table {
         padding: 15px; 
         border-collapse:collapse; 
-        width:100%;
+        max-width: 400px;
+        width: 100% !important;
+        table-layout: inherit;
         border-radius: 5px 5px 5px 5px;}
     td:not(.not_this){
         border-top: 2px solid #000000}
@@ -53,6 +61,7 @@
         font-style:italic}
     .mycontainer { 
         padding: 15px;
+        width: 100%;
         border-radius: 10px 10px 10px 10px;
         background: #3388cc}
     span {
@@ -60,7 +69,7 @@
     .item {
         width:40%}
     .w {
-        background-color: white; padding 10px; border-radius: 5px 5px 5px 5px}
+        background-color: white; padding: 10px; border-radius: 5px 5px 5px 5px}
     .odk-container {
         background-color: #e6e6e6; 
         width:70%; 
