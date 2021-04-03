@@ -584,7 +584,8 @@ promptTypes.instances = promptTypes.base.extend({
     events: {
         "click .openInstance": "openInstance",
         "click .deleteInstance": "confirmDeleteInstance",
-        "click .createInstance": "createInstance"
+        "click .createInstance": "createInstance",
+        "click .searchInstance": "searchInstance"
     },
     configureRenderContext: function(ctxt) {
         var that = this;
@@ -710,8 +711,31 @@ promptTypes.instances = promptTypes.base.extend({
                 ctxt.failure(m);
             }}));
         }
-    }
+    },
+     searchInstance: function (evt) {
+                var that = this;
+                evt.stopPropagation(true);
+                evt.stopImmediatePropagation();
+                var instanceIdToSearch = $(evt.currentTarget).attr('id');
+                if (that._cachedEvent === null || that._cachedEvent === undefined) {
+                    return;
+                }
+                if (instanceIdToSearch !== null && instanceIdToSearch !== undefined) {
+                    var ctxt = that.controller.newContext(evt, that.type + ".searchInstance");
+                    if (evt.getCount() > 0) {
+                        console.log('cbSRSuccess data is' + evt);
+                        var rowId = evt.getRowId(0);
+                        that.controller.openInstance(ctxt, instanceIdToOpen, [rowId]);
+                    }
+                    else {
+                        document.getElementById("search").value = "";
+                        document.getElementsByName("query")[0].placeholder = "Instances not found";
+                    }
+                }
+            }
+    
 });
+    
 promptTypes.contents = promptTypes.base.extend({
     type:"contents",
     hideInContents: true,
