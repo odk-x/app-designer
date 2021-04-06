@@ -573,6 +573,7 @@ promptTypes.instances = promptTypes.base.extend({
     valid: true,
     _cachedEvent: null,
 	_protoDisplay: {
+        search_instance: 'search_instance',
 		instances_survey_form_identification: 'survey_form_identification',
 		new_button_label: 'instances_survey_create_button_label',
 		instances_last_save_date_label: 'instances_last_save_date_label',
@@ -712,25 +713,27 @@ promptTypes.instances = promptTypes.base.extend({
             }}));
         }
     },
-     searchInstance: function (evt) {
+    searchInstance: function (evt) {
                 var that = this;
-                evt.stopPropagation(true);
-                evt.stopImmediatePropagation();
-                var instanceIdToSearch = $(evt.currentTarget).attr('id');
+                that._cachedEvent = evt;
+                const search = document.getElementById('searchBox');
+
+                var instanceIdToSearch = $(evt.currentTarget).attr('display_value');
+                let instanceIdToSearch = [];
                 if (that._cachedEvent === null || that._cachedEvent === undefined) {
                     return;
                 }
+                console.log(search)
                 if (instanceIdToSearch !== null && instanceIdToSearch !== undefined) {
-                    var ctxt = that.controller.newContext(evt, that.type + ".searchInstance");
-                    if (evt.getCount() > 0) {
-                        console.log('cbSRSuccess data is' + evt);
-                        var rowId = evt.getRowId(0);
-                        that.controller.openInstance(ctxt, instanceIdToOpen, [rowId]);
-                    }
-                    else {
-                        document.getElementById("search").value = "";
-                        document.getElementsByName("query")[0].placeholder = "Instances not found";
-                    }
+                    var ctxt = that.controller.newContext(that._cachedEvent, that.type + ".searchInstance");
+                    search.addEventListener('keyup',(e)=>{
+                        const searchstring = e.target.value;
+                        const filtered = instanceIdToSearch.filter( instance => {
+                            return instance.name.includes(searchstring);
+                        });
+                        console.log(filtered)
+                    })
+                    
                 }
             }
     
