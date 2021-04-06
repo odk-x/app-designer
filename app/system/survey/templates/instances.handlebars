@@ -19,18 +19,14 @@
         <hr>
     </div>
     
-    <body onload="display()">
-        <script type="text/javascript" src="../js/prompts.js"></script>
-        <div id="searchBox">
-            <form id="form" action="javascript:getResults();">
-                <input id="search" type="text" name="query" size="15" placeholder="Enter Client ID..." />
-                <input id="submit" type="submit" value="Search" />
+     <div id="searchBox" >
+            <form id="form" >
+                <input id="search" type="text" name="query" size="15" placeholder="Enter Instances..." />{{localizeText display.search_instance}}
+                <button type="button" id="{{instance_id}}" display_value="{{display_field}}" class="odk searchInstance btn btn-default" tabindex="0">
+					<span class="glyphicon glyphicon-search" style="font-size:20px;">
+				</button>
             </form>
         </div>
-        <div id="wrapper">
-            <ul id="list"></ul>
-        </div>
-    </body>
     
     {{{localizeText display.instances_previously_created_instances_label}}}
     <hr>
