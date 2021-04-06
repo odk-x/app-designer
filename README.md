@@ -170,16 +170,19 @@ $ adb --version
 **Tip:** If you are going to be heavily customizing the look-and-feel of the application with a lot of external JavaScript libraries, you might also choose to install **bower**.
 
 ## Installing Application Designer
-Download the zip file.
-Unzip the file you downloaded and move the resulting folder to somewhere other than your **Downloads** directory; such as your **Documents** folder.
-To open Application Designer, navigate to the location of your unzipped folder in **cmd**, and type: 
+Open a **Terminal** and type
+```
+$ git clone https://github.com/odk-x/app-designer.git
+```
+If you're using **Github Desktop**, clone [this repository](https://github.com/odk-x/app-designer) by clicking on `Code`.
+To open Application Designer, navigate to the location of your local cloned repository in **cmd**/**Terminal**, and type: 
 ```
 $ grunt
 ```
 This command runs the script contained in **Gruntfile.js**, so be sure it is in the current directory.
 
 #### Windows Users Tip
-You will be opening a **cmd** window and changing your current directory (using the **cd** command) into this directory every time you use this tool.  It is therefore useful to create ashortcut that opens a cmd window directly into this directory:
+You will be opening a **cmd** window and changing your current directory (using the **cd** command) into this directory every time you use this tool.  It is therefore useful to create a shortcut that opens a cmd window directly into this directory:
 1) Open a file browser and navigate to the unzipped directory containing a number of files and directories, including a **Gruntfile.js**.
 2) Click into the top location bar that displays the nested list of folders to this folder.
 3) Copy this path to the cut-and-paste buffer.
@@ -196,6 +199,8 @@ You will be opening a **cmd** window and changing your current directory (using 
 
 #### MacOSX Users Tip
 Terminal will open a new terminal window if you drag a folder (or pathname) onto the Terminal application icon, and you can also drag a folder to the tab bar of an existing window to create a new tab in that folder.
+
+You have now completed the installation of the ODK-X Application Designer software.
 
 ## How to contribute
 If you’re new to ODK-X you can check out the documentation:
