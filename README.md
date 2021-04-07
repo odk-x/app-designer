@@ -27,13 +27,13 @@ tasks specified in the Gruntfile.
 - Android SDK -> the software development kit for Android devices (installation is described below).
 
 ##### Java
-Make sure Java 8 or higher is installed on the computer you plan to use.  If it is not, [download and install it](https://java.com/en/download/). If you are using MacOSX, it may require special care and attention.See [MacOSX Java install](https://docs.oracle.com/javase/7/docs/webnotes/install/mac/mac-jdk.html) and [MacOSX Java FAQ](https://docs.oracle.com/javase/7/docs/webnotes/install/mac/mac-install-faq.html).
+Make sure Java 8 or higher is installed on the computer you plan to use.  If it is not, [download and install it](https://java.com/en/download/). If you are using MacOSX, it may require special care and attention.See [MacOSX Java install](https://docs.oracle.com/javase/8/docs/technotes/guides/install/mac_jdk.html) and [MacOSX Java FAQ](https://docs.oracle.com/javase/8/docs/technotes/guides/install/mac_install_faq.html).
 
 ##### NodeJS
 You must use Version 12 or higher. To avoid directory path problems on Windows, we require npm version 6.9 or higher (generally npm will be bundled with NodeJS installer). Follow the [instructions to install NodeJS](https://nodejs.org/en/).
 
 ###### For Windows
-When installing on Windows you can use an automated **NodeJS** installer the uses **Chocolatey**. If you chose not to let the installer use **Chocolatey** to install a bunch of packages after installing **NodeJS**, you will need to ensure the location of the `npm` folder is added to the *PATH* variable of your system. If it is not, subsequent calls to access grunt will fail. For example: `C:\Users\[username]\AppData\Roaming\npm`. For instructions on modifying *PATH*, see the section at the bottom of this page called Add adb to your *PATH* For Windows. Instead of navigating to the location of Android SDK, navigate to the location of the `npm` folder.
+When installing on Windows you can use an automated **NodeJS** installer that uses **Chocolatey**. If you chose not to let the installer use **Chocolatey** to install a bunch of packages after installing **NodeJS**, you will need to ensure the location of the `npm` folder is added to the *PATH* variable of your system. If it is not, subsequent calls to access grunt will fail. For example: `C:\Users\[username]\AppData\Roaming\npm`. For instructions on modifying *PATH*, see the section at the bottom of this page called Add adb to your *PATH* For Windows. Instead of navigating to the location of Android SDK, navigate to the location of the `npm` folder.
 
 ###### For Mac/Unix
 After installing NodeJS, open a terminal (which you can do by clicking the spotlight in the top right corner of the screen, typing terminal, and clicking the program named Terminal) and type: ```$ npm --version```
@@ -85,7 +85,7 @@ To install the Android SDK:
 6) Run the SDK Manager
    - On Windows, it is available in the `Start Menu` under Android SDK Tools
    **Warning:** If the packages fail to install, you may need to run the Android SDK as an Administrator.
-   - On Mac/Unix, open the SDK folder you downloaded above. In the `bin/` or `tools/` directories (on some versions it is in both places–it doesn't matter which you use), double click the file called `android`.
+   - On Mac/Unix, there is a `sdkmanager` CLI, more information can be found [here](https://developer.android.com/studio/command-line/sdkmanager).
 7) Select the latest versions of the following packages (by checking their checkboxes):
     - Android SDK Tools
     - Android Platform-tools
@@ -153,8 +153,8 @@ This process is more involved on Mac/Unix than on Windows. Use a text editor (no
 ```
 $ echo ~
 ```
-in a **terminal**. ('~' is a shortcut for the home directory.) Macs use a hidden file called `.bash_profile` in the home directory to set variables like *PATH*. Other Unix systems use files like `.bashrc`. You might have to check the specifics for your distribution to know which you should use. Open the appropriate file. If the file does not already exist, create a new file that will be saved with the appropriate name in your home directory.
-We want to add the location of the **adb** tool to your *PATH* while preserving the existing *PATH* information. Assuming that your **adb** program is in the `/Users/someuser/Desktop/android-sdk/platform-tools/` directory, you would add the following command to the end of the `.bash_profile` file:
+in a **terminal**. ('~' is a shortcut for the home directory.) Macs use a hidden file called `.zsh` in the home directory to set variables like *PATH*. Other Unix systems use files like `.bashrc`. You might have to check the specifics for your distribution to know which you should use. Open the appropriate file. If the file does not already exist, create a new file that will be saved with the appropriate name in your home directory.
+We want to add the location of the **adb** tool to your *PATH* while preserving the existing *PATH* information. Assuming that your **adb** program is in the `/Users/someuser/Desktop/android-sdk/platform-tools/` directory, you would add the following command to the end of the `.zshrc` file:
 ```
 $ export PATH=${PATH}:/Users/someuser/Desktop/android-sdk/platform-tools
 ```
@@ -176,17 +176,7 @@ $ git clone https://github.com/odk-x/app-designer.git
 ```
 If you're using **Github Desktop**, clone [this repository](https://github.com/odk-x/app-designer) by clicking on `Code`.
 
-On Windows, open a cmd window (go to Start Menu, search for cmd and open it); on MacOSX, open a terminal window. Within this window, type:
-```
-$ npm install -g grunt-cli
-```
-If the above command is unsuccessful, some machines may need to append sudo at the beginning of the command. If grunt is successfully installed, the following command:
-```
-$ grunt --version
-```
-Should display the installed version of grunt. For example the version might be `grunt-cli v1.2.0`
-
-**Warning:** If grunt is not found, you may need to add it to the PATH variable of your system. And if npm is not installed follow the steps of NodeJS in prerequisites.
+Install the [grunt packages](https://github.com/iamhks/app-designer#grunt) also mentioned in the prerequisites. Make sure [NodeJS](https://github.com/iamhks/app-designer#nodejs) is also installed.
 
 To open Application Designer, navigate to the location of your local cloned repository in **cmd**/**Terminal**, and type: 
 ```
@@ -205,7 +195,7 @@ You will be opening a **cmd** window and changing your current directory (using 
 7) Click Next, and then Finish.
 8) Select this newly-created **cmd.exe** shortcut and right-click.
 9) Select *Properties*.
-10) Click on the *Start* intext box, delete its contents, and paste the path to this folder.
+10) Click on the *Start* in text box, delete its contents, and paste the path to this folder.
 11) Click *OK* to accept the change.
 12) Double-click the **cmd.exe** shortcut to open a **cmd** window.
 13) Confirm that it opens in the intended directory (you should see the full path to that directory displayed to the left of the blinking cursor).
