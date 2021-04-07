@@ -175,6 +175,19 @@ Open a **Terminal** and type
 $ git clone https://github.com/odk-x/app-designer.git
 ```
 If you're using **Github Desktop**, clone [this repository](https://github.com/odk-x/app-designer) by clicking on `Code`.
+
+On Windows, open a cmd window (go to Start Menu, search for cmd and open it); on MacOSX, open a terminal window. Within this window, type:
+```
+$ npm install -g grunt-cli
+```
+If the above command is unsuccessful, some machines may need to append sudo at the beginning of the command. If grunt is successfully installed, the following command:
+```
+$ grunt --version
+```
+Should display the installed version of grunt. For example the version might be `grunt-cli v1.2.0`
+
+**Warning:** If grunt is not found, you may need to add it to the PATH variable of your system. And if npm is not installed follow the steps of NodeJS in prerequisites.
+
 To open Application Designer, navigate to the location of your local cloned repository in **cmd**/**Terminal**, and type: 
 ```
 $ grunt
