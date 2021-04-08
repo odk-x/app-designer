@@ -583,6 +583,7 @@ var XLSXConverter = {};
                 value = value.replace(/\r/g, "");
                 value = value.trim();
             }
+            key = key.trim();
             outRow[key] = value;
         });
         return outRow;
