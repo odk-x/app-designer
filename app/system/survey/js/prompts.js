@@ -714,28 +714,28 @@ promptTypes.instances = promptTypes.base.extend({
         }
     },
     searchInstance: function (evt) {
-                var that = this;
-                that._cachedEvent = evt;
-                const search = document.getElementById('searchBox');
+        var that= this
+        that._cachedEvent = evt;
+        const search = document.getElementById('searchBox');
+        // if (that._cachedEvent === null || that._cachedEvent === undefined) {
+        //     return;
+        // }
+        var instanceToSearch = $(evt.currentTarget).attr('display_value');
+        
+        console.log(search)
+        if ( instanceToSearch !== null && instanceToSearch !== undefined ) {
+            var ctxt = that.controller.newContext(that._cachedEvent, that.type + ".searchInstance");
+            that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+                odkCommon.log('D',"prompts." + that.type + ".searchInstance", "px: " + that.promptIdx);
+                that.controller.searchInstance(ctxt, instanceToSearch)
+            }}))
+            // search.addEventListener('keyup',(e)=>{
+            //     console.log(ctxt);
+            // })
 
-                var instanceIdToSearch = $(evt.currentTarget).attr('display_value');
-                let instanceIdToSearch = [];
-                if (that._cachedEvent === null || that._cachedEvent === undefined) {
-                    return;
-                }
-                console.log(search)
-                if (instanceIdToSearch !== null && instanceIdToSearch !== undefined) {
-                    var ctxt = that.controller.newContext(that._cachedEvent, that.type + ".searchInstance");
-                    search.addEventListener('keyup',(e)=>{
-                        const searchstring = e.target.value;
-                        const filtered = instanceIdToSearch.filter( instance => {
-                            return instance.name.includes(searchstring);
-                        });
-                        console.log(filtered)
-                    })
-                    
-                }
-            }
+        }
+    }
+
     
 });
     
