@@ -90,6 +90,8 @@ To install the Android SDK:
     - Android SDK Tools
     - Android Platform-tools
     - Android Build-tools
+
+    -For this step on Mac/Unix, you'll need to make a complete setup of [Android Studio](https://developer.android.com/studio/install#mac). You may skip the steps 8-11 since, the above tools will be included in the Android Studio install you just did.
 8) If extra packages are selected, you may unselect them before installation.    
 9) Click `Install 3 packages` in the lower right corner of the screen.    
 10) A licensing pop-up dialog will appear. Accept the license agreement(s) by selecting the `Accept License` option. If there are multiple licenses, you may need to select each license in the Packages window on this dialog and check this `Accept License` option for each of them before the `Install` button will become enabled.    
@@ -176,7 +178,7 @@ $ git clone https://github.com/odk-x/app-designer.git
 ```
 If you're using **Github Desktop**, clone [this repository](https://github.com/odk-x/app-designer) by clicking on `Code`.
 
-Install the [grunt packages](https://github.com/iamhks/app-designer#grunt) also mentioned in the prerequisites. Make sure [NodeJS](https://github.com/iamhks/app-designer#nodejs) is also installed.
+Install the [grunt packages](https://github.com/odk-x/app-designer#grunt) mentioned in the prerequisites. Make sure [NodeJS](https://github.com/odk-x/app-designer#nodejs) is also installed.
 
 To open Application Designer, navigate to the location of your local cloned repository in **cmd**/**Terminal**, and type: 
 ```
@@ -195,7 +197,7 @@ You will be opening a **cmd** window and changing your current directory (using 
 7) Click Next, and then Finish.
 8) Select this newly-created **cmd.exe** shortcut and right-click.
 9) Select *Properties*.
-10) Click on the *Start* in text box, delete its contents, and paste the path to this folder.
+10) Click on the *Start in* text box, delete its contents, and paste the path to this folder.
 11) Click *OK* to accept the change.
 12) Double-click the **cmd.exe** shortcut to open a **cmd** window.
 13) Confirm that it opens in the intended directory (you should see the full path to that directory displayed to the left of the blinking cursor).
