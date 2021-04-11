@@ -30,12 +30,13 @@ tasks specified in the Gruntfile.
 Make sure Java 8 or higher is installed on the computer you plan to use.  If it is not, [download and install it](https://java.com/en/download/). If you are using MacOSX, it may require special care and attention.See [MacOSX Java install](https://docs.oracle.com/javase/8/docs/technotes/guides/install/mac_jdk.html) and [MacOSX Java FAQ](https://docs.oracle.com/javase/8/docs/technotes/guides/install/mac_install_faq.html).
 
 ##### NodeJS
-You must use Version 12 or higher. To avoid directory path problems on Windows, we require npm version 6.9 or higher (generally npm will be bundled with NodeJS installer). Follow the [instructions to install NodeJS](https://nodejs.org/en/).
+You must use Version 12 or higher. To avoid directory path problems on Windows, we require npm version 6.9 or higher (generally npm will be bundled with NodeJS installer). Follow the [instructions to install NodeJS](https://nodejs.org/en/download/package-manager/).
 
 ###### For Windows
 When installing on Windows you can use an automated **NodeJS** installer that uses **Chocolatey**. If you chose not to let the installer use **Chocolatey** to install a bunch of packages after installing **NodeJS**, you will need to ensure the location of the `npm` folder is added to the *PATH* variable of your system. If it is not, subsequent calls to access grunt will fail. For example: `C:\Users\[username]\AppData\Roaming\npm`. For instructions on modifying *PATH*, see the section at the bottom of this page called Add adb to your *PATH* For Windows. Instead of navigating to the location of Android SDK, navigate to the location of the `npm` folder.
+You can check if npm has been installed properly by typing `npm --version` in cmd or Powershell.
 
-###### For Mac/Unix
+###### For Mac/Linux
 After installing NodeJS, open a terminal (which you can do by clicking the spotlight in the top right corner of the screen, typing terminal, and clicking the program named Terminal) and type: ```$ npm --version```
 
 **Warning:**
@@ -58,7 +59,7 @@ If the command:
 ```
 $ ls /usr/local/bin/npm
 ```
-outputs a message telling you permission is denied, then you will have to change the ownership of the `/usr/local/` and `/usr/local/bin/` directories. On Mac, follow the [instructions to take ownership](http://osxdaily.com/2013/04/23/change-file-ownership-mac-os-x/) of these directories, or to at least give yourself read permission. On other Unix systems, use the **chown** command or the user-interface appropriate to your distribution to do so.
+outputs a message telling you permission is denied, then you will have to change the ownership of the `/usr/local/` and `/usr/local/bin/` directories. On Mac, follow the [instructions to take ownership](http://osxdaily.com/2013/04/23/change-file-ownership-mac-os-x/) of these directories, or to at least give yourself read permission. On other Linux systems, use the **chown** command or the user-interface appropriate to your distribution to do so.
 
 ##### Grunt
 After installing NodeJS, install **grunt** by doing the following:
@@ -85,13 +86,13 @@ To install the Android SDK:
 6) Run the SDK Manager
    - On Windows, it is available in the `Start Menu` under Android SDK Tools
    **Warning:** If the packages fail to install, you may need to run the Android SDK as an Administrator.
-   - On Mac/Unix, there is a `sdkmanager` CLI, more information can be found [here](https://developer.android.com/studio/command-line/sdkmanager).
+   - On Mac/Linux, there is a `sdkmanager` CLI, more information can be found [here](https://developer.android.com/studio/command-line/sdkmanager).
 7) Select the latest versions of the following packages (by checking their checkboxes):
     - Android SDK Tools
     - Android Platform-tools
     - Android Build-tools
 
-    -For this step on Mac/Unix, you'll need to make a complete setup of [Android Studio](https://developer.android.com/studio/install#mac). You may skip the steps 8-11 since, the above tools will be included in the Android Studio install you just did.
+    -For this step on Mac/Linux, you'll need to make a complete setup of [Android Studio](https://developer.android.com/studio/install#mac). You may skip the steps 8-11 since, the above tools will be included in the Android Studio install you just did.
 8) If extra packages are selected, you may unselect them before installation.    
 9) Click `Install 3 packages` in the lower right corner of the screen.    
 10) A licensing pop-up dialog will appear. Accept the license agreement(s) by selecting the `Accept License` option. If there are multiple licenses, you may need to select each license in the Packages window on this dialog and check this `Accept License` option for each of them before the `Install` button will become enabled.    
@@ -99,7 +100,7 @@ To install the Android SDK:
 
 Among many other things, this will install the Android Debug Bridge software on your computer. This tool enables the scripted pushing of files and APKs down to your Android device. See [adb (Android Debug Bridge)](https://developer.android.com/studio/command-line/adb.html) for a listing of its capabilities.
 
-Next, on Windows open a **cmd** window (open the Start menu, type **cmd** in the search box, select and open it), and on Mac/Unix open a **terminal** window. Type:
+Next, on Windows open a **cmd** window (open the Start menu, type **cmd** in the search box, select and open it), and on Mac/Linux open a **terminal** window. Type:
 ```
 $ adb version
 ```
@@ -131,7 +132,7 @@ $ adb version
 ```
 You should now see the version of the **adb** tool. For example: `Android Debug Bridge version 1.0.31`. You can now move on to [Installing Application Designer](https://docs.odk-x.org/app-designer-install/).
 
-###### For Mac/Unix
+###### For Mac/Linux
 The *PATH* variable is nothing more than a default list of places the system looks for commands. Open a **terminal**. Type:
 ```
 $ echo $PATH
@@ -151,11 +152,11 @@ Note the location where you downloaded the Android SDK. It should contain a fold
 $ /Users/someuser/Desktop/android-sdk/platform-tools/adb --version
 ```
 This works because we're telling the computer exactly where the program **adb** exists. By putting the `platform-tools` directory on the system's *PATH* variable, we will be able to just type **adb** and have the system find it in the `/Users/someuser/Desktop/android-sdk/platform-tools/` directory.
-This process is more involved on Mac/Unix than on Windows. Use a text editor (not **Word**, but something like **TextEdit**), select the option to open a file, and browse to your home directory. You can find your home directory by typing:
+This process is more involved on Mac/Linux than on Windows. Use a text editor (not **Word**, but something like **TextEdit**), select the option to open a file, and browse to your home directory. You can find your home directory by typing:
 ```
 $ echo ~
 ```
-in a **terminal**. ('~' is a shortcut for the home directory.) Macs use a hidden file called `.zsh` in the home directory to set variables like *PATH*. Other Unix systems use files like `.bashrc`. You might have to check the specifics for your distribution to know which you should use. Open the appropriate file. If the file does not already exist, create a new file that will be saved with the appropriate name in your home directory.
+in a **terminal**. ('~' is a shortcut for the home directory.) Macs use a hidden file called `.zsh` in the home directory to set variables like *PATH*. Other Linux systems use files like `.bashrc`. You might have to check the specifics for your distribution to know which you should use. Open the appropriate file. If the file does not already exist, create a new file that will be saved with the appropriate name in your home directory.
 We want to add the location of the **adb** tool to your *PATH* while preserving the existing *PATH* information. Assuming that your **adb** program is in the `/Users/someuser/Desktop/android-sdk/platform-tools/` directory, you would add the following command to the end of the `.zshrc` file:
 ```
 $ export PATH=${PATH}:/Users/someuser/Desktop/android-sdk/platform-tools
