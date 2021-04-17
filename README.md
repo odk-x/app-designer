@@ -105,7 +105,7 @@ Next, on Windows open a **cmd** window (open the Start menu, type **cmd** in the
 ```
 $ adb version
 ```
-If this displays a version string, then your installation is complete; you are done with this section and can move on to [Installing Application Designer](https://docs.odk-x.org/app-designer-install/).
+If this displays a version string, then your installation is complete; you are done with this section and can move on to [Installing Application Designer](#installing-application-designer).
 
 **Warning:** 
     - If there is an error complaining about Java not being installed, you will need to close this **cmd** or **termina**l window and download and install Java. After installing Java, open a new **cmd** or **terminal** window and type this command again.
