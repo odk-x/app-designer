@@ -83,6 +83,7 @@ To install the Android SDK:
 3) Within that section, download the appropriate file(s) based on your operating system.  
 4) Accept the license agreement    
 5) Wait for the install of the SDK Tools to complete. Windows will need to manually run the .exe file previously downloaded to start installation.    
+Note: There is no graphical tool for package management when using only the command line tools in either of Mac/Windows/Linux. You need to do a complete setup of Android Studio, more information in step 7.
 6) Run the SDK Manager
    - On Windows, it is available in the `Start Menu` under Android SDK Tools
    **Warning:** If the packages fail to install, you may need to run the Android SDK as an Administrator.
@@ -179,13 +180,23 @@ $ git clone https://github.com/odk-x/app-designer.git
 ```
 If you're using **Github Desktop**, clone [this repository](https://github.com/odk-x/app-designer) by clicking on `Code`.
 
-Install the [grunt packages](https://github.com/odk-x/app-designer#grunt) mentioned in the prerequisites. Make sure [NodeJS](https://github.com/odk-x/app-designer#nodejs) is also installed.
+Now you need to install the node packages:
+```
+$ cd app-designer
+$ npm install grunt --save-dev
+```
 
 To open Application Designer, navigate to the location of your local cloned repository in **cmd**/**Terminal**, and type: 
 ```
 $ grunt
 ```
-This command runs the script contained in **Gruntfile.js**, so be sure it is in the current directory.
+This command runs the script contained in **Gruntfile.js**, so be sure it is in the current directory. If the Chrome browser does not open, try opening it yourself and browsing to [http://localhost:8000/index.html](http://localhost:8000/index.html).
+
+If the page never times-out, but never loads (it remains blank or constantly spinning), then stop grunt and try this command instead:
+```
+$ grunt --verbose connect:livereload:keepalive
+```
+This will start grunt, but disable the file-change detection mechanisms that automatically reload an HTML page when it or any JavaScript file it uses has been modified. Others have reported that uninstalling npm and node, and then re-installing them may correct the issue.
 
 #### Windows Users Tip
 You will be opening a **cmd** window and changing your current directory (using the **cd** command) into this directory every time you use this tool.  It is therefore useful to create a shortcut that opens a cmd window directly into this directory:
