@@ -122,7 +122,7 @@
         "type": "note",
         "display": {
           "prompt": {
-            "text": "<h3>\nThis label uses Handlesbars template features:\n</h3>\n{{#if data.name}}\nHello {{data.name}}!\n{{else}}\nName not entered.\n{{/if}}"
+            "text": "<h3>\nThis label uses Handlebars template features:\n</h3>\n{{#if data.name}}\nHello {{data.name}}!\n{{else}}\nName not entered.\n{{/if}}"
           },
           "hint": {
             "text": "Handlebars templates allow labels to change depending on the values previously entered."
@@ -763,7 +763,8 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path"
+      "templatePath": "requirejs_path",
+      "hideInContents": "formula"
     },
     "settings": {
       "table_id": {

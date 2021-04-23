@@ -258,7 +258,8 @@ var XLSXConverter = {};
             uri: 'formula', // queries
             callback: 'formula(context)', // queries
             choice_filter: 'formula(choice_item)', // expects "choice" context arg.
-            templatePath: 'requirejs_path'
+            templatePath: 'requirejs_path',
+            hideInContents: 'formula'
     };
 
     //The prompt type map is not kept in a separate JSON file because
@@ -582,6 +583,7 @@ var XLSXConverter = {};
                 value = value.replace(/\r/g, "");
                 value = value.trim();
             }
+            key = key.trim();
             outRow[key] = value;
         });
         return outRow;
