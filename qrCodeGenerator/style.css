@@ -21,6 +21,23 @@ body {
     padding-top: .5em;
     padding-bottom: .5em;
 }
+#head-text {
+    margin-top: 0;
+}
+.description p {
+    background-color: #d3d3d3;
+    margin-top: 0;
+    padding: .5em;
+}
+a {
+    color: #000000;
+    text-decoration: underline;
+    cursor: pointer;
+}
+a:hover {
+    color: #4b4b4b;
+    text-decoration: none;
+}
 .field-style {
 	margin-top: 10px;
     padding-left: .5em;
