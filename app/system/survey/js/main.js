@@ -17,7 +17,7 @@ requirejs.config({
     paths: {
         // third-party libraries we depend upon
         jquery: "libs/jquery-3.6.0",
-        jquerymigrate: "libs/jquery-migrate-3.1.0",
+        jquerymigrate: "libs/jquery-migrate-3.3.2",
         bootstrap: "libs/bootstrap-3.3.7-dist/js/bootstrap.min",
         moment: "libs/eonasdan/moment",
         combodate: "libs/combodate/js/combodate",
