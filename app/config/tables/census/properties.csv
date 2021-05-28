@@ -1,6 +1,0 @@
-_partition,_aspect,_key,_type,_value
-Column,isAdult,displayChoicesList,object,"[{""choice_list_name"":""yesno"",""data_value"":""y"",""display"":{""title"":{""text"":""Yes""}},""_row_num"":2},{""choice_list_name"":""yesno"",""data_value"":""n"",""display"":{""title"":{""text"":""No""}},""_row_num"":3}]"
-FormType,default,FormType.formType,string,SURVEY
-SurveyUtil,default,SurveyUtil.formId,string,census
-Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"{""text"":""Census Form""}"
