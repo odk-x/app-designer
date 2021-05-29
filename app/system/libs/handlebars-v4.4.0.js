@@ -1,7 +1,7 @@
 /**!
 
  @license
- handlebars v4.3.0
+ handlebars v4.4.0
 
 Copyright (C) 2011-2017 by Yehuda Katz
 
@@ -275,11 +275,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _logger2 = _interopRequireDefault(_logger);
 
-	var VERSION = '4.3.0';
+	var VERSION = '4.4.0';
 	exports.VERSION = VERSION;
 	var COMPILER_REVISION = 8;
-
 	exports.COMPILER_REVISION = COMPILER_REVISION;
+	var LAST_COMPATIBLE_COMPILER_REVISION = 7;
+
+	exports.LAST_COMPATIBLE_COMPILER_REVISION = LAST_COMPATIBLE_COMPILER_REVISION;
 	var REVISION_CHANGES = {
 	  1: '<= 1.0.rc.2', // 1.0.rc.2 is actually rev2 but doesn't report it
 	  2: '== 1.0.0-rc.3',
@@ -686,7 +688,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
 
 	var _interopRequireDefault = __webpack_require__(1)['default'];
 
@@ -748,6 +750,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	            execIteration(i, i, i === context.length - 1);
 	          }
 	        }
+	      } else if (global.Symbol && context[global.Symbol.iterator]) {
+	        var newContext = [];
+	        var iterator = context[global.Symbol.iterator]();
+	        for (var it = iterator.next(); !it.done; it = iterator.next()) {
+	          newContext.push(it.value);
+	        }
+	        context = newContext;
+	        for (var j = context.length; i < j; i++) {
+	          execIteration(i, i, i === context.length - 1);
+	        }
 	      } else {
 	        var priorKey = undefined;
 
@@ -778,6 +790,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }),
 /* 13 */
@@ -1087,15 +1100,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var compilerRevision = compilerInfo && compilerInfo[0] || 1,
 	      currentRevision = _base.COMPILER_REVISION;
 
-	  if (compilerRevision !== currentRevision) {
-	    if (compilerRevision < currentRevision) {
-	      var runtimeVersions = _base.REVISION_CHANGES[currentRevision],
-	          compilerVersions = _base.REVISION_CHANGES[compilerRevision];
-	      throw new _exception2['default']('Template was precompiled with an older version of Handlebars than the current runtime. ' + 'Please update your precompiler to a newer version (' + runtimeVersions + ') or downgrade your runtime to an older version (' + compilerVersions + ').');
-	    } else {
-	      // Use the embedded version info since the runtime doesn't know about this revision yet
-	      throw new _exception2['default']('Template was precompiled with a newer version of Handlebars than the current runtime. ' + 'Please update your runtime to a newer version (' + compilerInfo[1] + ').');
-	    }
+	  if (compilerRevision >= _base.LAST_COMPATIBLE_COMPILER_REVISION && compilerRevision <= _base.COMPILER_REVISION) {
+	    return;
+	  }
+
+	  if (compilerRevision < _base.LAST_COMPATIBLE_COMPILER_REVISION) {
+	    var runtimeVersions = _base.REVISION_CHANGES[currentRevision],
+	        compilerVersions = _base.REVISION_CHANGES[compilerRevision];
+	    throw new _exception2['default']('Template was precompiled with an older version of Handlebars than the current runtime. ' + 'Please update your precompiler to a newer version (' + runtimeVersions + ') or downgrade your runtime to an older version (' + compilerVersions + ').');
+	  } else {
+	    // Use the embedded version info since the runtime doesn't know about this revision yet
+	    throw new _exception2['default']('Template was precompiled with a newer version of Handlebars than the current runtime. ' + 'Please update your runtime to a newer version (' + compilerInfo[1] + ').');
 	  }
 	}
 
@@ -1114,6 +1129,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // Note: Using env.VM references rather than local var references throughout this section to allow
 	  // for external users to override these as pseudo-supported APIs.
 	  env.VM.checkRevision(templateSpec.compiler);
+
+	  // backwards compatibility for precompiled templates with compiler-version 7 (<4.3.0)
+	  var templateWasPrecompiledWithCompilerV7 = templateSpec.compiler && templateSpec.compiler[0] === 7;
 
 	  function invokePartialWrapper(partial, context, options) {
 	    if (options.hash) {
@@ -1243,9 +1261,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 
 	      container.hooks = {};
-	      var keepHelper = options.allowCallsToHelperMissing;
-	      _helpers.moveHelperToHooks(container, 'helperMissing', keepHelper);
-	      _helpers.moveHelperToHooks(container, 'blockHelperMissing', keepHelper);
+
+	      var keepHelperInHelpers = options.allowCallsToHelperMissing || templateWasPrecompiledWithCompilerV7;
+	      _helpers.moveHelperToHooks(container, 'helperMissing', keepHelperInHelpers);
+	      _helpers.moveHelperToHooks(container, 'blockHelperMissing', keepHelperInHelpers);
 	    } else {
 	      container.helpers = options.helpers;
 	      container.partials = options.partials;
@@ -3798,13 +3817,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // PUBLIC API: You can override these methods in a subclass to provide
 	  // alternative compiled forms for name lookup and buffering semantics
 	  nameLookup: function nameLookup(parent, name /* , type*/) {
+	    var isEnumerable = [this.aliasable('container.propertyIsEnumerable'), '.call(', parent, ',"constructor")'];
+
 	    if (name === 'constructor') {
-	      return ['(', parent, '.propertyIsEnumerable(\'constructor\') ? ', parent, '.constructor : undefined', ')'];
+	      return ['(', isEnumerable, '?', _actualLookup(), ' : undefined)'];
 	    }
-	    if (JavaScriptCompiler.isValidJavaScriptVariableName(name)) {
-	      return [parent, '.', name];
-	    } else {
-	      return [parent, '[', JSON.stringify(name), ']'];
+	    return _actualLookup();
+
+	    function _actualLookup() {
+	      if (JavaScriptCompiler.isValidJavaScriptVariableName(name)) {
+	        return [parent, '.', name];
+	      } else {
+	        return [parent, '[', JSON.stringify(name), ']'];
+	      }
 	    }
 	  },
 	  depthedLookup: function depthedLookup(name) {
@@ -4003,7 +4028,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    for (var alias in this.aliases) {
 	      // eslint-disable-line guard-for-in
 	      var node = this.aliases[alias];
-
 	      if (this.aliases.hasOwnProperty(alias) && node.children && node.referenceCount > 1) {
 	        varDeclarations += ', alias' + ++aliasCount + '=' + alias;
 	        node.children[0] = 'alias' + aliasCount;
