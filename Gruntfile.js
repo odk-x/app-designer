@@ -519,7 +519,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
                  cwd: 'app' },
 				'.nomedia',
                 '**',
-                '!system/**',
+                'system/**',
 				'!data/**',
 				'!output/**',
                 '!**/~$*.xlsx');
