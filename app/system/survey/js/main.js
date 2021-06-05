@@ -51,7 +51,7 @@ requirejs.config({
         handlebarsHelpers: "survey/js/handlebarsHelpers",
         formulaFunctions: "survey/js/formulaFunctions",
         jqueryCsv: "libs/jquery.csv-0.8.3",
-        XRegExp: "libs/XRegExp-All-3.2.0",
+        XRegExp: "libs/XRegExp-All-4.0.0",
         d3: "libs/d3-amd/d3",
         mockDbif: "js/mock/mockDbif",
         mockImpl: "js/mock/mockImpl",
