@@ -1,4 +1,4 @@
-var XRegExp = require("./xlsxconverter/XRegExp-All-4.2.0.js");
+var XRegExp = require("./xlsxconverter/XRegExp-All-4.4.0.js");
 var readline = require("readline");
 var _ = require("./devEnv/libs/underscore.js");
 var XLSXConverter = require("./xlsxconverter/XLSXConverter2.js");
