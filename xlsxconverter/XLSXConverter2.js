@@ -452,6 +452,18 @@ var XLSXConverter = {};
 			// odk time stamp -- UTC timestamp string
             "type": "string",
 			"elementType": "dateTime"
+        },
+        "date_year_only": {
+            "type": "string",
+            "elementType": "date_year_ony"
+        },
+        "date_month_only": {
+            "type": "string",
+            "elementType": "date_month_only"
+        },
+        "date_month_and_year_only": {
+            "type": "string",
+            "elementType": "date_month_and_year_only"
         }
     };
     var warnings = {
