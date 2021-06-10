@@ -563,6 +563,12 @@ return {
                 // convert from a nanosecond-extended iso8601-style LOCAL TIME ZONE time HH:MM:SS.sssssssss
                 // this does not preserve the nanosecond field...
                 return odkCommon.toDateFromOdkTime(new Date(), value);
+            } else if ( jsonType.elementType === 'date_year_only' ) {
+                return moment(value).format('YYYY');
+            } else if ( jsonType.elementType === 'date_month_only' ) {
+                return moment(value).format('MM');
+            } else if ( jsonType.elementType === 'date_month_and_year_only' ) {
+                return moment(value).format('YYYY/MM');
             } else {
                 return value;
             }
