@@ -564,9 +564,9 @@ return {
                 // this does not preserve the nanosecond field...
                 return odkCommon.toDateFromOdkTime(new Date(), value);
             } else if ( jsonType.elementType === 'date_year_only' ) {
-                return moment(value).year();
+                return moment(value).format('YYYY');
             } else if ( jsonType.elementType === 'date_month_only' ) {
-                return moment(value).month();
+                return moment(value).format('MM');
             } else if ( jsonType.elementType === 'date_month_and_year_only' ) {
                 return moment(value).format('YYYY/MM');
             } else {
