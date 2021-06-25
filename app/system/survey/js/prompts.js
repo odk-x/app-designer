@@ -2205,6 +2205,27 @@ promptTypes.birth_date = promptTypes.date_no_time.extend({
         }
     },
 });
+    
+promptTypes.date_year_only = promptTypes.date_no_time.extend({
+    type: "date",
+    showTime: false,
+    timeFormat: "YYYY",
+    timeTemplate: "YYYY"
+});
+
+promptTypes.date_month_only = promptTypes.date_no_time.extend({
+    type: "date",
+    showTime: false,
+    timeFormat: "MM",
+    timeTemplate: "MM"
+});
+
+promptTypes.date_month_and_year_only = promptTypes.date_no_time.extend({
+    type: "date",
+    showTime: false,
+    timeFormat: "YYYY/MM",
+    timeTemplate: "YYYY / MM"
+});
 /**
  * Media is an abstract object used as a base for image/audio/video
  */
