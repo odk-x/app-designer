@@ -464,6 +464,10 @@ var XLSXConverter = {};
         "date_month_and_year_only": {
             "type": "string",
             "elementType": "date_month_and_year_only"
+        },
+        "non_gregorian_calendar_picker": {
+            "type": "string",
+            "elementType": "dateTime"
         }
     };
     var warnings = {
