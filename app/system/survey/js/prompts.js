@@ -2226,6 +2226,11 @@ promptTypes.date_month_and_year_only = promptTypes.date_no_time.extend({
     timeFormat: "YYYY/MM",
     timeTemplate: "YYYY / MM"
 });
+
+promptTypes.non_gregorian_calendar_picker = promptTypes.input_type.extend({
+    type: "dateTime",
+    templatePath: "templates/non_gregorian_calendar_picker.handlebars"
+});
 /**
  * Media is an abstract object used as a base for image/audio/video
  */
