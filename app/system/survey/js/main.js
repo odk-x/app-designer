@@ -16,6 +16,15 @@ requirejs.config({
     waitSeconds: 45,
     paths: {
         // third-party libraries we depend upon
+        jqueryCalendars: 'libs/non-gregorian-calendar-picker/jquery.calendars',
+        jqueryCalendarsPlus: 'libs/non-gregorian-calendar-picker/jquery.calendars.plus',
+        jqueryPlugin: 'libs/non-gregorian-calendar-picker/jquery.plugin',
+        jqueryCalendarsPicker: 'libs/non-gregorian-calendar-picker/jquery.calendars.picker',
+        jqueryPluginMin: 'libs/non-gregorian-calendar-picker/jquery.plugin.min',
+        jqueryCalendarsCoptic: 'libs/non-gregorian-calendar-picker/jquery.calendars.coptic',
+        jqueryCalendarsEthiopian: 'libs/non-gregorian-calendar-picker/jquery.calendars.ethiopian',
+        jqueryCalendarsIslamic: 'libs/non-gregorian-calendar-picker/jquery.calendars.islamic',
+        jqueryCalendarsPersian: 'libs/non-gregorian-calendar-picker/jquery.calendars.persian',
         jquery : 'libs/jquery-3.4.1',
 		jquerymigrate: 'libs/jquery-migrate-3.0.0',
         bootstrap : 'libs/bootstrap-3.3.7-dist/js/bootstrap.min',
