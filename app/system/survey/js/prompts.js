@@ -2228,7 +2228,7 @@ promptTypes.date_month_and_year_only = promptTypes.date_no_time.extend({
 });
 
 promptTypes.non_gregorian_calendar_picker = promptTypes.input_type.extend({
-    type: "dateTime",
+    type: "date",
     templatePath: "templates/non_gregorian_calendar_picker.handlebars"
 });
 /**
