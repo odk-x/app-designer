@@ -81,7 +81,11 @@
 			transaction.executeSql('drop table if exists _table_definitions');
 		});
 	}, function(error) {
-		alert(String(error));
+		console.error(error)
+		if (error.code === 5) {
+			alert(`${error[Symbol.toStringTag]} - Database is empty.`);
+		}
+		//alert(String(error));
         var cw = document.getElementById('previewscreen').contentWindow;
         cw.location.reload();
 	}, function() {
