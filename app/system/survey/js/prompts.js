@@ -1,13 +1,13 @@
 /**
  * All  the standard prompts available to a form designer.
  */
-define(['database','opendatakit','controller','backbone','moment','formulaFunctions','handlebars','promptTypes','jquery','underscore','d3','handlebarsHelpers','combodate'],
-function(database,  opendatakit,  controller,  Backbone,  moment,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,           d3,   _hh) {
+define(['database','opendatakit','controller','backbone','moment','formulaFunctions','handlebars','promptTypes','jquery','underscore','d3','handlebarsHelpers','combodate','jqueryPluginMin','jqueryCalendars','jqueryCalendarsPlus','jqueryPlugin','jqueryCalendarsPicker','jqueryCalendarsCoptic', 'jqueryCalendarsEthiopian', 'jqueryCalendarsIslamic', 'jqueryCalendarsPersian'],
+function(database,  opendatakit,  controller,  Backbone,  moment,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,           d3,   _hh, jqueryPluginMin, jqueryCalendars, jqueryCalendarsPlus, jqueryPlugin, jqueryCalendarsPicker, jqueryCalendarsCoptic, jqueryCalendarsEthiopian, jqueryCalendarsIslamic, jqueryCalendarsPersian) {
 'use strict';
 /* global odkCommon, odkSurvey */
 verifyLoad('prompts',
-    ['database','opendatakit','controller','backbone','moment', 'formulaFunctions','handlebars','promptTypes','jquery','underscore','d3', 'handlebarsHelpers','combodate'],
-    [ database,  opendatakit,  controller,  Backbone,  moment,   formulaFunctions,  Handlebars,  promptTypes,  $,       _,           d3,   _hh,           $.fn.combodate] );
+    ['database','opendatakit','controller','backbone','moment', 'formulaFunctions','handlebars','promptTypes','jquery','underscore','d3', 'handlebarsHelpers','combodate','jqueryPluginMin','jqueryCalendars','jqueryCalendarsPlus','jqueryPlugin','jqueryCalendarsPicker','jqueryCalendarsCoptic', 'jqueryCalendarsEthiopian', 'jqueryCalendarsIslamic', 'jqueryCalendarsPersian'],
+    [ database,  opendatakit,  controller,  Backbone,  moment,   formulaFunctions,  Handlebars,  promptTypes,  $,       _,           d3,   _hh,           $.fn.combodate,  jqueryPluginMin, jqueryCalendars, jqueryCalendarsPlus, jqueryPlugin, jqueryCalendarsPicker, jqueryCalendarsCoptic, jqueryCalendarsEthiopian, jqueryCalendarsIslamic, jqueryCalendarsPersian] );
 
 promptTypes.base = Backbone.View.extend({
     className: "odk-base",
@@ -2228,7 +2228,7 @@ promptTypes.date_month_and_year_only = promptTypes.date_no_time.extend({
 });
 
 promptTypes.non_gregorian_calendar_picker = promptTypes.input_type.extend({
-    type: "date",
+    type: "string",
     templatePath: "templates/non_gregorian_calendar_picker.handlebars"
 });
 /**
