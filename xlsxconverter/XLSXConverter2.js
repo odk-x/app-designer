@@ -467,7 +467,7 @@ var XLSXConverter = {};
         },
         "non_gregorian_calendar_picker": {
             "type": "string",
-            "elementType": "date"
+            "elementType": "date_no_time"
         }
     };
     var warnings = {
