@@ -16,15 +16,6 @@ requirejs.config({
     waitSeconds: 45,
     paths: {
         // third-party libraries we depend upon
-        jqueryCalendars: 'libs/non-gregorian-calendar-picker/jquery.calendars',
-        jqueryCalendarsPlus: 'libs/non-gregorian-calendar-picker/jquery.calendars.plus',
-        jqueryPlugin: 'libs/non-gregorian-calendar-picker/jquery.plugin',
-        jqueryCalendarsPicker: 'libs/non-gregorian-calendar-picker/jquery.calendars.picker',
-        jqueryPluginMin: 'libs/non-gregorian-calendar-picker/jquery.plugin.min',
-        jqueryCalendarsCoptic: 'libs/non-gregorian-calendar-picker/jquery.calendars.coptic',
-        jqueryCalendarsEthiopian: 'libs/non-gregorian-calendar-picker/jquery.calendars.ethiopian',
-        jqueryCalendarsIslamic: 'libs/non-gregorian-calendar-picker/jquery.calendars.islamic',
-        jqueryCalendarsPersian: 'libs/non-gregorian-calendar-picker/jquery.calendars.persian',
         jquery : 'libs/jquery-3.4.1',
 		jquerymigrate: 'libs/jquery-migrate-3.0.0',
         bootstrap : 'libs/bootstrap-3.3.7-dist/js/bootstrap.min',
@@ -68,7 +59,16 @@ requirejs.config({
         mockSchema: 'js/mock/mockSchema',
         odkDataIf: 'js/mock/odkDataIf',
         hammer : 'libs/hammer.min',
-        jqueryHammer : 'libs/jquery.hammer'
+        jqueryHammer : 'libs/jquery.hammer',
+        jqueryPluginMin: 'libs/non-gregorian-calendar-picker/jquery.plugin.min',
+        jqueryCalendars: 'libs/non-gregorian-calendar-picker/jquery.calendars',
+        jqueryCalendarsPlus: 'libs/non-gregorian-calendar-picker/jquery.calendars.plus',
+        jqueryPlugin: 'libs/non-gregorian-calendar-picker/jquery.plugin',
+        jqueryCalendarsPicker: 'libs/non-gregorian-calendar-picker/jquery.calendars.picker',
+        jqueryCalendarsCoptic: 'libs/non-gregorian-calendar-picker/jquery.calendars.coptic',
+        jqueryCalendarsEthiopian: 'libs/non-gregorian-calendar-picker/jquery.calendars.ethiopian',
+        jqueryCalendarsIslamic: 'libs/non-gregorian-calendar-picker/jquery.calendars.islamic',
+        jqueryCalendarsPersian: 'libs/non-gregorian-calendar-picker/jquery.calendars.persian'
     },
     shim: {
         'bootstrap': {
@@ -125,6 +125,33 @@ requirejs.config({
         'jqueryHammer' : { //
             deps: ['jquery', 'hammer'],
             exports: 'jqueryHammer'
+        },
+        'jqueryPluginMin': {
+            deps: [],
+        },
+        'jqueryCalendars': {
+            deps: ['jqueryPluginMin'],
+        },
+        'jqueryCalendarsPlus': {
+            deps: ['jqueryPluginMin', 'jqueryCalendars'],
+        },
+        'jqueryPlugin': {
+            deps: ['jqueryPluginMin', 'jqueryCalendars', 'jqueryCalendarsPlus'],
+        },
+        'jqueryCalendarsPicker': {
+            deps: ['jqueryPluginMin', 'jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin'],
+        },
+        'jqueryCalendarsCoptic': {
+            deps: ['jqueryPluginMin', 'jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsEthiopian': {
+            deps: ['jqueryPluginMin', 'jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsIslamic': {
+            deps: ['jqueryPluginMin', 'jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsPersian': {
+            deps: ['jqueryPluginMin', 'jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
         }
     }
 });
