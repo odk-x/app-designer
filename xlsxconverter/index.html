@@ -475,25 +475,12 @@ function handleDragover(e) {
     e.dataTransfer.dropEffect = 'copy';
 }
 
-function convertAll(e) {
-    console.dir(e.target); 
-    console.log(e.target); 
-    let files = e.target.files;
-    for (let i = 0; i < files.length; i++) {
-        console.log(files[i].name); 
-        console.log(files[i].webkitRelativePath); 
-    }
-    // let files = e.target.files; 
-    // for (let i = 0; i < e.target.webkitdirectory.length; i++) {
-    //     console.log(e.target.webkitdirectory[i].name); 
-    // }
-}
 
 window.onload = function() {
 	var browse = document.getElementById("browsefile");
 	var drop = document.getElementById('drop');
-	browse.addEventListener('click', convertAll, false);
-	browse.addEventListener('change', convertAll, false);
+	browse.addEventListener('click', handleFileChooserClick, false);
+	browse.addEventListener('change', handleFileSelect, false);
 	drop.addEventListener('dragover', handleDragover, false);
 	drop.addEventListener('drop', handleDrop, false);
 	browse.disabled = false;
@@ -507,16 +494,12 @@ window.onload = function() {
     <div id="drop">Drop an XLSX file here to convert to JSON.</div>
   </div>
   <div id="browse">
-    <!-- <p>Select an XLSX file from which to generate a <tt>formDef.json</tt> file</p> -->
-    <p>Select a folder from which to generate a <tt>formDef.json</tt> file</p>
-    <br>
-    <input class="input" type="file" id="browsefile" webkitdirectory="" directory="" multiple/>
+    Select an XLSX file from which to generate a <tt>formDef.json</tt> file<br/><input class="input" type="file" id="browsefile" disabled="true"/>
   </div>
   <div id="errors"></div>
   <div id="warnings"></div>
 
   <div class="panel">
-    <button class="save-button" onclick="convertAll();">Convert Folder Files</button>
     <button class="save-button" onclick="postFormDef();" id="write-formdef">Save to File System</button>
     <button class="save-button" onclick="handleSave();" id="save">Save</button>
     <p>Output (to be saved as <tt>formDef.json</tt>):</p>
