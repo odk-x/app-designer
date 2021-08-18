@@ -465,9 +465,9 @@ var XLSXConverter = {};
             "type": "string",
             "elementType": "date_month_and_year_only"
         },
-        "non_gregorian_calendar_picker": {
+        "nepali_calendar_picker": {
             "type": "string",
-            "elementType": "date_no_time"
+			"elementType": "nepali_calendar"
         }
     };
     var warnings = {
