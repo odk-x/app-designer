@@ -1,5 +1,31 @@
 {
   "xlsx": {
+    "properties": [
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "defaultViewType",
+        "type": "string",
+        "value": "LIST",
+        "_row_num": 2
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "detailViewFileName",
+        "type": "string",
+        "value": "config/tables/SkipLogic/html/SkipLogic_detail.html",
+        "_row_num": 3
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "listViewFileName",
+        "type": "string",
+        "value": "config/tables/SkipLogic/html/SkipLogic_list.html",
+        "_row_num": 4
+      }
+    ],
     "settings": [
       {
         "setting_name": "form_id",
@@ -1659,7 +1685,14 @@
         "_aspect": "default",
         "_key": "defaultViewType",
         "_type": "string",
-        "_value": "SPREADSHEET"
+        "_value": "LIST"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "detailViewFileName",
+        "_type": "string",
+        "_value": "config/tables/SkipLogic/html/SkipLogic_detail.html"
       },
       {
         "_partition": "Table",
@@ -1667,6 +1700,13 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":\"Skip Logic Example Form\"}"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "listViewFileName",
+        "_type": "string",
+        "_value": "config/tables/SkipLogic/html/SkipLogic_list.html"
       }
     ]
   }
