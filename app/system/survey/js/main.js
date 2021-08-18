@@ -68,6 +68,7 @@ requirejs.config({
         jqueryCalendarsCoptic: 'libs/non-gregorian-calendar-picker/jquery.calendars.coptic',
         jqueryCalendarsEthiopian: 'libs/non-gregorian-calendar-picker/jquery.calendars.ethiopian',
         jqueryCalendarsIslamic: 'libs/non-gregorian-calendar-picker/jquery.calendars.islamic',
+        jqueryCalendarsNepali: 'libs/non-gregorian-calendar-picker/jquery.calendars.nepali',
         jqueryCalendarsPersian: 'libs/non-gregorian-calendar-picker/jquery.calendars.persian'
     },
     shim: {
@@ -148,6 +149,9 @@ requirejs.config({
             deps: ['jqueryPluginMin', 'jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
         },
         'jqueryCalendarsIslamic': {
+            deps: ['jqueryPluginMin', 'jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsNepali': {
             deps: ['jqueryPluginMin', 'jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
         },
         'jqueryCalendarsPersian': {
