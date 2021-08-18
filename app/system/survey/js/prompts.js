@@ -1,13 +1,13 @@
 /**
  * All  the standard prompts available to a form designer.
  */
-define(['database','opendatakit','controller','backbone','moment','formulaFunctions','handlebars','promptTypes','jquery','underscore','d3','handlebarsHelpers','combodate','jqueryPluginMin','jqueryCalendars','jqueryCalendarsPlus','jqueryPlugin','jqueryCalendarsPicker','jqueryCalendarsCoptic', 'jqueryCalendarsEthiopian', 'jqueryCalendarsIslamic', 'jqueryCalendarsPersian'],
-function(database,  opendatakit,  controller,  Backbone,  moment,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,           d3,   _hh, jqueryPluginMin, jqueryCalendars, jqueryCalendarsPlus, jqueryPlugin, jqueryCalendarsPicker, jqueryCalendarsCoptic, jqueryCalendarsEthiopian, jqueryCalendarsIslamic, jqueryCalendarsPersian) {
+define(['database','opendatakit','controller','backbone','moment','formulaFunctions','handlebars','promptTypes','jquery','underscore','d3','handlebarsHelpers','combodate','jqueryPluginMin','jqueryCalendars','jqueryCalendarsPlus','jqueryPlugin','jqueryCalendarsPicker','jqueryCalendarsCoptic', 'jqueryCalendarsEthiopian', 'jqueryCalendarsIslamic', 'jqueryCalendarsNepali', 'jqueryCalendarsPersian'],
+function(database,  opendatakit,  controller,  Backbone,  moment,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,           d3,   _hh, jqueryPluginMin, jqueryCalendars, jqueryCalendarsPlus, jqueryPlugin, jqueryCalendarsPicker, jqueryCalendarsCoptic, jqueryCalendarsEthiopian, jqueryCalendarsIslamic, jqueryCalendarsNepali, jqueryCalendarsPersian) {
 'use strict';
 /* global odkCommon, odkSurvey */
 verifyLoad('prompts',
-    ['database','opendatakit','controller','backbone','moment', 'formulaFunctions','handlebars','promptTypes','jquery','underscore','d3', 'handlebarsHelpers','combodate','jqueryPluginMin','jqueryCalendars','jqueryCalendarsPlus','jqueryPlugin','jqueryCalendarsPicker','jqueryCalendarsCoptic', 'jqueryCalendarsEthiopian', 'jqueryCalendarsIslamic', 'jqueryCalendarsPersian'],
-    [ database,  opendatakit,  controller,  Backbone,  moment,   formulaFunctions,  Handlebars,  promptTypes,  $,       _,           d3,   _hh,           $.fn.combodate,  jqueryPluginMin, jqueryCalendars, jqueryCalendarsPlus, jqueryPlugin, jqueryCalendarsPicker, jqueryCalendarsCoptic, jqueryCalendarsEthiopian, jqueryCalendarsIslamic, jqueryCalendarsPersian] );
+    ['database','opendatakit','controller','backbone','moment', 'formulaFunctions','handlebars','promptTypes','jquery','underscore','d3', 'handlebarsHelpers','combodate','jqueryPluginMin','jqueryCalendars','jqueryCalendarsPlus','jqueryPlugin','jqueryCalendarsPicker','jqueryCalendarsCoptic', 'jqueryCalendarsEthiopian', 'jqueryCalendarsIslamic', 'jqueryCalendarsNepali', 'jqueryCalendarsPersian'],
+    [ database,  opendatakit,  controller,  Backbone,  moment,   formulaFunctions,  Handlebars,  promptTypes,  $,       _,           d3,   _hh,           $.fn.combodate,  jqueryPluginMin, jqueryCalendars, jqueryCalendarsPlus, jqueryPlugin, jqueryCalendarsPicker, jqueryCalendarsCoptic, jqueryCalendarsEthiopian, jqueryCalendarsIslamic, jqueryCalendarsNepali, jqueryCalendarsPersian] );
 
 promptTypes.base = Backbone.View.extend({
     className: "odk-base",
@@ -2227,9 +2227,122 @@ promptTypes.date_month_and_year_only = promptTypes.date_no_time.extend({
     timeTemplate: "YYYY / MM"
 });
 
-promptTypes.non_gregorian_calendar_picker = promptTypes.input_type.extend({
+promptTypes.non_gregorian_calendar = promptTypes.base_date.extend({
     type: "string",
-    templatePath: "templates/non_gregorian_calendar_picker.handlebars"
+    templatePath: "templates/datetimepicker.handlebars",
+
+    configureRenderContext: function(ctxt) {
+        var that = this;
+        var renderContext = that.renderContext;
+        if(that.detectNativeDatePicker()){
+            renderContext.inputAttributes.type = that.type;
+            that.usePicker = false;
+            ctxt.success();
+        } else {
+            var dateValue = that.getValue();
+            var userTimeFormat  = renderContext.inputAttributes.timeFormat;
+            if (userTimeFormat !== null && userTimeFormat !== undefined) {
+                that.timeFormat = userTimeFormat;
+            }
+            if (dateValue !== undefined && dateValue !== null) {
+                renderContext.value = dateValue;
+            }
+            ctxt.success();
+        }
+    },
+
+    modification: function(evt) {
+        var that = this;
+        odkCommon.log('D',"prompts." + that.type + ".modification px: " + that.promptIdx);
+        if ( !that.insideAfterRender ) {
+            // var formattedDateValue = that.$('input').combodate('getValue', null); //initialising input to be combodate...turn input of handlebar template to template
+            var formattedDateValue = that.$('input').val();
+            var value = that.formatDBVal(formattedDateValue);
+
+            //
+            // we are using a date pop-up.  If an earlier action fails, we should not
+            // attempt to apply the state changes of this pop-up. Tolerate the loss
+            // of whatever the user tried to pick. They shouldn't move so fast.
+
+            var ctxt = that.controller.newContext(evt, that.type + ".modification");
+            that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+
+                odkCommon.log('D',"prompts." + that.type + ".modification: determine if reRendering ", "px: " + that.promptIdx);
+                var ref = that.getValue();
+
+                var rerender = false;
+                if ( ref === null || ref === undefined ) {
+                    rerender = ( value !== null && value !== undefined );
+                } else if ( value === null || value === undefined ) {
+                    rerender = ( ref !== null && ref !== undefined );
+                } else {
+                    rerender = !(that.sameValue(ref, value));
+                }
+
+                var renderContext = that.renderContext;
+                if ( value === undefined || value === null ) {
+                    renderContext.value = '';
+                } else {
+                    renderContext.value = formattedDateValue;
+                }
+
+                // track original value
+                var originalValue = that.getValue();
+                that.setValueDeferredChange(value);
+                renderContext.invalid = !that.validateValue();
+                if ( renderContext.invalid ) {
+                    value = originalValue;
+                    formattedDateValue = moment(value).format(that.timeFormat);
+                    // restore it...
+                    that.setValueDeferredChange(originalValue);
+                    rerender = true;
+                }
+
+                renderContext.value = formattedDateValue;
+                if ( rerender ) {
+                    odkCommon.log('D',"prompts." + that.type + ".modification: reRender", "px: " + that.promptIdx);
+                    that.reRender(ctxt);
+                }  else {
+                    // We are now done with this
+                    ctxt.success();
+                }
+            },
+            failure:function(m) {
+                odkCommon.log('D',"prompts." + that.type + ".modification -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+                ctxt.failure(m);
+            }}));
+        }
+    },
+});
+    
+promptTypes.nepali_calendar_picker = promptTypes.non_gregorian_calendar.extend({
+    afterRender: function() {
+        var that = this;
+        if(that.usePicker){
+            that.insideAfterRender = true;
+
+            if (that.dtp !== null && that.dtp !== undefined) {
+                that.dtp.destroy();
+            }
+
+            that.$('input').calendarsPicker({calendar: $.calendars.instance('nepali'), dateFormat: 'yyyy/mm/dd'});
+
+            var inputElement = that.$('input');
+            that.dtp = inputElement.data('DateTimePicker');
+
+            that.insideAfterRender = false;
+        }
+    },
+    
+    formatDBVal: function(formattedDateValue) {
+        var outputValue = null;
+        if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
+            var julianDate = $.calendars.instance('nepali').parseDate('yyyy/mm/dd', formattedDateValue).toJD();
+            var gregorianDate = $.calendars.instance('gregorian').fromJD(julianDate);
+            outputValue = gregorianDate.formatDate('yyyy/mm/dd');
+        }
+        return outputValue;
+    },
 });
 /**
  * Media is an abstract object used as a base for image/audio/video
