@@ -569,6 +569,10 @@ return {
                 return moment(value).format('MM');
             } else if ( jsonType.elementType === 'date_month_and_year_only' ) {
                 return moment(value).format('YYYY/MM');
+            } else if ( jsonType.elementType === 'nepali_calendar' ) {
+                var julianDate = $.calendars.instance('gregorian').parseDate('yyyy/mm/dd', value).toJD();
+                var nepaliDate = $.calendars.instance('nepali').fromJD(julianDate)
+                return nepaliDate.formatDate('yyyy/mm/dd');
             } else {
                 return value;
             }
