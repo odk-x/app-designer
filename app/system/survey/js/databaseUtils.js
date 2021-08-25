@@ -505,6 +505,12 @@ return {
         if ( value === "" ) {
             throw new Error("unexpected empty (zero-length string) value for field");
         }
+        
+        function convertGregorianDateToTargetDate(value, targetCalendar) {
+            var julianDate = $.calendars.instance('gregorian').parseDate('yyyy/mm/dd', value).toJD();
+            var targetDate = $.calendars.instance(targetCalendar).fromJD(julianDate);
+            return targetDate.formatDate('yyyy/mm/dd');
+        }
 
         if ( jsonType.type === 'array' ) {
             // TODO: ensure object spec conformance on read?
@@ -569,54 +575,30 @@ return {
                 return moment(value).format('MM');
             } else if ( jsonType.elementType === 'date_month_and_year_only' ) {
                 return moment(value).format('YYYY/MM');
-            } else if ( jsonType.elementType === 'coptic_calendar' ) {
-                var julianDate = $.calendars.instance('gregorian').parseDate('yyyy/mm/dd', value).toJD();
-                var copticDate = $.calendars.instance('coptic').fromJD(julianDate)
-                return copticDate.formatDate('yyyy/mm/dd');
+            }else if ( jsonType.elementType === 'coptic_calendar' ) {
+                return convertGregorianDateToTargetDate(value, 'coptic');
             } else if ( jsonType.elementType === 'ethiopian_calendar' ) {
-                var julianDate = $.calendars.instance('gregorian').parseDate('yyyy/mm/dd', value).toJD();
-                var ethiopianDate = $.calendars.instance('ethiopian').fromJD(julianDate)
-                return ethiopianDate.formatDate('yyyy/mm/dd');
+                return convertGregorianDateToTargetDate(value, 'ethiopian');
             } else if ( jsonType.elementType === 'hebrew_calendar' ) {
-                var julianDate = $.calendars.instance('gregorian').parseDate('yyyy/mm/dd', value).toJD();
-                var hebrewDate = $.calendars.instance('hebrew').fromJD(julianDate)
-                return hebrewDate.formatDate('yyyy/mm/dd');
+                return convertGregorianDateToTargetDate(value, 'hebrew');
             } else if ( jsonType.elementType === 'islamic_calendar' ) {
-                var julianDate = $.calendars.instance('gregorian').parseDate('yyyy/mm/dd', value).toJD();
-                var islamicDate = $.calendars.instance('islamic').fromJD(julianDate)
-                return islamicDate.formatDate('yyyy/mm/dd');
+                return convertGregorianDateToTargetDate(value, 'islamic');
             } else if ( jsonType.elementType === 'julian_calendar' ) {
-                var julianDate = $.calendars.instance('gregorian').parseDate('yyyy/mm/dd', value).toJD();
-                var julianDate = $.calendars.instance('julian').fromJD(julianDate)
-                return julianDate.formatDate('yyyy/mm/dd');
+                return convertGregorianDateToTargetDate(value, 'julian');
             } else if ( jsonType.elementType === 'mayan_calendar' ) {
-                var julianDate = $.calendars.instance('gregorian').parseDate('yyyy/mm/dd', value).toJD();
-                var mayanDate = $.calendars.instance('mayan').fromJD(julianDate)
-                return mayanDate.formatDate('yyyy/mm/dd');
+                return convertGregorianDateToTargetDate(value, 'mayan');
             } else if ( jsonType.elementType === 'nanakshahi_calendar' ) {
-                var julianDate = $.calendars.instance('gregorian').parseDate('yyyy/mm/dd', value).toJD();
-                var nanakshahiDate = $.calendars.instance('nanakshahi').fromJD(julianDate)
-                return nanakshahiDate.formatDate('yyyy/mm/dd');
+                return convertGregorianDateToTargetDate(value, 'nanakshahi');
             } else if ( jsonType.elementType === 'nepali_calendar' ) {
-                var julianDate = $.calendars.instance('gregorian').parseDate('yyyy/mm/dd', value).toJD();
-                var nepaliDate = $.calendars.instance('nepali').fromJD(julianDate)
-                return nepaliDate.formatDate('yyyy/mm/dd');
+                return convertGregorianDateToTargetDate(value, 'nepali');
             } else if ( jsonType.elementType === 'persian_calendar' ) {
-                var julianDate = $.calendars.instance('gregorian').parseDate('yyyy/mm/dd', value).toJD();
-                var persianDate = $.calendars.instance('persian').fromJD(julianDate)
-                return persianDate.formatDate('yyyy/mm/dd');
+                return convertGregorianDateToTargetDate(value, 'persian');
             } else if ( jsonType.elementType === 'taiwan_calendar' ) {
-                var julianDate = $.calendars.instance('gregorian').parseDate('yyyy/mm/dd', value).toJD();
-                var taiwanDate = $.calendars.instance('taiwan').fromJD(julianDate)
-                return taiwanDate.formatDate('yyyy/mm/dd');
+                return convertGregorianDateToTargetDate(value, 'taiwan');
             } else if ( jsonType.elementType === 'thai_calendar' ) {
-                var julianDate = $.calendars.instance('gregorian').parseDate('yyyy/mm/dd', value).toJD();
-                var thaiDate = $.calendars.instance('thai').fromJD(julianDate)
-                return thaiDate.formatDate('yyyy/mm/dd');
+                return convertGregorianDateToTargetDate(value, 'thai');
             } else if ( jsonType.elementType === 'ummalqura_calendar' ) {
-                var julianDate = $.calendars.instance('gregorian').parseDate('yyyy/mm/dd', value).toJD();
-                var ummalquraDate = $.calendars.instance('ummalqura').fromJD(julianDate)
-                return ummalquraDate.formatDate('yyyy/mm/dd');
+                return convertGregorianDateToTargetDate(value, 'ummalqura');
             } else {
                 return value;
             }
