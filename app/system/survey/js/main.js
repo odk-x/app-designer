@@ -59,7 +59,23 @@ requirejs.config({
         mockSchema: 'js/mock/mockSchema',
         odkDataIf: 'js/mock/odkDataIf',
         hammer : 'libs/hammer.min',
-        jqueryHammer : 'libs/jquery.hammer'
+        jqueryHammer : 'libs/jquery.hammer',
+        jqueryCalendars: 'libs/non-gregorian-calendar-picker/jquery.calendars',
+        jqueryCalendarsPlus: 'libs/non-gregorian-calendar-picker/jquery.calendars.plus',
+        jqueryPlugin: 'libs/non-gregorian-calendar-picker/jquery.plugin',
+        jqueryCalendarsPicker: 'libs/non-gregorian-calendar-picker/jquery.calendars.picker',
+        jqueryCalendarsCoptic: 'libs/non-gregorian-calendar-picker/jquery.calendars.coptic',
+        jqueryCalendarsEthiopian: 'libs/non-gregorian-calendar-picker/jquery.calendars.ethiopian',
+        jqueryCalendarsHebrew: 'libs/non-gregorian-calendar-picker/jquery.calendars.hebrew',
+        jqueryCalendarsIslamic: 'libs/non-gregorian-calendar-picker/jquery.calendars.islamic',
+        jqueryCalendarsJulian: 'libs/non-gregorian-calendar-picker/jquery.calendars.julian',
+        jqueryCalendarsMayan: 'libs/non-gregorian-calendar-picker/jquery.calendars.mayan',
+        jqueryCalendarsNanakshahi: 'libs/non-gregorian-calendar-picker/jquery.calendars.nanakshahi',
+        jqueryCalendarsNepali: 'libs/non-gregorian-calendar-picker/jquery.calendars.nepali',
+        jqueryCalendarsPersian: 'libs/non-gregorian-calendar-picker/jquery.calendars.persian',
+        jqueryCalendarsTaiwan: 'libs/non-gregorian-calendar-picker/jquery.calendars.taiwan',
+        jqueryCalendarsThai: 'libs/non-gregorian-calendar-picker/jquery.calendars.thai',
+        jqueryCalendarsUmmalqura: 'libs/non-gregorian-calendar-picker/jquery.calendars.ummalqura'
     },
     shim: {
         'bootstrap': {
@@ -116,6 +132,54 @@ requirejs.config({
         'jqueryHammer' : { //
             deps: ['jquery', 'hammer'],
             exports: 'jqueryHammer'
+        },
+        'jqueryCalendars': {
+            deps: [],
+        },
+        'jqueryCalendarsPlus': {
+            deps: ['jqueryCalendars'],
+        },
+        'jqueryPlugin': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus'],
+        },
+        'jqueryCalendarsPicker': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin'],
+        },
+        'jqueryCalendarsCoptic': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsEthiopian': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsHebrew': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsIslamic': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsJulian': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsMayan': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsNanakshahi': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsNepali': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsPersian': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsTaiwan': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsThai': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsUmmalqura': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
         }
     }
 });

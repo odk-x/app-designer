@@ -464,6 +464,54 @@ var XLSXConverter = {};
         "date_month_and_year_only": {
             "type": "string",
             "elementType": "date_month_and_year_only"
+        },
+        "coptic_calendar_picker": {
+            "type": "string",
+			"elementType": "coptic_calendar"
+        },
+        "ethiopian_calendar_picker": {
+            "type": "string",
+			"elementType": "ethiopian_calendar"
+        },
+        "hebrew_calendar_picker": {
+            "type": "string",
+			"elementType": "hebrew_calendar"
+        },
+        "islamic_calendar_picker": {
+            "type": "string",
+			"elementType": "islamic_calendar"
+        },
+        "julian_calendar_picker": {
+            "type": "string",
+			"elementType": "julian_calendar"
+        },
+        "mayan_calendar_picker": {
+            "type": "string",
+			"elementType": "mayan_calendar"
+        },
+        "nanakshahi_calendar_picker": {
+            "type": "string",
+			"elementType": "nanakshahi_calendar"
+        },
+        "nepali_calendar_picker": {
+            "type": "string",
+			"elementType": "nepali_calendar"
+        },
+        "persian_calendar_picker": {
+            "type": "string",
+			"elementType": "persian_calendar"
+        },
+        "taiwan_calendar_picker": {
+            "type": "string",
+			"elementType": "taiwan_calendar"
+        },
+        "thai_calendar_picker": {
+            "type": "string",
+			"elementType": "thai_calendar"
+        },
+        "ummalqura_calendar_picker": {
+            "type": "string",
+			"elementType": "ummalqura_calendar"
         }
     };
     var warnings = {
