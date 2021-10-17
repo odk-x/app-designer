@@ -39,27 +39,43 @@ requirejs.config({
         // odkSurveyStateManagement.js -- stub directly loaded
         // odkTables.js -- stub directly loaded
         // functionality
-        screens: "survey/js/screens",
-        prompts: "survey/js/prompts",
-        database: "survey/js/database",
-        databaseUtils: "survey/js/databaseUtils",
-        controller: "survey/js/controller",
-        builder: "survey/js/builder",
-        screenManager: "survey/js/screenManager",
-        parsequery: "survey/js/parsequery",
-        opendatakit: "survey/js/opendatakit",
-        handlebarsHelpers: "survey/js/handlebarsHelpers",
-        formulaFunctions: "survey/js/formulaFunctions",
-        jqueryCsv: "libs/jquery.csv-0.8.3",
-        XRegExp: "libs/XRegExp-All-4.4.0",
-        d3: "libs/d3-amd/d3",
-        mockDbif: "js/mock/mockDbif",
-        mockImpl: "js/mock/mockImpl",
-        mockUtils: "js/mock/mockUtils",
-        mockSchema: "js/mock/mockSchema",
-        odkDataIf: "js/mock/odkDataIf",
-        hammer: "libs/hammer.min",
-        jqueryHammer: "libs/jquery.hammer",
+        screens : 'survey/js/screens',
+        prompts : 'survey/js/prompts',
+        database : 'survey/js/database',
+        databaseUtils : 'survey/js/databaseUtils',
+        controller : 'survey/js/controller',
+        builder : 'survey/js/builder',
+        screenManager : 'survey/js/screenManager',
+        parsequery : 'survey/js/parsequery',
+        opendatakit : 'survey/js/opendatakit',
+        handlebarsHelpers : 'survey/js/handlebarsHelpers',
+        formulaFunctions : 'survey/js/formulaFunctions',
+        jqueryCsv : 'libs/jquery.csv-0.8.3',
+        XRegExp : 'libs/XRegExp-All-4.4.0',
+        d3 : 'libs/d3-amd/d3',
+        mockDbif: 'js/mock/mockDbif',
+        mockImpl: 'js/mock/mockImpl',
+        mockUtils: 'js/mock/mockUtils',
+        mockSchema: 'js/mock/mockSchema',
+        odkDataIf: 'js/mock/odkDataIf',
+        hammer : 'libs/hammer.min',
+        jqueryHammer : 'libs/jquery.hammer',
+        jqueryCalendars: 'libs/non-gregorian-calendar-picker/jquery.calendars',
+        jqueryCalendarsPlus: 'libs/non-gregorian-calendar-picker/jquery.calendars.plus',
+        jqueryPlugin: 'libs/non-gregorian-calendar-picker/jquery.plugin',
+        jqueryCalendarsPicker: 'libs/non-gregorian-calendar-picker/jquery.calendars.picker',
+        jqueryCalendarsCoptic: 'libs/non-gregorian-calendar-picker/jquery.calendars.coptic',
+        jqueryCalendarsEthiopian: 'libs/non-gregorian-calendar-picker/jquery.calendars.ethiopian',
+        jqueryCalendarsHebrew: 'libs/non-gregorian-calendar-picker/jquery.calendars.hebrew',
+        jqueryCalendarsIslamic: 'libs/non-gregorian-calendar-picker/jquery.calendars.islamic',
+        jqueryCalendarsJulian: 'libs/non-gregorian-calendar-picker/jquery.calendars.julian',
+        jqueryCalendarsMayan: 'libs/non-gregorian-calendar-picker/jquery.calendars.mayan',
+        jqueryCalendarsNanakshahi: 'libs/non-gregorian-calendar-picker/jquery.calendars.nanakshahi',
+        jqueryCalendarsNepali: 'libs/non-gregorian-calendar-picker/jquery.calendars.nepali',
+        jqueryCalendarsPersian: 'libs/non-gregorian-calendar-picker/jquery.calendars.persian',
+        jqueryCalendarsTaiwan: 'libs/non-gregorian-calendar-picker/jquery.calendars.taiwan',
+        jqueryCalendarsThai: 'libs/non-gregorian-calendar-picker/jquery.calendars.thai',
+        jqueryCalendarsUmmalqura: 'libs/non-gregorian-calendar-picker/jquery.calendars.ummalqura'
     },
     shim: {
         bootstrap: {
@@ -114,12 +130,59 @@ requirejs.config({
             deps: [],
             exports: "Hammer",
         },
-        jqueryHammer: {
-            //
-            deps: ["jquery", "hammer"],
-            exports: "jqueryHammer",
+        'jqueryHammer' : { 
+            deps: ['jquery', 'hammer'],
+            exports: 'jqueryHammer'
         },
-    },
+        'jqueryCalendars': {
+            deps: [],
+        },
+        'jqueryCalendarsPlus': {
+            deps: ['jqueryCalendars'],
+        },
+        'jqueryPlugin': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus'],
+        },
+        'jqueryCalendarsPicker': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin'],
+        },
+        'jqueryCalendarsCoptic': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsEthiopian': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsHebrew': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsIslamic': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsJulian': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsMayan': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsNanakshahi': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsNepali': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsPersian': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsTaiwan': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsThai': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsUmmalqura': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        }
+    }
 });
 
 /**
