@@ -12,27 +12,27 @@
  * interpretation of the formDef.json for the form).
  */
 requirejs.config({
-    baseUrl: odkCommon.getBaseUrl() + 'system',
+    baseUrl: odkCommon.getBaseUrl() + "system",
     waitSeconds: 45,
     paths: {
         // third-party libraries we depend upon
-        jquery : 'libs/jquery-3.4.1',
-		jquerymigrate: 'libs/jquery-migrate-3.0.0',
-        bootstrap : 'libs/bootstrap-3.3.7-dist/js/bootstrap.min',
-        moment : 'libs/eonasdan/moment',
-        combodate : 'libs/combodate/js/combodate',
-        spinner : 'libs/spinner/waitMe.min',
-        backbone : 'libs/backbone-min.1.4.0',
-        handlebars : 'libs/handlebars-v4.1.2',
-        underscore : 'libs/underscore.1.8.3',
-        text : 'libs/text.2.0.15',
+        jquery: "libs/jquery-3.6.0",
+        jquerymigrate: "libs/jquery-migrate-3.3.2",
+        bootstrap: "libs/bootstrap-3.3.7-dist/js/bootstrap.min",
+        moment: "libs/eonasdan/moment",
+        combodate: "libs/combodate/js/combodate",
+        spinner: "libs/spinner/waitMe.min",
+        backbone: "libs/backbone-min.1.4.0",
+        handlebars: "libs/handlebars-v4.7.7",
+        underscore: "libs/underscore.1.13.1",
+        text: "libs/text.2.0.16",
         //mobiscroll : 'libs/mobiscroll-2.5.4/js/combined.min',
         // directory paths for resources
-        img : 'img',
-        templates : 'survey/templates',
+        img: "img",
+        templates: "survey/templates",
         // top-level objects
-        screenTypes : 'survey/js/screenTypes',
-        promptTypes : 'survey/js/promptTypes',
+        screenTypes: "survey/js/screenTypes",
+        promptTypes: "survey/js/promptTypes",
         // odkCommon.js -- stub directly loaded
         // odkData.js -- stub directly loaded
         // odkSurvey.js -- stub directly loaded
@@ -51,7 +51,7 @@ requirejs.config({
         handlebarsHelpers : 'survey/js/handlebarsHelpers',
         formulaFunctions : 'survey/js/formulaFunctions',
         jqueryCsv : 'libs/jquery.csv-0.8.3',
-        XRegExp : 'libs/XRegExp-All-3.0.0-pre-2014-12-24',
+        XRegExp : 'libs/XRegExp-All-4.4.0',
         d3 : 'libs/d3-amd/d3',
         mockDbif: 'js/mock/mockDbif',
         mockImpl: 'js/mock/mockImpl',
@@ -59,63 +59,128 @@ requirejs.config({
         mockSchema: 'js/mock/mockSchema',
         odkDataIf: 'js/mock/odkDataIf',
         hammer : 'libs/hammer.min',
-        jqueryHammer : 'libs/jquery.hammer'
+        jqueryHammer : 'libs/jquery.hammer',
+        jqueryCalendars: 'libs/non-gregorian-calendar-picker/jquery.calendars',
+        jqueryCalendarsPlus: 'libs/non-gregorian-calendar-picker/jquery.calendars.plus',
+        jqueryPlugin: 'libs/non-gregorian-calendar-picker/jquery.plugin',
+        jqueryCalendarsPicker: 'libs/non-gregorian-calendar-picker/jquery.calendars.picker',
+        jqueryCalendarsCoptic: 'libs/non-gregorian-calendar-picker/jquery.calendars.coptic',
+        jqueryCalendarsEthiopian: 'libs/non-gregorian-calendar-picker/jquery.calendars.ethiopian',
+        jqueryCalendarsHebrew: 'libs/non-gregorian-calendar-picker/jquery.calendars.hebrew',
+        jqueryCalendarsIslamic: 'libs/non-gregorian-calendar-picker/jquery.calendars.islamic',
+        jqueryCalendarsJulian: 'libs/non-gregorian-calendar-picker/jquery.calendars.julian',
+        jqueryCalendarsMayan: 'libs/non-gregorian-calendar-picker/jquery.calendars.mayan',
+        jqueryCalendarsNanakshahi: 'libs/non-gregorian-calendar-picker/jquery.calendars.nanakshahi',
+        jqueryCalendarsNepali: 'libs/non-gregorian-calendar-picker/jquery.calendars.nepali',
+        jqueryCalendarsPersian: 'libs/non-gregorian-calendar-picker/jquery.calendars.persian',
+        jqueryCalendarsTaiwan: 'libs/non-gregorian-calendar-picker/jquery.calendars.taiwan',
+        jqueryCalendarsThai: 'libs/non-gregorian-calendar-picker/jquery.calendars.thai',
+        jqueryCalendarsUmmalqura: 'libs/non-gregorian-calendar-picker/jquery.calendars.ummalqura'
     },
     shim: {
-        'bootstrap': {
-            deps: ['jquery'],
-            exports: '$.fn'
+        bootstrap: {
+            deps: ["jquery"],
+            exports: "$.fn",
         },
-        'moment': {
+        moment: {
             deps: [],
         },
-        'combodate': {
-            deps: ['jquery', 'moment'],
-            exports: '$.fn.combodate'
+        combodate: {
+            deps: ["jquery", "moment"],
+            exports: "$.fn.combodate",
         },
-        'spinner': {
-            deps: ['jquery'],
-            exports: '$.fn.waitMe'
+        spinner: {
+            deps: ["jquery"],
+            exports: "$.fn.waitMe",
         },
-        'underscore': {
+        underscore: {
             //These script dependencies should be loaded before loading
             //underscore.js
             deps: [],
             //Once loaded, use the global '_' as the
             //module value.
-            exports: '_'
+            exports: "_",
         },
-        'backbone': {
+        backbone: {
             //These script dependencies should be loaded before loading
             //backbone.js
-            deps: ['underscore', 'jquery', 'jquerymigrate'],
+            deps: ["underscore", "jquery", "jquerymigrate"],
             //Once loaded, use the global 'Backbone' as the
             //module value.
-            exports: 'Backbone'
+            exports: "Backbone",
         },
-        'handlebars': {
+        handlebars: {
             //These script dependencies should be loaded before loading
             //handlebars.js
-            deps: ['jquery'],
+            deps: ["jquery"],
             //Once loaded, use the global 'Handlebars' as the
             //module value.
-            exports: 'Handlebars'
+            exports: "Handlebars",
         },
-        'jqueryCsv' : {
-            deps: ['jquery'],
-            exports: '$.csv'
+        jqueryCsv: {
+            deps: ["jquery"],
+            exports: "$.csv",
         },
-        'd3' : {
+        d3: {
             deps: [],
-            exports: 'd3'
+            exports: "d3",
         },
-        'hammer' : { // to use swipe on pages/
+        hammer: {
+            // to use swipe on pages/
             deps: [],
-            exports: 'Hammer'
+            exports: "Hammer",
         },
-        'jqueryHammer' : { //
+        'jqueryHammer' : { 
             deps: ['jquery', 'hammer'],
             exports: 'jqueryHammer'
+        },
+        'jqueryCalendars': {
+            deps: [],
+        },
+        'jqueryCalendarsPlus': {
+            deps: ['jqueryCalendars'],
+        },
+        'jqueryPlugin': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus'],
+        },
+        'jqueryCalendarsPicker': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin'],
+        },
+        'jqueryCalendarsCoptic': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsEthiopian': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsHebrew': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsIslamic': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsJulian': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsMayan': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsNanakshahi': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsNepali': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsPersian': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsTaiwan': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsThai': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
+        },
+        'jqueryCalendarsUmmalqura': {
+            deps: ['jqueryCalendars', 'jqueryCalendarsPlus', 'jqueryPlugin', 'jqueryCalendarsPicker'],
         }
     }
 });
@@ -125,8 +190,8 @@ requirejs.config({
  * re-draw of the current screen when returning from a linked table (sub-form).
  */
 function redrawHook() {
-    'use strict';
-    require('controller').redrawHook();
+    "use strict";
+    require("controller").redrawHook();
 }
 
 /**
@@ -135,7 +200,7 @@ function redrawHook() {
  * place the following object into focus.
  */
 function odkLeaveField(theForm) {
-    'use strict';
+    "use strict";
     /* Tabbing advances through the fields
      * provided there are tabindex attributes on them.
      * But hitting Enter, Next or Go does not.
@@ -145,12 +210,12 @@ function odkLeaveField(theForm) {
      * The tabbing does not wrap, but we
      * will make Enter, Next or Go wrap.
      */
-    var $fields = $('body > * [tabindex]');
+    var $fields = $("body > * [tabindex]");
     var $form = $(theForm);
-    var $formField = $(theForm).find('* * [tabindex]').filter(':last');
+    var $formField = $(theForm).find("* * [tabindex]").filter(":last");
     var idxFound = null;
-    $fields.each(function(idx,domElement) {
-        if ( $formField.is(domElement) ) {
+    $fields.each(function (idx, domElement) {
+        if ($formField.is(domElement)) {
             idxFound = idx;
             return false;
         }
@@ -158,12 +223,12 @@ function odkLeaveField(theForm) {
     });
 
     var $next;
-    if ( idxFound !== null ) {
-        $next = $fields.eq(idxFound+1);
+    if (idxFound !== null) {
+        $next = $fields.eq(idxFound + 1);
     } else {
         $next = $fields.eq(0);
     }
-    if ( $next !== null && $next !== undefined ) {
+    if ($next !== null && $next !== undefined) {
         $next.focus();
     }
 }
@@ -173,120 +238,228 @@ function odkLeaveField(theForm) {
  * been loaded. If there is a circular dependency, it will
  * be null. If so, log the error.
  */
-function verifyLoad( prefix, alist, args ) {
-    'use strict';
+function verifyLoad(prefix, alist, args) {
+    "use strict";
     var i;
-    for ( i = 0 ; i < args.length ; ++i ) {
-        if ( args[i] === undefined || args[i] === null ) {
-            odkCommon.log('E',prefix + ' cyclic dependency prevented initialization of ' + alist[i]);
+    for (i = 0; i < args.length; ++i) {
+        if (args[i] === undefined || args[i] === null) {
+            odkCommon.log(
+                "E",
+                prefix +
+                    " cyclic dependency prevented initialization of " +
+                    alist[i]
+            );
         }
     }
 }
 
 // Load XRegExp very early so that it is available when
 // the JS stub implementation of odkCommon needs it.
-require(['jquery','XRegExp'],
-    function($, XRegExp) {
-        'use strict';
-        verifyLoad('main.require.jquery',
-            ['jquery','XRegExp'],
-            [$, XRegExp]);
+require(["jquery", "XRegExp"], function ($, XRegExp) {
+    "use strict";
+    verifyLoad("main.require.jquery", ["jquery", "XRegExp"], [$, XRegExp]);
 
-        odkCommon.log('I','main.require.jquery.loaded establish mobileinit action');
+    odkCommon.log(
+        "I",
+        "main.require.jquery.loaded establish mobileinit action"
+    );
 
-        require(['bootstrap','moment', 'odkDataIf'],
-            function(bootstrap, moment, odkDataIf) {
-                verifyLoad('main.require.bootstrap.moment',
-                    ['bootstrap','moment', 'odkDataIf'],
-                    [bootstrap,   moment, odkDataIf]);
-                odkCommon.log('I','main.require.bootstrap.moment.loaded establish mobileinit action');
+    require(["bootstrap", "moment", "odkDataIf"], function (
+        bootstrap,
+        moment,
+        odkDataIf
+    ) {
+        verifyLoad(
+            "main.require.bootstrap.moment",
+            ["bootstrap", "moment", "odkDataIf"],
+            [bootstrap, moment, odkDataIf]
+        );
+        odkCommon.log(
+            "I",
+            "main.require.bootstrap.moment.loaded establish mobileinit action"
+        );
 
-            // and launch the framework...
-            require([ 'spinner', 'databaseUtils', 'opendatakit', 'database', 'parsequery',
-                            'builder', 'controller', 'd3', 'jqueryCsv', 'combodate'],
-            function(spinner,   databaseUtils, opendatakit,   database,  parsequery,
-                             builder,   controller,   d3,   jqueryCsv) {
-                verifyLoad('main.require.framework.loaded',
-                    ['combodate', 'spinner', 'databaseUtils', 'opendatakit', 'database','parsequery',
-                            'builder', 'controller', 'd3', 'jqueryCsv'],
-                    [ $.fn.combodate,   spinner,  databaseUtils,  opendatakit,   database,  parsequery,
-                             builder,   controller,   d3,   jqueryCsv]);
+        // and launch the framework...
+        require([
+            "spinner",
+            "databaseUtils",
+            "opendatakit",
+            "database",
+            "parsequery",
+            "builder",
+            "controller",
+            "d3",
+            "jqueryCsv",
+            "combodate",
+        ], function (
+            spinner,
+            databaseUtils,
+            opendatakit,
+            database,
+            parsequery,
+            builder,
+            controller,
+            d3,
+            jqueryCsv
+        ) {
+            verifyLoad(
+                "main.require.framework.loaded",
+                [
+                    "combodate",
+                    "spinner",
+                    "databaseUtils",
+                    "opendatakit",
+                    "database",
+                    "parsequery",
+                    "builder",
+                    "controller",
+                    "d3",
+                    "jqueryCsv",
+                ],
+                [
+                    $.fn.combodate,
+                    spinner,
+                    databaseUtils,
+                    opendatakit,
+                    database,
+                    parsequery,
+                    builder,
+                    controller,
+                    d3,
+                    jqueryCsv,
+                ]
+            );
 
+            // define a function that waits until jquery mobile is initialized
+            // then calls changeUrlHash() to trigger loading and processing of
+            // the requested form.
 
-                // define a function that waits until jquery mobile is initialized
-                // then calls changeUrlHash() to trigger loading and processing of
-                // the requested form.
+            parsequery.initialize(controller, builder);
 
-                parsequery.initialize(controller,builder);
+            var ref = window.location.href;
+            var hashIdx = ref.indexOf("#");
+            var searchIdx = ref.indexOf("?");
+            var search = window.location.search;
+            var newRef = ref;
 
-                var ref = window.location.href;
-                var hashIdx = ref.indexOf("#");
-                var searchIdx = ref.indexOf("?");
-                var search = window.location.search;
-                var newRef = ref;
+            var isAndroid =
+                opendatakit.getPlatformInfo().container === "Android";
+            var testAndroidParsing = false;
+            var remapUrl = !isAndroid;
 
-                var isAndroid = (opendatakit.getPlatformInfo().container === "Android");
-                var testAndroidParsing = false;
-                var remapUrl = !isAndroid;
-
-                var kickOffProcessing = function() {
-                    var ctxt = controller.newStartContext();
-                    controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
-                        parsequery.changeUrlHash(ctxt);
-                    }}));
-                };
-                // TODO: figure out why jqMobile+Chrome adds an empty '?' search
-                // string to window.location.href   Code deals with that here.
-                // The ? catastrophically breaks Android 2.x
-                if ( remapUrl ) {
-                    if ( !(testAndroidParsing || isAndroid) ) {
-                        if ( searchIdx < 0 || (hashIdx > 0 && searchIdx > hashIdx) ) {
-                            // add it if it is missing
-                            if ( hashIdx < 0 ) {
-                                        newRef = ref + '?';
-                            } else if ( hashIdx > 0 ) {
-                                        newRef = ref.substring(0,hashIdx) + '?' + ref.substring(hashIdx,ref.length);
-                            }
-                            odkCommon.log('W','main.addEmptySearchTerm.reloadpage ref: ' + ref + ' newRef: ' + newRef);
-                            window.location.assign(newRef);
-                        } else if ( search !== undefined && search !== null && search.length > 0 ) {
-                            // remove the non-empty search string and replace with ?
-                            if ( hashIdx < 0 ) {
-                                newRef = ref + '?';
-                            } else if ( hashIdx > 0 ) {
-                                newRef = ref.substring(0,hashIdx) + '?' + ref.substring(hashIdx,ref.length);
-                            }
-                            odkCommon.log('W',"main.clearNonEmptySearchTerm.reloadpage ref: " + ref + ' newRef: ' + newRef);
-                            window.location.assign(newRef);
-                        } else {
-                            odkCommon.log('D','main.changeUrlHash ref: ' + ref);
-
-                            (kickOffProcessing)();
+            var kickOffProcessing = function () {
+                var ctxt = controller.newStartContext();
+                controller.enqueueTriggeringContext(
+                    $.extend({}, ctxt, {
+                        success: function () {
+                            parsequery.changeUrlHash(ctxt);
+                        },
+                    })
+                );
+            };
+            // TODO: figure out why jqMobile+Chrome adds an empty '?' search
+            // string to window.location.href   Code deals with that here.
+            // The ? catastrophically breaks Android 2.x
+            if (remapUrl) {
+                if (!(testAndroidParsing || isAndroid)) {
+                    if (searchIdx < 0 || (hashIdx > 0 && searchIdx > hashIdx)) {
+                        // add it if it is missing
+                        if (hashIdx < 0) {
+                            newRef = ref + "?";
+                        } else if (hashIdx > 0) {
+                            newRef =
+                                ref.substring(0, hashIdx) +
+                                "?" +
+                                ref.substring(hashIdx, ref.length);
                         }
-                    } else if ( searchIdx > 0 && (hashIdx < 0 || hashIdx > searchIdx) ) {
-                        // we have a '?' on the URL. Forcibly remove it.
-                        hashIdx = (hashIdx > 0) ? hashIdx : ref.length;
-                        newRef = ref.substring(0,searchIdx) + ref.substring(hashIdx,ref.length);
-                        odkCommon.log('W','main.removeUrlSearchTerm.reloadpage ref: ' + ref + ' newRef: ' + newRef );
+                        odkCommon.log(
+                            "W",
+                            "main.addEmptySearchTerm.reloadpage ref: " +
+                                ref +
+                                " newRef: " +
+                                newRef
+                        );
+                        window.location.assign(newRef);
+                    } else if (
+                        search !== undefined &&
+                        search !== null &&
+                        search.length > 0
+                    ) {
+                        // remove the non-empty search string and replace with ?
+                        if (hashIdx < 0) {
+                            newRef = ref + "?";
+                        } else if (hashIdx > 0) {
+                            newRef =
+                                ref.substring(0, hashIdx) +
+                                "?" +
+                                ref.substring(hashIdx, ref.length);
+                        }
+                        odkCommon.log(
+                            "W",
+                            "main.clearNonEmptySearchTerm.reloadpage ref: " +
+                                ref +
+                                " newRef: " +
+                                newRef
+                        );
                         window.location.assign(newRef);
                     } else {
-                        // no search term -- pass through
-                        odkCommon.log('D','main.changeUrlHash ref: ' + ref);
+                        odkCommon.log("D", "main.changeUrlHash ref: " + ref);
 
-                        (kickOffProcessing)();
+                        kickOffProcessing();
                     }
+                } else if (
+                    searchIdx > 0 &&
+                    (hashIdx < 0 || hashIdx > searchIdx)
+                ) {
+                    // we have a '?' on the URL. Forcibly remove it.
+                    hashIdx = hashIdx > 0 ? hashIdx : ref.length;
+                    newRef =
+                        ref.substring(0, searchIdx) +
+                        ref.substring(hashIdx, ref.length);
+                    odkCommon.log(
+                        "W",
+                        "main.removeUrlSearchTerm.reloadpage ref: " +
+                            ref +
+                            " newRef: " +
+                            newRef
+                    );
+                    window.location.assign(newRef);
                 } else {
-                    // don't care -- do whatever...
-                    odkCommon.log('D','main.simple.changeUrlHash ref: ' + ref);
+                    // no search term -- pass through
+                    odkCommon.log("D", "main.changeUrlHash ref: " + ref);
 
-                    (kickOffProcessing)();
+                    kickOffProcessing();
                 }
-            }, function(err) {
-                odkCommon.log('E','main.require.framework.errback: ' + err.requireType + ' modules: ' + err.requireModules.toString());
-            });
-    }, function(err) {
-        odkCommon.log('E','main.require.bootstrap.moment.errback: ' + err.requireType + ' modules: ' + err.requireModules.toString());
+            } else {
+                // don't care -- do whatever...
+                odkCommon.log("D", "main.simple.changeUrlHash ref: " + ref);
+
+                kickOffProcessing();
+            }
+        }, function (err) {
+            odkCommon.log(
+                "E",
+                "main.require.framework.errback: " +
+                    err.requireType +
+                    " modules: " +
+                    err.requireModules.toString()
+            );
+        });
+    }, function (err) {
+        odkCommon.log(
+            "E",
+            "main.require.bootstrap.moment.errback: " +
+                err.requireType +
+                " modules: " +
+                err.requireModules.toString()
+        );
     });
-}, function(err) {
-    odkCommon.log('E','main.require.jquery.errback: ' + err.requireType + ' modules: ' + err.requireModules.toString());
+}, function (err) {
+    odkCommon.log(
+        "E",
+        "main.require.jquery.errback: " +
+            err.requireType +
+            " modules: " +
+            err.requireModules.toString()
+    );
 });

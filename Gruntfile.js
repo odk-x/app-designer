@@ -50,10 +50,10 @@ var postHandler = function(req, res, next) {
 
 		var file;
         if (req.headers['content-type'] === 'application/octet-stream') {
-            var base64 = require('base64-stream');
+            var {Base64Decode} = require('base64-stream');
 
             file = fs.createWriteStream(path);
-            req.pipe(base64.decode()).pipe(file);
+            req.pipe(new Base64Decode()).pipe(file);
 
             file.on('error', function(err) {
                 res.write('error uploading the file');
@@ -519,7 +519,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
                  cwd: 'app' },
 				'.nomedia',
                 '**',
-                '!system/**',
+                'system/**',
 				'!data/**',
 				'!output/**',
                 '!**/~$*.xlsx');

@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link  rel='stylesheet' type='text/css'href='css/animate.css' />
 <link rel="stylesheet" type="text/css" href="css/style.css" />
-<script type="text/javascript" src="../app/system/libs/jquery-3.4.1.js"></script>
-<script type="text/javascript" src="../app/system/libs/jquery-migrate-3.0.0.js"></script>
+<script type="text/javascript" src="../app/system/libs/jquery-3.6.0.js"></script>
+<script type="text/javascript" src="../app/system/libs/jquery-migrate-3.3.2.js"></script>
   <script type="text/javascript" src="../app/system/js/odkCommon.js"></script>
   <script type="text/javascript" src="../app/system/js/odkData.js"></script>
   <script type="text/javascript" src="../app/system/survey/js/odkSurvey.js"></script>
@@ -81,7 +81,11 @@
 			transaction.executeSql('drop table if exists _table_definitions');
 		});
 	}, function(error) {
-		alert(String(error));
+		console.error(error)
+		if (error.code === 5) {
+			alert(`${error[Symbol.toStringTag]} - Database is empty.`);
+		}
+		//alert(String(error));
         var cw = document.getElementById('previewscreen').contentWindow;
         cw.location.reload();
 	}, function() {
