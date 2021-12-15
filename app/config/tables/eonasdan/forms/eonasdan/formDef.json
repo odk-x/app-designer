@@ -46,6 +46,26 @@
           "timeFormat": "HH:mm"
         },
         "_row_num": 5
+      },
+      {
+        "type": "ethiopian_calendar_picker",
+        "name": "example4",
+        "display": {
+          "prompt": {
+            "text": "Ethiopian Calendar"
+          }
+        },
+        "_row_num": 6
+      },
+      {
+        "type": "islamic_calendar_picker",
+        "name": "example5",
+        "display": {
+          "prompt": {
+            "text": "Islamic Calendar"
+          }
+        },
+        "_row_num": 7
       }
     ],
     "settings": [
@@ -206,6 +226,28 @@
         "type": "string",
         "elementType": "time",
         "elementKey": "example3"
+      },
+      "example4": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementType": "ethiopian_calendar",
+        "elementKey": "example4"
+      },
+      "example5": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementType": "islamic_calendar",
+        "elementKey": "example5"
       }
     },
     "section_names": [
@@ -285,12 +327,42 @@
             "promptIdx": 3
           },
           {
+            "type": "ethiopian_calendar_picker",
+            "name": "example4",
+            "display": {
+              "prompt": {
+                "text": "Ethiopian Calendar"
+              }
+            },
+            "_row_num": 6,
+            "__rowNum__": 5,
+            "_token_type": "prompt",
+            "_type": "ethiopian_calendar_picker",
+            "_branch_label_enclosing_screen": "survey/_screen6",
+            "promptIdx": 4
+          },
+          {
+            "type": "islamic_calendar_picker",
+            "name": "example5",
+            "display": {
+              "prompt": {
+                "text": "Islamic Calendar"
+              }
+            },
+            "_row_num": 7,
+            "__rowNum__": 6,
+            "_token_type": "prompt",
+            "_type": "islamic_calendar_picker",
+            "_branch_label_enclosing_screen": "survey/_screen7",
+            "promptIdx": 5
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 6,
-            "_branch_label_enclosing_screen": "survey/_screen6",
-            "promptIdx": 4
+            "_row_num": 8,
+            "_branch_label_enclosing_screen": "survey/_screen8",
+            "promptIdx": 6
           }
         ],
         "validation_tag_map": {
@@ -322,25 +394,37 @@
             "operationIdx": 3
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 6,
-            "operationIdx": 4
-          },
-          {
             "_row_num": 6,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 4
+          },
+          {
+            "_row_num": 7,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 5
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 8,
+            "operationIdx": 6
+          },
+          {
+            "_row_num": 8,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 5
+            "operationIdx": 7
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 6,
-            "operationIdx": 6
+            "_row_num": 8,
+            "operationIdx": 8
           }
         ],
         "branch_label_map": {
@@ -348,8 +432,10 @@
           "_screen3": 1,
           "_screen4": 2,
           "_screen5": 3,
-          "_contents": 5,
-          "_screen6": 5
+          "_screen6": 4,
+          "_screen7": 5,
+          "_contents": 7,
+          "_screen8": 7
         }
       },
       "initial": {
@@ -586,6 +672,34 @@
         "elementName": "example3",
         "elementSet": "data",
         "elementPath": "example3"
+      },
+      "example4": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementType": "ethiopian_calendar",
+        "elementKey": "example4",
+        "elementName": "example4",
+        "elementSet": "data",
+        "elementPath": "example4"
+      },
+      "example5": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementType": "islamic_calendar",
+        "elementKey": "example5",
+        "elementName": "example5",
+        "elementSet": "data",
+        "elementPath": "example5"
       },
       "_id": {
         "type": "string",

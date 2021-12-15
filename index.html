@@ -4,8 +4,8 @@
 <meta http-equiv="content-type" content="text/html; charset=us-ascii">
 <!-- <meta content='width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;' name='viewport' /> -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script type="text/javascript" src="../app/system/libs/jquery-3.4.1.js"></script>
-<script type="text/javascript" src="../app/system/libs/jquery-migrate-3.0.0.js"></script>
+<script type="text/javascript" src="app/system/libs/jquery-3.6.0.js"></script>
+<script type="text/javascript" src="app/system/libs/jquery-migrate-3.3.2.js"></script>
 <link rel='stylesheet' type='text/css'href='devEnv/css/animate.css' />
 <link rel="stylesheet" type="text/css" href="devEnv/css/style.css" />
   <script type="text/javascript">
@@ -54,13 +54,10 @@
 
 <body class="absolute">
   <noscript>This page requires javascript and a Chrome or WebKit browser</noscript>
-  <div class="topversion">ODK 2.1.8</div>
+  <div class="topversion">ODK-X 2.1.9</div>
   <ul class="tabs">
     <li>
       <button onclick="switchTab(event, 'tab1')" class="tab-link active">Preview</a>
-    </li>
-    <li>
-      <button onclick="switchTab(event, 'tab2')" class="tab-link">Customize</a>
     </li>
     <li>
       <button onclick="switchTab(event, 'tab3')" class="tab-link">XLSX Converter</a>
@@ -69,10 +66,13 @@
       <button onclick="switchTab(event, 'tab4')" class="tab-link">File Browser</a>
     </li>
     <li>
-      <button onclick="switchTab(event, 'tab5')" class="tab-link">Scan Form Designer</a>
-    </li>
-    <li>
       <button onclick="switchTab(event, 'tab6')" class="tab-link">QR Code Generator</a>
+    </li>   
+     <li>
+      <button onclick="switchTab(event, 'tab5')" class="tab-link" style="background-color: red">Scan Form Designer</a>
+    </li>    
+    <li>
+      <button onclick="switchTab(event, 'tab2')" class="tab-link" style="background-color: red">Customize</a>
     </li>
   </ul>
   <div class="content">

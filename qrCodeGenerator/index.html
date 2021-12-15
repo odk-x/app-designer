@@ -5,14 +5,19 @@
         <link rel="stylesheet" type="text/css" href="style.css" />
         <title></title>
 
-        <script type="text/javascript" src="../app/system/libs/jquery-3.2.1.js"></script>
+        <script type="text/javascript" src="../app/system/libs/jquery-3.4.1.js"></script>
         <script type="text/javascript" src="libs/davidshimjs-qrcodejs-a714bbe/qrcode.js"></script> 
         <script type="text/javascript" src="js/index.js"></script>
     </head>
 
     <body class="fullembedded" >
+        <div class="description">
+            <p>This tool generates a QR Code to log-in to the Server using the <a target="_blank" href="https://github.com/odk-x/services/releases/tag/2.1.7"> ODK-X Services</a> application. Navigate to Server setting in the Services app, click the QR Code icon at the top right corner to scan the generated QR Code.</p>
+        </div>
     <div>
         <div class="panel">
+            <p id="head-text">Enter your server URL, username and password below to generate the QR Code</p>
+
             <p>Enter the url:</p>
             <input type="url" class="field-style" id="odk-url"/>
 

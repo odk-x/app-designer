@@ -1,13 +1,13 @@
 /**
  * All  the standard prompts available to a form designer.
  */
-define(['database','opendatakit','controller','backbone','moment','formulaFunctions','handlebars','promptTypes','jquery','underscore','d3','handlebarsHelpers','combodate'],
-function(database,  opendatakit,  controller,  Backbone,  moment,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,           d3,   _hh) {
+define(['database','opendatakit','controller','backbone','moment','formulaFunctions','handlebars','promptTypes','jquery','underscore','d3','handlebarsHelpers','combodate','jqueryCalendars','jqueryCalendarsPlus','jqueryPlugin','jqueryCalendarsPicker', 'jqueryCalendarsCoptic', 'jqueryCalendarsEthiopian', 'jqueryCalendarsHebrew', 'jqueryCalendarsIslamic', 'jqueryCalendarsJulian', 'jqueryCalendarsMayan', 'jqueryCalendarsNanakshahi', 'jqueryCalendarsNepali', 'jqueryCalendarsPersian', 'jqueryCalendarsTaiwan', 'jqueryCalendarsThai', 'jqueryCalendarsUmmalqura'],
+function(database,  opendatakit,  controller,  Backbone,  moment,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,           d3,   _hh, jqueryCalendars, jqueryCalendarsPlus, jqueryPlugin, jqueryCalendarsPicker, jqueryCalendarsCoptic, jqueryCalendarsEthiopian, jqueryCalendarsHebrew, jqueryCalendarsIslamic, jqueryCalendarsJulian, jqueryCalendarsMayan, jqueryCalendarsNanakshahi, jqueryCalendarsNepali, jqueryCalendarsPersian, jqueryCalendarsTaiwan, jqueryCalendarsThai, jqueryCalendarsUmmalqura) {
 'use strict';
 /* global odkCommon, odkSurvey */
 verifyLoad('prompts',
-    ['database','opendatakit','controller','backbone','moment', 'formulaFunctions','handlebars','promptTypes','jquery','underscore','d3', 'handlebarsHelpers','combodate'],
-    [ database,  opendatakit,  controller,  Backbone,  moment,   formulaFunctions,  Handlebars,  promptTypes,  $,       _,           d3,   _hh,           $.fn.combodate] );
+    ['database','opendatakit','controller','backbone','moment', 'formulaFunctions','handlebars','promptTypes','jquery','underscore','d3', 'handlebarsHelpers','combodate','jqueryCalendars','jqueryCalendarsPlus','jqueryPlugin','jqueryCalendarsPicker', 'jqueryCalendarsCoptic', 'jqueryCalendarsEthiopian', 'jqueryCalendarsHebrew', 'jqueryCalendarsIslamic', 'jqueryCalendarsJulian', 'jqueryCalendarsMayan', 'jqueryCalendarsNanakshahi', 'jqueryCalendarsNepali', 'jqueryCalendarsPersian', 'jqueryCalendarsTaiwan', 'jqueryCalendarsThai', 'jqueryCalendarsUmmalqura'],
+    [ database,  opendatakit,  controller,  Backbone,  moment,   formulaFunctions,  Handlebars,  promptTypes,  $,       _,           d3,   _hh,           $.fn.combodate, jqueryCalendars, jqueryCalendarsPlus, jqueryPlugin, jqueryCalendarsPicker, jqueryCalendarsCoptic, jqueryCalendarsEthiopian, jqueryCalendarsHebrew, jqueryCalendarsIslamic, jqueryCalendarsJulian, jqueryCalendarsMayan, jqueryCalendarsNanakshahi, jqueryCalendarsNepali, jqueryCalendarsPersian, jqueryCalendarsTaiwan, jqueryCalendarsThai, jqueryCalendarsUmmalqura] );
 
 promptTypes.base = Backbone.View.extend({
     className: "odk-base",
@@ -2203,6 +2203,474 @@ promptTypes.birth_date = promptTypes.date_no_time.extend({
 
             that.insideAfterRender = false;
         }
+    },
+});
+    
+promptTypes.date_year_only = promptTypes.date_no_time.extend({
+    type: "date",
+    showTime: false,
+    timeFormat: "YYYY",
+    timeTemplate: "YYYY"
+});
+
+promptTypes.date_month_only = promptTypes.date_no_time.extend({
+    type: "date",
+    showTime: false,
+    timeFormat: "MM",
+    timeTemplate: "MM"
+});
+
+promptTypes.date_month_and_year_only = promptTypes.date_no_time.extend({
+    type: "date",
+    showTime: false,
+    timeFormat: "YYYY/MM",
+    timeTemplate: "YYYY / MM"
+});
+
+promptTypes.non_gregorian_calendar = promptTypes.base_date.extend({
+    type: "string",
+    templatePath: "templates/datetimepicker.handlebars",
+
+    configureRenderContext: function(ctxt) {
+        var that = this;
+        var renderContext = that.renderContext;
+        if(that.detectNativeDatePicker()){
+            renderContext.inputAttributes.type = that.type;
+            that.usePicker = false;
+            ctxt.success();
+        } else {
+            var dateValue = that.getValue();
+            var userTimeFormat  = renderContext.inputAttributes.timeFormat;
+            if (userTimeFormat !== null && userTimeFormat !== undefined) {
+                that.timeFormat = userTimeFormat;
+            }
+            if (dateValue !== undefined && dateValue !== null) {
+                renderContext.value = dateValue;
+            }
+            ctxt.success();
+        }
+    },
+
+    modification: function(evt) {
+        var that = this;
+        odkCommon.log('D',"prompts." + that.type + ".modification px: " + that.promptIdx);
+        if ( !that.insideAfterRender ) {
+            var formattedDateValue = that.$('input').val();
+            var value = that.formatDBVal(formattedDateValue);
+
+            //
+            // we are using a date pop-up.  If an earlier action fails, we should not
+            // attempt to apply the state changes of this pop-up. Tolerate the loss
+            // of whatever the user tried to pick. They shouldn't move so fast.
+
+            var ctxt = that.controller.newContext(evt, that.type + ".modification");
+            that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+
+                odkCommon.log('D',"prompts." + that.type + ".modification: determine if reRendering ", "px: " + that.promptIdx);
+                var ref = that.getValue();
+
+                var rerender = false;
+                if ( ref === null || ref === undefined ) {
+                    rerender = ( value !== null && value !== undefined );
+                } else if ( value === null || value === undefined ) {
+                    rerender = ( ref !== null && ref !== undefined );
+                } else {
+                    rerender = !(that.sameValue(ref, value));
+                }
+
+                var renderContext = that.renderContext;
+                if ( value === undefined || value === null ) {
+                    renderContext.value = '';
+                } else {
+                    renderContext.value = formattedDateValue;
+                }
+
+                // track original value
+                var originalValue = that.getValue();
+                that.setValueDeferredChange(value);
+                renderContext.invalid = !that.validateValue();
+                if ( renderContext.invalid ) {
+                    value = originalValue;
+                    formattedDateValue = moment(value).format(that.timeFormat);
+                    // restore it...
+                    that.setValueDeferredChange(originalValue);
+                    rerender = true;
+                }
+
+                renderContext.value = formattedDateValue;
+                if ( rerender ) {
+                    odkCommon.log('D',"prompts." + that.type + ".modification: reRender", "px: " + that.promptIdx);
+                    that.reRender(ctxt);
+                }  else {
+                    // We are now done with this
+                    ctxt.success();
+                }
+            },
+            failure:function(m) {
+                odkCommon.log('D',"prompts." + that.type + ".modification -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+                ctxt.failure(m);
+            }}));
+        }
+    },
+});
+
+promptTypes.coptic_calendar_picker = promptTypes.non_gregorian_calendar.extend({
+    afterRender: function() {
+        var that = this;
+        if(that.usePicker){
+            that.insideAfterRender = true;
+
+            if (that.dtp !== null && that.dtp !== undefined) {
+                that.dtp.destroy();
+            }
+
+            that.$('input').calendarsPicker({calendar: $.calendars.instance('coptic'), dateFormat: 'yyyy/mm/dd'});
+
+            var inputElement = that.$('input');
+            that.dtp = inputElement.data('DateTimePicker');
+
+            that.insideAfterRender = false;
+        }
+    },
+    
+    formatDBVal: function(formattedDateValue) {
+        var outputValue = null;
+        if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
+            var julianDate = $.calendars.instance('coptic').parseDate('yyyy/mm/dd', formattedDateValue).toJD();
+            var gregorianDate = $.calendars.instance('gregorian').fromJD(julianDate);
+            outputValue = gregorianDate.formatDate('yyyy/mm/dd');
+        }
+        return outputValue;
+    },
+});
+
+promptTypes.ethiopian_calendar_picker = promptTypes.non_gregorian_calendar.extend({
+    afterRender: function() {
+        var that = this;
+        if(that.usePicker){
+            that.insideAfterRender = true;
+
+            if (that.dtp !== null && that.dtp !== undefined) {
+                that.dtp.destroy();
+            }
+
+            that.$('input').calendarsPicker({calendar: $.calendars.instance('ethiopian'), dateFormat: 'yyyy/mm/dd'});
+
+            var inputElement = that.$('input');
+            that.dtp = inputElement.data('DateTimePicker');
+
+            that.insideAfterRender = false;
+        }
+    },
+    
+    formatDBVal: function(formattedDateValue) {
+        var outputValue = null;
+        if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
+            var julianDate = $.calendars.instance('ethiopian').parseDate('yyyy/mm/dd', formattedDateValue).toJD();
+            var gregorianDate = $.calendars.instance('gregorian').fromJD(julianDate);
+            outputValue = gregorianDate.formatDate('yyyy/mm/dd');
+        }
+        return outputValue;
+    },
+});
+
+promptTypes.hebrew_calendar_picker = promptTypes.non_gregorian_calendar.extend({
+    afterRender: function() {
+        var that = this;
+        if(that.usePicker){
+            that.insideAfterRender = true;
+
+            if (that.dtp !== null && that.dtp !== undefined) {
+                that.dtp.destroy();
+            }
+
+            that.$('input').calendarsPicker({calendar: $.calendars.instance('hebrew'), dateFormat: 'yyyy/mm/dd'});
+
+            var inputElement = that.$('input');
+            that.dtp = inputElement.data('DateTimePicker');
+
+            that.insideAfterRender = false;
+        }
+    },
+    
+    formatDBVal: function(formattedDateValue) {
+        var outputValue = null;
+        if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
+            var julianDate = $.calendars.instance('hebrew').parseDate('yyyy/mm/dd', formattedDateValue).toJD();
+            var gregorianDate = $.calendars.instance('gregorian').fromJD(julianDate);
+            outputValue = gregorianDate.formatDate('yyyy/mm/dd');
+        }
+        return outputValue;
+    },
+});
+
+promptTypes.islamic_calendar_picker = promptTypes.non_gregorian_calendar.extend({
+    afterRender: function() {
+        var that = this;
+        if(that.usePicker){
+            that.insideAfterRender = true;
+
+            if (that.dtp !== null && that.dtp !== undefined) {
+                that.dtp.destroy();
+            }
+
+            that.$('input').calendarsPicker({calendar: $.calendars.instance('islamic'), dateFormat: 'yyyy/mm/dd'});
+
+            var inputElement = that.$('input');
+            that.dtp = inputElement.data('DateTimePicker');
+
+            that.insideAfterRender = false;
+        }
+    },
+    
+    formatDBVal: function(formattedDateValue) {
+        var outputValue = null;
+        if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
+            var julianDate = $.calendars.instance('islamic').parseDate('yyyy/mm/dd', formattedDateValue).toJD();
+            var gregorianDate = $.calendars.instance('gregorian').fromJD(julianDate);
+            outputValue = gregorianDate.formatDate('yyyy/mm/dd');
+        }
+        return outputValue;
+    },
+});
+
+promptTypes.julian_calendar_picker = promptTypes.non_gregorian_calendar.extend({
+    afterRender: function() {
+        var that = this;
+        if(that.usePicker){
+            that.insideAfterRender = true;
+
+            if (that.dtp !== null && that.dtp !== undefined) {
+                that.dtp.destroy();
+            }
+
+            that.$('input').calendarsPicker({calendar: $.calendars.instance('julian'), dateFormat: 'yyyy/mm/dd'});
+
+            var inputElement = that.$('input');
+            that.dtp = inputElement.data('DateTimePicker');
+
+            that.insideAfterRender = false;
+        }
+    },
+    
+    formatDBVal: function(formattedDateValue) {
+        var outputValue = null;
+        if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
+            var julianDate = $.calendars.instance('julian').parseDate('yyyy/mm/dd', formattedDateValue).toJD();
+            var gregorianDate = $.calendars.instance('gregorian').fromJD(julianDate);
+            outputValue = gregorianDate.formatDate('yyyy/mm/dd');
+        }
+        return outputValue;
+    },
+});
+
+promptTypes.mayan_calendar_picker = promptTypes.non_gregorian_calendar.extend({
+    afterRender: function() {
+        var that = this;
+        if(that.usePicker){
+            that.insideAfterRender = true;
+
+            if (that.dtp !== null && that.dtp !== undefined) {
+                that.dtp.destroy();
+            }
+
+            that.$('input').calendarsPicker({calendar: $.calendars.instance('mayan'), dateFormat: 'yyyy/mm/dd'});
+
+            var inputElement = that.$('input');
+            that.dtp = inputElement.data('DateTimePicker');
+
+            that.insideAfterRender = false;
+        }
+    },
+    
+    formatDBVal: function(formattedDateValue) {
+        var outputValue = null;
+        if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
+            var julianDate = $.calendars.instance('mayan').parseDate('yyyy/mm/dd', formattedDateValue).toJD();
+            var gregorianDate = $.calendars.instance('gregorian').fromJD(julianDate);
+            outputValue = gregorianDate.formatDate('yyyy/mm/dd');
+        }
+        return outputValue;
+    },
+});
+
+promptTypes.nanakshahi_calendar_picker = promptTypes.non_gregorian_calendar.extend({
+    afterRender: function() {
+        var that = this;
+        if(that.usePicker){
+            that.insideAfterRender = true;
+
+            if (that.dtp !== null && that.dtp !== undefined) {
+                that.dtp.destroy();
+            }
+
+            that.$('input').calendarsPicker({calendar: $.calendars.instance('nanakshahi'), dateFormat: 'yyyy/mm/dd'});
+
+            var inputElement = that.$('input');
+            that.dtp = inputElement.data('DateTimePicker');
+
+            that.insideAfterRender = false;
+        }
+    },
+    
+    formatDBVal: function(formattedDateValue) {
+        var outputValue = null;
+        if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
+            var julianDate = $.calendars.instance('nanakshahi').parseDate('yyyy/mm/dd', formattedDateValue).toJD();
+            var gregorianDate = $.calendars.instance('gregorian').fromJD(julianDate);
+            outputValue = gregorianDate.formatDate('yyyy/mm/dd');
+        }
+        return outputValue;
+    },
+});
+
+promptTypes.nepali_calendar_picker = promptTypes.non_gregorian_calendar.extend({
+    afterRender: function() {
+        var that = this;
+        if(that.usePicker){
+            that.insideAfterRender = true;
+
+            if (that.dtp !== null && that.dtp !== undefined) {
+                that.dtp.destroy();
+            }
+
+            that.$('input').calendarsPicker({calendar: $.calendars.instance('nepali'), dateFormat: 'yyyy/mm/dd'});
+
+            var inputElement = that.$('input');
+            that.dtp = inputElement.data('DateTimePicker');
+
+            that.insideAfterRender = false;
+        }
+    },
+    
+    formatDBVal: function(formattedDateValue) {
+        var outputValue = null;
+        if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
+            var julianDate = $.calendars.instance('nepali').parseDate('yyyy/mm/dd', formattedDateValue).toJD();
+            var gregorianDate = $.calendars.instance('gregorian').fromJD(julianDate);
+            outputValue = gregorianDate.formatDate('yyyy/mm/dd');
+        }
+        return outputValue;
+    },
+});
+
+promptTypes.persian_calendar_picker = promptTypes.non_gregorian_calendar.extend({
+    afterRender: function() {
+        var that = this;
+        if(that.usePicker){
+            that.insideAfterRender = true;
+
+            if (that.dtp !== null && that.dtp !== undefined) {
+                that.dtp.destroy();
+            }
+
+            that.$('input').calendarsPicker({calendar: $.calendars.instance('persian'), dateFormat: 'yyyy/mm/dd'});
+
+            var inputElement = that.$('input');
+            that.dtp = inputElement.data('DateTimePicker');
+
+            that.insideAfterRender = false;
+        }
+    },
+    
+    formatDBVal: function(formattedDateValue) {
+        var outputValue = null;
+        if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
+            var julianDate = $.calendars.instance('persian').parseDate('yyyy/mm/dd', formattedDateValue).toJD();
+            var gregorianDate = $.calendars.instance('gregorian').fromJD(julianDate);
+            outputValue = gregorianDate.formatDate('yyyy/mm/dd');
+        }
+        return outputValue;
+    },
+});
+
+promptTypes.taiwan_calendar_picker = promptTypes.non_gregorian_calendar.extend({
+    afterRender: function() {
+        var that = this;
+        if(that.usePicker){
+            that.insideAfterRender = true;
+
+            if (that.dtp !== null && that.dtp !== undefined) {
+                that.dtp.destroy();
+            }
+
+            that.$('input').calendarsPicker({calendar: $.calendars.instance('taiwan'), dateFormat: 'yyyy/mm/dd'});
+
+            var inputElement = that.$('input');
+            that.dtp = inputElement.data('DateTimePicker');
+
+            that.insideAfterRender = false;
+        }
+    },
+    
+    formatDBVal: function(formattedDateValue) {
+        var outputValue = null;
+        if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
+            var julianDate = $.calendars.instance('taiwan').parseDate('yyyy/mm/dd', formattedDateValue).toJD();
+            var gregorianDate = $.calendars.instance('gregorian').fromJD(julianDate);
+            outputValue = gregorianDate.formatDate('yyyy/mm/dd');
+        }
+        return outputValue;
+    },
+});
+
+promptTypes.thai_calendar_picker = promptTypes.non_gregorian_calendar.extend({
+    afterRender: function() {
+        var that = this;
+        if(that.usePicker){
+            that.insideAfterRender = true;
+
+            if (that.dtp !== null && that.dtp !== undefined) {
+                that.dtp.destroy();
+            }
+
+            that.$('input').calendarsPicker({calendar: $.calendars.instance('thai'), dateFormat: 'yyyy/mm/dd'});
+
+            var inputElement = that.$('input');
+            that.dtp = inputElement.data('DateTimePicker');
+
+            that.insideAfterRender = false;
+        }
+    },
+    
+    formatDBVal: function(formattedDateValue) {
+        var outputValue = null;
+        if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
+            var julianDate = $.calendars.instance('thai').parseDate('yyyy/mm/dd', formattedDateValue).toJD();
+            var gregorianDate = $.calendars.instance('gregorian').fromJD(julianDate);
+            outputValue = gregorianDate.formatDate('yyyy/mm/dd');
+        }
+        return outputValue;
+    },
+});
+
+promptTypes.ummalqura_calendar_picker = promptTypes.non_gregorian_calendar.extend({
+    afterRender: function() {
+        var that = this;
+        if(that.usePicker){
+            that.insideAfterRender = true;
+
+            if (that.dtp !== null && that.dtp !== undefined) {
+                that.dtp.destroy();
+            }
+
+            that.$('input').calendarsPicker({calendar: $.calendars.instance('ummalqura'), dateFormat: 'yyyy/mm/dd'});
+
+            var inputElement = that.$('input');
+            that.dtp = inputElement.data('DateTimePicker');
+
+            that.insideAfterRender = false;
+        }
+    },
+    
+    formatDBVal: function(formattedDateValue) {
+        var outputValue = null;
+        if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
+            var julianDate = $.calendars.instance('ummalqura').parseDate('yyyy/mm/dd', formattedDateValue).toJD();
+            var gregorianDate = $.calendars.instance('gregorian').fromJD(julianDate);
+            outputValue = gregorianDate.formatDate('yyyy/mm/dd');
+        }
+        return outputValue;
     },
 });
 /**
