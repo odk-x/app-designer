@@ -224,11 +224,7 @@ promptTypes.base = Backbone.View.extend({
                 currElString = currEl[0].innerHTML;
                 currElStringNoSpaces = currElString.replace(/\s/g, '');
             }
-            var toBeDrawnEl = that.template(that.renderContext, {
-                // Subverting breaking change in handlebars v. 4.6 to allow access to "not own" properties (insecure)
-                allowProtoMethodsByDefault: true,
-                allowProtoPropertiesByDefault: true
-            });
+            var toBeDrawnEl = that.template(that.renderContext);
             var tbdString = null;
             if (toBeDrawnEl !== null && toBeDrawnEl !== undefined) {
                 tbdString = toBeDrawnEl.replace(/\s/g, '');
