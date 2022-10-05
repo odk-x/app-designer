@@ -1340,6 +1340,11 @@ return {
             }}),true);
         }}));
     },
+    searchInstance: function(ctxt){
+        var name = opendatakit.getCurrentInstanceId();
+        console.log(name);
+    },
+
     reset: function(ctxt,sameForm) {
         var that = this;
         ctxt.log('I','controller.reset');
