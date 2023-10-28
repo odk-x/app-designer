@@ -165,7 +165,7 @@ input[type="range"]::-webkit-slider-thumb:before {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    background-color: #5594D7; 
+    background-color: #5594D7;
     color: #FDFDFD;
 }
 .odk-header-back-btn {
