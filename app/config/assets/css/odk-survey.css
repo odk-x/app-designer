@@ -629,3 +629,16 @@ Eventually we should make a jqm theme for this.
     overflow:hidden;
     margin-right:50px;
 }
+
+
+/* Added styles to edit the input field of the apps */
+.form-control {
+    height: 56px;
+    padding: 16px 16px;
+    font-size: 18px;
+    line-height: 1.42857143;
+    color: #666;
+  }
+  .form-control:focus {
+    border-color: #5594D7;
+  }
