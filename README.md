@@ -211,6 +211,8 @@ $ grunt --verbose connect:livereload:keepalive
 ```
 This will start grunt, but disable the file-change detection mechanisms that automatically reload an HTML page when it or any JavaScript file it uses has been modified. Others have reported that uninstalling npm and node, and then re-installing them may correct the issue.
 
+If you get the error "You must use Chrome or Safari Browser (note: this is tested only in chrome browser)" even when using any of these , it’s likely due to the removal of the built-in DB on Chrome. Until mid-2024 (M123), you can resolve this by re-enabling it using chrome://flags/#web-sql-access.
+
 #### Windows Users Tip
 You will be opening a **cmd** window and changing your current directory (using the **cd** command) into this directory every time you use this tool.  It is therefore useful to create a shortcut that opens a cmd window directly into this directory:
 1) Open a file browser and navigate to the unzipped directory containing a number of files and directories, including a **Gruntfile.js**.
