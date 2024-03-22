@@ -247,29 +247,34 @@ module.exports = function (grunt) {
                 }
             }
         },
-        open: {
-            server: {
-                path: 'http://localhost:<%= connect.options.port %>/index.html',
-                app: {app: (function() {
-                    var platform = require('os').platform();
-                    // windows: *win*
-                    // mac: darwin
-                    if (platform.search('win') >= 0 &&
-                      platform.search('darwin') < 0) {
-                      // Windows expects chrome.
-                      grunt.log.writeln('detected Windows environment');
-                      return 'chrome';
-                    } else {
-                      // Mac (and maybe others--add as discovered), expects
-                      // Google Chrome
-                      grunt.log.writeln('detected non-Windows environment');
-                      return 'Google Chrome';
-                    }
-                  })()
+ open: {
+    server: {
+        path: 'http://localhost:<%= connect.options.port %>/index.html',
+        app: {
+            app: (function() {
+                var platform = require('os').platform();
+                // windows: *win*
+                // mac: darwin
+                // linux: linux
+                if (platform.search('win') !== -1) {
+                    // Windows expects chrome.
+                    grunt.log.writeln('Detected Windows environment');
+                    return 'chrome';
+                } else if (platform.search('darwin') !== -1) {
+                    // Mac expects "Google Chrome"
+                    grunt.log.writeln('Detected macOS environment');
+                    return 'Google Chrome';
+                } else {
+                    // Default for Linux and potentially other environments
+                    grunt.log.writeln('Detected non-Windows, non-macOS environment');
+                    return 'google-chrome';
                 }
-            }
-        },
-    });
+            })()
+        }
+    }
+},
+});
+
 
     // We need grunt-exec to run adb commands from within grunt.
     grunt.loadNpmTasks('grunt-exec');
