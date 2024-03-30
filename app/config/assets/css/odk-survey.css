@@ -703,7 +703,7 @@ Eventually we should make a jqm theme for this.
     font-size: 14px;
     text-overflow: ellipsis;
     overflow: hidden;
-    border: none;
+    border: #c8c8c8;
     border-radius: 24px;
 } 
 .odk-next-btn{
@@ -712,7 +712,7 @@ Eventually we should make a jqm theme for this.
     font-size: 14px;
     text-overflow: ellipsis;
     overflow: hidden;
-    border: none;
+    border: #c8c8c8;
     border-radius: 24px;
 }
 .no-instance{
