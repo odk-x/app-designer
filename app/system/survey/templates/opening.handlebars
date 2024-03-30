@@ -1,3 +1,21 @@
+<style>
+     @media (min-width:478px) {
+        .odk-container{
+            width: 95vw;
+            margin: 0 auto 0 auto ;
+        }
+    }
+    .createInstance{
+    background-color: #5594d7;
+    color: white;
+    text-align: center;
+    margin-left: 2cm;
+    font-size: 14px;
+    border: none;
+    border-radius: 24px;
+    width: 60%;
+   }
+   </style>
 <div>
     <div>
         <center><img src="{{ headerImg }}" class="odk-formlogo" /></center>
@@ -10,7 +28,7 @@
         <fieldset class="openingNew">
             <div class="row">
                 <div>
-                    <button class="odk-next-btn btn btn-default" type="button" tabindex="0">
+                    <button class="createInstance btn btn-default" type="button" tabindex="0">
 					{{localizeText display.opening_survey_next_button_label}} <span class="glyphicon glyphicon-chevron-right" style="font-size:20px;"></span>
                     </button>
                 </div>
