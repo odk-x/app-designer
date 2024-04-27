@@ -27,7 +27,7 @@ var mountDirectory = function(dir) {
 var setHeaders = function(res, path) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+    res.setHeader('Cross-Origin-Embedder-Policy', 'credentialless');
     res.setHeader('Cross-Origin-Opener-Policy', 'cross-origin');
     res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
 }
