@@ -2,6 +2,7 @@
   "name": "jswebviewer",
   "version": "0.0.0",
   "dependencies": {
+    "@sqlite.org/sqlite-wasm": "^3.45.3-build1",
     "archiver": "^5.3.0",
     "base64-stream": "^1.0.0",
     "browser-request": "^0.3.3",
