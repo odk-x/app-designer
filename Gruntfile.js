@@ -4,17 +4,18 @@ var SERVER_PORT = 8000;
 var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
 var serveStatic = require('serve-static');
 var serveIndex = require('serve-index');
-var mountFolder = function (connect, dir) {
+var mountFolder = function (dir) {
     return serveStatic(
         require('path').resolve(dir),
         {
             // We need to specify a file that will be displayed in place of
             // index.html. _.html is used because it is unlikely to exist.
-            index: '_.html'
+            index: '_.html',
+            setHeaders: setHeaders
         }
     );
 };
-var mountDirectory = function(connect, dir) {
+var mountDirectory = function(dir) {
     return serveIndex(
         require('path').resolve(dir),
         {
@@ -22,6 +23,14 @@ var mountDirectory = function(connect, dir) {
         }
     );
 };
+
+var setHeaders = function(res, path) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+    res.setHeader('Cross-Origin-Opener-Policy', 'cross-origin');
+    res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+}
 
 var postHandler = function(req, res, next) {
     if (req.method === 'POST') {
@@ -205,6 +214,8 @@ module.exports = function (grunt) {
                     livereload: LIVERELOAD_PORT
                 },
                 files: [
+                    'devEnv/*.html',
+                    'devEnv/*.js',
                     '<%= tables.appDir %>/*.html',
                     '<%= tables.appDir %>/system/**',
                 ]
@@ -215,6 +226,11 @@ module.exports = function (grunt) {
             }
         },
         connect: {
+            server: {
+                options: {
+                    setHeaders: setHeaders 
+                }
+            },
             options: {
                 port: SERVER_PORT,
                 // change this to '0.0.0.0' to access the server from outside
@@ -222,29 +238,26 @@ module.exports = function (grunt) {
             },
             livereload: {
                 options: {
-                    middleware: function (connect) {
-                        return [
-                            postHandler,
-                            lrSnippet,
-                            mountFolder(connect, baseDirForServer),
-                            mountDirectory(connect, baseDirForServer)
-                        ];
+                    middleware: function(connect, options, middlewares) {
+                        middlewares.unshift(postHandler);
+                        middlewares.unshift(lrSnippet);                        
+                        middlewares.unshift(mountFolder(baseDirForServer));
+                        middlewares.unshift(mountDirectory(baseDirForServer));
+                        return middlewares;
                     }
                 }
             },
             test: {
                 options: {
                     port: 8001,
-                    middleware: function (connect) {
-                        return [
+                    middleware: [
                             postHandler,
                             lrSnippet,
-                            mountFolder(connect, 'test'),
-                            mountFolder(connect, baseDirForServer),
-                            mountDirectory(connect, baseDirForServer)
-                        ];
-                    }
-                }
+                            mountFolder('test'),
+                            mountFolder(baseDirForServer),
+                            mountDirectory(baseDirForServer)
+                        ]
+                }                
             }
         },
         open: {
