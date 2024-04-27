@@ -769,7 +769,7 @@ window.odkCommon = {
     * @return
     */
    log: function(level, loggingString, detail) {
-      loggingString = loggingString + detail;
+      loggingString = loggingString + (detail ?? '');
       odkCommonIf.log(level, loggingString);
    },
 
