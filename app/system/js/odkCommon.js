@@ -1123,8 +1123,14 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                 break;
             }
 
+            // Use an Error object to get the caller info
+            const stack = new Error().stack;
+            const stackLines = stack.split("\n");
+            let callerLine = stackLines[3]; // due to the extra layer caused by odkCommonIf
+            callerLine = /\(([^)]+)\)/.exec(callerLine) ?? callerLine;
+                        
             if ( logIt && console ) {
-                let txt = severity + '/' + msg;
+                const txt = `${msg} ${callerLine}`;
                 if ( severity === 'E') {
                     console.error(txt);
                 } else if (severity === 'W') {
