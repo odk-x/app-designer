@@ -1123,14 +1123,21 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                 break;
             }
 
-            if ( logIt ) {
-                if ( severity === 'E' || severity === 'W' ) {
-                    console.error(severity + '/' + msg);
+            if ( logIt && console ) {
+                let txt = severity + '/' + msg;
+                if ( severity === 'E') {
+                    console.error(txt);
+                } else if (severity === 'W') {
+                    console.warn(txt);
+                } else if (severity === 'I') {
+                    console.info(txt);
+                } else if (severity === 'D' && (typeof console.debug === "function")) {
+                    console.debug(txt);
                 } else {
-                    console.log(severity + '/' + msg);
+                    console.log(txt);
                 }
             }
-            console.log();
+
         },
 
         getActiveUser: function() {
