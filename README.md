@@ -1,24 +1,37 @@
 # ODK-X Application Designer 
 
-This project is __*actively maintained*__
+## Table of Contents
+- [Introduction](#introduction)
+- [Setting up your environment](#setting-up-your-environment)
+  - [Prerequisites](#prerequisites)
+  - [Java](#java)
+  - [NodeJS](#nodejs)
+    - [For Windows](#for-windows)
+    - [For Mac/Linux](#for-maclinux)
+  - [Grunt](#grunt)
+  - [Android SDK](#android-sdk)
+    - [Installing Android SDK](#installing-android-sdk)
+    - [Verifying Android SDK Installation](#verifying-android-sdk-installation)
+    - [Adding adb to your PATH](#adding-adb-to-your-path)
+      - [For Windows](#for-windows-1)
+      - [For Mac/Linux](#for-maclinux-1)
+- [Installing Application Designer](#installing-application-designer)
+  - [Windows Users Tip](#windows-users-tip)
+  - [MacOSX Users Tip](#macosx-users-tip)
+- [How to contribute](#how-to-contribute)
+- [Links for users](#links-for-users)
 
-The developer [wiki](https://github.com/odk-x/tool-suite-X/wiki) (including release notes) and [issues tracker](https://github.com/odk-x/tool-suite-X/issues) are located under the [**ODK-X Tool Suite**](https://github.com/odk-x) project.
-
-This repository contains the ODK-X Application Designer software.
-
-Complete Android apps, including data entry, synchronization, and distribution,
-can be written using HTML and JavaScript files. ODK-X Tables and ODK-X Survey will
-serve these files as the skin of your app.
-
-Projects intending to write a Tables app can clone this repository and use it
-as a starting point.
-
-Much of the boilerplate of app creation can be avoided by employing the Grunt
-tasks specified in the Gruntfile.
+## Introduction
+This project is actively maintained. 
+The developer [wiki](https://github.com/odk-x/tool-suite-X/wiki) (including release notes) and [issues tracker](https://github.com/odk-x/tool-suite-X/issues) are located under the [**ODK-X Tool Suite**](https://github.com/odk-x) project. 
+This repository contains the ODK-X Application Designer software. Complete Android apps, including data entry, synchronization, and distribution, can be written using HTML and JavaScript files. 
+ODK-X Tables and ODK-X Survey will serve these files as the skin of your app. 
+Projects intending to write a Tables app can clone this repository and use it as a starting point. 
+Much of the boilerplate of app creation can be avoided by employing the Grunt tasks specified in the Gruntfile.
 
 ## Setting up your environment
 
-#### Prerequisites
+### Prerequisites
 
 - Java -> Java is required by the Android SDK (installation is described below).
 - Chrome -> [Google's Chrome browser](https://www.google.com/intl/en/chrome/browser/desktop/index.html). 
@@ -26,17 +39,17 @@ tasks specified in the Gruntfile.
 - Grunt -> a task-based scripting environment (installation is described below).
 - Android SDK -> the software development kit for Android devices (installation is described below).
 
-##### Java
+### Java
 Make sure Java 8 or higher is installed on the computer you plan to use.  If it is not, [download and install it](https://java.com/en/download/). If you are using MacOSX, it may require special care and attention.See [MacOSX Java install](https://docs.oracle.com/javase/8/docs/technotes/guides/install/mac_jdk.html) and [MacOSX Java FAQ](https://docs.oracle.com/javase/8/docs/technotes/guides/install/mac_install_faq.html).
 
-##### NodeJS
+### NodeJS
 You must use Version 12 or higher. To avoid directory path problems on Windows, we require npm version 6.9 or higher (generally npm will be bundled with NodeJS installer). Follow the [instructions to install NodeJS](https://nodejs.org/en/download/package-manager/).
 
-###### For Windows
+### For Windows
 When installing on Windows you can use an automated **NodeJS** installer that uses **Chocolatey**. If you chose not to let the installer use **Chocolatey** to install a bunch of packages after installing **NodeJS**, you will need to ensure the location of the `npm` folder is added to the *PATH* variable of your system. If it is not, subsequent calls to access grunt will fail. For example: `C:\Users\[username]\AppData\Roaming\npm`. For instructions on modifying *PATH*, see the section at the bottom of this page called Add adb to your *PATH* For Windows. Instead of navigating to the location of Android SDK, navigate to the location of the `npm` folder.
 You can check if npm has been installed properly by typing `npm --version` in cmd or Powershell.
 
-###### For Mac/Linux
+### For Mac/Linux
 After installing NodeJS, open a terminal (which you can do by clicking the spotlight in the top right corner of the screen, typing terminal, and clicking the program named Terminal) and type: ```$ npm --version```
 
 **Warning:**
@@ -61,7 +74,7 @@ $ ls /usr/local/bin/npm
 ```
 outputs a message telling you permission is denied, then you will have to change the ownership of the `/usr/local/` and `/usr/local/bin/` directories. On Mac, follow the [instructions to take ownership](http://osxdaily.com/2013/04/23/change-file-ownership-mac-os-x/) of these directories, or to at least give yourself read permission. On other Linux systems, use the **chown** command or the user-interface appropriate to your distribution to do so.
 
-##### Grunt
+### Grunt
 After installing NodeJS, install **grunt** by doing the following:
 **Note:** These installation steps are copied from the [Grunt Getting Started guide](https://gruntjs.com/getting-started).
 On Windows, open a **cmd** window (go to Start Menu, search for **cmd** and open it); on MacOSX, open a **terminal** window. Within this window, type:
@@ -111,8 +124,8 @@ If this displays a version string, then your installation is complete; you are d
     - If there is an error complaining about Java not being installed, you will need to close this **cmd** or **termina**l window and download and install Java. After installing Java, open a new **cmd** or **terminal** window and type this command again.
     - If **adb** is not found, then you need to add it to the *PATH* variable of your system.
 
-##### Add adb to your PATH
-###### For Windows
+### Add adb to your PATH
+#### For Windows
 1) Open a Windows File Explorer and navigate to the location of your Android SDK. This will typically be at one of: `C:\Users\your_username\android-sdks` or `C:\ProgramFiles\Android\android-sdk` or `C:\Program Files (x86)\Android\android-sdk`.
 2) Navigate into the `platform-tools` folder.
 3) Click in the file path at the top of the File Explorer window. The path will become aselected text string. Copy it into your copy-and-paste buffer.
@@ -197,6 +210,8 @@ If the page never times-out, but never loads (it remains blank or constantly spi
 $ grunt --verbose connect:livereload:keepalive
 ```
 This will start grunt, but disable the file-change detection mechanisms that automatically reload an HTML page when it or any JavaScript file it uses has been modified. Others have reported that uninstalling npm and node, and then re-installing them may correct the issue.
+
+If you get the error "You must use Chrome or Safari Browser (note: this is tested only in chrome browser)" even when using any of these , it’s likely due to the removal of the built-in DB on Chrome. Until mid-2024 (M123), you can resolve this by re-enabling it using chrome://flags/#web-sql-access.
 
 #### Windows Users Tip
 You will be opening a **cmd** window and changing your current directory (using the **cd** command) into this directory every time you use this tool.  It is therefore useful to create a shortcut that opens a cmd window directly into this directory:
