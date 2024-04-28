@@ -11,49 +11,16 @@
         <!-- <script type="text/javascript" src="../app/system/libs/jquery-migrate-3.3.2.js" ></script> -->
         <link rel="stylesheet" type="text/css" href="css/animate.css" />
         <link rel="stylesheet" type="text/css" href="css/style.css" />
-        <script type="text/javascript">
-            //<![CDATA[
-            function resizeIframe(value) {
-                var parts = value.substring(1).split("x");
-                var $el = $("#filescreen");
-                $el.width(parseInt(parts[0]));
-                $el.height(parseInt(parts[1]) + 1); // we somehow lose a pixel?
-                var cw = document.getElementById("filescreen").contentWindow;
-                cw.location.reload();
-            }
-            function loadPage(value) {
-                var cw = document.getElementById("filescreen").contentWindow;
-                cw.location = value;
-            }
-            function backbutton() {
-                var cw = document.getElementById("filescreen").contentWindow;
-                cw.history.back();
-            }
-            //]]>
-        </script>
-        <title>OpenDataKit File Browser</title>
+       
+        <title>ODK-X File Browser</title>
     </head>
 
     <body class="fullembedded">
-        <noscript
-            >This page requires javascript and a Chrome or WebKit
-            browser</noscript
-        >
+        <noscript>This page requires javascript and a browser</noscript>
         <div class="backviewport">
-            <span
-                >View and open files that would be pushed to your Android
-                device.</span
-            >
-            <button
-                class="backbutton"
-                name="backbutton"
-                id="backbutton"
-                onclick="backbutton()"
-                type="button"
-            >
-                Back Button
-            </button>
-            <iframe id="filescreen" class="bigviewport" src="../app/" />
+            <span>View and open files that would be pushed to your Android device.</span>
+            
+            <a href="/app/" target="_blank">Click me to open the files view in a new tab</a>
         </div>
     </body>
 </html>
