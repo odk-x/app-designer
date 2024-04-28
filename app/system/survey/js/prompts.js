@@ -511,7 +511,7 @@ promptTypes.finalize = promptTypes.base.extend({
         } else {
             // Now we are always going to display instance id
             // unless this decision changes ...
-            that.renderContext.display_field = ts.toISOString();
+            that.renderContext.display_field = ts?.toISOString();
         }
         if ( that._screen && that._screen._renderContext ) {
             that._screen._renderContext.enableForwardNavigation = false;
