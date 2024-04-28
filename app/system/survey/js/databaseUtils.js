@@ -475,7 +475,7 @@ return {
 
             if ( value === undefined || value === null ) {
                 if ( jsonType.isNotNullable ) {
-                    throw new Error("unexpected null value for non-nullable field");
+                    throw new Error(`unexpected null value for non-nullable field: ${jsonType.elementName}<${jsonType.type}>`);
                 }
                 return null;
             }
@@ -494,7 +494,7 @@ return {
 
         if ( value === undefined || value === null ) {
             if ( jsonType.isNotNullable ) {
-                throw new Error("unexpected null value for non-nullable field");
+                throw new Error(`unexpected null value for non-nullable field: ${jsonType.elementName}<${jsonType.type}>`);
             }
             return null;
         }

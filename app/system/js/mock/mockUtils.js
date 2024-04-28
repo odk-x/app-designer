@@ -19,10 +19,9 @@ return {
     //                    one of array, object, string, boolean, number, integer, ...
     fromDatabaseToOdkDataInterfaceElementType: function( jsonType, value ) {
         var that = this;
-
         if ( value === undefined || value === null ) {
             if ( jsonType.isNotNullable ) {
-                throw new Error("unexpected null value for non-nullable field");
+                throw new Error(`unexpected null value for non-nullable field: ${jsonType.elementName}<${jsonType.type}>`);
             }
             return null;
         }
@@ -31,7 +30,7 @@ return {
         // Strings are either NULL or non-zero-length.
         //
         if ( value === "" ) {
-            throw new Error("unexpected empty (zero-length string) value for field");
+            throw new Error(`unexpected empty (zero-length string) value for field: ${jsonType.elementName}<${jsonType.type}>`);
         }
 
         if ( jsonType.type === 'array' ) {

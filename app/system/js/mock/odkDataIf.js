@@ -202,11 +202,11 @@ var odkDataIf = {
         if ( tableId === 'framework' ) {
             formPath = "config/assets/framework/forms/framework/formDef.json";
         } else {
-            formPath = "config/tables/" + tableId + "/forms/" + tableId + "/formDef.json";
+            formPath = `config/tables/${tableId}/forms/${tableId}/formDef.json`;
         }
         that._importAsynchronousText(formPath, function (jqXHR, textStatus ) {
             if ( textStatus !== "success" ) {
-                throw Error("Unable to read " + formPath);
+                throw Error(`Unable to read ${formPath}`);
             }
 
             var formDef = JSON.parse(jqXHR.responseText);
@@ -274,7 +274,7 @@ var odkDataIf = {
             };
             transaction.executeSql(ctxt.sqlStatement.stmt, ctxt.sqlStatement.bind,
             function(transaction, result) {
-                // we are done creating the table and its metadata!
+                console.debug("Done creating the table and its metadata")
             });
         } else {
             var colDef = colDefs.shift();
@@ -300,7 +300,6 @@ var odkDataIf = {
         };
         transaction.executeSql(ctxt.sqlStatement.stmt, ctxt.sqlStatement.bind,
         function(transaction, result) {
-
             var colDefs = [];
 
             for ( var dbColumnName in def.dataTableModel ) {
@@ -321,11 +320,13 @@ var odkDataIf = {
                 }
             }
             // create the data table
-            ctxt.sqlStatement = mockSchema.createTableStmt(tableId, def.dataTableModel);
+            ctxt.sqlStatement.stmt = mockSchema.createTableStmt(tableId, def.dataTableModel);
+            ctxt.sqlStatement.bind = [];
             transaction.executeSql(ctxt.sqlStatement.stmt, ctxt.sqlStatement.bind,
-            function(transaction, result) {
-                that._defineTableColumnsEntry(ctxt, transaction, tableId, def, formDef, colDefs);
-            });
+                function(transaction, result) {
+                    that._defineTableColumnsEntry(ctxt, transaction, tableId, def, formDef, colDefs);
+                }
+            );
         });
     },
     _defineTableKVS: function(ctxt, transaction, tableId, def, formDef, properties) {
@@ -374,11 +375,11 @@ var odkDataIf = {
         }
     },
     _defineTable: function(ctxt, transaction, tableId, def, formDef) {
-        var that = this;
+        var that = this;        
         ctxt.sqlStatement = {
             stmt : "delete from _key_value_store_active where _table_id = ?",
             bind : [tableId]
-        };
+        };        
         transaction.executeSql(ctxt.sqlStatement.stmt, ctxt.sqlStatement.bind,
         function(transaction, result) {
             def.keyValueStoreList = [];
@@ -396,6 +397,8 @@ var odkDataIf = {
             }
         }), function (transaction) {
             ctxt.sqlStatement = sqlStatement;
+            //console.log("Executing SQL statement:", ctxt.sqlStatement);
+            
             transaction.executeSql(ctxt.sqlStatement.stmt, ctxt.sqlStatement.bind,
                 function(transaction, result) {
                     var count = result.rows.length;
@@ -446,7 +449,6 @@ var odkDataIf = {
                         }
                         resultRows.push(rowArray);
                     }
-
                     if ( $.isEmptyObject(elementNameMap) ) {
                         // fake it -- assume these are in the order they appear in dataTableModel
                         i = 0;
@@ -534,6 +536,7 @@ var odkDataIf = {
         });
     },
 
+    // Not implemented
     getRoles: function(_callbackId) {
         var that = this;
 
@@ -542,6 +545,7 @@ var odkDataIf = {
         throw new Error("Not implemented in app-designer");
     },
 
+    // Not implemented
     getDefaultGroup: function(_callbackId) {
         var that = this;
 
@@ -550,6 +554,7 @@ var odkDataIf = {
         throw new Error("Not implemented in app-designer");
     },
 
+    // Not implemented
     getUsers: function(_callbackId) {
         var that = this;
 
@@ -558,6 +563,7 @@ var odkDataIf = {
         throw new Error("Not implemented in app-designer");
     },
 
+    // Not implemented
     getAllTableIds: function(_callbackId) {
         var that = this;
 
@@ -655,9 +661,7 @@ var odkDataIf = {
 
         // TODO: row filtering
         var sqlStatement =  {
-            stmt : 'select * from "' + tableDef.tableId + '" as T where _id=? and ' +
-                    'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' +
-                    tableDef.tableId + '" as V where V._id=T._id)',
+            stmt : `select * from "${tableDef.tableId}" as T where _id=? and T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "${tableDef.tableId}" as V where V._id=T._id)`,
             bind : [rowId]
         };
 
@@ -712,8 +716,7 @@ var odkDataIf = {
                         }
                     }), function(transaction) {
                         ctxt.sqlStatement = mockSchema.updateChangesDataTableStmt(tableDef, changes, rowId);
-                        transaction.executeSql(ctxt.sqlStatement.stmt, ctxt.sqlStatement.bind,
-                            function(transaction, result) {});
+                        transaction.executeSql(ctxt.sqlStatement.stmt, ctxt.sqlStatement.bind, function(transaction, result) {});
                 });
             }
         }), tableId);
@@ -790,7 +793,6 @@ var odkDataIf = {
 
     addCheckpoint: function(tableId, stringifiedJSON, rowId, metaDataRev, _callbackId) {
         var that = this;
-
         var ctxt = that.newStartContext(_callbackId);
 
         if ( rowId === null || rowId === undefined ) {

@@ -11,8 +11,8 @@ return {
     ctxt.sqlStatement = null;
     var that = this;
     try {
-        if ( mockDbif.w3cSqlIsOpen() ) {
-            mockDbif.w3cSqlTransaction(transactionBody, function(error) {
+        if ( mockDbif.isDbOpen() ) {
+            mockDbif.execTransaction(transactionBody, function(error) {
                     if ( ctxt.sqlStatement !== null && ctxt.sqlStatement !== undefined ) {
                         ctxt.log('E',"withDb.transaction.error.sqlStmt", ctxt.sqlStatement.stmt);
                         ctxt.log('E',"withDb.transaction.error.sqlBinds", ctxt.sqlStatement.bind);
@@ -26,33 +26,14 @@ return {
                         inContinuation = true;
                         ctxt.success();
                     });
-        } else if(mockDbif.w3cSqlIsUnsupported() ) {
-            ctxt.log('E','mockImpl.withDb.notSupported w3c SQL interface is not supported');
-            inContinuation = true;
-            ctxt.failure({message: "Web client does not support the W3C SQL database standard."});
-        } else {
-            var settings = {shortName: "odk", version: "1", displayName: "ODK Instance Database", maxSize: 65536};
-            mockDbif.w3cSqlOpenAndInitializeDatabase(
-                settings.shortName, settings.version, settings.displayName, settings.maxSize,
-                // initialize the database...
-                function(transaction) {
-                    var td;
-                    td = mockSchema.createTableStmt('_column_definitions', 
-                                                mockSchema.columnDefinitionsPredefinedColumns,
-                                                mockSchema.columnDefinitionsTableConstraint );
-                    ctxt.sqlStatement = td;
-                    transaction.executeSql(td.stmt, td.bind);
-                    td = mockSchema.createTableStmt('_key_value_store_active', 
-                                                mockSchema.keyValueStoreActivePredefinedColumns,
-                                                mockSchema.keyValueStoreActiveTableConstraint );
-                    ctxt.sqlStatement = td;
-                    transaction.executeSql(td.stmt, td.bind);
-                    td = mockSchema.createTableStmt('_table_definitions', 
-                                                mockSchema.tableDefinitionsPredefinedColumns);
-                    ctxt.sqlStatement = td;
-                    transaction.executeSql(td.stmt, td.bind);
-                    ctxt.sqlStatement = null;
-                }, 
+        } else {            
+            mockDbif.initializeDatabase(
+                // initialize statements
+                [
+                    mockSchema.createTableStmt('_column_definitions', mockSchema.columnDefinitionsPredefinedColumns, mockSchema.columnDefinitionsTableConstraint ),
+                    mockSchema.createTableStmt('_key_value_store_active', mockSchema.keyValueStoreActivePredefinedColumns, mockSchema.keyValueStoreActiveTableConstraint ),
+                    mockSchema.createTableStmt('_table_definitions', mockSchema.tableDefinitionsPredefinedColumns)
+                ], 
                 // transaction to invoke...
                 transactionBody,
                 function(error) {
@@ -71,7 +52,7 @@ return {
                 });
         }
     } catch(e) {
-        mockDbif.w3cSqlCloseDatabase();
+        mockDbif.closeDatabase();
         // Error handling code goes here.
         if ( ctxt.sqlStatement !== null && ctxt.sqlStatement !== undefined ) {
             ctxt.log('E',"withDb.exception.sqlStmt", ctxt.sqlStatement.stmt);
