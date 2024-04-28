@@ -77,53 +77,5 @@ return {
         return;
     }
 },
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-/// APIs replicated from opendatakit to allow data table creation
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-purge:function(ctxt) {
-    throw new Error("this is never called -- see app-designer/devEnv/tab1.html -- that is the purge button (needs impl on appDesigner)");
-    
-    var that = this;
-    ctxt.log('I','mockImpl.purge.initiated');
-    var tableSets = [];
-    that.withDb( $.extend({},ctxt,{success:function() {
-            // OK we have tableSets[] constructed.
-            // Now drop all those tables and delete contents from metadata tables
-            that.withDb( ctxt, function(transaction) {
-                var i, sql, tableEntry;
-                for ( i = 0 ; i < tableSets.length ; ++i ) {
-                    tableEntry = tableSets[i];
-                    sql = mockSchema.dropTableStmt(tableEntry.table_id);
-                    ctxt.sqlStatement = sql;
-                    transaction.executeSql(sql.stmt, sql.bind);
-                }
-                sql = mockSchema.deleteEntireTableContentsTableStmt('key_value_store_active');
-                ctxt.sqlStatement = sql;
-                transaction.executeSql(sql.stmt, sql.bind);
-                
-                sql = mockSchema.deleteEntireTableContentsTableStmt('_column_definitions');
-                ctxt.sqlStatement = sql;
-                transaction.executeSql(sql.stmt, sql.bind);
-
-                sql = mockSchema.deleteEntireTableContentsTableStmt('_table_definitions');
-                ctxt.sqlStatement = sql;
-                transaction.executeSql(sql.stmt, sql.bind);
-            });
-        }}), function(transaction) {
-        var is = mockSchema.selectAllTableDbNamesAndIdsDataStmt();
-        ctxt.sqlStatement = is;
-        transaction.executeSql(is.stmt, is.bind, function(transaction, result) {
-            var len = result.rows.length;
-            var i, row, tableEntry;
-            for ( i = 0 ; i < len ; ++i ) {
-                row = result.rows.item(i);
-                tableEntry = { table_id: row._table_id };
-                tableSets.push(tableEntry);
-            }
-        });
-    });
-}
 };
 });

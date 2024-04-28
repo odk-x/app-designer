@@ -1408,27 +1408,27 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
          * Return the location of the currently executing file.
          */
         _getCurrentFileLocation: function () {
-          // We need to get the location of the currently
-          // executing file. This is not readily exposed, and it is not as simple as
-          // finding the current script tag, since callers might be loading the file
-          // using RequireJS or some other loading library. We're going to instead
-          // pull the file location out of a stack trace.
-          var error = new Error();
-          var stack = error.stack;
+            //#codesmell
+            // We need to get the location of the currently
+            // executing file. This is not readily exposed, and it is not as simple as
+            // finding the current script tag, since callers might be loading the file
+            // using RequireJS or some other loading library. We're going to instead
+            // pull the file location out of a stack trace.
+            var error = new Error();
+            var stack = error.stack;
 
-          // We expect the stack to look something like:
-          // TypeError: undefined is not a function
-          //     at Object.window.odkCommon.getPlatformInfo
-          //     (http://homes.cs.washington.edu/~sudars/odk/survey-js-adaptr/app/system/js/odkCommon.js:45:29)
-          //     blah blah blah
-          // So now we'll extract the file location. We'll do this by assuming that
-          // the location occurs in the first parentheses.
-          var openParen = stack.indexOf('(');
-          var closedParen = stack.indexOf(')');
+            // We expect the stack to look something like:
+            // TypeError: undefined is not a function
+            //     at Object.window.odkCommon.getPlatformInfo
+            //     (http://homes.cs.washington.edu/~sudars/odk/survey-js-adaptr/app/system/js/odkCommon.js:45:29)
+            //     blah blah blah
+            // So now we'll extract the file location. We'll do this by assuming that
+            // the location occurs in the first parentheses.
+            var openParen = stack.indexOf('http');
+            var closedParen = stack.indexOf('odkCommon.js');
 
-          var fileLocation = stack.substring(openParen + 1, closedParen);
-
-          return fileLocation;
+            var fileLocation = stack.substring(openParen, closedParen + 'odkCommon.js'.length);
+            return fileLocation;
         },
         /**
          * Compute and return the base URI for this machine. This will allow the code
@@ -1443,14 +1443,10 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
           // changed, this file must be updated appropriately.
           // Since we are expecting this file to live in app/system/tables/js/, we
           // can look for the first occurrence and take everything before it.
-
-          var expectedFileLocation = 'system/js/odkCommon.js';
-
-          var fileLocation = this._getCurrentFileLocation();
-
-          var indexToFile = fileLocation.indexOf(expectedFileLocation);
-
-          var result = fileLocation.substring(0, indexToFile);
+          //#codesmell
+          const fileLocation = this._getCurrentFileLocation()
+          const indexToFile = fileLocation.indexOf('system/js/odkCommon.js')
+          const result = fileLocation.substring(0, indexToFile);
 
           return result;
 
