@@ -30,6 +30,7 @@ var setHeaders = function(res, path) {
     res.setHeader('Cross-Origin-Embedder-Policy', 'credentialless');
     res.setHeader('Cross-Origin-Opener-Policy', 'cross-origin');
     res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+    res.setHeader('Content-Security-Policy',`frame-ancestors 'self' http://localhost:${SERVER_PORT} http://localhost:${LIVERELOAD_PORT}`);
     res.setHeader('X-Content-Type-Options', '');
 }
 
