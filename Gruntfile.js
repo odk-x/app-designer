@@ -30,6 +30,7 @@ var setHeaders = function(res, path) {
     res.setHeader('Cross-Origin-Embedder-Policy', 'credentialless');
     res.setHeader('Cross-Origin-Opener-Policy', 'cross-origin');
     res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+    res.setHeader('X-Content-Type-Options', '');
 }
 
 var postHandler = function(req, res, next) {
@@ -239,6 +240,12 @@ module.exports = function (grunt) {
             livereload: {
                 options: {
                     middleware: function(connect, options, middlewares) {
+                        // Add the middleware for setting headers
+                        middlewares.unshift(function(req, res, next) {
+                            setHeaders(res);
+                            next();
+                        });
+
                         middlewares.unshift(postHandler);
                         middlewares.unshift(lrSnippet);                        
                         middlewares.unshift(mountFolder(baseDirForServer));
