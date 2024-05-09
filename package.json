@@ -2,6 +2,7 @@
   "name": "jswebviewer",
   "version": "0.0.0",
   "dependencies": {
+    "@sqlite.org/sqlite-wasm": "^3.45.3-build1",
     "archiver": "^5.3.0",
     "base64-stream": "^1.0.0",
     "browser-request": "^0.3.3",
@@ -10,13 +11,13 @@
   "devDependencies": {
     "connect-livereload": "~0.6.1",
     "grunt": "^1.5.3",
-    "grunt-contrib-connect": "~3.0.0",
+    "grunt-contrib-connect": "~4.0.0",
     "grunt-contrib-watch": "^1.1.0",
     "grunt-exec": "~3.0.0",
     "grunt-open": "~0.2.4",
     "load-grunt-tasks": "~5.1.0",
     "serve-index": "^1.9.1",
-    "serve-static": "^1.14.1",
+    "serve-static": "^1.15.0",
     "time-grunt": "~2.0.0"
   },
   "engines": {

@@ -56,8 +56,6 @@ keyValueStoreActivePredefinedColumns: {
                     _type: { type: 'string', isNotNullable: false },
                     _value: { type: 'string', isNotNullable: false } },
 createTableStmt: function( dbTableName, dataTableModel, tableConstraint ) {
-        var that = this;
-        // TODO: verify that dbTableName is not already in use...
         var createTableCmd = 'CREATE TABLE IF NOT EXISTS "' + dbTableName + '"(';
         var comma = '';
         for ( var dbColumnName in dataTableModel ) {
@@ -88,10 +86,7 @@ createTableStmt: function( dbTableName, dataTableModel, tableConstraint ) {
             createTableCmd += comma + tableConstraint + " ";
         }
         createTableCmd += ');';
-        return  {
-            stmt : createTableCmd,
-            bind : []
-        };
+        return createTableCmd;
     },
 dropTableStmt: function(dbTableName) {
         return { stmt: 'drop table if exists "' + dbTableName + '"',
@@ -103,32 +98,18 @@ deleteEntireTableContentsTableStmt: function(dbTableName) {
                 bind: []
             };
     },
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-//   DATA TABLE DATA
-//   DATA TABLE DATA
-//   DATA TABLE DATA
-//   DATA TABLE DATA
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-// Records in the data table are always inserted.
-// Metadata columns are indicated by a leading underscore in the name.
-//
-// The _savepoint_type (metadata) column === "COMPLETE" if they are 'official' values.
-// Otherwise, _savepoint_type === "INCOMPLETE" indicates a manual user savepoint and
-// _savepoint_type IS NULL indicates an automatic (checkpoint) savepoint.
-// The _savepoint_timestamp indicates the time in NANOSECONDS at which the savepoint occured.
 
 /**
  * add row for first time
- */
- /**
+ *
+ *
+ * Records in the data table are always inserted.
+ * Metadata columns are indicated by a leading underscore in the name.
+ *
+ * The _savepoint_type (metadata) column === "COMPLETE" if they are 'official' values.
+ * Otherwise, _savepoint_type === "INCOMPLETE" indicates a manual user savepoint and
+ * _savepoint_type IS NULL indicates an automatic (checkpoint) savepoint.
+ * The _savepoint_timestamp indicates the time in NANOSECONDS at which the savepoint occured.
  * insert an entirely new savepoint for the given instanceId (not based upon
  * the values in any existing record). Called when creating a new instance
  * or (TODO) sub-form instance.
@@ -412,20 +393,7 @@ insertCheckpointChangesDataTableStmt:function(tableDef, changes, rowId) {
         bind : bindings
         };
 },
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-//   TABLE META DATA
-//   TABLE META DATA
-//   TABLE META DATA
-//   TABLE META DATA
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
+
 selectAllTableDbNamesAndIdsDataStmt: function() {
     return {
             stmt: 'select _table_id from _table_definitions',
