@@ -223,8 +223,12 @@ promptTypes.base = Backbone.View.extend({
             if (currEl.length > 0) {
                 currElString = currEl[0].innerHTML;
                 currElStringNoSpaces = currElString.replace(/\s/g, '');
-            }
-            var toBeDrawnEl = that.template(that.renderContext);
+            }            
+            var toBeDrawnEl = that.template(that.renderContext, {
+                // Subverting breaking change in handlebars v. 4.6 to allow access to "not own" properties (insecure)
+                allowProtoMethodsByDefault: true, 
+                allowProtoPropertiesByDefault: true
+            });
             var tbdString = null;
             if (toBeDrawnEl !== null && toBeDrawnEl !== undefined) {
                 tbdString = toBeDrawnEl.replace(/\s/g, '');
@@ -511,7 +515,7 @@ promptTypes.finalize = promptTypes.base.extend({
         } else {
             // Now we are always going to display instance id
             // unless this decision changes ...
-            that.renderContext.display_field = ts.toISOString();
+            that.renderContext.display_field = ts?.toISOString();
         }
         if ( that._screen && that._screen._renderContext ) {
             that._screen._renderContext.enableForwardNavigation = false;

@@ -386,23 +386,14 @@ window.odkData = {
         var that = this;
         setTimeout(function() {
             var resultJSON = that.getOdkDataIf().getResponseJSON();
-            //odkCommon.log('D','odkData:resultJSON is ' + resultJSON);
-
             var result = JSON.parse(resultJSON);
-
             var callbackFnStr = result.callbackJSON;
-            // odkCommon.log('D','odkData:callbackJSON is ' + callbackFnStr);
 
             that.invokeCallbackFn(result, callbackFnStr);
 
         }, 0);
     },
 
-    //
-    // The code for the data object has
-    // been moved here since this is only
-    // accessed here
-    //
     __getResultData : function() {
 
         /**

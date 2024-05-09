@@ -110,6 +110,7 @@ span {
 	border-right-width: 0px;
 	border-bottom-width: 0px;
 	border-left-width: 0px;
+	min-height: 600px;
 }
 .themeviewport {
 	margin: 0 auto;

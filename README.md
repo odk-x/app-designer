@@ -43,7 +43,7 @@ Much of the boilerplate of app creation can be avoided by employing the Grunt ta
 Make sure Java 8 or higher is installed on the computer you plan to use.  If it is not, [download and install it](https://java.com/en/download/). If you are using MacOSX, it may require special care and attention.See [MacOSX Java install](https://docs.oracle.com/javase/8/docs/technotes/guides/install/mac_jdk.html) and [MacOSX Java FAQ](https://docs.oracle.com/javase/8/docs/technotes/guides/install/mac_install_faq.html).
 
 ### NodeJS
-You must use Version 12 or higher. To avoid directory path problems on Windows, we require npm version 6.9 or higher (generally npm will be bundled with NodeJS installer). Follow the [instructions to install NodeJS](https://nodejs.org/en/download/package-manager/).
+You must use Version 20 or higher. To avoid directory path problems on Windows, we require npm version 10 or higher (generally npm will be bundled with NodeJS installer). Follow the [instructions to install NodeJS](https://nodejs.org/en/download/package-manager/).
 
 ### For Windows
 When installing on Windows you can use an automated **NodeJS** installer that uses **Chocolatey**. If you chose not to let the installer use **Chocolatey** to install a bunch of packages after installing **NodeJS**, you will need to ensure the location of the `npm` folder is added to the *PATH* variable of your system. If it is not, subsequent calls to access grunt will fail. For example: `C:\Users\[username]\AppData\Roaming\npm`. For instructions on modifying *PATH*, see the section at the bottom of this page called Add adb to your *PATH* For Windows. Instead of navigating to the location of Android SDK, navigate to the location of the `npm` folder.
@@ -211,8 +211,6 @@ $ grunt --verbose connect:livereload:keepalive
 ```
 This will start grunt, but disable the file-change detection mechanisms that automatically reload an HTML page when it or any JavaScript file it uses has been modified. Others have reported that uninstalling npm and node, and then re-installing them may correct the issue.
 
-If you get the error "You must use Chrome or Safari Browser (note: this is tested only in chrome browser)" even when using any of these , it’s likely due to the removal of the built-in DB on Chrome. Until mid-2024 (M123), you can resolve this by re-enabling it using chrome://flags/#web-sql-access.
-
 #### Windows Users Tip
 You will be opening a **cmd** window and changing your current directory (using the **cd** command) into this directory every time you use this tool.  It is therefore useful to create a shortcut that opens a cmd window directly into this directory:
 1) Open a file browser and navigate to the unzipped directory containing a number of files and directories, including a **Gruntfile.js**.
@@ -243,7 +241,7 @@ Once you’re up and running, you can choose an issue to start working on from h
 
 Issues tagged as [good first issue](https://github.com/odk-x/tool-suite-X/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) should be a good place to start.
 
-Pull requests are welcome, though please submit them against the development branch. We prefer verbose descriptions of the change you are submitting. If you are fixing a bug please provide steps to reproduce it or a link to a an issue that provides that information. If you are submitting a new feature please provide a description of the need or a link to a forum discussion about it. 
+Pull requests are welcome, though please submit them against the development branch. We prefer verbose descriptions of the change you are submitting. If you are fixing a bug, please provide steps to reproduce it or a link to an issue that provides that information. If you are submitting a new feature, please provide a description of the need or a link to a forum discussion about it. 
 
 ## Links for users
 This document is aimed at helping developers and technical contributors. For information on how to get started as a user of ODK-X, see our [online documentation](https://docs.odk-x.org), or to learn more about the Open Data Kit project, visit [https://odk-x.org](https://odk-x.org).
