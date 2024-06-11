@@ -3,15 +3,16 @@
         <center><img src="{{ headerImg }}" class="odk-formlogo" /></center>
         <hr>
     </div>
+    <div class="instance-formid">
 	{{{localizeText display.instances_survey_form_identification}}}
-
+      </div>  
     <div class="instanceClearDiv"></div>
     <div>
         <fieldset class="instanceNew">
             <div class="row">
-                <div>
-                    <button type="button" class="createInstance btn btn-default" tabindex="0">{{localizeText display.new_button_label}}
-                        <span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"></span>
+                <div class="instance-button ml-6">
+                    <button type="button" class="createInstance btn btn-default p-4 text-center" tabindex="0">{{localizeText display.new_button_label}}
+                        <span class="glyphicon glyphicon-plus-sign" style="font-size: 12px;"></span>
                     </button>
                 </div>
             </div>
@@ -29,7 +30,7 @@
                 {{/if}}
                 <li class="list-group-item">
                     <fieldset class="instanceListGrid">
-                        <div class="row">
+                        <div class="row-list">
                             <div class="col-xs-8">
                                 <p><strong>{{display_field}}</strong></p>
 								{{{localizeText ../display.instances_last_save_date_label}}}
@@ -55,7 +56,9 @@
                     </fieldset>
                 </li>
             {{else}}
-                <li>{{localizeText display.instances_no_saved_instances_label}}</li>
+            <div class="no-instance">
+                <p>{{localizeText display.instances_no_saved_instances_label}}</p>
+                <div>
             {{/each}}
         </ul>
     </div>
