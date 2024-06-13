@@ -577,6 +577,7 @@ promptTypes.instances = promptTypes.base.extend({
     valid: true,
     _cachedEvent: null,
 	_protoDisplay: {
+        search_instance: 'search_instance',
 		instances_survey_form_identification: 'survey_form_identification',
 		new_button_label: 'instances_survey_create_button_label',
 		instances_last_save_date_label: 'instances_last_save_date_label',
@@ -588,7 +589,8 @@ promptTypes.instances = promptTypes.base.extend({
     events: {
         "click .openInstance": "openInstance",
         "click .deleteInstance": "confirmDeleteInstance",
-        "click .createInstance": "createInstance"
+        "click .createInstance": "createInstance",
+        "click .searchInstance": "searchInstance"
     },
     configureRenderContext: function(ctxt) {
         var that = this;
@@ -714,8 +716,33 @@ promptTypes.instances = promptTypes.base.extend({
                 ctxt.failure(m);
             }}));
         }
+    },
+    searchInstance: function (evt) {
+        var that= this
+        that._cachedEvent = evt;
+        const search = document.getElementById('searchBox');
+        // if (that._cachedEvent === null || that._cachedEvent === undefined) {
+        //     return;
+        // }
+        var instanceToSearch = $(evt.currentTarget).attr('display_value');
+        
+        console.log(search)
+        if ( instanceToSearch !== null && instanceToSearch !== undefined ) {
+            var ctxt = that.controller.newContext(that._cachedEvent, that.type + ".searchInstance");
+            that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+                odkCommon.log('D',"prompts." + that.type + ".searchInstance", "px: " + that.promptIdx);
+                that.controller.searchInstance(ctxt, instanceToSearch)
+            }}))
+            // search.addEventListener('keyup',(e)=>{
+            //     console.log(ctxt);
+            // })
+
+        }
     }
+
+    
 });
+    
 promptTypes.contents = promptTypes.base.extend({
     type:"contents",
     hideInContents: true,
