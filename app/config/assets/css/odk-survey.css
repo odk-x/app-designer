@@ -46,6 +46,7 @@ body {
     padding-left: 1em;
     padding-right: 1em;
     padding-bottom: 3em;
+    margin: 24px;
 }
 
 .input-container {
@@ -241,7 +242,7 @@ input[type="range"]::-webkit-slider-thumb:before {
     /*
     The height is a trade-off, we get a better looking regular grid with it set,
     but we loose the ability auto-fit arbitrary sized content.
-    Maybe I could use a table to get the best of both worlds. 
+    Maybe I could use a table to get the best of both worlds.
     */
     width: 130px;
     margin: 2px;
@@ -337,8 +338,22 @@ Eventually we should make a jqm theme for this.
     width: 100%;
 }
 
+.create-instance{
+     display: flex;
+     justify-content: center;
+     gap: 8px;
+     background-color: #5594d7;
+     color: white;
+     text-align: center;
+     font-size: 14px;
+     border: none;
+     border-radius: 24px;
+     width: 100%;
+     padding: 16px;
+    }
+
 .instanceRowControl{
-  float: right;
+   float:right;
 }
 
 .openingRowControl{
@@ -629,3 +644,7 @@ Eventually we should make a jqm theme for this.
     overflow:hidden;
     margin-right:50px;
 }
+
+/*create new instance button  and  go to next prompt */
+
+
