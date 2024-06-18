@@ -338,7 +338,7 @@ Eventually we should make a jqm theme for this.
     width: 100%;
 }
 
-.create-instance{
+.createInstance{
      display: flex;
      justify-content: center;
      gap: 8px;
@@ -645,6 +645,6 @@ Eventually we should make a jqm theme for this.
     margin-right:50px;
 }
 
-/*create new instance button  and  go to next prompt */
+
 
 
