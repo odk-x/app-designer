@@ -67,7 +67,7 @@ cp -r "$appConfig/assets/framework"/* "$surveyConfig/assets/framework"
 # Survey config img files
 cp "$appConfig/assets/img/advance.png" "$surveyConfig/assets/img/advance.png"
 cp "$appConfig/assets/img/backup.png" "$surveyConfig/assets/img/backup.png"
-cp "$appConfig/assets/img/form_logo.png" "$surveyConfig/assets/img/form_logo.png"
+cp "$appConfig/assets/img/form_logo_new.png" "$surveyConfig/assets/img/form_logo_new.png"
 cp "$appConfig/assets/img/play.png" "$surveyConfig/assets/img/play.png"
 
 #Move all the necessary Survey system files over

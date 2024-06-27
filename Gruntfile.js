@@ -469,7 +469,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 				'config/assets/framework/**',
                 'config/assets/commonDefinitions.js',
                 'config/assets/img/play.png',
-                'config/assets/img/form_logo.png',
+                'config/assets/img/form_logo_new.png',
                 'config/assets/img/backup.png',
                 'config/assets/img/advance.png',
                 'config/assets/css/odk-survey.css',
@@ -1067,7 +1067,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			'config/assets/css/odk-survey.css',
 			'config/assets/img/advance.png',
 			'config/assets/img/backup.png',
-			'config/assets/img/form_logo.png',
+			'config/assets/img/form_logo_new.png',
 			'config/assets/img/little_arrow.png',
 			'config/assets/img/play.png',
 			'config/assets/libs/**',
@@ -1141,7 +1141,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			'config/assets/css/odk-survey.css',
 			'config/assets/img/advance.png',
 			'config/assets/img/backup.png',
-			'config/assets/img/form_logo.png',
+			'config/assets/img/form_logo_new.png',
 			'config/assets/img/little_arrow.png',
 			'config/assets/img/play.png',
 			'config/assets/libs/**',
@@ -1220,7 +1220,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			'config/assets/css/odk-survey.css',
 			'config/assets/img/advance.png',
 			'config/assets/img/backup.png',
-			'config/assets/img/form_logo.png',
+			'config/assets/img/form_logo_new.png',
 			'config/assets/img/little_arrow.png',
 			'config/assets/img/play.png',
 			'config/assets/libs/**',
@@ -1310,7 +1310,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			'config/assets/css/odk-survey.css',
 			'config/assets/img/advance.png',
 			'config/assets/img/backup.png',
-			'config/assets/img/form_logo.png',
+			'config/assets/img/form_logo_new.png',
 			'config/assets/img/little_arrow.png',
 			'config/assets/img/play.png',
 			'config/assets/libs/**',
@@ -1472,7 +1472,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			'config/assets/css/odk-survey.css',
 			'config/assets/img/advance.png',
 			'config/assets/img/backup.png',
-			'config/assets/img/form_logo.png',
+			'config/assets/img/form_logo_new.png',
 			'config/assets/img/little_arrow.png',
 			'config/assets/img/play.png',
 			'config/assets/libs/**',
@@ -1862,7 +1862,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 					// to /sdcard/odk/forms
 					// I.e., this folder should contain things like:
 					//  .../formid.xml
-					//  .../formid-media/form_logo.jpg
+					//  .../formid-media/form_logo_new.jpg
 					//  .../formid-media/...
 					//  .../formid2.xml
 					//
