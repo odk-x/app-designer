@@ -223,10 +223,10 @@ promptTypes.base = Backbone.View.extend({
             if (currEl.length > 0) {
                 currElString = currEl[0].innerHTML;
                 currElStringNoSpaces = currElString.replace(/\s/g, '');
-            }            
+            }
             var toBeDrawnEl = that.template(that.renderContext, {
                 // Subverting breaking change in handlebars v. 4.6 to allow access to "not own" properties (insecure)
-                allowProtoMethodsByDefault: true, 
+                allowProtoMethodsByDefault: true,
                 allowProtoPropertiesByDefault: true
             });
             var tbdString = null;
@@ -623,9 +623,11 @@ promptTypes.instances = promptTypes.base.extend({
                     if ( savepoint_type === opendatakit.savepoint_type_complete ) {
                         term.savepoint_type_text = that.savepoint_type_finalized_text;
 						term.is_checkpoint = false;
+						term.status_class = 'finalized';
                     } else if ( savepoint_type === opendatakit.savepoint_type_incomplete ) {
                         term.savepoint_type_text = that.savepoint_type_incomplete_text;
 						term.is_checkpoint = false;
+						term.status_class = 'incomplete';
                     } else {
                         term.savepoint_type_text = that.savepoint_type_checkpoint_text;
 						term.is_checkpoint = true;
@@ -2209,7 +2211,7 @@ promptTypes.birth_date = promptTypes.date_no_time.extend({
         }
     },
 });
-    
+
 promptTypes.date_year_only = promptTypes.date_no_time.extend({
     type: "date",
     showTime: false,
@@ -2336,7 +2338,7 @@ promptTypes.coptic_calendar_picker = promptTypes.non_gregorian_calendar.extend({
             that.insideAfterRender = false;
         }
     },
-    
+
     formatDBVal: function(formattedDateValue) {
         var outputValue = null;
         if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
@@ -2366,7 +2368,7 @@ promptTypes.ethiopian_calendar_picker = promptTypes.non_gregorian_calendar.exten
             that.insideAfterRender = false;
         }
     },
-    
+
     formatDBVal: function(formattedDateValue) {
         var outputValue = null;
         if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
@@ -2396,7 +2398,7 @@ promptTypes.hebrew_calendar_picker = promptTypes.non_gregorian_calendar.extend({
             that.insideAfterRender = false;
         }
     },
-    
+
     formatDBVal: function(formattedDateValue) {
         var outputValue = null;
         if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
@@ -2426,7 +2428,7 @@ promptTypes.islamic_calendar_picker = promptTypes.non_gregorian_calendar.extend(
             that.insideAfterRender = false;
         }
     },
-    
+
     formatDBVal: function(formattedDateValue) {
         var outputValue = null;
         if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
@@ -2456,7 +2458,7 @@ promptTypes.julian_calendar_picker = promptTypes.non_gregorian_calendar.extend({
             that.insideAfterRender = false;
         }
     },
-    
+
     formatDBVal: function(formattedDateValue) {
         var outputValue = null;
         if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
@@ -2486,7 +2488,7 @@ promptTypes.mayan_calendar_picker = promptTypes.non_gregorian_calendar.extend({
             that.insideAfterRender = false;
         }
     },
-    
+
     formatDBVal: function(formattedDateValue) {
         var outputValue = null;
         if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
@@ -2516,7 +2518,7 @@ promptTypes.nanakshahi_calendar_picker = promptTypes.non_gregorian_calendar.exte
             that.insideAfterRender = false;
         }
     },
-    
+
     formatDBVal: function(formattedDateValue) {
         var outputValue = null;
         if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
@@ -2546,7 +2548,7 @@ promptTypes.nepali_calendar_picker = promptTypes.non_gregorian_calendar.extend({
             that.insideAfterRender = false;
         }
     },
-    
+
     formatDBVal: function(formattedDateValue) {
         var outputValue = null;
         if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
@@ -2576,7 +2578,7 @@ promptTypes.persian_calendar_picker = promptTypes.non_gregorian_calendar.extend(
             that.insideAfterRender = false;
         }
     },
-    
+
     formatDBVal: function(formattedDateValue) {
         var outputValue = null;
         if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
@@ -2606,7 +2608,7 @@ promptTypes.taiwan_calendar_picker = promptTypes.non_gregorian_calendar.extend({
             that.insideAfterRender = false;
         }
     },
-    
+
     formatDBVal: function(formattedDateValue) {
         var outputValue = null;
         if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
@@ -2636,7 +2638,7 @@ promptTypes.thai_calendar_picker = promptTypes.non_gregorian_calendar.extend({
             that.insideAfterRender = false;
         }
     },
-    
+
     formatDBVal: function(formattedDateValue) {
         var outputValue = null;
         if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
@@ -2666,7 +2668,7 @@ promptTypes.ummalqura_calendar_picker = promptTypes.non_gregorian_calendar.exten
             that.insideAfterRender = false;
         }
     },
-    
+
     formatDBVal: function(formattedDateValue) {
         var outputValue = null;
         if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
