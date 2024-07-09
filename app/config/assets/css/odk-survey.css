@@ -341,6 +341,7 @@ Eventually we should make a jqm theme for this.
   float: right;
   display: flex;
   margin-right: 10px;
+  gap: 5px;
 }
 
 .openingRowControl{
