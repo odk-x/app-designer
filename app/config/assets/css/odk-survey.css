@@ -344,6 +344,20 @@ Eventually we should make a jqm theme for this.
   gap: 5px;
 }
 
+.instanceRowControl .openInstance{
+   border-top-left-radius: 8px!important;
+   border-top-right-radius: 8px!important;
+   border-bottom-right-radius: 8px!important;
+   border-bottom-left-radius: 8px!important;
+ }
+
+.instanceRowControl .deleteInstance {
+   border-top-left-radius: 8px!important;
+   border-top-right-radius: 8px!important;
+   border-bottom-right-radius: 8px!important;
+   border-bottom-left-radius: 8px!important;
+   }
+
 .openingRowControl{
   float: right;
 }
