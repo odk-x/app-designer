@@ -340,7 +340,7 @@ Eventually we should make a jqm theme for this.
 .instanceRowControl{
   float: right;
   display: flex;
-  margin-right: 10px;
+  margin-right: auto;
   gap: 5px;
 }
 
