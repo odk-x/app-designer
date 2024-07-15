@@ -640,7 +640,7 @@ Eventually we should make a jqm theme for this.
     color: #1CCB3D;
     background-color: #F0FDF2;
     height: 40px;
-    border-radius:15px
+    border-radius: 15px
 }
 
 .savepoints.incomplete {
@@ -653,6 +653,6 @@ Eventually we should make a jqm theme for this.
     color: #DF961F;
     background-color: #FCF8EA;
     height: 40px;
-    border-radius:15px
+    border-radius: 15px
 }
 
