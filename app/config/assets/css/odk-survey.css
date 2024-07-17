@@ -291,14 +291,6 @@ input[type="range"]::-webkit-slider-thumb:before {
     background-color: white;
 }
 
-
-
-
-
-
-
-
-/* popups */
 .modal{
    display: block;
    background-color: rgba(0, 0, 0, 0.5);
@@ -316,41 +308,37 @@ input[type="range"]::-webkit-slider-thumb:before {
 
 .modal-body h3 {
     margin-bottom: 18px!important;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     color: black;
 }
 
 .modal-body p {
-  font-size: 18px;
+  font-size: 16px;
   margin-bottom: 20px;
   color: #333;
 }
 
-.btn-group-vertical {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    gap: 10px;
-    text-align: center;
-    background-color: none!important;
+.modal-body .btn-group-vertical{
+   display: flex;
+   margin-left: 30%;
+   gap: 10px;
 }
 
 #yes-btn {
-    background-color: #DB6262!important;
+    color: #DB6262!important;
+    background-color: transparent!important;
     border: none;
-    font-size: 14px;
-    border-radius: 20px;
-
+    font-size: 14px!important;
 }
 
 #no-btn {
-    background-color: #5594D7!important;
+    background-color: #F2F7FC!important;
+    color: black!important;
     border: none;
-    font-size: 14px;
+    font-size: 14px!important;
     border-radius: 20px;
 }
-
 
 /*
 Orangy glow.
