@@ -241,7 +241,7 @@ input[type="range"]::-webkit-slider-thumb:before {
     /*
     The height is a trade-off, we get a better looking regular grid with it set,
     but we loose the ability auto-fit arbitrary sized content.
-    Maybe I could use a table to get the best of both worlds. 
+    Maybe I could use a table to get the best of both worlds.
     */
     width: 130px;
     margin: 2px;
@@ -629,3 +629,5 @@ Eventually we should make a jqm theme for this.
     overflow:hidden;
     margin-right:50px;
 }
+
+
