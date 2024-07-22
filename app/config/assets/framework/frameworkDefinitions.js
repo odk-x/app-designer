@@ -215,7 +215,7 @@ window.odkFrameworkDefinitions = {
     "survey_form_identification": {
       "string_token": "survey_form_identification",
       "text": {
-        "default": "<div><center><span style='color: #DF961F; font-weight:bold;'>SURVEY</span></center><hr></div><div><p>Form name: {{localizeText form_title}}</p>{{#if form_version}}<p>Form version: {{form_version}}</p>{{/if}}<hr></div>",
+        "default": "<div><center><span style='color: #DF961F; font-weight:bold; margin-top:50%;'>SURVEY</span></center><hr></div><div><p>Form name: {{localizeText form_title}}</p>{{#if form_version}}<p>Form version: {{form_version}}</p>{{/if}}<hr></div>",
         "es": "<div><center>SURVEY</center><hr></div><div><p>Nombre del Formulario: {{localizeText form_title}}</p>{{#if form_version}}<p>Version de Formulario: {{form_version}}</p>{{/if}}<hr></div>"
       },
       "_row_num": 28
