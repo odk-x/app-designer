@@ -1,8 +1,5 @@
 <div>
-    <div>
-        <center><img src="{{ headerImg }}" class="odk-formlogo" /></center>
-        <hr>
-    </div>
+{{!--      logo removed--}}
 	{{{localizeText display.instances_survey_form_identification}}}
 
     <div class="instanceClearDiv"></div>
@@ -35,6 +32,7 @@
 								{{{localizeText ../display.instances_last_save_date_label}}}
                                 <p>{{savepoint_timestamp}}</p>
 								<p class="savepoints {{status_class}}"><strong>{{localizeText savepoint_type_text}}</strong></p>
+
 								{{#if is_checkpoint}}
 									<span class="glyphicon glyphicon-warning-sign"></span></p>
 								{{/if}}

@@ -473,7 +473,7 @@ promptTypes.opening = promptTypes.base.extend({
         ctxt.success();
     },
     renderContext: {
-        headerImg: requirejs.toUrl('../config/assets/img/form_logo.png'),
+        headerImg: requirejs.toUrl('../config/assets/img/form_logo_new.png'),
         backupImg: requirejs.toUrl('../config/assets/img/backup.png'),
         advanceImg: requirejs.toUrl('../config/assets/img/advance.png')
     },
@@ -643,7 +643,7 @@ promptTypes.instances = promptTypes.base.extend({
                 });
 
                 $.extend(that.renderContext, {
-                    headerImg: requirejs.toUrl('../config/assets/img/form_logo.png')
+                    headerImg: requirejs.toUrl('../config/assets/img/form_logo_new.png')
                 });
                 if ( that._screen && that._screen._renderContext ) {
                     that._screen._renderContext.showHeader = false;
