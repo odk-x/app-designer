@@ -331,8 +331,10 @@ Eventually we should make a jqm theme for this.
 }
 
 .odk-formlogo {
-    width: 100%;
+    width: 40%;
+    height: 40%;
 }
+
 .odk-label-image {
     width: 100%;
 }
@@ -654,3 +656,4 @@ Eventually we should make a jqm theme for this.
     overflow:hidden;
     margin-right:50px;
 }
+
