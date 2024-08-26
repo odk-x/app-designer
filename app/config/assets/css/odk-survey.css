@@ -310,7 +310,7 @@ input[type="range"]::-webkit-slider-thumb:before {
     margin-bottom: 18px!important;
     font-size: 18px;
     font-weight: bold;
-    color: black;
+    color: #1D1D1D ;
 }
 
 .modal-body p {
@@ -334,7 +334,7 @@ input[type="range"]::-webkit-slider-thumb:before {
 
 #no-btn {
     background-color: #F2F7FC!important;
-    color: black!important;
+    color: #1D1D1D!important;
     border: none;
     font-size: 14px!important;
     border-radius: 20px;
