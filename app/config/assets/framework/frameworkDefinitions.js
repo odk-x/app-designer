@@ -191,16 +191,16 @@ window.odkFrameworkDefinitions = {
     "confirm_action_no_label": {
       "string_token": "confirm_action_no_label",
       "text": {
-        "default": "NO",
-        "es": "NO"
+        "default": "CANCEL",
+        "es": "CANCELAR"
       },
       "_row_num": 25
     },
     "confirm_action_yes_label": {
       "string_token": "confirm_action_yes_label",
       "text": {
-        "default": "YES",
-        "es": "SI"
+        "default": "DELETE",
+        "es": "ELIMINAR"
       },
       "_row_num": 26
     },
