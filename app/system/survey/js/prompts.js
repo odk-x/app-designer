@@ -1309,9 +1309,12 @@ promptTypes.select = promptTypes._linked_type.extend({
         var matchedChoice = null;
         var choiceList = [];
         var newChoice = null;
-
         if (savedValue === null || savedValue === undefined)
             return choiceList;
+
+        if (!Array.isArray(savedValue)) {
+			savedValue = savedValue.split(',');
+		}
 
         for (var i = 0; i < savedValue.length; i++)
         {
