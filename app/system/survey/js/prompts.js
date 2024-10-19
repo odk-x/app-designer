@@ -1729,7 +1729,7 @@ promptTypes.input_type = promptTypes.base.extend({
     type: "input_type",
     templatePath: "templates/input_type.handlebars",
     inputAttributes: {
-        'placeholder':'not specified'
+        'placeholder':''
     },
     displayed: false,
     modified: false,
