@@ -738,7 +738,7 @@ Eventually we should make a jqm theme for this.
 }
 
 .odk-base button {
-    /* Apply styles for survey form */
+    /* Apply styles for survey app Button */
     transition: background-color 0.3s;
     cursor: pointer;
     border: none;
