@@ -247,10 +247,10 @@ module.exports = function (grunt) {
                             next();
                         });
 
-                        middlewares.unshift(postHandler);
-                        middlewares.unshift(lrSnippet);
                         middlewares.unshift(mountFolder(baseDirForServer));
                         middlewares.unshift(mountDirectory(baseDirForServer));
+                        middlewares.unshift(postHandler);
+                        middlewares.unshift(lrSnippet);
                         return middlewares;
                     }
                 }
@@ -259,12 +259,12 @@ module.exports = function (grunt) {
                 options: {
                     port: 8001,
                     middleware: [
-                            postHandler,
-                            lrSnippet,
-                            mountFolder('test'),
-                            mountFolder(baseDirForServer),
-                            mountDirectory(baseDirForServer)
-                        ]
+                        mountFolder('test'),
+                        mountFolder(baseDirForServer),
+                        mountDirectory(baseDirForServer),
+                        postHandler,
+                        lrSnippet
+                    ]
                 }
             }
         },
