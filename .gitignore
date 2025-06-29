@@ -4,3 +4,9 @@ app/output/props/*
 tempZipDir
 .idea/*
 node_modules
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

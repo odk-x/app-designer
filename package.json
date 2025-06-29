@@ -9,6 +9,8 @@
     "mkdirp": "^1.0.4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.53.1",
+    "@types/node": "^24.0.7",
     "connect-livereload": "~0.6.1",
     "grunt": "^1.5.3",
     "grunt-contrib-connect": "~4.0.0",
@@ -22,5 +24,6 @@
   },
   "engines": {
     "node": ">=0.8.0"
-  }
+  },
+  "scripts": {}
 }
