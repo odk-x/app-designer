@@ -9,6 +9,8 @@
     "mkdirp": "^1.0.4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.53.1",
+    "@types/node": "^24.0.7",
     "connect-livereload": "~0.6.1",
     "grunt": "^1.5.3",
     "grunt-contrib-connect": "~4.0.0",
@@ -16,11 +18,21 @@
     "grunt-exec": "~3.0.0",
     "grunt-open": "~0.2.4",
     "load-grunt-tasks": "~5.1.0",
+    "playwright": "^1.53.2",
     "serve-index": "^1.9.1",
     "serve-static": "^1.15.0",
     "time-grunt": "~2.0.0"
   },
   "engines": {
     "node": ">=0.8.0"
-  }
+  },
+  "scripts": {},
+  "description": "## Table of Contents - [Introduction](#introduction) - [Setting up your environment](#setting-up-your-environment)   - [Prerequisites](#prerequisites)   - [Java](#java)   - [NodeJS](#nodejs)     - [For Windows](#for-windows)     - [For Mac/Linux](#for-maclinux)   - [Grunt](#grunt)   - [Android SDK](#android-sdk)     - [Installing Android SDK](#installing-android-sdk)     - [Verifying Android SDK Installation](#verifying-android-sdk-installation)     - [Adding adb to your PATH](#adding-adb-to-your-path)       - [For Windows](#for-windows-1)       - [For Mac/Linux](#for-maclinux-1) - [Installing Application Designer](#installing-application-designer)   - [Windows Users Tip](#windows-users-tip)   - [MacOSX Users Tip](#macosx-users-tip) - [How to contribute](#how-to-contribute) - [Links for users](#links-for-users)",
+  "main": "Gruntfile.js",
+  "directories": {
+    "test": "tests"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
