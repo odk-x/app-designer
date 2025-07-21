@@ -22,22 +22,34 @@ jobs:
           name: Start Grunt Server
           background: true
           command: |
-            # Run only the server parts of grunt, skip the browser opening
-            npx grunt server connect:livereload watch
+            npx grunt connect:livereload:keepalive
       
       - run:
           name: Wait for server to be ready
           command: |
             echo "Waiting for server to start..."
-            for i in {1..60}; do
+            # Give the server a moment to initialize
+            sleep 3
+            
+            for i in {1..30}; do
               if curl -sSf http://localhost:8000 >/dev/null 2>&1; then
                 echo "Server is ready on port 8000!"
+                # Verify it's actually serving content
+                curl -s http://localhost:8000 | head -5
                 exit 0
               fi
-              echo "Attempt $i/60: Server not ready yet..."
+              echo "Attempt $i/30: Server not ready yet..."
               sleep 2
             done
-            echo "Server failed to start"
+            
+            echo "Server failed to start after 60 seconds"
+            echo "Debug information:"
+            netstat -tlnp | grep :8000 || echo "No process listening on port 8000"
+            ps aux | grep grunt || echo "No grunt processes found"
+            
+            # Check if grunt process exists but maybe on different port
+            netstat -tlnp | grep grunt || echo "No grunt-related ports found"
+            
             exit 1
       
       - run:
