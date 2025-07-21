@@ -17,8 +17,21 @@ jobs:
           command: npx playwright install --with-deps
 
       - run:
+          name: Start Grunt server in background
+          command: |
+            npx grunt &
+            sleep 15  # Wait for server to fully start
+          background: true
+
+      - run:
+          name: Wait for server to be ready
+          command: |
+            timeout 30 sh -c 'until curl -f http://localhost:8000; do sleep 1; done'
+
+      - run:
           name: Run Playwright tests
           command: npx playwright test
+          no_output_timeout: 10m
 
       - store_artifacts:
           path: test-results/
