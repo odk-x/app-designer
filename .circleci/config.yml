@@ -1,42 +1,50 @@
 version: 2.1
-
 jobs:
   test:
     docker:
       - image: mcr.microsoft.com/playwright:v1.43.1-jammy
-
     steps:
       - checkout
-
+      
+      - run:
+          name: Install system dependencies  
+          command: apt-get update && apt-get install -y curl
+      
       - run:
           name: Install dependencies
           command: npm ci
-
+      
       - run:
           name: Install Playwright Browsers
           command: npx playwright install --with-deps
-
+      
       - run:
           name: Start Grunt Server
+          background: true
           command: |
-            npx grunt &
-            echo $! > grunt.pid  # Save the PID
-            sleep 5  # Let it start
-            timeout 30 sh -c 'until curl -sSf http://localhost:8000; do sleep 1; done'
+            # Run only the server parts of grunt, skip the browser opening
+            npx grunt server connect:livereload watch
+      
+      - run:
+          name: Wait for server to be ready
+          command: |
+            echo "Waiting for server to start..."
+            for i in {1..60}; do
+              if curl -sSf http://localhost:8000 >/dev/null 2>&1; then
+                echo "Server is ready on port 8000!"
+                exit 0
+              fi
+              echo "Attempt $i/60: Server not ready yet..."
+              sleep 2
+            done
+            echo "Server failed to start"
+            exit 1
       
       - run:
           name: Run Playwright tests
           command: npx playwright test
           no_output_timeout: 10m
-
-      - run:
-          name: Stop Grunt Server
-          when: always
-          command: |
-            if [ -f grunt.pid ]; then
-              kill $(cat grunt.pid) || true
-            fi
-
+      
       - store_artifacts:
           path: test-results/
           destination: playwright-test-results
