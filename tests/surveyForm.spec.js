@@ -124,7 +124,7 @@ test.describe('ODK Form Application', () => {
     };
 
     // Load and start the form
-    await odkPage.selectForm('exampleForm ');
+    await odkPage.selectForm('exampleForm');
     await odkPage.createNewInstance();
     await odkPage.clickNext();
 
@@ -161,7 +161,7 @@ test.describe('ODK Form Application', () => {
     };
 
     // Load and start the form
-    await odkPage.selectForm('Agriculture ');
+    await odkPage.selectForm('Agriculture');
     await odkPage.createNewInstance();
     await odkPage.clickNextByText();
 
@@ -181,7 +181,7 @@ test.describe('ODK Form Application', () => {
     await odkPage.finalizeForm();
 
     // Follow the completion link after finalization
-    await odkPage.page.locator('#tab1').contentFrame().locator('iframe[name="screen"]').first().contentFrame().getByRole('button', { name: 'Follow link' }).click();
+    await odkPage.clickFollowLinkButton();
   });
 });
 
