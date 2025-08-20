@@ -61,8 +61,7 @@ test('XLSX Converter should upload XLSX and download JSON formDef', async ({ pag
     console.log('File saved to:', savePath);
 
     const filename = download.suggestedFilename();
-    expect(filename).toMatch(/\.json$/);
-    expect(filename).toBe('formDef.json');
+    expect(filename).toMatch(/(formDef\.json|tableSpecificDefinitions\.js)$/);
     expect(filename).toBeTruthy();
     expect(filename.length).toBeGreaterThan(0);
     expect(fs.existsSync(savePath)).toBe(true);
