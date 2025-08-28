@@ -200,7 +200,7 @@ module.exports = function (grunt) {
             },
 			macGenConvert: {
 				cmd: function(str, formDefFile) {
-					return 'node macGenConverter.js ' + str + ' > ' + formDefFile; 
+					return 'node macGenConverter.js ' + str + ' > ' + formDefFile;
 				}
 			}
         },
@@ -230,7 +230,7 @@ module.exports = function (grunt) {
         connect: {
             server: {
                 options: {
-                    setHeaders: setHeaders 
+                    setHeaders: setHeaders
                 }
             },
             options: {
@@ -247,10 +247,10 @@ module.exports = function (grunt) {
                             next();
                         });
 
-                        middlewares.unshift(postHandler);
-                        middlewares.unshift(lrSnippet);                        
                         middlewares.unshift(mountFolder(baseDirForServer));
                         middlewares.unshift(mountDirectory(baseDirForServer));
+                        middlewares.unshift(postHandler);
+                        middlewares.unshift(lrSnippet);
                         return middlewares;
                     }
                 }
@@ -259,33 +259,37 @@ module.exports = function (grunt) {
                 options: {
                     port: 8001,
                     middleware: [
-                            postHandler,
-                            lrSnippet,
-                            mountFolder('test'),
-                            mountFolder(baseDirForServer),
-                            mountDirectory(baseDirForServer)
-                        ]
-                }                
+                        mountFolder('test'),
+                        mountFolder(baseDirForServer),
+                        mountDirectory(baseDirForServer),
+                        postHandler,
+                        lrSnippet
+                    ]
+                }
             }
         },
-        open: {
+         open: {
             server: {
                 path: 'http://localhost:<%= connect.options.port %>/index.html',
-                app: {app: (function() {
-                    var platform = require('os').platform();
-                    // windows: *win*
-                    // mac: darwin
-                    if (platform.search('win') >= 0 &&
-                      platform.search('darwin') < 0) {
-                      // Windows expects chrome.
-                      grunt.log.writeln('detected Windows environment');
-                      return 'chrome';
-                    } else {
-                      // Mac (and maybe others--add as discovered), expects
-                      // Google Chrome
-                      grunt.log.writeln('detected non-Windows environment');
-                      return 'Google Chrome';
-                    }
+                app: {
+                    app: (function() {
+                        var platform = require('os').platform();
+                        // windows: *win*
+                        // mac: darwin
+                        // linux: linux
+                        if (platform.search('win') !== -1) {
+                            // Windows expects chrome.
+                            grunt.log.writeln('Detected Windows environment');
+                            return 'chrome';
+                        } else if (platform.search('darwin') !== -1) {
+                            // Mac expects "Google Chrome"
+                            grunt.log.writeln('Detected macOS environment');
+                            return 'Google Chrome';
+                        } else {
+                            // Default for Linux and potentially other environments
+                            grunt.log.writeln('Detected non-Windows, non-macOS environment');
+                            return 'google-chrome';
+                            }
                   })()
                 }
             }
@@ -365,7 +369,7 @@ module.exports = function (grunt) {
 			var platform = require('os').platform();
 			var isWindows = (platform.search('win') >= 0 &&
                              platform.search('darwin') < 0);
-							 
+
             var dirs = grunt.file.expand(
                 {filter: function(path) {
  						if ( !path.endsWith(".xlsx") ) {
@@ -373,7 +377,7 @@ module.exports = function (grunt) {
 						}
 						var cells = path.split((isWindows ? "\\" : "/"));
 						return (cells.length >= 6) &&
-						  ( cells[cells.length-1] === cells[cells.length-2] + ".xlsx" ); 
+						  ( cells[cells.length-1] === cells[cells.length-2] + ".xlsx" );
 					},
                  cwd: 'app' },
 				'**/*.xlsx',
@@ -396,30 +400,30 @@ module.exports = function (grunt) {
         });
 
 var zipAllFiles = function( destZipFile, filesList, completionFn ) {
-			// create a file to stream archive data to. 
+			// create a file to stream archive data to.
 			var fs = require('fs');
 			var archiver = require('archiver');
 
 			var output = fs.createWriteStream(destZipFile);
 			var archive = archiver('zip', {
-				store: true // Sets the compression method to STORE. 
+				store: true // Sets the compression method to STORE.
 			});
-			 
-			// listen for all archive data to be written 
+
+			// listen for all archive data to be written
 			output.on('close', function() {
 			  console.log(archive.pointer() + ' total bytes');
 			  console.log('archiver has been finalized and the output file descriptor has closed.');
 			  completionFn(true);
 			});
-			 
-			// good practice to catch this error explicitly 
+
+			// good practice to catch this error explicitly
 			archive.on('error', function(err) {
 			  throw err;
 			});
-			 
-			// pipe archive data to the file 
+
+			// pipe archive data to the file
 			archive.pipe(output);
-				
+
 			filesList.forEach(function(fileName) {
                 //  Have to add app back into the file name for the adb push
                 var src = tablesConfig.appDir + '/' + fileName;
@@ -429,7 +433,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 						grunt.log.writeln('error ' + err + ' adding ' + src + ' to file ' + destZipFile);
 				}} );
 			});
-			// finalize the archive (ie we are done appending files but streams have to finish yet) 
+			// finalize the archive (ie we are done appending files but streams have to finish yet)
 			archive.finalize();
 };
 
@@ -438,12 +442,12 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
         'BROKEN: does not compress and last file is not terminated properly. Construct the configzip and systemzip for survey and tables',
         function() {
 			var done = this.async();
-			
+
 			var buildDir = 'build' +
 				'/zips';
-			 
+
 			grunt.file.delete(buildDir + '/');
-			
+
 			grunt.file.mkdir(buildDir);
 			grunt.file.mkdir(buildDir + '/survey/');
 			grunt.file.mkdir(buildDir + '/tables/');
@@ -465,7 +469,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 				'config/assets/framework/**',
                 'config/assets/commonDefinitions.js',
                 'config/assets/img/play.png',
-                'config/assets/img/form_logo.png',
+                'config/assets/img/form_logo_new.png',
                 'config/assets/img/backup.png',
                 'config/assets/img/advance.png',
                 'config/assets/css/odk-survey.css',
@@ -493,16 +497,16 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 				'!**/.DS_Store',
                 '!**/~$*.xlsx');
 
-			zipAllFiles(buildDir + '/survey/systemzip', surveySystemZipFiles, 
+			zipAllFiles(buildDir + '/survey/systemzip', surveySystemZipFiles,
 				function(outcome) {
 					if ( outcome ) {
-						zipAllFiles(buildDir + '/survey/configzip', surveyConfigZipFiles, 
+						zipAllFiles(buildDir + '/survey/configzip', surveyConfigZipFiles,
 							function(outcome) {
 								if ( outcome ) {
-									zipAllFiles(buildDir + '/tables/systemzip', tablesSystemZipFiles, 
+									zipAllFiles(buildDir + '/tables/systemzip', tablesSystemZipFiles,
 										function(outcome) {
 											if ( outcome ) {
-												zipAllFiles(buildDir + '/tables/configzip', tablesConfigZipFiles, 
+												zipAllFiles(buildDir + '/tables/configzip', tablesConfigZipFiles,
 													function(outcome) {
 														if ( outcome ) {
 															grunt.log.writeln('success!');
@@ -816,7 +820,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 				destFileName = destFileName.substring(0,idx) + destFileName.substring(idx+demoInfix.length);
 				idx = destFileName.indexOf(demoInfix + ".");
 			}
-			
+
 			var idxDir = destFileName.indexOf(demoInfix + "/");
 			while ( idxDir >= 0 ) {
 				// directory...
@@ -824,7 +828,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 				destFileName = destFileName.substring(0,idxDir) + destFileName.substring(idxDir+demoInfix.length);
 				idxDir = destFileName.indexOf(demoInfix + "/");
 			}
-			
+
 			var buildDir = 'build' +
 				'/' +
 				demoInfix.substring(1);
@@ -858,7 +862,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 
 	//
 	// returns a function that will handle the adb push of files onto the
-	// device with any files containing ".infix." stripped of that infix 
+	// device with any files containing ".infix." stripped of that infix
 	// and any folders ending in ".infix" also stripped.
 	//
 	var infixRenameAdbPusher = function(demoInfix, offsetDir) {
@@ -884,7 +888,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 				destFileName = destFileName.substring(0,idx) + destFileName.substring(idx+demoInfix.length);
 				idx = destFileName.indexOf(demoInfix + ".");
 			}
-			
+
 			var idxDir = destFileName.indexOf(demoInfix + "/");
 			while ( idxDir >= 0 ) {
 				// directory...
@@ -1063,7 +1067,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			'config/assets/css/odk-survey.css',
 			'config/assets/img/advance.png',
 			'config/assets/img/backup.png',
-			'config/assets/img/form_logo.png',
+			'config/assets/img/form_logo_new.png',
 			'config/assets/img/little_arrow.png',
 			'config/assets/img/play.png',
 			'config/assets/libs/**',
@@ -1137,7 +1141,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			'config/assets/css/odk-survey.css',
 			'config/assets/img/advance.png',
 			'config/assets/img/backup.png',
-			'config/assets/img/form_logo.png',
+			'config/assets/img/form_logo_new.png',
 			'config/assets/img/little_arrow.png',
 			'config/assets/img/play.png',
 			'config/assets/libs/**',
@@ -1216,7 +1220,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			'config/assets/css/odk-survey.css',
 			'config/assets/img/advance.png',
 			'config/assets/img/backup.png',
-			'config/assets/img/form_logo.png',
+			'config/assets/img/form_logo_new.png',
 			'config/assets/img/little_arrow.png',
 			'config/assets/img/play.png',
 			'config/assets/libs/**',
@@ -1306,7 +1310,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			'config/assets/css/odk-survey.css',
 			'config/assets/img/advance.png',
 			'config/assets/img/backup.png',
-			'config/assets/img/form_logo.png',
+			'config/assets/img/form_logo_new.png',
 			'config/assets/img/little_arrow.png',
 			'config/assets/img/play.png',
 			'config/assets/libs/**',
@@ -1468,7 +1472,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			'config/assets/css/odk-survey.css',
 			'config/assets/img/advance.png',
 			'config/assets/img/backup.png',
-			'config/assets/img/form_logo.png',
+			'config/assets/img/form_logo_new.png',
 			'config/assets/img/little_arrow.png',
 			'config/assets/img/play.png',
 			'config/assets/libs/**',
@@ -1858,7 +1862,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 					// to /sdcard/odk/forms
 					// I.e., this folder should contain things like:
 					//  .../formid.xml
-					//  .../formid-media/form_logo.jpg
+					//  .../formid-media/form_logo_new.jpg
 					//  .../formid-media/...
 					//  .../formid2.xml
 					//
