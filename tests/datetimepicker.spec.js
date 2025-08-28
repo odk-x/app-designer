@@ -1,48 +1,83 @@
 const { test, expect } = require('@playwright/test');
 
 const BASE_URL = 'http://localhost:8000/index.html';
+const DEFAULT_TIMEOUT = 30000;
+
+const TEST_YEAR = new Date().getFullYear().toString();
+const JANUARY = '0';
+const AUGUST = '7';
+const FIRST_DAY = '1';
+const HOUR_23 = '23';
+const ETHIOPIAN_DAY_7 = '7';
+const ISLAMIC_DAY_9 = '9';
+
+async function getTab1Frame(page) {
+    return await page.locator('#tab1').contentFrame();
+}
+
+async function getScreenFrame(page) {
+    const tab1Frame = await getTab1Frame(page);
+    return await tab1Frame.locator('iframe[name="screen"]').contentFrame();
+}
+
+async function getPreviewScreenFrame(page) {
+    const tab1Frame = await getTab1Frame(page);
+    return await tab1Frame.locator('#previewscreen').contentFrame();
+}
+
+async function clickNext(frame) {
+    await frame.getByText('Next').first().click();
+}
+
+async function selectDateTime(frame, year, month, day, hour = null, minute = null) {
+    await frame.getByRole('combobox').first().selectOption(year);
+    await frame.getByRole('combobox').nth(1).selectOption(month);
+    await frame.getByRole('combobox').nth(2).selectOption(day);
+
+    if (hour !== null) {
+        await frame.getByRole('combobox').nth(3).selectOption(hour);
+    }
+
+    if (minute !== null) {
+        await frame.getByRole('combobox').nth(4).selectOption(minute);
+    }
+}
 
 test('DateTime Picker Flow', async ({ page }) => {
-    page.setDefaultTimeout(30000);
-
+    page.setDefaultTimeout(DEFAULT_TIMEOUT);
     await page.goto(BASE_URL, { waitUntil: 'networkidle' });
 
-    await page.locator('#tab1').contentFrame().locator('iframe[name="screen"]').contentFrame().getByRole('link', { name: 'DateTime Picker ' }).click();
-    await page.locator('#tab1').contentFrame().locator('iframe[name="screen"]').contentFrame().getByRole('button', { name: 'Follow link' }).click();
+    const screenFrame = await getScreenFrame(page);
+    const previewScreenFrame = await getPreviewScreenFrame(page);
 
-    await page.locator('#tab1').contentFrame().locator('#previewscreen').contentFrame().getByRole('button', { name: 'Create new instance ' }).click();
-    await page.locator('#tab1').contentFrame().locator('#previewscreen').contentFrame().getByText('Next').first().click();
+    await screenFrame.getByRole('link', { name: 'DateTime Picker ' }).click();
+    await screenFrame.getByRole('button', { name: 'Follow link' }).click();
 
-    await page.locator('#tab1').contentFrame().locator('#previewscreen').contentFrame().getByRole('combobox').first().selectOption('2025');
-    await page.locator('#tab1').contentFrame().locator('#previewscreen').contentFrame().getByRole('combobox').nth(1).selectOption('0');
-    await page.locator('#tab1').contentFrame().locator('#previewscreen').contentFrame().getByRole('combobox').nth(2).selectOption('1');
-    await page.locator('#tab1').contentFrame().locator('#previewscreen').contentFrame().getByText('Next').first().click();
+    await previewScreenFrame.getByRole('button', { name: 'Create new instance ' }).click();
+    await clickNext(previewScreenFrame);
 
-    await page.locator('#tab1').contentFrame().locator('#previewscreen').contentFrame().getByRole('combobox').first().selectOption('2025');
-    await page.locator('#tab1').contentFrame().locator('#previewscreen').contentFrame().getByRole('combobox').nth(1).selectOption('7');
-    await page.locator('#tab1').contentFrame().locator('#previewscreen').contentFrame().getByRole('combobox').nth(2).selectOption('1');
-    await page.locator('#tab1').contentFrame().locator('#previewscreen').contentFrame().getByRole('combobox').nth(3).selectOption('1');
-    await page.locator('#tab1').contentFrame().locator('#previewscreen').contentFrame().getByRole('combobox').nth(4).selectOption('0');
-    await page.locator('#tab1').contentFrame().locator('#previewscreen').contentFrame().getByText('Next').first().click();
+    await selectDateTime(previewScreenFrame, TEST_YEAR, JANUARY, FIRST_DAY);
+    await clickNext(previewScreenFrame);
 
-    await page.locator('#tab1').contentFrame().locator('#previewscreen').contentFrame().getByRole('combobox').first().selectOption('2025');
-    await page.locator('#tab1').contentFrame().locator('#previewscreen').contentFrame().getByRole('combobox').nth(1).selectOption('7');
-    await page.locator('#tab1').contentFrame().locator('#previewscreen').contentFrame().getByRole('combobox').nth(2).selectOption('23');
-    await page.locator('#tab1').contentFrame().locator('#previewscreen').contentFrame().getByText('Next').first().click();
+    await selectDateTime(previewScreenFrame, TEST_YEAR, AUGUST, FIRST_DAY, FIRST_DAY, JANUARY);
+    await clickNext(previewScreenFrame);
 
-    await page.locator('#tab1').contentFrame().locator('#previewscreen').contentFrame().getByRole('combobox').first().selectOption('0');
-    await page.locator('#tab1').contentFrame().locator('#previewscreen').contentFrame().getByRole('combobox').nth(1).selectOption('0');
-    await page.locator('#tab1').contentFrame().locator('#previewscreen').contentFrame().getByText('Next').first().click();
+    await selectDateTime(previewScreenFrame, TEST_YEAR, AUGUST, HOUR_23);
+    await clickNext(previewScreenFrame);
 
-    await page.locator('#tab1').contentFrame().locator('#previewscreen').contentFrame().getByRole('textbox', { name: 'Ethiopian Calendar' }).click();
-    await page.locator('#tab1').contentFrame().locator('#previewscreen').contentFrame().getByRole('link', { name: '7', exact: true }).click();
-    await page.locator('#tab1').contentFrame().locator('#previewscreen').contentFrame().getByText('Next').first().click();
+    await previewScreenFrame.getByRole('combobox').first().selectOption(JANUARY);
+    await previewScreenFrame.getByRole('combobox').nth(1).selectOption(JANUARY);
+    await clickNext(previewScreenFrame);
 
-    await page.locator('#tab1').contentFrame().locator('#previewscreen').contentFrame().getByRole('textbox', { name: 'Islamic Calendar' }).click();
-    await page.locator('#tab1').contentFrame().locator('#previewscreen').contentFrame().getByRole('link', { name: '9', exact: true }).click();
-    await page.locator('#tab1').contentFrame().locator('#previewscreen').contentFrame().getByText('Next').first().click();
+    await previewScreenFrame.getByRole('textbox', { name: 'Ethiopian Calendar' }).click();
+    await previewScreenFrame.getByRole('link', { name: ETHIOPIAN_DAY_7, exact: true }).click();
+    await clickNext(previewScreenFrame);
 
-    await page.locator('#tab1').contentFrame().locator('#previewscreen').contentFrame().getByRole('button', { name: 'Finalize' }).click();
+    await previewScreenFrame.getByRole('textbox', { name: 'Islamic Calendar' }).click();
+    await previewScreenFrame.getByRole('link', { name: ISLAMIC_DAY_9, exact: true }).click();
+    await clickNext(previewScreenFrame);
 
-    console.log('Test completed successfully!');
+    await previewScreenFrame.getByRole('button', { name: 'Finalize' }).click();
+
+    await page.waitForTimeout(2000);
 });
