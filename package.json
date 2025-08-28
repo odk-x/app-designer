@@ -10,14 +10,14 @@
   },
   "devDependencies": {
     "connect-livereload": "~0.6.1",
-    "grunt": "^1.5.3",
-    "grunt-contrib-connect": "~4.0.0",
+    "grunt": "^1.6.1",
+    "grunt-contrib-connect": "~5.0.0",
     "grunt-contrib-watch": "^1.1.0",
     "grunt-exec": "~3.0.0",
     "grunt-open": "~0.2.4",
     "load-grunt-tasks": "~5.1.0",
     "serve-index": "^1.9.1",
-    "serve-static": "^1.15.0",
+    "serve-static": "^1.16.0",
     "time-grunt": "~2.0.0"
   },
   "engines": {
