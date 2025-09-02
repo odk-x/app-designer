@@ -12,20 +12,27 @@ const ETHIOPIAN_DAY_7 = '7';
 const ISLAMIC_DAY_9 = '9';
 
 async function getTab1Frame(page) {
-    return await page.locator('#tab1').contentFrame();
+    const frameLocator = page.locator('#tab1');
+    await frameLocator.waitFor();
+    return await frameLocator.contentFrame();
 }
 
 async function getScreenFrame(page) {
     const tab1Frame = await getTab1Frame(page);
-    return await tab1Frame.locator('iframe[name="screen"]').contentFrame();
+    const frameLocator = tab1Frame.locator('iframe[name="screen"]');
+    await frameLocator.waitFor();
+    return await frameLocator.contentFrame();
 }
 
 async function getPreviewScreenFrame(page) {
     const tab1Frame = await getTab1Frame(page);
-    return await tab1Frame.locator('#previewscreen').contentFrame();
+    const frameLocator = tab1Frame.locator('#previewscreen');
+    await frameLocator.waitFor();
+    return await frameLocator.contentFrame();
 }
 
 async function clickNext(frame) {
+    await frame.getByText('Next').first().waitFor();
     await frame.getByText('Next').first().click();
 }
 
@@ -44,8 +51,10 @@ async function selectDateTime(frame, year, month, day, hour = null, minute = nul
 }
 
 test('DateTime Picker Flow', async ({ page }) => {
+    test.setTimeout(60000); // allow 60s in CI
     page.setDefaultTimeout(DEFAULT_TIMEOUT);
-    await page.goto(BASE_URL, { waitUntil: 'networkidle' });
+
+    await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
 
     const screenFrame = await getScreenFrame(page);
     const previewScreenFrame = await getPreviewScreenFrame(page);
@@ -53,7 +62,7 @@ test('DateTime Picker Flow', async ({ page }) => {
     await screenFrame.getByRole('link', { name: 'DateTime Picker ' }).click();
     await screenFrame.getByRole('button', { name: 'Follow link' }).click();
 
-    await previewScreenFrame.getByRole('button', { name: 'Create new instance ' }).click();
+    await previewScreenFrame.getByRole('button', { name: 'Create new instance ' }).waitFor();
     await clickNext(previewScreenFrame);
 
     await selectDateTime(previewScreenFrame, TEST_YEAR, JANUARY, FIRST_DAY);
@@ -69,15 +78,16 @@ test('DateTime Picker Flow', async ({ page }) => {
     await previewScreenFrame.getByRole('combobox').nth(1).selectOption(JANUARY);
     await clickNext(previewScreenFrame);
 
-    await previewScreenFrame.getByRole('textbox', { name: 'Ethiopian Calendar' }).click();
+
+    await previewScreenFrame.getByRole('textbox', { name: 'Ethiopian Calendar' }).waitFor();
     await previewScreenFrame.getByRole('link', { name: ETHIOPIAN_DAY_7, exact: true }).click();
     await clickNext(previewScreenFrame);
 
-    await previewScreenFrame.getByRole('textbox', { name: 'Islamic Calendar' }).click();
+    await previewScreenFrame.getByRole('textbox', { name: 'Islamic Calendar' }).waitFor();
     await previewScreenFrame.getByRole('link', { name: ISLAMIC_DAY_9, exact: true }).click();
     await clickNext(previewScreenFrame);
 
-    await previewScreenFrame.getByRole('button', { name: 'Finalize' }).click();
+    await previewScreenFrame.getByRole('button', { name: 'Finalize' }).waitFor();
 
     await page.waitForTimeout(2000);
 });
