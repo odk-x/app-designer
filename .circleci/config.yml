@@ -1,0 +1,72 @@
+version: 2.1
+jobs:
+  test:
+    docker:
+      - image: mcr.microsoft.com/playwright:v1.43.1-jammy
+    steps:
+      - checkout
+
+      - run:
+          name: Install system dependencies
+          command: apt-get update && apt-get install -y curl
+
+      - run:
+          name: Install dependencies
+          command: npm ci
+
+      - run:
+          name: Install Playwright Browsers
+          command: npx playwright install --with-deps
+
+      - run:
+          name: Start Grunt Server
+          background: true
+          command: |
+            npx grunt connect:livereload:keepalive
+      
+      - run:
+          name: Wait for server to be ready
+          command: |
+            echo "Waiting for server to start..."
+            # Give the server a moment to initialize
+            sleep 3
+            
+            for i in {1..30}; do
+              if curl -sSf http://localhost:8000 >/dev/null 2>&1; then
+                echo "Server is ready on port 8000!"
+                # Verify it's actually serving content
+                curl -s http://localhost:8000 | head -5
+                exit 0
+              fi
+              echo "Attempt $i/30: Server not ready yet..."
+              sleep 2
+            done
+            
+            echo "Server failed to start after 60 seconds"
+            echo "Debug information:"
+            netstat -tlnp | grep :8000 || echo "No process listening on port 8000"
+            ps aux | grep grunt || echo "No grunt processes found"
+            
+            # Check if grunt process exists but maybe on different port
+            ss -tlnp | grep :8000 || echo "No process listening on port 8000"
+            ps aux | grep grunt || echo "No grunt processes found"
+            
+            # Check if grunt process exists but maybe on different port
+            ss -tlnp | grep grunt || echo "No grunt-related ports found"
+            
+            exit 1
+      
+      - run:
+          name: Run Playwright tests
+          command: npx playwright test
+          no_output_timeout: 10m
+
+      - store_artifacts:
+          path: test-results/
+          destination: playwright-test-results
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test
