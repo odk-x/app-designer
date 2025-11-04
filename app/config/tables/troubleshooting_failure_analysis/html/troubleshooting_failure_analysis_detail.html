@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!-- TBL_IV_REF Detailed View -->
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="../../../assets/css/detail.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../../../assets/commonDefinitions.js"></script>
+        <script type="text/javascript" src="../../../assets/libs/jquery-3.4.1.js"></script>
+        <script type="text/javascript" src="../../../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="../../../assets/js/util.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    </head>
+    <body>
+        <script type="text/javascript" src="../js/troubleshooting_failure_analysis_detail.js"></script>
+
+        <div class="card-header">
+            <div class="title-block">
+                <h3><span id="frig-hdr">Refrigerator</span></h3>
+                <span id="tracking_id" class="tracking-id">Loading..</span>
+            </div>
+			<div class="header-icons">
+                <i class="bi bi-hospital"></i>
+                <i class="bi bi-bar-chart-line"></i>
+                <i class="bi bi-box"></i>
+                <i class="bi bi-hospital"></i>
+                <i class="bi bi-snow"></i>
+            </div>
+        </div>
+
+
+        <div class="section">
+            <h4>Summary</h4>
+            <div class="info-grid-2">
+                <div><strong>TFA Id:</strong> <span id="tfa_id"></span></div>
+                <div><strong>TFA Date:</strong> <span id="tfa_date"></span></div>
+                <div><strong>Refrigerator Id:</strong> <span id="refrigerator_id"></span></div>
+            </div>
+        </div>
+
+        <div id="dynamic_layout"/>
+
+        <script>
+            $(function() { display(); });
+        </script>
+    </body>
+</html>

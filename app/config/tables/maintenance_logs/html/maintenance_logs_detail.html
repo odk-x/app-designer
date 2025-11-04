@@ -10,48 +10,50 @@
         <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
         <script type="text/javascript" src="../../../assets/js/util.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     </head>
     <body>
         <script type="text/javascript" src="../js/maintenance_logs_detail.js"></script>
-
-        <div class="header col-12">
-            <h1><span id="frig-hdr">Refrigerator</span> <span id="tracking_id" class=""></span></h1>
+        <div class="card-header">
+            <div class="title-block">
+                <h3><span id="frig-hdr">Refrigerator</span></h3>
+                <span id="tracking_id" class="tracking-id">Loading..</span>
+                
+                <div class="card-actions">
+                    <button id="editLogBtn" onclick="onEditLog()" title="Edit" class="hideButton">
+                        <i class="bi bi-pencil"></i> Edit
+                    </button>
+                    <button id="delLogBtn" onclick="onDeleteLog()" title="Delete" class="hideButton">
+                        <i class="bi bi-trash"></i> Delete
+                    </button>
+                </div>
+            </div>
+			<div class="header-icons">
+                <i class="bi bi-hospital"></i>
+                <i class="bi bi-bar-chart-line"></i>
+                <i class="bi bi-box"></i>
+                <i class="bi bi-hospital"></i>
+                <i class="bi bi-snow"></i>
+            </div>
         </div>
 
-        <br>
-
-        <div class="detail col-12">
-            <h3 id="mnt-log-info">Maintenance Log Information</h3>
-        </div>
-
-        <p><span class="detailHdr" id="frig-id">Refrigerator ID:</span> <span id="refrigerator_id"></span>
-        <p><span class="detailHdr" id="work-stat">Functional Status:</span> <span id="functional_status"></span></p>
-        <p><span class="detailHdr" id="reason-not-work">Reason Not Working:</span>
-            <span id="reason_not_working"></span></p>
-        <p><span class="detailHdr" id="date-srv">Date Serviced:</span> <span id="date_serviced"></span></p>
-        <p><span class="detailHdr" id="type-of-mnt">Type of Maintenance:</span> <span id="maint_type"></span></p>
-        <p class="overflowWrap"><span class="detailHdr" id="sp-prt-elec">Spare Parts (Electrical):</span>
-            <span id="spare_parts_electrical"></span></p>
-        <p class="overflowWrap"><span class="detailHdr" id="sp-prt-hard">Spare Parts (Hardware):</span>
-            <span id="spare_parts_hardware"></span></p>
-        <p class="overflowWrap"><span class="detailHdr" id="sp-prt-mon">Spare Parts (Monitoring):</span>
-            <span id="spare_parts_monitoring"></span></p>
-        <p class="overflowWrap"><span class="detailHdr" id="sp-prt-pow">Spare Parts (Power):</span>
-            <span id="spare_parts_power"></span></p>
-        <p class="overflowWrap"><span class="detailHdr" id="sp-prt-ref">Spare Parts (Refrigeration):</span>
-            <span id="spare_parts_refrigeration"></span></p>
-        <p class="overflowWrap"><span class="detailHdr" id="sp-prt-sol">Spare Parts (Solar):</span>
-            <span id="spare_parts_solar"></span></p>
-        <p class="overflowWrap"><span class="detailHdr" id="add-sp-prt">Additional Spare Parts:</span>
-            <span id="addtl_spare_parts"></span></p>
-        <p class="overflowWrap"><span class="detailHdr" id="act-tkn-lbl">Actions Taken:</span> <span id="actions_taken"></span></p>
-
-        <div id="editLogBtn" class="button hideButton">
-            <h3 id="edit-log" href="#" onclick="onEditLog()">Edit Log</h3>
-        </div>
-
-        <div id="delLogBtn" class="button buttonDelete hideButton">
-            <h3 id="del-log" href="#" onclick="onDeleteLog()">Delete Log</h3>
+        <div class="section">
+            <h4>Summary</h4>
+            <div class="info-grid-2">
+                <div><strong>Refrigerator Id:</strong> <span id="refrigerator_id"></span></div>
+                <div><strong>Functional Status:</strong> <span id="functional_status"></span></div>
+                <div><strong>Reason Not Working:</strong> <span id="reason_not_working"></span></div>
+                <div><strong>Date Serviced:</strong> <span id="date_serviced"></span></div>
+                <div><strong>Type of Maintenance:</strong> <span id="maint_type"></span></div>
+                <div><strong>Spare Parts (Electrical):</strong> <span id="spare_parts_electrical"></span></div>
+                <div><strong>Spare Parts (Hardware):</strong> <span id="spare_parts_hardware"></span></div>
+                <div><strong>Spare Parts (Monitoring):</strong> <span id="spare_parts_monitoring"></span></div>
+                <div><strong>Spare Parts (Power):</strong> <span id="spare_parts_power"></span></div>
+                <div><strong>Spare Parts (Refrigeration):</strong> <span id="spare_parts_refrigeration"></span></div>
+                <div><strong>Spare Parts (Solar):</strong> <span id="spare_parts_solar"></span></div>
+                <div><strong>Additional Spare Parts:</strong> <span id="addtl_spare_parts"></span></div>
+                <div><strong>Actions Taken:</strong> <span id="actions_taken"></span></div>
+            </div>
         </div>
 
         <script>

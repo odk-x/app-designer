@@ -1,0 +1,12 @@
+_element_key,_element_name,_element_type,_list_child_element_keys
+component_cooling,component_cooling,string,[]
+component_electrical,component_electrical,string,[]
+component_electrical_solar,component_electrical_solar,string,[]
+component_failure,component_failure,string,[]
+component_non_failure_image,component_non_failure_image,mimeUri,"[""component_non_failure_image_contentType"",""component_non_failure_image_uriFragment""]"
+component_non_failure_image_contentType,contentType,mimeType,[]
+component_non_failure_image_uriFragment,uriFragment,rowpath,[]
+component_structural,component_structural,string,[]
+concern,concern,string,[]
+observations,observations,string,[]
+tfa_uuid,tfa_uuid,string,[]

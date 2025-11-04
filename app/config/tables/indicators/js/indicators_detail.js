@@ -17,6 +17,12 @@ function cbFrigSuccess(result) {
     util.showIdForDetail('#voltage_stabilizer_replaced', 'voltage_stabilizer_replaced', sentinelSurveyResultSet, true);
     util.showIdForDetail('#warranty_claim_been_made', 'warranty_claim_been_made', sentinelSurveyResultSet, true);
 
+    util.showIdForDetail('#refrigerator_state', 'refrigerator_state', sentinelSurveyResultSet, true);
+    util.showIdForDetail('#heat_alarms', 'heat_alarms', sentinelSurveyResultSet, true);
+    util.showIdForDetail('#freeze_alarms', 'freeze_alarms', sentinelSurveyResultSet, true);
+    util.showIdForDetail('#heat_alarms_over_48', 'heat_alarms_over_48', sentinelSurveyResultSet, true);
+    util.showIdForDetail('#reason_temperature_excursion', 'reason_temperature_excursion', sentinelSurveyResultSet, true);
+
 }
 
 function onEditSentinelSurvey() {
@@ -100,3 +106,4 @@ function display() {
 
     odkData.getViewData(cbSuccess, cbFailure);
 }
+

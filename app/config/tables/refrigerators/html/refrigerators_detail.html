@@ -10,95 +10,277 @@
         <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
         <script type="text/javascript" src="../../../assets/js/util.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     </head>
+
     <body>
         <script type="text/javascript" src="../js/refrigerators_detail.js"></script>
 
-        <div class="header col-12">
-            <h1><span id="frig-hdr">Refrigerator</span> <span id="tracking_id" class=""></span></h1>
-        </div>
-
-        <br>
-
-        <div class="detail col-12">
-            <h3 id="basic-frig-info">Basic Refrigerator Information</h3>
-        </div>
-
-        <div class="row">
-            <div class="col-6">
-                <p ><span class="detailHdr" id="fac">Facility:</span> <span id="facility_name"></span></p>
-                <p ><span class="detailHdr" id="yr-install">Year Installed:</span> <span id="install_year"></span></p>
-                <p><span class="detailHdr" id="stat">Status:</span> <span id="functional_status"></span></p>
-                <p><span class="detailHdr" id="rsn-not-work">Reason Not Working:</span> <span id="reason_not_working"></span></p>
-                <p><span class="detailHdr" id="srv-pri">Service Priority:</span> <span id="maintenance_priority"></span></p>
-                <p><span class="detailHdr" id="date-srv">Date Serviced:</span> <span id="date_serviced"></span></p>
+        <div class="card-header">
+            <div class="title-block">
+                <h3><span id="frig-hdr">Refrigerator</span></h3>
+				<span class="tracking-id">ID: <span id="tracking_id">Loading..</span></span>
+                
+                <div class="card-actions">
+                    <button  id="editFrigBtn" class="hideButton" onclick="onEditFrig()" title="Edit">
+                        <i class="bi bi-pencil"></i> Edit
+                    </button>
+                    <button id="movFrigBtn" class="hideButton" onclick="onMovFrig()" title="Move">
+                        <i class="bi bi-arrow-left-right"></i> Move
+                    </button>
+                    <button id="delFrigBtn" class="hideButton" onclick="onDeleteFrig()" title="Delete">
+                        <i class="bi bi-trash"></i> Delete
+                    </button>
+                </div>
             </div>
-
-            <div class="col-6">
-                <p><span class="detailHdr" id="manu-id">Manufacturer:</span> <span id="manufacturer_id"></span></p>
-                <p><span class="detailHdr" id="mdl-id">Model ID:</span> <span id="model_id"></span></p>
-                <p><span class="detailHdr" id="frig-id">Refrigerator ID:</span> <span id="refrigerator_id"></span></p>
-                <p><span class="detailHdr" id="ser-num">Serial Number:</span> <span id="serial_number"></span></p>
-                <p><span class="detailHdr" id="cat-id">Catalog ID:</span> <span id="catalog_id"></span></p>
-                <p><span class="detailHdr" id="volt-reg">Voltage Regulator?</span> <span id="voltage_regulator"></span></p>
-                <p><span class="detailHdr" id="temp-mon">Temperature Monitoring Device?</span> <span id="temperature_monitoring_device"></span></p>
+            
+            <div class="header-icons">
+                <i class="bi bi-hospital"></i>
+                <i class="bi bi-bar-chart-line"></i>
+                <i class="bi bi-box"></i>
+                <i class="bi bi-hospital"></i>
+                <i class="bi bi-snow"></i>
             </div>
         </div>
 
-        <div id="editFrigStatusBtn" class="button hideButton">
-            <h3 id="ed-frig-stat" href="#" onclick="onEditFrigStatus()">Edit Refrigerator Status</h3>
+        <!-- SUMMARY -->
+        <div class="section">
+            <h4>Summary</h4>
+            <div class="info-grid-2">
+                <div><strong>Facility:</strong> <span id="facility_name"></span></div>
+                <div><strong>Year Installed:</strong> <span id="install_year"></span></div>
+                <div><strong>Manufacturer:</strong> <span id="manufacturer_id"></span></div>
+                <div><strong>Serial Number:</strong> <span id="serial_number"></span></div>
+                <div><strong>Model ID:</strong> <span id="model_id"></span></div>
+                <div><strong>Catalog ID:</strong> <span id="catalog_id"></span></div>
+            </div>
         </div>
 
-        <div class="button">
-            <h3 id="add-mnt-rec" href="#" onclick="onClickAddMntRec()">Add Maintenance Record</h3>
+        <!-- OPERATIONAL INFO -->
+        <div class="section last-div">
+            <h4>Operational Info</h4>
+            <div class="info-grid-2">
+                <div><strong>Functional Status:</strong> <span id="functional_status"></span></div>
+                <div><strong>Current Use Status:</strong> <span id="use_status"></span></div>
+                <div><strong>Reason Not Working:</strong> <span id="reason_not_working"></span></div>
+                <div><strong>Service Priority:</strong> <span id="maintenance_priority"></span></div>
+                <div><strong>Date Serviced:</strong> <span id="date_serviced"></span></div>
+                <div><strong>Under Warranty:</strong> <span id="under_warranty"></span></div>
+                <div><strong>Voltage Regulator:</strong> <span id="voltage_regulator"></span></div>
+                <div><strong>Voltage Stabilizer Available:</strong> <span id="available_voltage_stabilizer"></span></div>
+                <div><strong>Temperature Monitoring Device:</strong> <span id="temperature_monitoring_device"></span></div>
+            </div>
+        </div>
+        
+        <br><br>
+        
+        <!-- Bottom Navigation Drawer -->
+        <div class="bottom-drawer-nav">
+            <button class="icon-btn" onclick="setActive(this, 'Information')">
+                <i class="bi bi-info-circle"></i>
+                Information
+            </button>
+            <button class="icon-btn" onclick="setActive(this, 'Maintenance')">
+                <i class="bi bi-tools"></i>
+                Maintenance
+            </button>
+            <button class="icon-btn" name="under_pmm" id="under_pmm">
+                <i class="bi bi-clipboard-check"></i>
+                PMM
+            </button>
         </div>
 
-        <div class="button">
-            <h3 id="vw-fac-info" href="#" onclick="onLinkClickFacility()">View Facility Information</h3>
+        <!-- Drawer Panels -->
+        <div class="drawer" id="Surveys">
+            <button class="drawer-close" onclick="closeDrawer()">×</button>
+            <div class="drawer-content">
+                <div class="drawer-card" onclick="onClickSentinelSurvey()">
+                    <div class="card-icon"><i class="bi bi-ui-checks-grid"></i></div>
+                    <div class="card-title">Monthly Sentinel Surveillance</div>
+                </div>
+
+                <div class="drawer-card" onclick="onClickViewSentinelSurvey()">
+                    <div class="card-icon"><i class="bi bi-journal-text"></i></div>
+                    <div class="card-title">Monthly Sentinel Surveillance Log</div>
+                </div>
+
+                <div class="drawer-card" onclick="onClickFollowupSurvey()">
+                    <div class="card-icon"><i class="bi bi-arrow-repeat"></i></div>
+                    <div class="card-title">Follow-up</div>
+                </div>
+                
+                <div class="drawer-card" onclick="onClickViewFollowupSurvey()">
+                    <div class="card-icon"><i class="bi bi-journal-arrow-up"></i></div>
+                    <div class="card-title">Follow-up Log</div>
+                </div>
+
+                <div class="drawer-card" onclick="onClickTFASurvey()">
+                    <div class="card-icon"><i class="bi bi-x-circle"></i></div>
+                    <div class="card-title">Failure Analysis</div>
+                </div>
+                
+                <div class="drawer-card" onclick="onClickViewTFASurvey()">
+                    <div class="card-icon"><i class="bi bi-file-earmark-x"></i></div>
+                    <div class="card-title">Failure Analysis Log</div>
+                </div>
+            </div>
         </div>
 
-        <div class="button">
-            <h3 id="vw-all-mnt-rec" href="#" onclick="onClickViewAllMntRecs()">View All Maintenance Records</h3>
+        <div class="drawer" id="Maintenance">
+            <button class="drawer-close" onclick="closeDrawer()">×</button>
+            <div class="drawer-content">
+                <div id="editFrigStatusBtn" class="drawer-card hideButton" onclick="onEditFrigStatus()">
+                    <div class="card-icon"><i class="bi bi-pencil"></i></div>
+                    <div class="card-title">Edit Refrigerator Status</div>
+                </div>
+
+                <div class="drawer-card" onclick="onClickAddMntRec()">
+                    <div class="card-icon"><i class="bi bi-plus-circle"></i></div>
+                    <div class="card-title">New Maintenance Record</div>
+                </div>
+                
+                <div class="drawer-card" onclick="onClickViewAllMntRecs()">
+                    <div class="card-icon"><i class="bi bi-clock-history"></i></div>
+                    <div class="card-title">Maintenance Record Log</div>
+                </div>
+            </div>
         </div>
 
-        <div class="button">
-            <h3 id="vw-mdl-info" href="#" onclick="onLinkClickModel()">View Model Information</h3>
+        <div class="drawer" id="Information">
+            <button class="drawer-close" onclick="closeDrawer()">×</button>
+            <div class="drawer-content">
+                <div class="drawer-card" onclick="onLinkClickFacility()">
+                    <div class="card-icon"><i class="bi bi-building"></i></div>
+                    <div class="card-title">Facility Information</div>
+                </div>
+
+                <div class="drawer-card" onclick="onLinkClickModel()">
+                    <div class="card-icon"><i class="bi bi-box"></i></div>
+                    <div class="card-title">Model Information</div>
+                </div>
+
+                <div class="drawer-card" onclick="onClickViewAllFrigMoves()">
+                    <div class="card-icon"><i class="bi bi-arrow-left-right"></i></div>
+                    <div class="card-title">Refrigerator Move Log</div>
+                </div>
+
+                <div class="drawer-card" onclick="onClickAddTempData()">
+                    <div class="card-icon"><i class="bi bi-thermometer-half"></i></div>
+                    <div class="card-title">New Temperature Data</div>
+                </div>
+
+                <div class="drawer-card" onclick="onClickViewAllTempData()">
+                    <div class="card-icon"><i class="bi bi-clipboard-data"></i></div>
+                    <div class="card-title">Temperature Data Log</div>
+                </div>
+            </div>
         </div>
 
-        <div id="editFrigBtn" class="button hideButton">
-            <h3 id="ed-frig" href="#" onclick="onEditFrig()">Edit Refrigerator</h3>
-        </div>
+        <div class="drawer" id="Actions">
+            <button class="drawer-close" onclick="closeDrawer()">×</button>
+            <div class="drawer-content">
+                <div class="drawer-card" onclick="onEditFrig()">
+                    <div class="card-icon"><i class="bi bi-pencil"></i></div>
+                    <div class="card-title">Edit Refrigerator</div>
+                </div>
 
-        <div id="delFrigBtn" class="button buttonDelete hideButton">
-            <h3 id="del-frig" href="#" onclick="onDeleteFrig()">Delete Refrigerator</h3>
-        </div>
+                <div class="drawer-card" onclick="onMovFrig()">
+                    <div class="card-icon"><i class="bi bi-arrows-move"></i></div>
+                    <div class="card-title">Move Refrigerator</div>
+                </div>
 
-        <div id="movFrigBtn" class="button hideButton">
-            <h3 id="mov-frig" href="#" onclick="onMovFrig()">Move Refrigerator</h3>
-        </div>
-
-        <div class="button">
-            <h3 id="vw-all-frig-mov" href="#" onclick="onClickViewAllFrigMoves()">View All Refrigerator Moves</h3>
-        </div>
-
-        <div class="button">
-            <h3 id="add-temp-data" href="#" onclick="onClickAddTempData()">Add Temperature Data</h3>
-        </div>
-
-        <div class="button">
-            <h3 id="vw-all-temp-data" href="#" onclick="onClickViewAllTempData()">View All Temperature Data</h3>
-        </div>
-
-        <div id="addSentSurvBtn" class="button hideButton">
-            <h3 id="add-sent-survey" href="#" onclick="onClickSentinelSurvey()">Add Sentinel Survey</h3>
-        </div>
-
-        <div id="viewSentSurvBtn" class="button hideButton">
-            <h3 id="vw-sent-survey" href="#" onclick="onClickViewSentinelSurvey()">View All Sentinel Surveys</h3>
+                <div class="drawer-card" onclick="onDeleteFrig()">
+                    <div class="card-icon"><i class="bi bi-trash"></i></div>
+                    <div class="card-title">Delete Refrigerator</div>
+                </div>
+            </div>
         </div>
 
         <script>
-            $(function() { display(); });
+            $(function() { 
+                display(); 
+            });
+            
+            function openDrawer(drawerId) {
+                // Close others
+                const drawers = document.querySelectorAll('.drawer');
+                drawers.forEach(d => d.classList.remove('show'));
+
+                // Open selected
+                const drawer = document.getElementById(drawerId);
+                if (drawer) drawer.classList.add('show');
+            }
+
+            function closeDrawer() {
+                document.querySelectorAll('.drawer').forEach(d => d.classList.remove('show'));
+                // reset all buttons back to default state
+                document.querySelectorAll('.icon-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    let icon = btn.querySelector('i');
+
+                    if (icon.classList.contains('bi-info-circle-fill')) icon.classList.replace('bi-info-circle-fill', 'bi-info-circle');
+                    if (icon.classList.contains('bi-lightning-charge-fill')) icon.classList.replace('bi-lightning-charge-fill', 'bi-lightning-charge');
+                    if (icon.classList.contains('bi-clipboard-check-fill')) icon.classList.replace('bi-clipboard-check-fill', 'bi-clipboard-check');
+                });
+            }
+
+            function setActive(button, drawer) {
+                // Reset all buttons
+                document.querySelectorAll('.icon-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    let icon = btn.querySelector('i');
+
+                    // revert to outline icons
+                    if (icon.classList.contains('bi-info-circle-fill')) icon.classList.replace('bi-info-circle-fill', 'bi-info-circle');
+                    if (icon.classList.contains('bi-lightning-charge-fill')) icon.classList.replace('bi-lightning-charge-fill', 'bi-lightning-charge');
+                    if (icon.classList.contains('bi-tools')) icon.classList.replace('bi-tools', 'bi-tools'); // tools has no fill
+                    if (icon.classList.contains('bi-clipboard-check-fill')) icon.classList.replace('bi-clipboard-check-fill', 'bi-clipboard-check');
+                });
+
+                // Activate clicked button
+                button.classList.add('active');
+                let icon = button.querySelector('i');
+
+                // switch to filled version
+                if (icon.classList.contains('bi-info-circle')) icon.classList.replace('bi-info-circle', 'bi-info-circle-fill');
+                if (icon.classList.contains('bi-lightning-charge')) icon.classList.replace('bi-lightning-charge', 'bi-lightning-charge-fill');
+                if (icon.classList.contains('bi-clipboard-check')) icon.classList.replace('bi-clipboard-check', 'bi-clipboard-check-fill');
+                // tools has no fill, so keep as-is
+
+                // open drawer
+                openDrawer(drawer);
+            }
+
+            function openTab(evt, tabName) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablink");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].classList.remove("active");
+                }
+                document.getElementById(tabName).style.display = "block";
+                evt.currentTarget.classList.add("active");
+            }
+
+            // Show first tab by default
+            document.addEventListener("DOMContentLoaded", function() {
+                document.querySelector(".tablink").click();
+            });
+
+            // Attach handler once
+            $(document).ready(function () {
+                $('#under_pmm').on('click', function (e) {
+                    if ($(this).hasClass('inactive')) {
+                        alert("This refrigerator is not under PMM.");
+                        return false; // stop here
+                    } else {
+                        setActive(this, 'Surveys'); // call your existing function
+                    }
+                });
+            });
         </script>
     </body>
 </html>

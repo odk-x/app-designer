@@ -5,12 +5,11 @@
 /* global odkTables, util */
 
 var adminRegionQueryStr = 'admin_region_id = ? AND _sync_state != ?';
+var viewFacilitiesNavigateButton = $('#view-facilities-navigate');
 
 async function display() {
 
     var body = $('#main');
-    // Set the background to be a picture.
-    body.css('background-image', 'url(img/hallway.jpg)');
 
     var locale = odkCommon.getPreferredLocale();
     $('#view-facilities-map').text(odkCommon.localizeText(locale, "view_map_of_all_health_facilities"));
@@ -20,42 +19,31 @@ async function display() {
     $('#view-service-refrigerators').text(odkCommon.localizeText(locale, "view_all_refrigerators_needing_service"));
     $('#view-models').text(odkCommon.localizeText(locale, "view_refrigerator_models"));
 
-    var hdrDiv = $('#navHeader');
-    var hdr1 = $('<h1>');
-    hdr1.attr('id', 'header1');
-    hdrDiv.append(hdr1);
-
     var linkedRegion = util.getQueryParameter(util.adminRegion);
     var linkedRegionId = util.getQueryParameter(util.adminRegionId);
 
     if (linkedRegion !== null) {
-        hdr1.text(linkedRegion);
+        $('#header1').text(linkedRegion);
     }
 
     // Get the breadcrumb
     if (linkedRegionId !== null && linkedRegionId !== undefined) {
         var breadcrumbName = await util.getBreadcrumbRegionName(locale, linkedRegionId, linkedRegion);
         if (breadcrumbName !== null && breadcrumbName !== undefined) {
-            var bcHdr = $('<h4>');
-            bcHdr.attr('id', 'breadcrumbHeader');
-            bcHdr.text(breadcrumbName);
-            hdrDiv.append(bcHdr);
+			$('#breadcrumb1').text(breadcrumbName);
         }
     }
 
-
-    var viewFacilitiesMapButton = $('#view-facilities-map');
-    viewFacilitiesMapButton.on(
-        'click',
-        function() {
+    var viewFacilitiesMapButton = $('#view-facilities-map-new');
+        viewFacilitiesMapButton.on('click', function () {
             var uriParams = util.getKeyToAppendToColdChainURL(util.adminRegionId, linkedRegionId);
-             odkTables.openTableToMapView(null, 'health_facilities',
-                adminRegionQueryStr, [linkedRegionId, util.deletedSyncState],
-                 'config/tables/health_facilities/html/hFacilities_list.html' + uriParams);
-        }
-    );
-
-    var viewFacilitiesListButton = $('#view-facilities-list');
+            odkTables.launchHTML(
+                null,
+                'config/tables/health_facilities/html/hFacilities_map.html' + uriParams
+            );
+        });
+    
+    var viewFacilitiesListButton = $('#view-facilities-list-new');
     viewFacilitiesListButton.on(
         'click',
         function() {
@@ -64,7 +52,7 @@ async function display() {
         }
     );
 
-    var filterFacilitiesButton = $('#filter-facilities');
+    var filterFacilitiesButton = $('#filter-facilities-new');
     filterFacilitiesButton.on(
         'click',
         function() {
@@ -76,7 +64,7 @@ async function display() {
         }
     );
 
-    var viewRefrigeratorsButton = $('#view-all-refrigerators');
+    var viewRefrigeratorsButton = $('#view-all-refrigerators-new');
     viewRefrigeratorsButton.on(
         'click',
         function() {
@@ -86,17 +74,17 @@ async function display() {
         }
     );
 
-    var viewServiceRefrigeratorsButton = $('#view-service-refrigerators');
+    var viewServiceRefrigeratorsButton = $('#view-service-refrigerators-new');
     viewServiceRefrigeratorsButton.on(
         'click',
         function() {
             var serviceQueryParams = util.getKeyToAppendToColdChainURL(util.adminRegionId, linkedRegionId);
-
+			console.log(serviceQueryParams);
             odkTables.launchHTML(null,
                 'config/tables/refrigerators/html/refrigerators_service_list.html' + serviceQueryParams);
     });
 
-    var viewColdRoomsButton = $('#view-all-cold-rooms');
+    var viewColdRoomsButton = $('#view-all-cold-rooms-new');
     viewColdRoomsButton.on(
         'click',
         function() {
@@ -106,7 +94,7 @@ async function display() {
         }
     );
 
-    var viewServiceColdRoomsButton = $('#view-service-cold-rooms');
+    var viewServiceColdRoomsButton = $('#view-service-cold-rooms-new');
     viewServiceColdRoomsButton.on(
         'click',
         function() {
@@ -116,7 +104,7 @@ async function display() {
                 'config/tables/cold_rooms/html/cold_rooms_service_list.html' + serviceQueryParams);
         });
 
-    var viewRefrigeratorModelsButton = $('#view-models');
+    var viewRefrigeratorModelsButton = $('#view-models-new');
     viewRefrigeratorModelsButton.on(
         'click',
         function() {

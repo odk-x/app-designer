@@ -1,17 +1,21 @@
 body {
-	font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-family: "Segoe UI", Roboto, sans-serif;
+    background-size: cover;
+    background-position: center;
 	text-align: center;
 	font-size: 2em;
-	color: #eee;
+    color: #333;
 	min-height: 100vh;
 	margin-top: -8px;
 	margin-bottom: -10px;
 	padding-top: 8px;
+    margin: 0;
+    padding: 0;
 }
+
 .button {
 	display: block;
 	width: 80%;
-	margin-left: 10%;
 	border: none;
 	color: white;
 	background-color: teal;
@@ -49,3 +53,91 @@ body {
 .buttonsDivStyle {
     overflow:auto;
 }
+
+#navHeader {
+    background-color: teal;
+    color: white;
+    padding: 20px 15px;
+    text-align: center;
+    border-bottom: 2px solid greem;
+}
+
+#navHeader h1 {
+    margin: 0;
+    font-size: 24pt;
+}
+
+#breadcrumbHeader {
+    font-size: 14pt;
+    margin-top: 5px;
+    color: #dfefff;
+}
+
+/* Description style */
+#description {
+    margin: 20px;
+    font-size: 16pt;
+    text-align: center;
+	height: 8%;
+}
+
+/* Buttons area */
+#buttonsDiv {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+#buttonsDiv .button {
+    background: linear-gradient(to right, #00998a, #005e66);
+    color: white;
+    border: none;
+    padding: 14px 22px;
+    font-size: 14pt;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 220px;
+    text-align: center;
+	height: 60px;
+}
+
+#buttonsDiv .button:hover {
+    background: linear-gradient(to right, #00998a, #005e66);
+    transform: scale(1.03);
+}
+
+/* Responsive header text spacing */
+@media (max-width: 600px) {
+    #navHeader h1 {
+        font-size: 18pt;
+    }
+    #buttonsDiv .button {
+        font-size: 12pt;
+        padding: 12px;
+    }
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* ✅ This centers the buttons inside each group */
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 600px;          
+    min-height: 320px;         	
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.button-group h3 {
+    font-size: 18pt;
+    margin-bottom: 20px;
+    color: teal;
+}
+

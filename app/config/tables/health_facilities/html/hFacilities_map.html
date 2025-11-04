@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Health Facilities Map + List</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="../../../assets/css/paginated_list.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Match working page include order -->
+    <script src="../../../assets/commonDefinitions.js"></script>
+    <script src="../../../assets/libs/jquery-3.4.1.js"></script>
+    <script src="../../../assets/js/util.js"></script>
+    <script src="../../../../system/js/odkCommon.js"></script>
+    <script src="../../../../system/js/odkData.js"></script>
+    <script src="../../../../system/tables/js/odkTables.js"></script>
+    <script src="../../../assets/js/list_view_logic.js"></script>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Map libs -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+  </head>
+  <body>
+    <!-- HEADER -->
+		<header>
+			<div class="app-header">
+				<h2 id="header1">Loading...</h2>
+					<div class="header-icons">
+					  <i class="bi bi-speedometer2"></i>
+					  <i class="bi bi-bar-chart-line"></i>
+					  <i class="bi bi-grid-3x3-gap"></i>
+					  <i class="bi bi-hospital"></i>
+					  <i class="bi bi-snow"></i>
+					</div>
+
+			</div>
+		</header>
+
+    <!-- SEARCH + LIST (identical form wiring to working page) -->
+		<main class="dashboard">
+			<div id="searchBox">
+			  <form id="form" action="javascript:getSearchListResults();" class="search-filter">
+				<div class="search-bar">
+				  <input id="search" type="text" name="query" placeholder="Search" onblur="clearListResults()" />
+				</div>
+
+				<button type="submit" id="submit" class="filter-btn">
+				  <i class="bi bi-search"></i>
+				</button>
+			  </form>
+			</div>
+
+      <div id="wrapper">
+		<div id="list" class="card-list"></div>
+	  </div>
+
+			<div class="btnDiv">
+					<div class="prevBtnDiv"><button id="prevButton" class="btn" onclick="prevListResults()">Prev</button></div>
+					<span id="navigation-text" class="navTextStyle"><span id="showing">Showing</span> <span id="navTextOffset"></span>-<span id="navTextLimit"></span> <span id="of">of</span> <span id="navTextCnt"></span></span>
+					<select id="limitDropdown" class="dropdownLimit" onchange="newListLimit();">
+						<option value="10">10</option>
+						<option value="20">20</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+						<option value="1000">1000</option>
+					</select>
+					<div class="nextBtnDiv"><button id="nextButton" class="btn" onclick="nextListResults()">Next</button></div>
+			</div>
+    </main>
+
+    <!-- MAP -->
+    <div id="map">
+      <button id="center-btn" onclick="centerMapOnUser()" title="Center on Me"></button>
+    </div>
+    <style>
+      :root { --accent:#008080; --bg:#f6f8fa; }
+      html,body { margin:0; padding:0; height:100%; display:flex; flex-direction:column; background:var(--bg); font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji"; }
+      main.dashboard { height:45%; overflow-y:auto; background:#fff; border-bottom:1px solid #e5e7eb; }
+
+      #map { flex:1; position:relative; }
+      /* “My Location” button bottom-right inside map */
+      #center-btn{
+        position:absolute; bottom:16px; right:16px; z-index:1000;
+        background:var(--accent); color:#fff; border:none; border-radius:999px;
+        width:40px; height:40px; cursor:pointer; box-shadow:0 2px 10px rgba(0,0,0,.12);
+      }
+      #center-btn::after { content:"◎"; font-size:16px; }
+
+      .leaflet-popup-content h4 { margin:0 0 6px 0; font-size:14px; }
+      .leaflet-popup-content button { padding:6px 10px; border:1px solid #e5e7eb; background:#fff; border-radius:8px; cursor:pointer; }
+      .leaflet-popup-content button:hover { background:#f3f4f6; }
+    </style>
+
+    <script>
+      /* ===== List wiring (same signatures as working JS) ===== */
+      var listQuery = 'SELECT * FROM health_facilities WHERE Location_latitude IS NOT NULL AND _sync_state != ?';
+      var listQueryParams = ['deleted'];
+      var searchParams = '(facility_id LIKE ? OR facility_name LIKE ?)';
+      var orderBy = 'ORDER BY facility_name ASC';
+
+      function resumeFunc(state){
+        if (state === 'init') {
+          var locale = odkCommon.getPreferredLocale();
+          $('#showing').text(odkCommon.localizeText(locale,"showing"));
+          $('#of').text(odkCommon.localizeText(locale,"of"));
+          $('#prevButton').text(odkCommon.localizeText(locale,"previous"));
+          $('#nextButton').text(odkCommon.localizeText(locale,"next"));
+          $('#submit').val(odkCommon.localizeText(locale,"search"));
+
+          listViewLogic.setTableId('health_facilities');
+          listViewLogic.setListQuery(listQuery);
+          listViewLogic.setListQueryParams(listQueryParams);
+          listViewLogic.setSearchParams(searchParams);
+          listViewLogic.setOrderBy(orderBy);
+          listViewLogic.setListElement('#list');
+          listViewLogic.setSearchTextElement('#search');   // <- same input id
+          listViewLogic.setHeaderElement('#header1');
+          listViewLogic.setLimitElement('#limitDropdown');
+          listViewLogic.setPrevAndNextButtons('#prevButton', '#nextButton');
+          listViewLogic.setNavTextElements('#navTextLimit', '#navTextOffset', '#navTextCnt');
+          listViewLogic.showEditAndDeleteButtons(false);
+
+          var facIDTxt = odkCommon.localizeText(locale, "facility_id");
+          var facTypeTxt = odkCommon.localizeText(locale, "facility_type_no_colon");
+          listViewLogic.setColIdsToDisplayInList('', 'facility_name', facIDTxt, 'facility_id', facTypeTxt, 'facility_type');
+        }
+        listViewLogic.resumeFn(state);
+      }
+      function clearListResults(){ listViewLogic.clearResults(); }
+      function prevListResults(){ listViewLogic.prevResults(); }
+      function nextListResults(){ listViewLogic.nextResults(); }
+      function getSearchListResults(){ listViewLogic.getSearchResults(); }
+      function newListLimit(){ listViewLogic.newLimit(); }
+
+      $(function(){ resumeFunc('init'); });
+
+      /* ===== Map setup ===== */
+      const DETAIL_PATH = 'config/tables/health_facilities/html/health_facilities_detail.html';
+      const map = L.map('map').setView([-13.98, 33.78], 7);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18}).addTo(map);
+
+      const markerCluster = L.markerClusterGroup();
+      const markerMap = new Map();
+      const defaultPng = 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png';
+      let iconUrl = defaultPng;
+      try {
+        const u = odkCommon.getFileAsUrl('config/assets/img/custom-icon.png');
+        if (u) iconUrl = u;
+      } catch(e){}
+
+      const customIcon = L.icon({ iconUrl, iconSize:[32,32], iconAnchor:[16,32], popupAnchor:[0,-28] });
+
+      function esc(v){ return (v==null)?'':String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+      function openDetail(rowId){
+        try { if (window.odkTables && odkTables.openDetailView) { odkTables.openDetailView('health_facilities', rowId, null, DETAIL_PATH); return; } } catch(e1){}
+        try { if (window.odkTables && odkTables.openDetailView) { odkTables.openDetailView(null,'health_facilities',rowId,DETAIL_PATH); return; } } catch(e2){}
+        try {
+          const url = odkCommon.getFileAsUrl(DETAIL_PATH);
+          if (url) {
+            try { sessionStorage.setItem('hf_selected_rowid', rowId); } catch(e){}
+            location.href = url + '?rowId=' + encodeURIComponent(rowId);
+            return;
+          }
+        } catch(e3){}
+        alert('Unable to open detail view for this record.');
+      }
+
+      function focusListRow(rowId){
+        const el = document.querySelector(`[data-rowid='${rowId}']`);
+        if (!el) return;
+        el.scrollIntoView({ behavior:'smooth', block:'center' });
+        el.classList.add('highlight');
+        setTimeout(()=>el.classList.remove('highlight'),2000);
+      }
+
+      function buildPopupHtml(row){
+        const name = esc(row.facility_name || 'Unknown');
+        return `
+          <div>
+            <h4>${name}</h4>
+            <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap;">
+              <button onclick="openDetail('${row._rowId}')">Show Detail</button>              
+            </div>
+          </div>`;
+      }
+
+      function cbSuccess(resultSet){
+        const bounds=[];
+        for (let i=0;i<resultSet.getCount();i++){
+          const lat = parseFloat(resultSet.getData(i,'Location_latitude'));
+          const lng = parseFloat(resultSet.getData(i,'Location_longitude'));
+          if (isNaN(lat)||isNaN(lng)) continue;
+
+          const row = {
+            _rowId: resultSet.getRowId(i),
+            facility_name: resultSet.getData(i,'facility_name')
+          };
+
+          const m = L.marker([lat,lng],{icon:customIcon});
+          m.bindPopup(buildPopupHtml(row));
+          markerMap.set(row._rowId, m);
+          markerCluster.addLayer(m);
+          bounds.push([lat,lng]);
+        }
+        map.addLayer(markerCluster);
+        if (bounds.length){
+          const fg = L.featureGroup(bounds.map(ll=>L.marker(ll)));
+          map.fitBounds(fg.getBounds().pad(0.2));
+        }
+      }
+      function cbFailure(err){ console.error('Map query failed:',err); }
+
+      // load markers
+      odkData.query(
+        'health_facilities',
+        'Location_latitude IS NOT NULL AND Location_longitude IS NOT NULL',
+        [],
+        null,null,null,null,null,null,
+        true,
+        cbSuccess,
+        cbFailure
+      );
+
+      // click list row → zoom to marker
+      listViewLogic.setOnClickHandler(function(rowId){
+        const marker = markerMap.get(rowId);
+        if (marker){
+          markerCluster.zoomToShowLayer(marker, function(){
+            map.setView(marker.getLatLng(),16);
+            marker.openPopup();
+          });
+        }
+      });
+
+      /* ===== Geolocation ===== */
+      let userLatLng=null, userCircle=null;
+      function centerMapOnUser(){ if(userLatLng) map.setView(userLatLng,16); }
+      window.centerMapOnUser = centerMapOnUser; // ensure onclick can see it
+
+      const userMarker = L.marker([0,0], {
+        icon: L.icon({ iconUrl:'https://cdn-icons-png.flaticon.com/512/64/64113.png', iconSize:[25,25] }),
+        title:"You are here"
+      }).addTo(map);
+
+      if (navigator.geolocation){
+        navigator.geolocation.watchPosition(
+          pos=>{
+            const { latitude:lat, longitude:lng, accuracy } = pos.coords;
+            userLatLng=[lat,lng];
+            userMarker.setLatLng(userLatLng).bindPopup(`You<br>Lat: ${lat.toFixed(5)}<br>Lng: ${lng.toFixed(5)}<br>±${Math.round(accuracy)} m`);
+            if (userCircle) map.removeLayer(userCircle);
+            userCircle = L.circle(userLatLng, { radius: accuracy||800, color:'blue', fillOpacity:0.1 }).addTo(map);
+          },
+          err=>console.error('GPS error:',err),
+          { enableHighAccuracy:true, maximumAge:10000, timeout:10000 }
+        );
+      }
+    </script>
+  </body>
+</html>

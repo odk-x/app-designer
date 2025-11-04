@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
-<!-- beninTeaHouses Detailed View -->
+    <!-- beninTeaHouses Detailed View -->
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link href="../../../assets/css/detail.css" type="text/css" rel="stylesheet" />
-        <link href="../../../assets/css/detail_summary.css" type="text/css" rel="stylesheet"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="../../../assets/css/detail.css" type="text/css" rel="stylesheet"/>
         <script type="text/javascript" src="../../../assets/commonDefinitions.js"></script>
         <script type="text/javascript" src="../../../assets/libs/jquery-3.4.1.js"></script>
         <script type="text/javascript" src="../../../../system/js/odkCommon.js"></script>
@@ -12,48 +11,193 @@
         <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
         <script type="text/javascript" src="../../../assets/js/util.js"></script>
         <script type="text/javascript" src="../js/health_facilities_detail.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     </head>
     <body>
 
-        <div class="header cl-12">
-            <h1><span id="TITLE"></span></h1>
-            <h3 id="breadcrumbHeader"></h3>
+        <div class="card-header">
+            <div class="title-block">
+                <h3><span id="TITLE">Loading..</span></h3>
+                <span id="breadcrumbHeader" class="tracking-id">Loading..</span>
+                
+                <div class="card-actions">
+                    <button id="editFacilityBtn" onclick="onEditFacility()" title="Edit" class="hideButton">
+                        <i class="bi bi-pencil"></i> Edit
+                    </button>
+                    <button id="delFacilityBtn" onclick="onDeleteFacility()" title="Delete" class="hideButton">
+                        <i class="bi bi-trash"></i> Delete
+                    </button>
+                </div>
+            </div>
+			<div class="header-icons">
+                <i class="bi bi-hospital"></i>
+                <i class="bi bi-bar-chart-line"></i>
+                <i class="bi bi-box"></i>
+                <i class="bi bi-hospital"></i>
+                <i class="bi bi-snow"></i>
+            </div>
         </div>
 
-        <br>
-
-        <div class="button">
-            <h3 id="view-summary" href="#" onclick="onFacilitySummaryClick()">View Facility Information</h3>
+        <div class="section">
+            <h4>Summary</h4>
+            <div class="info-grid-2">
+                <div><strong>Facility Id:</strong> <span id="facility_id"></span></div>
+                <div><strong>Facility Type:</strong> <span id="facility_type"></span></div>
+                <div><strong>Contact Name:</strong> <span id="contact_name"></span></div>
+                <div><strong>Contact Phone Number:</strong> <span id="contact_phone_number"></span></div>
+                <div><strong>Catchment Population:</strong> <span id="catchment_population"></span></div>
+                <div><strong>Ownership:</strong> <span id="facility_ownership"></span></div>
+                <div><strong>Admin Region:</strong> <span id="admin_region"></span></div>
+            </div>
         </div>
 
-        <div class="button">
-            <h3 id="refrig-inv" href="#" onclick="onLinkClick()">Refrigerator Inventory</h3>
-            <h3>(<span id="fridge_list"></span>)</h3>
+        <div class="section">
+            <h4>Power Information</h4>
+            <div class="info-grid-2">
+                <div><strong>Electricity Source:</strong> <span id="electricity_source"></span></div>
+                <div><strong>Grid Availability:</strong> <span id="grid_availability"></span></div>
+                <div><strong>Fuel Availability:</strong> <span id="fuel_availability"></span></div>
+            </div>
         </div>
 
-        <div class="button">
-            <h3 id="add-fridge" href="#" onclick="onAddFridgeClick()">Add Refrigerator</h3>
+        <div class="section">
+            <h4>Location Information</h4>
+            <div class="info-grid-2">
+                <div><strong>Latitude (GPS):</strong> <span id="lat"></span></div>
+                <div><strong>Longitude (GPS):</strong> <span id="lon"></span></div>
+            </div>
         </div>
 
-        <div class="button">
-            <h3 id="cold-room-inv" href="#" onclick="onCRInvClick()">Cold Room Inventory</h3>
-            <h3>(<span id="cold_room_list"></span>)</h3>
+        <div class="section last-div">
+            <h4>Stock Information</h4>
+            <div class="info-grid-2">
+                <div><strong>Distance to Supply Point:</strong> <span id="distance_to_supply"></span></div>
+                <div><strong>Vaccine Supply Interval:</strong> <span id="supply_interval"></span></div>
+                <div><strong>Vaccine Supply Mode:</strong> <span id="supply_mode"></span></div>
+            </div>
+        </div>
+		
+        <div class="bottom-drawer-nav">
+            <button class="icon-btn" onclick="setActive(this, 'Refrigerator')">
+                <i class="bi bi-door-closed"></i>
+                Refrigerator
+            </button>
+            <button class="icon-btn" onclick="setActive(this, 'ColdRoom')">
+				<i class="bi bi-building"></i>
+                Cold Room
+            </button>
         </div>
 
-        <div class="button">
-            <h3 id="add-cold-room" href="#" onclick="onAddCRClick()">Add Cold Room</h3>
+	<!-- Drawer Panels -->
+
+        <div class="drawer" id="Refrigerator">
+            <button class="drawer-close" onclick="closeDrawer()">×</button>
+            <div class="drawer-content">
+                <div class="drawer-card" onclick="onAddFridgeClick()">
+                    <div class="card-icon"><i class="bi bi-plus-circle"></i></div>
+                    <div class="card-title">Add Refrigerator</div>
+                </div>
+                
+                <div class="drawer-card" onclick="onLinkClick()">
+                    <div class="card-icon"><i class="bi bi-clock-history"></i></div>
+                    <div class="card-title">View Refrigerator Inventory<div>(<span id="fridge_list"></span>)</div></div>
+                </div>
+            </div>
         </div>
 
-        <div id="editFacilityBtn" class="button hideButton">
-            <h3 id="edit-fac" href="#" onclick="onEditFacility()">Edit Facility</h3>
+        <div class="drawer" id="ColdRoom">
+            <button class="drawer-close" onclick="closeDrawer()">×</button>
+            <div class="drawer-content">
+                <div class="drawer-card" onclick="onAddCRClick()">
+                    <div class="card-icon"><i class="bi bi-plus-circle"></i></div>
+                    <div class="card-title">Add Cold Room</div>
+                </div>
+                
+                <div class="drawer-card" onclick="onCRInvClick()">
+                    <div class="card-icon"><i class="bi bi-clock-history"></i></div>
+                    <div class="card-title">View Cold Room Inventory<div>(<span id="cold_room_list"></span>)</div></div>
+				</div>
+            </div>
         </div>
 
-        <div id="delFacilityBtn" class="button buttonDelete hideButton">
-            <h3 id="del-fac" href="#" onclick="onDeleteFacility()">Delete Facility</h3>
-        </div>
+    <script>
+            $(function() { 
+                display(); 
+            });
+            
+            function openDrawer(drawerId) {
+                // Close others
+                const drawers = document.querySelectorAll('.drawer');
+                drawers.forEach(d => d.classList.remove('show'));
 
-        <script>
-            $(function() { display(); });  // calls the detail display function when ready
-        </script>
+                // Open selected
+                const drawer = document.getElementById(drawerId);
+                if (drawer) drawer.classList.add('show');
+            }
+
+            function closeDrawer() {
+                document.querySelectorAll('.drawer').forEach(d => d.classList.remove('show'));
+                // reset all buttons back to default state
+                document.querySelectorAll('.icon-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    let icon = btn.querySelector('i');
+
+                    if (icon.classList.contains('bi-info-circle-fill')) icon.classList.replace('bi-info-circle-fill', 'bi-info-circle');
+                    if (icon.classList.contains('bi-lightning-charge-fill')) icon.classList.replace('bi-lightning-charge-fill', 'bi-lightning-charge');
+                    if (icon.classList.contains('bi-clipboard-check-fill')) icon.classList.replace('bi-clipboard-check-fill', 'bi-clipboard-check');
+                });
+            }
+
+            function setActive(button, drawer) {
+                // Reset all buttons
+                document.querySelectorAll('.icon-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    let icon = btn.querySelector('i');
+
+                    // revert to outline icons
+                    if (icon.classList.contains('bi-info-circle-fill')) icon.classList.replace('bi-info-circle-fill', 'bi-info-circle');
+                    if (icon.classList.contains('bi-lightning-charge-fill')) icon.classList.replace('bi-lightning-charge-fill', 'bi-lightning-charge');
+                    if (icon.classList.contains('bi-tools')) icon.classList.replace('bi-tools', 'bi-tools'); // tools has no fill
+                    if (icon.classList.contains('bi-clipboard-check-fill')) icon.classList.replace('bi-clipboard-check-fill', 'bi-clipboard-check');
+                });
+
+                // Activate clicked button
+                button.classList.add('active');
+                let icon = button.querySelector('i');
+
+                // switch to filled version
+                if (icon.classList.contains('bi-info-circle')) icon.classList.replace('bi-info-circle', 'bi-info-circle-fill');
+                if (icon.classList.contains('bi-lightning-charge')) icon.classList.replace('bi-lightning-charge', 'bi-lightning-charge-fill');
+                if (icon.classList.contains('bi-clipboard-check')) icon.classList.replace('bi-clipboard-check', 'bi-clipboard-check-fill');
+                // tools has no fill, so keep as-is
+
+                // open drawer
+                openDrawer(drawer);
+            }
+
+            function openTab(evt, tabName) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablink");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].classList.remove("active");
+                }
+                document.getElementById(tabName).style.display = "block";
+                evt.currentTarget.classList.add("active");
+            }
+
+            // Show first tab by default
+            document.addEventListener("DOMContentLoaded", function() {
+                document.querySelector(".tablink").click();
+            });
+
+
+            $(function() { display(); });
+    </script>
     </body>
+	
+
 </html>

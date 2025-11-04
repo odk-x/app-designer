@@ -53,6 +53,11 @@ body {
 }
 
 /* sliders*/
+h2{
+	text-align: center;
+	font-size: 25px;
+	font-weight: bold;
+}
 
 input[type="range"] {
     -webkit-appearance: none;
@@ -628,4 +633,8 @@ Eventually we should make a jqm theme for this.
     text-align:left;
     overflow:hidden;
     margin-right:50px;
+}
+
+label {
+	font-weight: normal;
 }

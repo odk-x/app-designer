@@ -11,48 +11,49 @@
         <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
         <script type="text/javascript" src="../../../../system/libs/underscore.1.8.3.js"></script>
         <script type="text/javascript" src="../../../assets/js/util.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
     </head>
     <body onload="display();">
         <script type="text/javascript" src="../js/refrigerator_types_detail.js"></script>
-        <div class="header col-12">
-            <h1><span id="mdl-hdr">Model:</span> <span id="model_name"></span></h1>
-            <h3><span id="cat-id-hdr">Catalog ID:</span> <span id="catalog_id"></span></h3>
+        <div class="card-header">
+				<div class="title-block">
+					<h3><span id="mdl-hdr">Model:  </span><span id="model_name"></span></h3>
+					<span id="cat-id-hdr" class="tracking-id">Loading..</span><span id="catalog_id"></span>
+					<div class="card-actions">
+						<button id="editCRBtn" onclick="onLinkClick()">
+							<span id="vw-all">View all</span> <span id="catalogID" class="h3"></span> <span id="frig-txt">Refrigerators</span>
+							(<span id="fridge_list"></span>)
+						</button>
+					</div>
+
+				</div>
+				<div class="header-icons">
+					<i class="bi bi-hospital"></i>
+					<i class="bi bi-bar-chart-line"></i>
+					<i class="bi bi-box"></i>
+					<i class="bi bi-hospital"></i>
+					<i class="bi bi-snow"></i>
+				</div>
         </div>
 
-        <div class="detail col-12">
-            <h3 id="mdl-info">Model Information</h3>
-        </div>
-
-        <div class="row">
-            <div class="col-6">
-                <p><span class="detailHdr" id="man">Manufacturer:</span> <span id="manufacturer"></span></p>
-                <p><span class="detailHdr" id="pwr-src">Power Sources:</span> <span id="power_sources"></span></p>
-                <p><span class="detailHdr" id="frig-grs-vol">Fridge Gross Volume:</span> <span id="r_gross_vol"></span></p>
-                <p><span class="detailHdr" id="frz-grs-vol">Freezer Gross Volume:</span> <span id="f_gross_vol"></span></p>
-            </div>
-
-            <div class="col-6">
-                <p><span class="detailHdr" id="equip-type">Equipment Type:</span> <span id="equipment_type"></span></p>
-                <p><span class="detailHdr" id="clim-zn">Climate Zone:</span> <span id="climate_zone"></span></p>
-                <p><span class="detailHdr" id="frig-net-vol">Fridge Net Volume:</span> <span id="r_net_vol"></span></p>
-                <p><span class="detailHdr" id="frz-net-vol">Freezer Net Volume:</span> <span id="f_net_vol"></span></p>
+        <div class="section">
+            <h4>Model Information</h4>
+            <div class="info-grid-2">
+                <div><strong>Manufacturer:</strong> <span id="manufacturer"></span></div>
+                <div><strong>Power Sources:</strong> <span id="power_sources"></span></div>
+                <div><strong>Fridge Gross Volume:</strong> <span id="r_gross_vol"></span></div>
+                <div><strong>Freezer Gross Volume:</strong> <span id="f_gross_vol"></span></div>
+                <div><strong>Equipment Type:</strong> <span id="equipment_type"></span></div>
+                <div><strong>Climate Zone:</strong> <span id="climate_zone"></span></div>
+                <div><strong>Fridge Net Volume:</strong> <span id="r_net_vol"></span></div>
+                <div><strong>Freezer Net Volume:</strong> <span id="f_net_vol"></span></div>
             </div>
         </div>
 
         <div>
             <img id="refPic" class="col-12">
         </div>
-
-        <br>
-
-        <div class="button">
-            <h3 href="#" onclick="onLinkClick()"><span id="vw-all">View all</span> <span id="catalogID" class="h3"></span> <span id="frig-txt">Refrigerators</span></h3>
-            <h3>(<span id="fridge_list"></span>)</h3>
-        </div>
-
-        <br>
-
         <script>
             $(function() { display(); });
         </script>

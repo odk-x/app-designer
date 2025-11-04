@@ -16,30 +16,62 @@ var currAdminRegion = null;
 var currAdminRegionId = null;
 
 function addMenuButton(type, label, divToAddButtonTo, currAdminRegion, currAdminRegionId, nextLevel) {
-    var button = $('<button>');
-    button.attr('class', 'button');
-    button.text(label);
+    const buttonsDiv = document.querySelector(divToAddButtonTo);
+
+    const equipments = Math.floor(Math.random() * (300 - 100 + 1)) + 100; // 100–300
+    const facilities = Math.floor(Math.random() * (equipments - 20)) + 10; // 10–equipments-1
+
+    // Generate dummy card data — you can adapt this if region data exists elsewhere
+    const region = {
+        id: currAdminRegionId || 0,
+        name: label,
+        subtitle: (type === util.linkedAdminRegion)
+            ? "View health facilities and refrigerators"
+            : (type === util.adminRegion)
+                ? "Explore subregions"
+                : "Administrator controls",
+        temperature: (Math.random() * (10 - 2) + 2).toFixed(1) + "°C",
+        alerts: Math.floor(Math.random() * 5),
+        status: Math.random() > 0.2 ? "active" : "issue"
+    };
+
+    const regionCard = document.createElement('div');
+    regionCard.className = 'region-card fade-in';
+    regionCard.innerHTML = `
+        <div class="card-top">
+            <div>
+                <div class="title">${region.name}</div>
+            </div>
+            <div class="meta">
+            </div>
+        </div>
+        <div class="card-footer">
+            <button class="btn-primary"><i class="fa fa-level-down-alt"></i> ${region.subtitle}</button>
+        </div>
+    `;
+
+    // Add ODK navigation logic
+    const primaryButton = regionCard.querySelector('.btn-primary');
+
     if (type === util.linkedAdminRegion) {
-        button.on('click', function () {
-            var urlParams = util.getKeysToAppendToColdChainMenuURL(maxLevelValue, currAdminRegion,
-                currAdminRegionId);
+        primaryButton.addEventListener('click', function () {
+            const urlParams = util.getKeysToAppendToColdChainMenuURL(maxLevelValue, currAdminRegion, currAdminRegionId);
             odkTables.launchHTML(null, 'config/assets/linkedAdminRegion.html' + urlParams);
         });
     } else if (type === util.adminRegion) {
-        button.on('click', function () {
-            var urlParams = util.getKeysToAppendToColdChainMenuURL(maxLevelValue, currAdminRegion,
-                currAdminRegionId, nextLevel);
+        primaryButton.addEventListener('click', function () {
+            const urlParams = util.getKeysToAppendToColdChainMenuURL(maxLevelValue, currAdminRegion, currAdminRegionId, nextLevel);
             odkTables.launchHTML(null, 'config/assets/index.html' + urlParams);
         });
     } else {
-        // Admin options
-        button.on('click', function () {
+        primaryButton.addEventListener('click', function () {
             odkTables.launchHTML(null, 'config/assets/coldchaindemo.html');
         });
     }
 
-    $(divToAddButtonTo).append(button);
+    buttonsDiv.appendChild(regionCard);
 }
+
 
 async function showRegionButtonsAndTitle(jsonRegions) {
     // There are subregions so show them
@@ -110,7 +142,7 @@ function updateStaticDisplay() {
     // Cold Chain Demo
     var fileUri = odkCommon.getFileAsUrl('config/assets/img/hallway.jpg');
     var header = $('<h1>');
-    header.attr('id', 'header1');
+    header.attr('id', 'header');
     var headerTxt = odkCommon.localizeText(locale, "cold_chain_management");
     header.text(headerTxt);
     headerDiv.append(header);
@@ -217,3 +249,4 @@ async function display() {
             currAdminRegionId);
     }
 }
+

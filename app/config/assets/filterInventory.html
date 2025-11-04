@@ -10,23 +10,55 @@
         <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
         <script type="text/javascript" src="js/filterInventory.js"></script>
         <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     </head>
 
-    <body id="main">
-        <div id="wrapper">
-            <div id="navHeader" class="hdr-divider">
-                <h1 id="inventory">Inventory</h1>
-            </div>
+	<body id="main">
+		<header class="app-header">
+			<div class="header-inner">
+				<div class="brand">
+					<div class="logo"><i class="bi bi-thermometer-snow"></i></div>
+					<h1 id="header">Inventory</h1>
+				</div>
+			</div>
+		</header>
+		<main class="main-content">
+			<div class="page">
+				<div class="top-grid">
+					<div class="panel fade-in" aria-labelledby="regions-heading">
+						
+						<!-- Dynamic region cards appended here -->
+						<div id="buttonsDiv" aria-live="polite">
+						
+							<div class="region-card fade-in" >
+								<div class="card-footer">
+											<button id="view-service-refrigerators-new" class="btn-primary"><i class="fa fa-level-down-alt"></i> Refrigerators Needing Service</button>
+								</div>
+							</div>
 
-            <br>
-            <button id="frig-inventory-by-age" class="btn btn-launch btn-primary btn-block">Refrigerator Age</button>
+							<div class="region-card fade-in" >
+								<div class="card-footer">
+											<button id="view-service-cold-rooms" class="btn-primary"><i class="fa fa-level-down-alt"></i> Cold Rooms Needing Service</button>
+								</div>
+							</div>
 
-            <button id="facility-inventory-by-grid-power" class="btn btn-launch btn-primary btn-block">Facility Grid Power Availability</button>
+						</div>
 
-        </div>
-        <script type="text/javascript">
-            $(display);
-        </script>
-    </body>
-</html>
+						<!-- Description / login placeholder -->
+						<div id="description"></div>
+					</div>
+				</div>
+
+				<!-- Spacing for footer -->
+				<div style="height:80px"></div>
+			</div>
+		</main>
+
+	</body>
+
+			<script type="text/javascript">
+				$(display);
+			</script>
+	</html>

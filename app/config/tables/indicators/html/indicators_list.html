@@ -11,37 +11,56 @@
         <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
         <script type="text/javascript" src="../../../assets/js/list_view_logic.js"></script>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     </head>
     <body>
         <script type="text/javascript" src="../js/indicators_list.js"></script>
 
+		<header>
+			<div class="app-header">
+				<h2 id="header1">Loading...</h2>
+					<div class="header-icons">
+					  <i class="bi bi-speedometer2"></i>
+					  <i class="bi bi-bar-chart-line"></i>
+					  <i class="bi bi-grid-3x3-gap"></i>
+					  <i class="bi bi-hospital"></i>
+					  <i class="bi bi-snow"></i>
+					</div>
 
-        <div id="header" class="paginatedListHeader"></div>
+			</div>
+		</header>
+		<main class="dashboard">
 
-        <div id="searchBox">
-            <form id="form" action="javascript:getSearchListResults();">
-                <input id="search" type="text" name="query" onblur="clearListResults()"/>
-                <input id="submit" type="submit" value="Search" />
-            </form>
-            <div class="btnDiv">
-                <div class="prevBtnDiv"><button id="prevButton" class="btn" onclick="prevListResults()">Prev</button></div>
-                <select id="limitDropdown" class="dropdownLimit" onchange="newListLimit();">
-                    <option value="10">10</option>
-				    <option value="20">20</option>
-				    <option value="50">50</option>
-				    <option value="100">100</option>
-				    <option value="1000">1000</option>
-			    </select>
-                <span id="navigation-text" class="navTextStyle"><span id="showing">Showing</span> <span id="navTextOffset"></span>-<span id="navTextLimit"></span> <span id="of">of</span> <span id="navTextCnt"></span></span>
-                <div class="nextBtnDiv"><button id="nextButton" class="btn" onclick="nextListResults()">Next</button></div>
-            </div>
-        </div>
+			<div id="searchBox">
+			  <form id="form" action="javascript:getSearchListResults();" class="search-filter">
+				<div class="search-bar">
+				  <input id="search" type="text" name="query" placeholder="Search" onblur="clearListResults()" />
+				</div>
 
-        <div id="wrapper">
-            <div id="list"></div>
-        </div>
+				<button type="submit" id="submit" class="filter-btn">
+				  <i class="bi bi-search"></i>
+				</button>
+			  </form>
+			</div>
+
+			<div id="wrapper">
+				<div id="list" class="card-list"></div>
+			</div>
+			<div class="btnDiv">
+					<div class="prevBtnDiv"><button id="prevButton" class="btn" onclick="prevListResults()">Prev</button></div>
+					<span id="navigation-text" class="navTextStyle"><span id="showing">Showing</span> <span id="navTextOffset"></span>-<span id="navTextLimit"></span> <span id="of">of</span> <span id="navTextCnt"></span></span>
+					<select id="limitDropdown" class="dropdownLimit" onchange="newListLimit();">
+						<option value="10">10</option>
+						<option value="20">20</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+						<option value="1000">1000</option>
+					</select>
+					<div class="nextBtnDiv"><button id="nextButton" class="btn" onclick="nextListResults()">Next</button></div>
+			</div>
         <script>
             $(function() { resumeFunc('init'); });
         </script>
+		</main>
     </body>
 </html>

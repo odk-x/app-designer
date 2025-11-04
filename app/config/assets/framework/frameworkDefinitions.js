@@ -398,7 +398,7 @@ window.odkFrameworkDefinitions = {
     "instances_survey_create_button_label": {
       "string_token": "instances_survey_create_button_label",
       "text": {
-        "default": "Create new instance",
+        "default": "New Failure",
         "es": "Hacer Caso Nuevo",
         "fr": "Créer une nouvelle instance"
       },
@@ -947,7 +947,7 @@ window.odkFrameworkDefinitions = {
     "filter_health_facilities_by_type": {
       "string_token": "filter_health_facilities_by_type",
       "text": {
-        "default": "Filter Health Facilities By Type",
+        "default": "Filter By Type",
         "es": "Filtrar Instituciones De Salud Por Tipo",
         "fr": "Filtrer les établissements de santé par type"
       },

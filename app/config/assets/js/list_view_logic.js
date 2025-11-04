@@ -13,6 +13,7 @@ window.listViewLogic = {
     rowCountKey: null,
     queryKey: null,
     searchKey: null,
+	surveillanceKey: null,
     queryStmt: 'stmt',
     queryArgs: 'args',
 
@@ -32,7 +33,8 @@ window.listViewLogic = {
     listElemId: null,
     imgId: null,
     searchTxtId: null,
-    headerId: null,
+    surveillanceTxtId: null,
+	headerId: null,
     limitId: null,
     prevBtnId: null,
     nextBtnId: null,
@@ -90,6 +92,7 @@ window.listViewLogic = {
         that.rowCountKey = that.tableId + ':rowCount';
         that.queryKey = that.tableId + ':query';
         that.searchKey = that.tableId + ':search';
+        that.surveillanceKey = that.tableId + ':surveillance';
     },
 
     setListQuery: function(queryToUse) {
@@ -162,6 +165,19 @@ window.listViewLogic = {
         var that = this;
 
         that.searchTxtId = searchTxtIdToUse;
+    },
+
+    setSurveillanceTextElement: function(surveillanceTxtIdToUse) {
+        if (surveillanceTxtIdToUse === null || surveillanceTxtIdToUse === undefined ||
+            surveillanceTxtIdToUse.length === 0) {
+            console.log('setSurveillanceTextElement: invalid surveillance text id');
+            return;
+        }
+
+        var that = this;
+
+        that.surveillanceTxtId = surveillanceTxtIdToUse;
+		console.log("IN setSurveillanceTextElement" +surveillanceTxtIdToUse);
     },
 
     setHeaderElement: function(headerIdToUse) {
@@ -333,12 +349,12 @@ window.listViewLogic = {
         that.clearRows();
 
         if (resultSet.getCount() === 0) {
-            console.log('No ' + util.formatDisplayText(that.tableId));
+            console.log('No Records Found!');
             var note = $('<li>');
             note.attr('class', 'note');
-            note.text('No ' + util.formatDisplayText(that.tableId));
+			note.html('<i class="bi bi-info-circle-fill"></i> No Records Found');
             $(that.listElemId).append(note);
-
+			$('.dashboard').css('height', '100%');
         } else {
             that.displayGroup(resultSet);
         }
@@ -411,6 +427,15 @@ window.listViewLogic = {
             var searchText = odkCommon.getSessionVariable(that.searchKey);
             if (searchText !== null && searchText !== undefined && searchText.length !== 0) {
                 $(that.searchTxtId).val(searchText);
+            }
+
+            var surveillanceTxt = odkCommon.getSessionVariable(that.surveillanceKey);
+			if (surveillanceTxt !== null && surveillanceTxt !== undefined && surveillanceTxt.length !== 0) {
+				if (surveillanceTxt === 'yes') {
+					$(that.surveillanceTxtId).prop('checked', true);
+				} else {
+					$(that.surveillanceTxtId).prop('checked', false);
+				}
             }
 
             that.rowCount = odkCommon.getSessionVariable(that.rowCountKey);
@@ -514,8 +539,19 @@ window.listViewLogic = {
             // We're also going to add a click listener on the wrapper ul that will
             // handle all of the clicks on its children.
             $(that.listElemId).click(function(e) {
+
                 // wrap up the object so we can call closest()
                 var jqueryObject = $(e.target);
+				
+				if (
+					jqueryObject.closest('.menu').length > 0 || 
+					jqueryObject.closest('.pmm-circle').length > 0 || 
+					jqueryObject.closest('.status').length > 0
+				) {
+					e.stopPropagation();
+					return;
+				}
+
                 // we want the closest thing with class item_space, which we
                 // have set up to have the row id
                 var containingDiv = jqueryObject.closest('.item_space');
@@ -562,75 +598,44 @@ window.listViewLogic = {
             item.attr('class', 'item_space');
             item.text(that.createLabel(that.hdrLabel) + util.formatColIdForDisplay(that.hdrColId, i, resultSet, true));
 
-            if (that.showEditAndDelButtons === false)  {
-                /* Creates arrow icon (Nothing to edit here) */
-                var chevron = $('<img>');
-                chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/white_arrow.png'));
-                chevron.attr('class', 'chevron');
-                item.append(chevron);
-            }
+			if (that.hdrLabel === 'Refrigerator'){ 
+				var underPmm = util.formatColIdForDisplay('is_under_pmm', i, resultSet, true);
+				if (underPmm === 'Yes' || underPmm === 'yes') {
+					var pmmBar = $('<br><div>')
+						.addClass('pmm-bar')
+						.text('PMM Surveillance'); 
 
+					item.append(pmmBar);
+				}
+
+			}
+			
+			if (that.hdrLabel === 'Refrigerator'){
+				var finalStatus = util.formatColIdForDisplay('functional_status', i, resultSet, true);
+				if (finalStatus === 'Functioning' || finalStatus === null || finalStatus === ''){
+     				var statusSurv = $('<div>').addClass('status functioning');
+					var statusSurvSpan = $('<span>').addClass('dot green');
+					statusSurv.append(statusSurvSpan);      
+					statusSurv.append('Working Well'); 
+					item.append(statusSurv);
+			}else if (finalStatus === 'Not Functioning'){
+     				var statusSurv = $('<div>').addClass('status not-functioning');
+					var statusSurvSpan = $('<span>').addClass('dot red');
+					statusSurv.append(statusSurvSpan);      
+					statusSurv.append('Needs Attention'); 
+    				item.append(statusSurv);
+				}
+			}else{
+			     	var statusSurv = $('<div>');
+					item.append(statusSurv);
+			}
+						
             if (that.firstDetColId !== null && that.firstDetColId !== undefined && that.firstDetColId.length !== 0) {
                 var field1 = $('<li>');
                 field1.attr('class', 'detail');
                 var fDetail = util.formatColIdForDisplay(that.firstDetColId, i, resultSet, true);
                 field1.text(that.createLabel(that.firstDetLabel) + fDetail);
                 item.append(field1);
-            }
-
-            // Add delete button if _effective_access has 'd'
-            if (that.showEditAndDelButtons === true) {
-                var access = resultSet.getData(i, '_effective_access');
-                if (access.indexOf('d') !== -1) {
-                    var deleteButton = $('<button>');
-                    deleteButton.attr('id', 'delButton');
-                    deleteButton.attr('class', 'delBtn btn');
-
-                    deleteButton.click(function(e) {
-                        var jqueryObj = $(e.target);
-                        // get closest thing with class item_space, to get row id
-                        var containingDiv = jqueryObj.closest('.item_space');
-                        var rowId = containingDiv.attr('rowId');
-                        console.log('deleteButton clicked with rowId: ' + rowId);
-                        e.stopPropagation();
-
-                        if (confirm(delRowTxt + ' ' + rowId)) {
-                            odkData.deleteRow(that.tableId, null, rowId, function(d) {
-                                alert(delRowCnfTxt);
-                                that.resumeFn('rowDeleted');
-                            }, function(error) {
-                                console.log('Failed to delete row ' +  rowId + ' with error ' + error);
-                                alert(delRowFailTxt + ' - ' + rowId);
-                            });
-                        }
-                    });
-
-                    deleteButton.text(deleteTxt);
-
-                    item.append(deleteButton);
-                }
-
-                // Add edit button if _effective_access has 'w'
-                if (access.indexOf('w') !== -1) {
-                    var editButton = $('<button>');
-                    editButton.attr('id', 'editButton');
-                    editButton.attr('class', 'editBtn btn');
-
-                    editButton.click(function(e) {
-                        var jqueryObj = $(e.target);
-                        // get closest thing with class item_space, to get row id
-                        var containingDiv = jqueryObj.closest('.item_space');
-                        var rowId = containingDiv.attr('rowId');
-                        console.log('editButton clicked with rowId: ' + rowId);
-                        e.stopPropagation();
-
-                        odkTables.editRowWithSurvey(null, that.tableId, rowId, that.formId, null, null);
-                    });
-
-                    editButton.text(editTxt);
-
-                    item.append(editButton);
-                }
             }
 
             if (that.secondDetColId !== null && that.secondDetColId !== undefined && that.secondDetColId.length !== 0) {
@@ -641,23 +646,78 @@ window.listViewLogic = {
                 item.append(field2);
             }
 
-            if (that.imgId !== null && that.imgId !== undefined && that.imgId.length !== 0) {
-                var uriRelative = resultSet.getData(i, that.imgId);
-                var src = '';
-                if (uriRelative !== null  && uriRelative !== '') {
-                    var uriAbsolute = odkCommon.getRowFileAsUrl(that.tableId, resultSet.getRowId(i), uriRelative);
-                    src = uriAbsolute;
-                }
+			var menu = $('<div>').addClass('menu');
+			var menuToggle = $('<button>').addClass('menu-toggle').text('⋮').click(function(e) {
+									e.stopPropagation(); // prevent card click
+									var menuContent = $(this).siblings('.menu-content');
+									// Toggle visibility
+									if (menuContent.is(':visible')) {
+										menuContent.hide();
+									} else {
+										// close any other open menus first
+										$('.menu-content').hide();
+										menuContent.show();
+									}
+								});
 
-                var thumbnail = $('<img>');
-                thumbnail.attr('src', src);
-                thumbnail.attr('class', 'imgWrapper');
+			var menuContent = $('<div>').addClass('menu-content');
 
-                var imgDiv = $('<div>');
-                imgDiv.addClass('imgWrapperDiv');
-                imgDiv.append(thumbnail);
-                item.append(imgDiv);
-            }
+			// Case 1: showEditAndDelButtons === true → add Edit/Delete options
+			if (that.showEditAndDelButtons === true) {
+				var access = resultSet.getData(i, '_effective_access');
+
+				if (access.indexOf('w') !== -1) {
+					var editBtn = $('<button>')
+						.text('Edit')
+						.click(function(e) {
+							var rowId = $(e.target).closest('.item_space').attr('rowId');
+							e.stopPropagation();
+							console.log('editButton clicked with rowId: ' + rowId);
+
+							odkTables.editRowWithSurvey(null, that.tableId, rowId, that.formId, null, null);
+						});
+					menuContent.append(editBtn);
+				}
+
+				if (access.indexOf('d') !== -1) {
+					var deleteBtn = $('<button>')
+						.text('Delete')
+						.click(function(e) {
+							var rowId = $(e.target).closest('.item_space').attr('rowId');
+							e.stopPropagation();
+							console.log('deleteButton clicked with rowId: ' + rowId);
+
+							if (confirm(delRowTxt + ' ' + rowId)) {
+								odkData.deleteRow(that.tableId, null, rowId,
+									function(d) {
+										alert(delRowCnfTxt);
+										that.resumeFn('rowDeleted');
+									},
+									function(error) {
+										console.log('Failed to delete row ' + rowId + ' with error ' + error);
+										alert(delRowFailTxt + ' - ' + rowId);
+									}
+								);
+							}
+						});
+					menuContent.append(deleteBtn);
+				}
+			}
+
+			// Case 2: showEditAndDelButtons === false → show only chevron icon
+			else {
+				var arrow = $('<i>')
+					.addClass('bi bi-chevron-right chevron-icon blue-icon')
+					.attr('title', 'View Details');
+
+				menuContent.append(arrow);
+			}
+
+			// Put menu together
+			menu.append(menuToggle);
+			menu.append(menuContent);
+			item.append(menu);
+
 
             $(that.listElemId).append(item);
 
@@ -796,16 +856,21 @@ window.listViewLogic = {
 
     getSearchResults :function() {
         var that = this;
-        if (that.searchTxtId === null || that.searchTxtId === undefined ||
-            that.searchTxtId.length === 0) {
+        if ((that.searchTxtId === null || that.searchTxtId === undefined ||
+            that.searchTxtId.length === 0) && (that.surveillanceTxtId === null || that.surveillanceTxtId === undefined ||
+            that.surveillanceTxtId.length === 0)) {
             return;
         }
         var searchText = $(that.searchTxtId).val();
-
-        if (searchText !== null && searchText !== undefined &&
-            searchText.length !== 0) {
+		var isUnderPmm = $(that.surveillanceTxtId).is(':checked') ? 'yes' : null;
+		
+        if ((searchText !== null && searchText !== undefined &&
+            searchText.length !== 0) || (isUnderPmm !== null && isUnderPmm !== undefined &&
+            isUnderPmm.length !== 0)) {
             odkCommon.setSessionVariable(that.searchKey, searchText);
+            odkCommon.setSessionVariable(that.surveillanceKey, isUnderPmm);
             searchText = '%' + searchText + '%';
+
 
             that.queryToRunParams = [];
             if (that.listQueryParams !== null && that.listQueryParams !== undefined &&
@@ -818,14 +883,22 @@ window.listViewLogic = {
             that.queryToRun = that.makeSearchQuery(that.queryToRun);
 
             that.queryToRun = that.appendOrderByToListQuery(that.queryToRun);
-
+			
+			var params = searchParams.split('?');
+			
             // Count the number of ?'s in queryToRun and
             // append that to queryToRunParams
             var searchParamsToAdd = that.searchParams.split('?').length - 1;
             for (var i = 0; i < searchParamsToAdd; i++) {
-                that.queryToRunParams.push(searchText);
+				  if (params[i].includes('is_under_pmm')) {
+					that.queryToRunParams.push(isUnderPmm);
+				  }else if (searchText !== null && searchText !== undefined && searchText.length !== 0 && searchText.length !== 2 ){
+					that.queryToRunParams.push(searchText);
+				  }else{
+					that.queryToRunParams.push(null);
+				  }					  
             }
-
+            
             var queryToRunParts = {};
             queryToRunParts[that.queryStmt] = that.queryToRun;
             queryToRunParts[that.queryArgs] = that.queryToRunParams;
@@ -851,6 +924,7 @@ window.listViewLogic = {
         if (searchText === null || searchText === undefined ||
             searchText.length === 0) {
             odkCommon.setSessionVariable(that.searchKey, '');
+            odkCommon.setSessionVariable(that.surveillanceKey, '');
 
             that.queryToRunParams = [];
             if (that.listQueryParams !== null && that.listQueryParams !== undefined &&

@@ -87,7 +87,6 @@ function refrigeratorsCBFailure(error) {
 
 var display = function() {
     var locale = odkCommon.getPreferredLocale();
-    $('#mdl-hdr').text(odkCommon.localizeText(locale, "model"));
     $('#cat-id-hdr').text(odkCommon.localizeText(locale, "catalog_id"));
     $('#mdl-info').text(odkCommon.localizeText(locale, "model_information"));
     $('#man').text(odkCommon.localizeText(locale, "manufacturer"));

@@ -7,12 +7,14 @@
 var refrigeratorsResultSet = {};
 var typeData = {};
 var facilityData = {};
+var indicatorData = {};
 
 
-function processFrigPromises(facilityResult, typeResult, logResult, tablesResult) {
+function processFrigPromises(facilityResult, typeResult, logResult, tablesResult, indicatorResult) {
     facilityData = facilityResult;
     typeData = typeResult;
-
+	indicatorData = indicatorResult;
+	
     util.showIdForDetail('#refrigerator_id', '_id', refrigeratorsResultSet, false);
     util.showIdForDetail('#serial_number', 'serial_number', refrigeratorsResultSet, false);
     util.showIdForDetail('#facility_name', 'facility_name', facilityData, false);
@@ -21,10 +23,13 @@ function processFrigPromises(facilityResult, typeResult, logResult, tablesResult
     util.showIdForDetail('#catalog_id', 'catalog_id', typeData, false);
     util.showIdForDetail('#tracking_id', 'tracking_id', refrigeratorsResultSet, false);
     util.showIdForDetail('#install_year', 'year_installed', refrigeratorsResultSet, false);
+    util.showIdForDetail('#use_status', 'utilization', refrigeratorsResultSet, true);
     util.showIdForDetail('#functional_status', 'functional_status', refrigeratorsResultSet, true);
     util.showIdForDetail('#reason_not_working', 'reason_not_working', refrigeratorsResultSet, true);
     util.showIdForDetail('#maintenance_priority', 'maintenance_priority', refrigeratorsResultSet, true);
-    util.showIdForDetail('#date_serviced', 'date_serviced', logResult, true);
+	util.showIdForDetail('#date_serviced', 'date_serviced', logResult, true, null, 'dd-mm-yyyy');
+    util.showIdForDetail('#under_warranty', 'under_warranty', refrigeratorsResultSet, true);
+    util.showIdForDetail('#available_voltage_stabilizer', 'available_voltage_stabilizer', indicatorResult, true);
 
     // Show N/A if value is null
     var locale = odkCommon.getPreferredLocale();
@@ -43,7 +48,21 @@ function processFrigPromises(facilityResult, typeResult, logResult, tablesResult
         var viewSSButton = $('#viewSentSurvBtn');
         viewSSButton.removeClass('hideButton');
     }
-
+	
+	if (refrigeratorsResultSet.get('is_under_pmm') == false || refrigeratorsResultSet.get('is_under_pmm') == null) {
+		$('#under_pmm').addClass('inactive');
+	} else {
+		$('#under_pmm').removeClass('inactive');
+		
+	    if ($('.alert-banner.surveillance').length === 0) {
+			const bannerHtml = `
+				<div class="alert-banner surveillance">
+				  <i class="bi bi-eye"></i>
+				  This Refrigerator is tagged for PMM Surveillance
+				</div>`;
+			$('.card-header').after(bannerHtml);
+		}
+	}
 }
 
 function cbSuccess(result) {
@@ -89,8 +108,15 @@ function cbSuccess(result) {
         odkData.getAllTableIds(resolve, reject);
     });
 
-    Promise.all([healthFacilityPromise, typePromise, logPromise, tablesPromise]).then(function (resultArray) {
-        processFrigPromises(resultArray[0], resultArray[1], resultArray[2], resultArray[3]);
+    var statusPromise = new Promise(function(resolve, reject) {
+        var statusQuery = 'SELECT * FROM indicators JOIN refrigerators ON refrigerators._id = indicators.refrigerator_id AND ' +
+            'indicators.refrigerator_id = ? ORDER BY _id DESC';
+        var statusParams = [refrigeratorsResultSet.get('_id')];
+        odkData.arbitraryQuery('indicators', statusQuery, statusParams, null, null, resolve, reject);
+    });
+
+    Promise.all([healthFacilityPromise, typePromise, logPromise, tablesPromise, statusPromise]).then(function (resultArray) {
+        processFrigPromises(resultArray[0], resultArray[1], resultArray[2], resultArray[3], resultArray[4]);
 
     }, function(err) {
         console.log('promises failed with error: ' + err);
@@ -144,6 +170,12 @@ function display() {
     $('#del-frig').text(odkCommon.localizeText(locale, "delete_refrigerator"));
     $('#add-sent-survey').text(odkCommon.localizeText(locale, "add_sentinel_survey"));
     $('#vw-sent-survey').text(odkCommon.localizeText(locale, "view_all_sentinel_surveys"));
+
+    $('#add-foll-survey').text(odkCommon.localizeText(locale, "add_followup_survey"));
+    $('#vw-foll-survey').text(odkCommon.localizeText(locale, "view_followup_survey"));
+
+    $('#add-tfa-survey').text(odkCommon.localizeText(locale, "add_tfa_survey"));
+    $('#vw-tfa-survey').text(odkCommon.localizeText(locale, "view_tfa_survey"));
 
     $('#add-temp-data').text(odkCommon.localizeText(locale, "add_temperature_data"));
     $('#vw-all-temp-data').text(odkCommon.localizeText(locale, "view_all_temperature_data"));
@@ -226,6 +258,9 @@ function onClickAddMntRec() {
 
 		var defaults = {'refrigerator_id': refrigeratorsResultSet.get('_id'),
             'date_serviced': odkCommon.toOdkTimeStampFromDate(new Date())};
+        defaults['under_warranty'] = refrigeratorsResultSet.get('under_warranty');	
+        defaults['warranty_service_provider_contact'] = refrigeratorsResultSet.get('warranty_service_provider_contact');	
+        defaults['warranty_service_provider_name'] = refrigeratorsResultSet.get('warranty_service_provider_name');	
 		defaults['_default_access'] = refrigeratorsResultSet.get('_default_access');
 		defaults['_group_read_only'] = refrigeratorsResultSet.get('_group_read_only');
 		defaults['_group_modify'] = refrigeratorsResultSet.get('_group_modify');
@@ -253,7 +288,12 @@ function onClickSentinelSurvey() {
             'reporting_period': odkCommon.toOdkTimeStampFromDate(new Date())};
         defaults['voltage_stabilizer_present'] = refrigeratorsResultSet.get('voltage_regulator');
         defaults['power_source'] = refrigeratorsResultSet.get('power_source');
+        defaults['under_warranty'] = refrigeratorsResultSet.get('under_warranty');
         defaults['year_installed'] = refrigeratorsResultSet.get('year_installed');
+		if (!$.isEmptyObject(indicatorData) && indicatorData.getCount() > 0) {
+			defaults['voltage_stabilizer_brand'] = indicatorData.get('voltage_stabilizer_brand');
+			defaults['available_voltage_stabilizer'] = indicatorData.get('available_voltage_stabilizer');
+		}
         defaults['_default_access'] = refrigeratorsResultSet.get('_default_access');
         defaults['_group_read_only'] = refrigeratorsResultSet.get('_group_read_only');
         defaults['_group_modify'] = refrigeratorsResultSet.get('_group_modify');
@@ -271,6 +311,74 @@ function onClickViewSentinelSurvey() {
         var frigIdQueryParams = util.getKeyToAppendToColdChainURL(keyToAppend, refrigeratorsResultSet.get('_id'));
         odkTables.launchHTML(null,
             'config/tables/indicators/html/indicators_list.html' + frigIdQueryParams);
+    }
+}
+
+function capitalizeFirstLetterOfEachWord(text){
+    const arr = text.split(" ");
+    for (var i = 0; i < arr.length; i++) {
+        arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+    }
+    return arr.join(" ");
+}
+
+function onClickFollowupSurvey() {
+    if (!$.isEmptyObject(refrigeratorsResultSet)) {
+
+        var defaults = {'refrigerator_id': refrigeratorsResultSet.get('_id'),
+            'followup_date': odkCommon.toOdkTimeStampFromDate(new Date()),
+            'followup_uuid': util.genUUID()};
+        defaults['power_source'] = refrigeratorsResultSet.get('power_source');
+        defaults['manufacturer'] = typeData.get('manufacturer');
+        defaults['model_id'] = typeData.get('model_id');
+        defaults['facility_name'] = capitalizeFirstLetterOfEachWord(facilityData.get('facility_name'));
+        defaults['_default_access'] = refrigeratorsResultSet.get('_default_access');
+        defaults['_group_read_only'] = refrigeratorsResultSet.get('_group_read_only');
+        defaults['_group_modify'] = refrigeratorsResultSet.get('_group_modify');
+        defaults['_group_privileged'] = refrigeratorsResultSet.get('_group_privileged');
+
+        odkTables.addRowWithSurvey(null, 'follow_up', 'follow_up', null, defaults);
+    }
+}
+
+function onClickViewFollowupSurvey() {
+    if (!$.isEmptyObject(refrigeratorsResultSet)) {
+
+        var keyToAppend = 'follow_up.refrigerator_id';
+
+        var frigIdQueryParams = util.getKeyToAppendToColdChainURL(keyToAppend, refrigeratorsResultSet.get('_id'));
+        odkTables.launchHTML(null,
+            'config/tables/follow_up/html/follow_up_list.html' + frigIdQueryParams);
+    }
+}
+
+function onClickTFASurvey() {
+    if (!$.isEmptyObject(refrigeratorsResultSet)) {
+
+        var defaults = {'refrigerator_id': refrigeratorsResultSet.get('_id'),
+            'tfa_date': odkCommon.toOdkTimeStampFromDate(new Date()),
+            'tfa_uuid': util.genUUID()};
+        defaults['manufacturer'] = typeData.get('manufacturer');
+        defaults['model_id'] = typeData.get('model_id');
+        defaults['power_source'] = refrigeratorsResultSet.get('power_source');
+        defaults['facility_name'] = capitalizeFirstLetterOfEachWord(facilityData.get('facility_name'));
+        defaults['_default_access'] = refrigeratorsResultSet.get('_default_access');
+        defaults['_group_read_only'] = refrigeratorsResultSet.get('_group_read_only');
+        defaults['_group_modify'] = refrigeratorsResultSet.get('_group_modify');
+        defaults['_group_privileged'] = refrigeratorsResultSet.get('_group_privileged');
+
+        odkTables.addRowWithSurvey(null, 'troubleshooting_failure_analysis', 'troubleshooting_failure_analysis', null, defaults);
+    }
+}
+
+function onClickViewTFASurvey() {
+    if (!$.isEmptyObject(refrigeratorsResultSet)) {
+
+        var keyToAppend = 'troubleshooting_failure_analysis.refrigerator_id';
+
+        var frigIdQueryParams = util.getKeyToAppendToColdChainURL(keyToAppend, refrigeratorsResultSet.get('_id'));
+        odkTables.launchHTML(null,
+            'config/tables/troubleshooting_failure_analysis/html/troubleshooting_failure_analysis_list.html' + frigIdQueryParams);
     }
 }
 

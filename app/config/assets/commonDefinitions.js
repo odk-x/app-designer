@@ -2058,6 +2058,139 @@ window.odkCommonDefinitions = {
         "es": "Días con temperatura inferior a 2°C, últimos 30 días"
       },
       "_row_num": 241
+    },
+    "add_followup_survey": {
+      "string_token": "add_followup_survey",
+      "text": {
+        "default": "Add Follow-up Survey"
+      },
+      "_row_num": 242
+    },
+    "view_followup_survey": {
+      "string_token": "view_followup_survey",
+      "text": {
+        "default": "View All Follow-up Surveys"
+      },
+      "_row_num": 243
+    },
+    "add_tfa_survey": {
+      "string_token": "add_tfa_survey",
+      "text": {
+        "default": "Add TFA Survey"
+      },
+      "_row_num": 244
+    },
+    "view_tfa_survey": {
+      "string_token": "view_tfa_survey",
+      "text": {
+        "default": "View All TFA Surveys"
+      },
+      "_row_num": 245
+    },
+    "followup_data_deleted_successfully": {
+      "string_token": "followup_data_deleted_successfully",
+      "text": {
+        "default": "Follow-up data deleted successfully"
+      },
+      "_row_num": 246
+    },
+    "are_you_sure_you_want_to_delete_this_followup_survey": {
+      "string_token": "are_you_sure_you_want_to_delete_this_followup_survey",
+      "text": {
+        "default": "Are you sure you want to delete this Follow-up survey?"
+      },
+      "_row_num": 247
+    },
+    "followup_survey_information": {
+      "string_token": "followup_survey_information",
+      "text": {
+        "default": "Basic Follow-up Survey Information"
+      },
+      "_row_num": 248
+    },
+    "edit_followup_survey": {
+      "string_token": "edit_followup_survey",
+      "text": {
+        "default": "Edit Follow-up Survey"
+      },
+      "_row_num": 249
+    },
+    "delete_followup_survey": {
+      "string_token": "delete_followup_survey",
+      "text": {
+        "default": "Delete Follow-up Survey"
+      },
+      "_row_num": 250
+    },
+    "tfa_data_deleted_successfully": {
+      "string_token": "tfa_data_deleted_successfully",
+      "text": {
+        "default": "TFA data deleted successfully"
+      },
+      "_row_num": 251
+    },
+    "are_you_sure_you_want_to_delete_this_tfa_survey": {
+      "string_token": "are_you_sure_you_want_to_delete_this_tfa_survey",
+      "text": {
+        "default": "Are you sure you want to delete this TFA survey?"
+      },
+      "_row_num": 252
+    },
+    "tfa_survey_information": {
+      "string_token": "tfa_survey_information",
+      "text": {
+        "default": "Basic TFA Survey Information"
+      },
+      "_row_num": 253
+    },
+    "edit_tfa_survey": {
+      "string_token": "edit_tfa_survey",
+      "text": {
+        "default": "Edit TFA Survey"
+      },
+      "_row_num": 254
+    },
+    "delete_tfa_survey": {
+      "string_token": "delete_tfa_survey",
+      "text": {
+        "default": "Delete TFA Survey"
+      },
+      "_row_num": 255
+    },
+    "date_no_colon": {
+      "string_token": "date_no_colon",
+      "text": {
+        "default": "Date"
+      },
+      "_row_num": 256
+    },
+    "followup_date": {
+      "string_token": "followup_date",
+      "text": {
+        "default": "Follow-up Date:"
+      },
+      "_row_num": 257
+    },
+    "followup_id": {
+      "string_token": "followup_id",
+      "text": {
+        "default": "Follow-up ID:"
+      },
+      "_row_num": 258
+    },
+    "tfa_date": {
+      "string_token": "tfa_date",
+      "text": {
+        "default": "TFA Date:"
+      },
+      "_row_num": 259
+    },
+    "tfa_id": {
+      "string_token": "tfa_id",
+      "text": {
+        "default": "TFA ID:"
+      },
+      "_row_num": 260
     }
   },
   "_locales": {

@@ -9,14 +9,13 @@ var healthFacilityResultSet = {};
 function onFacilitySummaryClick() {
     if (!$.isEmptyObject(healthFacilityResultSet))
     {
-        var rowIdQueryParams = util.getKeyToAppendToColdChainURL(util.facilityRowId, healthFacilityResultSet.get('_id'));
+        var rowIdQueryParams = util.getKeyToAppendToColdChainURL(util.facilityRowId, healthFacilityResultSet.get('facility_id'));
         odkTables.launchHTML(null,
             'config/tables/health_facilities/html/health_facilities_detail_summary.html' + rowIdQueryParams);
     }
 }
 
 function onLinkClick() {
-
     if (!$.isEmptyObject(healthFacilityResultSet))
     {
         var rowIdQueryParams = util.getKeyToAppendToColdChainURL(util.facilityRowId, healthFacilityResultSet.get('_id'));
@@ -129,11 +128,56 @@ function cbDeleteFailure(error) {
     odkCommon.closeWindow(-1);
 }
 
-function cbSuccess(result) {
+async function cbSuccess(healthFacilityResult) {
+    var locale = odkCommon.getPreferredLocale();
+    healthFacilityResultSet = healthFacilityResult;
 
-    healthFacilityResultSet = result;
+    $('#TITLE').text(healthFacilityResultSet.get('facility_name'));
 
-     var access = healthFacilityResultSet.get('_effective_access');
+    $('#facility_id').text(healthFacilityResultSet.get('facility_id'));
+    $('#facility_type').text(util.formatDisplayText(healthFacilityResultSet.get('facility_type')));
+    $('#contact_name').text(healthFacilityResultSet.get('contact_name'));
+    $('#contact_phone_number').text(healthFacilityResultSet.get('contact_phone_number'));
+    $('#catchment_population').text(healthFacilityResultSet.get('catchment_population'));
+    $('#facility_ownership').text(util.formatDisplayText(healthFacilityResultSet.get('facility_ownership')));
+
+    var linkedRegionId = healthFacilityResultSet.get('admin_region_id');
+    $('#admin_region').text(linkedRegionId);
+
+    // Get the breadcrumb
+    if (linkedRegionId !== null && linkedRegionId !== undefined) {
+        var breadcrumbName = await util.getBreadcrumbRegionName(locale, linkedRegionId);
+        if (breadcrumbName !== null && breadcrumbName !== undefined) {
+            var bcHdr = $('#breadcrumbHeader');
+            bcHdr.text(breadcrumbName);
+        }
+    }
+
+    $('#electricity_source').text(util.formatDisplayText(healthFacilityResultSet.get('electricity_source')));
+
+    $('#grid_availability').text(util.formatDisplayText(
+        healthFacilityResultSet.get('grid_power_availability')) + ' ' +
+        odkCommon.localizeText(locale, "hours_per_day"));
+
+    $('#fuel_availability').text(util.formatDisplayText(healthFacilityResultSet.get('fuel_availability')));
+
+    // The latitude and longitude are stored in a single column as GeoPoint.
+    // We need to extract the lat/lon from the GeoPoint.
+    var lat = healthFacilityResultSet.get('Location.latitude');
+    var lon = healthFacilityResultSet.get('Location.longitude');
+    $('#lat').text(lat);
+    $('#lon').text(lon);
+
+    $('#distance_to_supply').text(healthFacilityResultSet.get('distance_to_supply') + ' ' +
+        odkCommon.localizeText(locale, "km"));
+
+    $('#supply_interval').text(healthFacilityResultSet.get('vaccine_supply_interval')  + ' ' +
+        odkCommon.localizeText(locale, "weeks"));
+
+    $('#supply_mode').text(util.formatDisplayText(
+        healthFacilityResultSet.get('vaccine_supply_mode')));
+		
+	var access = healthFacilityResultSet.get('_effective_access');
 
     if (access.indexOf('w') !== -1) {
         var editButton = $('#editFacilityBtn');
@@ -160,12 +204,13 @@ function cbSuccess(result) {
     });
 
 
-
     Promise.all([refrigeratorCountPromise, coldRoomCountPromise]).then(function (resultArray) {
         refrigeratorsCBSuccess(resultArray[0], resultArray[1]);
     }, function(err) {
         console.log('promises failed with error: ' + err);
     });
+
+
 }
 
 function cbFailure(error) {
@@ -175,18 +220,33 @@ function cbFailure(error) {
 
 function display() {
     var locale = odkCommon.getPreferredLocale();
+    $('#basic-facility-information').text(odkCommon.localizeText(locale, "basic_facility_information"));
+    $('#health-fac-id').text(odkCommon.localizeText(locale, "health_facility_id"));
+    $('#fac-type').text(odkCommon.localizeText(locale, "facility_type"));
+    $('#con-name').text(odkCommon.localizeText(locale, "contact_name"));
+    $('#con-ph-num').text(odkCommon.localizeText(locale, "contact_phone_number"));
+    $('#catch-pop').text(odkCommon.localizeText(locale, "catchment_population"));
+    $('#ownership').text(odkCommon.localizeText(locale, "ownership"));
+    $('#admin-reg').text(odkCommon.localizeText(locale, "admin_region"));
 
-    $('#view-summary').text(odkCommon.localizeText(locale, "view_facility_information"));
+    $('#power-information').text(odkCommon.localizeText(locale, "power_information"));
+    $('#elec-source').text(odkCommon.localizeText(locale, "electricity_source"));
+    $('#grid-avail').text(odkCommon.localizeText(locale, "grid_availability"));
+    $('#fuel-avail').text(odkCommon.localizeText(locale, "gas_cylinder_availability"));
 
-    $('#refrig-inv').text(odkCommon.localizeText(locale, "refrigerator_inventory"));
-    $('#add-fridge').text(odkCommon.localizeText(locale, "add_refrigerator"));
+    $('#loc-info').text(odkCommon.localizeText(locale, "location_information"));
+    $('#lat-gps').text(odkCommon.localizeText(locale, "latitude_gps"));
+    $('#long-gps').text(odkCommon.localizeText(locale, "longitude_gps"));
 
-    $('#cold-room-inv').text(odkCommon.localizeText(locale, "cold_room_inventory"));
-    $('#add-cold-room').text(odkCommon.localizeText(locale, "add_cold_room"));
+    $('#stk-info').text(odkCommon.localizeText(locale, "stock_information"));
+    $('#dist-to-sup-pt').text(odkCommon.localizeText(locale, "distance_to_supply_point"));
+    $('#vac-sup-interval').text(odkCommon.localizeText(locale, "vaccine_supply_interval"));
+    $('#vac-sup-mode').text(odkCommon.localizeText(locale, "vaccine_supply_mode"));
 
-    $('#edit-fac').text(odkCommon.localizeText(locale, "edit_facility"));
-    $('#del-fac').text(odkCommon.localizeText(locale, "delete_facility"));
-
+    // var facId = util.getQueryParameter(util.facilityRowId);
+	//console.log(facId);
+    //odkData.query('health_facilities', '_id = ?', [facId], null, null, null, null, null, null, true,
+     //   cbSuccess, cbFailure);
     odkData.getViewData(cbSuccess, cbFailure);
 }
 

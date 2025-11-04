@@ -27,7 +27,7 @@ function resumeFunc(state) {
         listViewLogic.setSearchParams(searchParams);
         listViewLogic.setListElement('#list');
         listViewLogic.setSearchTextElement('#search');
-        listViewLogic.setHeaderElement('#header');
+        listViewLogic.setHeaderElement('#header1');
         listViewLogic.setLimitElement('#limitDropdown');
         listViewLogic.setPrevAndNextButtons('#prevButton', '#nextButton');
         listViewLogic.setNavTextElements('#navTextLimit', '#navTextOffset', '#navTextCnt');

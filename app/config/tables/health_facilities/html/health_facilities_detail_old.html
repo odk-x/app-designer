@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<!-- beninTeaHouses Detailed View -->
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="../../../assets/css/homeScreen.css" type="text/css" rel="stylesheet" />
+        <link href="../../../assets/css/generate-index.css" type="text/css" rel="stylesheet"/>
+        <link href="../../../assets/css/detail_summary.css" type="text/css" rel="stylesheet"/>
+        <link href="../../../assets/css/detail_refined.css" type="text/css" rel="stylesheet"/>
+        <script type="text/javascript" src="../../../assets/commonDefinitions.js"></script>
+        <script type="text/javascript" src="../../../assets/libs/jquery-3.4.1.js"></script>
+        <script type="text/javascript" src="../../../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="../../../assets/js/util.js"></script>
+        <script type="text/javascript" src="../js/health_facilities_detail.js"></script>
+    </head>
+    <body>
+  <div class="header cl-12">
+    <h1><span id="TITLE"></span></h1>
+    <h3 id="breadcrumbHeader"></h3>
+  </div>
+		<div id="buttonsDiv" class="buttonsDivStyle">
+			<div class="button-group">
+				<h3>📍 Health Facility</h3>
+				<button onclick="onFacilitySummaryClick()" class="button">View Facility Info</button>
+				<button onclick="onEditFacility()" class="button">Edit Facility</button>
+				<button onclick="onDeleteFacility()" class="button">Delete Facility</button>
+			</div>
+			<div class="button-group">
+				<h3>🧊 Refrigerator</h3>
+				<button onclick="onAddFridgeClick()" class="button">Add Refrigerator</button>
+				<button onclick="onLinkClick()" class="button">Refrigerator Inventory</button>
+			</div>
+			<div class="button-group">
+				<h3>❄️ Cold Room</h3>
+				<button  onclick="onAddCRClick()" class="button">Add Cold Room</button>
+				<button  onclick="onCRInvClick()" class="button">Cold Room Inventory</button>
+			</div>
+		</div>
+
+  <script>
+    $(function() { display(); });
+  </script>
+</body>
+
+
+  <script>
+    function showDrawer(type) {
+      document.querySelectorAll('.tablink').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById('drawer').classList.add('show');
+
+      const drawerBody = document.getElementById('drawerBody');
+      if (type === 'summary') drawerBody.innerHTML = 'Facility summary information...';
+      else if (type === 'fridge') drawerBody.innerHTML = 'Refrigerator inventory...';
+      else if (type === 'coldroom') drawerBody.innerHTML = 'Cold room inventory...';
+    }
+
+    function closeDrawer() {
+      document.getElementById('drawer').classList.remove('show');
+    }
+  </script>
+
+</body>
+        <script>
+            $(function() { display(); });  // calls the detail display function when ready
+        </script>
+    </body>
+</html>

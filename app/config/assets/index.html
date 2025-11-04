@@ -1,29 +1,714 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link href="ratchet/css/ratchet.css" type="text/css" rel="stylesheet" />
-        <link href="ratchet/css/ratchet-theme-android.css" type="text/css" rel="stylesheet" />
-        <link href="css/homeScreen.css" type="text/css" rel="stylesheet" />
-        <link href="css/generate-index.css" type="text/css" rel="stylesheet" />
-        <script type="text/javascript" src="commonDefinitions.js"></script>
-        <script type="text/javascript" src="libs/jquery-3.4.1.js"></script>
-        <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
-        <script type="text/javascript" src="../../system/js/odkData.js"></script>
-        <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
-        <script type="text/javascript" src="js/menu.js"></script>
-        <script type="text/javascript" src="js/util.js"></script>
-    </head>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <title>Cold Chain Management — Dashboard</title>
 
-    <body id="main">
-        <div id="navHeader" class="hdr-divider"></div>
+    <!-- External libs (kept) -->
+    <link href="ratchet/css/ratchet.css" rel="stylesheet" />
+    <link href="ratchet/css/ratchet-theme-android.css" rel="stylesheet" />
+    <link href="css/generate-index.css" rel="stylesheet" />
+    <script type="text/javascript" src="commonDefinitions.js"></script>
+    <script type="text/javascript" src="libs/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
+    <script type="text/javascript" src="../../system/js/odkData.js"></script>
+    <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
+    <script type="text/javascript" src="js/menu.js"></script>
+    <script type="text/javascript" src="js/util.js"></script>
 
-        <div id="description"></div>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        <div id="buttonsDiv" class="buttonsDivStyle"></div>
+    <!-- REVAMPED STYLES -->
+    <style>
+    :root{
+        --bg-1: #ffffff;
+        --bg-2: #f8fafc;
+        --bg-3: #f1f5f9;
+        --accent-1: #0ea5e9; /* sky-500 */
+        --accent-2: #3b82f6; /* blue-500 */
+        --accent-3: #06b6d4; /* cyan-500 */
+        --text-primary: #1e293b; /* slate-800 */
+        --text-secondary: #475569; /* slate-600 */
+        --text-muted: #64748b; /* slate-500 */
+        --text-light: #94a3b8; /* slate-400 */
+        --border-light: #e2e8f0; /* slate-200 */
+        --border-medium: #cbd5e1; /* slate-300 */
+        --success: #10b981; /* emerald-500 */
+        --warning: #f59e0b; /* amber-500 */
+        --danger: #ef4444; /* red-500 */
+        --card-radius: 12px;
+        --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+        --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.1), 0 2px 4px -1px rgba(15, 23, 42, 0.06);
+        --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.1), 0 4px 6px -2px rgba(15, 23, 42, 0.05);
+        --max-width: 1200px;
+        --header-height: 80px;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
 
-        <script type="text/javascript">
-            $(display);
-        </script>
-    </body>
+    /* Page base */
+    html,body{
+        height:100%;
+        margin:0;
+        background: var(--bg-1);
+        color: var(--text-primary);
+        -webkit-font-smoothing:antialiased;
+        -moz-osx-font-smoothing:grayscale;
+        overflow:hidden;
+    }
+
+    /* App header */
+    .app-header{
+        height: var(--header-height);
+        position:fixed;
+        top:0;
+        left:0;
+        right:0;
+        display:flex;
+        align-items:center;
+        z-index:1100;
+        background: white;
+        border-bottom: 1px solid var(--border-light);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .header-inner{
+        width:100%;
+        max-width:var(--max-width);
+        margin: 0 auto;
+        display:flex;
+        align-items:center;
+        gap:1rem;
+        padding:0 1.5rem;
+    }
+
+    .brand {
+        display:flex;
+        align-items:center;
+        gap:.75rem;
+    }
+    .brand .logo {
+        width:44px;
+        height:44px;
+        border-radius:10px;
+        background: linear-gradient(135deg, var(--accent-2), var(--accent-1));
+        box-shadow: 0 4px 8px rgba(59, 130, 246, 0.2);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-weight:700;
+        color:white;
+        font-size:1.05rem;
+    }
+    .brand h1 {
+        font-size: 1.5rem;
+        margin: 0;
+        line-height: 1.1;
+        font-weight: 700;
+        color: var(--text-primary);
+        letter-spacing: 0.2px;
+    }
+    .header-actions{
+        margin-left:auto;
+        display:flex;
+        align-items:center;
+        gap:.75rem;
+    }
+    .header-badge{
+        background: var(--bg-2);
+        padding:.35rem .75rem;
+        border-radius:999px;
+        border: 1px solid var(--border-light);
+        color: var(--text-muted);
+        font-size:.86rem;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+    .header-badge i {
+        color: var(--accent-1);
+    }
+
+    /* Main scroll area */
+    .main-content{
+        position:fixed;
+        top: var(--header-height);
+        bottom:0;
+        left:0;
+        right:0;
+        overflow:auto;
+        -webkit-overflow-scrolling:touch;
+        padding: 2rem 1rem;
+        background: var(--bg-2);
+    }
+
+    .page {
+        max-width: var(--max-width);
+        margin: 0 auto;
+    }
+
+    /* Top overview row */
+    .top-grid {
+        display:grid;
+        grid-template-columns: 1fr 320px;
+        gap:1.5rem;
+        align-items:start;
+        margin-bottom:1.5rem;
+    }
+
+    /* Left column — region list container */
+    .panel {
+        background: white;
+        border-radius: var(--card-radius);
+        padding:1.5rem;
+        border: 1px solid var(--border-light);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .panel h2 {
+        margin:0 0 .75rem 0;
+        font-size:1.25rem;
+        color: var(--text-primary);
+        font-weight: 600;
+    }
+    .panel .lead {
+        color: var(--text-secondary);
+        font-size:.9rem;
+        margin-bottom: 1rem;
+        line-height: 1.5;
+    }
+
+    /* Stats cards */
+    .stats {
+        display:flex;
+        gap:.75rem;
+        margin-bottom:1.25rem;
+    }
+    .stat {
+        flex:1;
+        background: white;
+        padding:.85rem;
+        border-radius:10px;
+        border:1px solid var(--border-light);
+        display:flex;
+        flex-direction:column;
+        gap:.25rem;
+        align-items:flex-start;
+        justify-content:center;
+        box-shadow: var(--shadow-sm);
+    }
+    .stat .value {
+        font-size:1.35rem;
+        font-weight:700;
+        color: var(--text-primary);
+    }
+    .stat .label { 
+        font-size:.78rem; 
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+    }
+    .stat .label i {
+        color: var(--accent-1);
+    }
+
+    /* Regions grid (cards column) */
+    #buttonsDiv {
+        display:grid;
+        grid-template-columns: 1fr;
+        gap: .9rem;
+        margin-top: .6rem;
+    }
+
+    .region-card {
+        position:relative;
+        overflow:hidden;
+        border-radius: var(--card-radius);
+        padding: 1.25rem;
+        background: white;
+        border:1px solid var(--border-light);
+        box-shadow: var(--shadow-sm);
+        transition: transform .2s ease, box-shadow .2s ease;
+        display:flex;
+        flex-direction:column;
+        gap:.75rem;
+    }
+    .region-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+        border-color: var(--border-medium);
+    }
+
+    .region-card .card-top {
+        display:flex;
+        align-items:flex-start;
+        justify-content:space-between;
+        gap: .75rem;
+    }
+    .region-card .title {
+        font-size:1.1rem;
+        font-weight:600;
+        color: var(--text-primary);
+    }
+    .region-card .subtitle {
+        font-size:.86rem;
+        color: var(--text-muted);
+        margin-top:4px;
+    }
+
+    .region-card .meta {
+        display:flex;
+        gap:.6rem;
+        align-items:center;
+    }
+    .tag {
+        padding:.25rem .5rem;
+        border-radius:999px;
+        background: var(--bg-2);
+        border:1px solid var(--border-light);
+        font-size:.8rem;
+        color: var(--text-muted);
+    }
+    .tag.status-active {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--success);
+        border-color: rgba(16, 185, 129, 0.2);
+    }
+    .tag.status-warning {
+        background: rgba(245, 158, 11, 0.1);
+        color: var(--warning);
+        border-color: rgba(245, 158, 11, 0.2);
+    }
+
+    .region-card .stats-row {
+        display:flex;
+        gap: .8rem;
+        font-size:.9rem;
+        color: var(--text-muted);
+        align-items:center;
+    }
+    .region-card .stats-row i {
+        color: #003B40;
+        font-size:1rem;
+        width:20px;
+    }
+
+    .region-card .card-footer {
+        margin-top: 8px;
+        display:flex;
+        gap:.6rem;
+        align-items:center;
+    }
+    .btn-primary {
+        background: linear-gradient(90deg, var(--accent-2), var(--accent-1));
+        border:none;
+        color:white;
+        padding:.6rem 1rem;
+        border-radius:8px;
+        cursor:pointer;
+        font-weight:600;
+        display:inline-flex;
+        gap:.5rem;
+        align-items:center;
+        box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+        transition: transform .1s, box-shadow .1s;
+        font-size: 0.9rem;
+    }
+    .btn-primary:hover {
+        box-shadow: 0 4px 8px rgba(59, 130, 246, 0.25);
+    }
+    .btn-primary:active { transform: translateY(1px); }
+    .btn-ghost {
+        background: transparent;
+        border: 1px solid var(--border-medium);
+        color: var(--text-muted);
+        padding:.55rem .75rem;
+        border-radius:8px;
+        cursor:pointer;
+        font-weight:500;
+        font-size: 0.9rem;
+        transition: all 0.2s;
+    }
+    .btn-ghost:hover {
+        background: var(--bg-2);
+        border-color: var(--border-medium);
+    }
+
+    /* Right column — quick actions & help */
+    .side {
+        display:flex;
+        flex-direction:column;
+        gap:1rem;
+    }
+    .side .card {
+        padding:1.25rem;
+        border-radius:var(--card-radius);
+        background: white;
+        border:1px solid var(--border-light);
+        box-shadow: var(--shadow-sm);
+    }
+    .side .card h3 { 
+        margin:0 0 .75rem 0; 
+        color: var(--text-primary); 
+        font-size:1rem; 
+        font-weight: 600;
+    }
+    .side .action-grid { 
+        display:grid; 
+        grid-template-columns:1fr 1fr; 
+        gap:.6rem; 
+    }
+    .action-grid button {
+        padding:.65rem .5rem;
+        border-radius:8px;
+        border:1px solid var(--border-light);
+        background: white;
+        color: var(--text-secondary);
+        cursor:pointer;
+        font-weight:500;
+        font-size: 0.85rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.4rem;
+        transition: all 0.2s;
+    }
+    .action-grid button:hover {
+        background: var(--bg-2);
+        border-color: var(--border-medium);
+    }
+    .action-grid button i {
+        font-size: 1.1rem;
+        color: var(--accent-2);
+    }
+    .help-list { 
+        font-size:.9rem; 
+        color: var(--text-muted); 
+        display:flex; 
+        flex-direction:column; 
+        gap:.5rem; 
+    }
+    .help-list a {
+        color: var(--accent-2);
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+    .help-list a:hover {
+        color: var(--accent-1);
+        text-decoration: underline;
+    }
+
+    /* Empty / login area */
+    #description {
+        margin-top: .7rem;
+    }
+
+    /* Small screens */
+    @media (max-width: 900px) {
+        .top-grid { grid-template-columns: 1fr; }
+        .header-inner { padding: 0 1rem; }
+        .main-content { padding: 1rem 0.75rem; }
+        .brand h1 { font-size:1.25rem; }
+        .side { order: 2; }
+    }
+
+    @media (max-width: 480px) {
+        .brand .logo { width:40px; height:40px; font-size:.95rem; }
+        .header-badge { display:none; }
+        .region-card { padding:1rem; }
+        .card-footer { flex-direction:column; align-items:stretch; }
+        .btn-primary { width:100%; justify-content:center; }
+        .stats { flex-direction: column; }
+    }
+
+    /* subtle fade-in */
+    .fade-in { animation: fadeIn .45s ease both; }
+    @keyframes fadeIn { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform:none; } }
+
+    /* Footer */
+    .app-footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100px;
+        background: white;
+        border-top: 1px solid var(--border-light);
+        box-shadow: 0 -2px 4px rgba(15, 23, 42, 0.05);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    }
+
+    .footer-inner {
+        width: 100%;
+        max-width: var(--max-width);
+        padding: 0 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--text-muted);
+        font-size: 0.88rem;
+    }
+
+    .footer-left {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--text-secondary);
+        font-weight: 500;
+    }
+
+    .footer-left i {
+        color: var(--accent-1);
+        font-size: 1.1rem;
+    }
+
+    .footer-right {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+    }
+
+    @media (max-width: 600px) {
+        .footer-inner {
+            flex-direction: column;
+            gap: 0.25rem;
+            text-align: center;
+            padding: 0 1rem;
+        }
+    }
+
+    /* Loading state */
+    .loading {
+        text-align: center;
+        padding: 2rem;
+        color: var(--text-muted);
+    }
+
+    .loading i {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: var(--accent-1);
+    }
+	
+	.btn-primary {
+    background: #003B40;
+    border: none;
+    color: white;
+    padding: .6rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    display: inline-flex;
+    gap: .5rem;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 59, 64, 0.3);
+    transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.btn-primary:hover {
+    background: #015256; /* slightly lighter for hover */
+    box-shadow: 0 4px 8px rgba(0, 59, 64, 0.35);
+}
+
+.btn-primary:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 3px rgba(0, 59, 64, 0.4);
+}
+
+html,body {
+    overflow:auto;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* ✅ center horizontally */
+  justify-content: center;
+  gap: 0; /* ✅ remove extra space between text and logo */
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-align: center;
+}
+
+.footer-left img {
+  margin-top: 2px; /* ✅ tiny breathing room below text */
+}
+
+    </style>
+</head>
+<body id="main">
+    <header class="app-header">
+        <div class="header-inner">
+            <div class="brand">
+                <div class="logo"><i class="bi bi-thermometer-snow"></i></div>
+                <h1 id="header">Cold Chain Management</h1>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="page">
+            <div class="top-grid">
+                <!-- Left: Regions + stats -->
+                <div class="panel fade-in" aria-labelledby="regions-heading">
+                    <h2 id="regions-heading">Regions & Facilities</h2>
+                    <div class="lead">Select a region to manage facilities, devices and monitoring data</div>
+                    
+                    <!-- Dynamic region cards appended here -->
+                    <div id="buttonsDiv" aria-live="polite">
+                    </div>
+
+                    <!-- Description / login placeholder -->
+                    <div id="description"></div>
+                </div>
+            </div>
+
+            <!-- Spacing for footer -->
+            <div style="height:80px"></div>
+        </div>
+    </main>
+
+	<footer class="app-footer">
+	  <div class="footer-inner">
+		<div class="footer-left">
+		  <span>Updated by</span>
+		  <img src="img/grassroots.png" 
+			   alt="Grassroots Logo" 
+			   style="height:28px;width:auto;">
+		</div>
+
+		<div class="footer-right">
+		  <span>
+			<a href="#" 
+			   onclick="window.open('https://drive.google.com/file/d/1-stuWWSOFSvJBccv4vnxVckaauqU4MVB/view?usp=sharing', '_blank'); return false;"
+			   style="color:#2980b9;text-decoration:none;">
+			   Resources
+			</a>
+			<br>
+		  </span>
+		</div>
+	  </div>
+	</footer>
+    <script>
+
+        // Function to update overview statistics
+        function updateOverviewStats() {
+            const totalFacilities = regionsData.reduce((sum, region) => sum + region.facilities, 0);
+            const totalDevices = regionsData.reduce((sum, region) => sum + region.devices, 0);
+            const totalAlerts = regionsData.reduce((sum, region) => sum + region.alerts, 0);
+            
+            document.getElementById('stat-facilities').textContent = totalFacilities;
+            document.getElementById('stat-devices').textContent = totalDevices;
+            document.getElementById('stat-alerts').textContent = totalAlerts;
+        }
+
+        // Function to simulate adding a new region
+        function addNewRegion() {
+            const newRegion = {
+                id: regionsData.length + 1,
+                name: "New Region",
+                subtitle: "0 facilities, 0 devices",
+                status: "active",
+                temperature: "0.0°C avg.",
+                alerts: 0,
+                facilities: 0,
+                devices: 0
+            };
+            
+            regionsData.push(newRegion);
+            displayRegions();
+            
+            // Show confirmation
+            alert("New region added successfully!");
+        }
+
+        // Function to view region dashboard
+        function viewRegionDashboard(regionId) {
+            const region = regionsData.find(r => r.id === regionId);
+            alert(`Opening dashboard for ${region.name}`);
+            // In a real app, this would navigate to the region dashboard
+        }
+
+        // Function to show region details
+        function showRegionDetails(regionId) {
+            const region = regionsData.find(r => r.id === regionId);
+            alert(`Showing details for ${region.name}\n\nFacilities: ${region.facilities}\nDevices: ${region.devices}\nTemperature: ${region.temperature}\nAlerts: ${region.alerts}`);
+            // In a real app, this would open a detailed view or modal
+        }
+
+        // Other action functions
+        function exportData() {
+            alert("Exporting data...");
+            // In a real app, this would trigger a data export process
+        }
+
+        function showAlerts() {
+            const totalAlerts = regionsData.reduce((sum, region) => sum + region.alerts, 0);
+            alert(`You have ${totalAlerts} active alerts across all regions.`);
+            // In a real app, this would navigate to an alerts page
+        }
+
+        function openSettings() {
+            alert("Opening settings...");
+            // In a real app, this would navigate to a settings page
+        }
+
+        function showUserGuide() {
+            alert("Opening user guide...");
+            // In a real app, this would open the user guide
+        }
+
+        function showSupport() {
+            alert("Opening support center...");
+            // In a real app, this would navigate to a support page
+        }
+
+        function showTraining() {
+            alert("Opening training videos...");
+            // In a real app, this would navigate to training resources
+        }
+
+        // Initialize the dashboard when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simulate loading delay
+            setTimeout(() => {
+                displayRegions();
+                
+                // Update last updated time
+                const now = new Date();
+                document.getElementById('last-updated').textContent = now.toLocaleTimeString();
+            }, 1000);
+        });
+
+        // Keep small DOM-ready hooks to populate simple overview stats if util provides counts.
+        (function attachMiniStats(){
+            try {
+                // If util provides quick counts, use them; otherwise leave as dashes.
+                if (window.util && typeof util.getOverviewCounts === 'function') {
+                    util.getOverviewCounts().then(function(cnt){
+                        document.getElementById('stat-facilities').textContent = cnt.facilities ?? '—';
+                        document.getElementById('stat-devices').textContent = cnt.devices ?? '—';
+                        document.getElementById('stat-alerts').textContent = cnt.alerts ?? '—';
+                    }).catch(function(){ /* ignore */ });
+                } else {
+                    // If region JSON is created later, display() will populate Region cards.
+                    document.getElementById('stat-facilities').textContent = '—';
+                    document.getElementById('stat-devices').textContent = '—';
+                    document.getElementById('stat-alerts').textContent = '—';
+                }
+            } catch(e){
+                console.warn('mini-stats hook failed', e);
+            }
+        })();
+
+        // Call your original display function (unchanged).
+        $(display);
+    </script>
+</body>
 </html>

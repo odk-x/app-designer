@@ -71,6 +71,28 @@ util.translateAdminRegionNameHelper = function(locale, regionName) {
 // The maximum possible depth for a geographic hierarchy
 util.maxLevelAppDepth = 5;
 
+util.getRegionIdByName = async function(regionName) {
+    return new Promise((resolve, reject) => {
+        odkData.arbitraryQuery(
+            'geographic_regions',
+            'SELECT _id FROM geographic_regions WHERE regionLevel1 = ? OR regionLevel2 = ? OR regionLevel3 = ? OR regionLevel4 = ? OR regionLevel5 = ?',
+            [regionName, regionName, regionName, regionName, regionName],
+            function (result) {
+                if (result.getCount() > 0) {
+                    resolve(result.get('rowId', 0) || result.get('_id', 0));
+                } else {
+                    console.warn("⚠️ No match found for region:", regionName);
+                    resolve(null);
+                }
+            },
+            function (error) {
+                console.error("❌ Failed to get region ID:", error);
+                reject(error);
+            }
+        );
+    });
+};
+
 util.getMaxLevel = function() {
     var queryStr = 'SELECT MAX(levelNumber) FROM geographic_regions WHERE _sync_state != ?';
 
@@ -247,7 +269,7 @@ util.getFacilityCountByAdminRegion = function(adminRegionId) {
             'JOIN geographic_regions ON geographic_regions._id = health_facilities.admin_region_id ' +
             'WHERE health_facilities._sync_state != ? AND geographic_regions._id = ?';
         var queryParam = [util.deletedSyncState, adminRegionId];
-
+		console.log(adminRegionId);
         odkData.arbitraryQuery('geographic_regions',
             queryStr,
             queryParam,
@@ -257,6 +279,8 @@ util.getFacilityCountByAdminRegion = function(adminRegionId) {
 
     }).then(function(result) {
         if (result !== null && result.getCount() == 1) {
+			console.log("HERE");
+			console.log(result.get('COUNT(*)'));
             return result.get('COUNT(*)');
         }
     }).catch(function (reason) {
@@ -607,39 +631,54 @@ util.formatColIdForDisplay = function(colId, index, resultSet, applyFormat) {
 
     var textToDisplay = resultSet.getData(index, colId);
     if (textToDisplay !== null && textToDisplay !== undefined && textToDisplay.length !== 0) {
-        if (applyFormat) {
+        if (/^[0-9]+(\.[0-9]+)?e[\+\-]?[0-9]+$/i.test(textToDisplay)) {
+            try {
+                // Use BigInt if integer
+                if (!textToDisplay.includes('.')) {
+                    textToDisplay = BigInt(textToDisplay).toString();
+                } else {
+                    // Convert decimal scientific notation safely
+                    let num = Number(textToDisplay);
+                    textToDisplay = num.toLocaleString('fullwide', { useGrouping: false });                }
+            } catch (e) {
+                // fallback: keep original
+            }
+        }
+
+		if (applyFormat) {
            textToDisplay = util.formatDisplayText(textToDisplay);
         }
 
         return textToDisplay;
     }
+	
+	
     return '';
 
 };
 
 util.showIdForDetail = function(idOfElement, colId, resultSet, applyFormat, defaultValue) {
-    if (idOfElement === null || idOfElement === undefined ||
-        idOfElement.length === 0) {
-        return;
-    }
+    if (!idOfElement || idOfElement.length === 0) return;
+    if (!colId || colId.length === 0) return;
+    if (resultSet.getCount() === 0) return;
 
-    if (colId === null || colId === undefined ||
-        colId.length === 0) {
-        return;
-    }
-
-    if (resultSet.getCount() === 0) {
-        return;
-    }
-
-    // Format for date
     var meta = resultSet.getMetadata();
     var elementMetadata = meta.dataTableModel[colId];
+
+    // Handle date fields
     if (elementMetadata.elementType === 'date') {
         var dateToUse = resultSet.get(colId);
         if (dateToUse !== null && dateToUse !== undefined) {
-            if (applyFormat) {
-                dateToUse = util.formatDate(dateToUse);
+            try {
+                var d = new Date(dateToUse);
+                if (!isNaN(d)) {
+                    var mm = String(d.getMonth() + 1).padStart(2, '0');
+                    var dd = String(d.getDate()).padStart(2, '0');
+                    var yyyy = d.getFullYear();
+                    dateToUse = `${dd}-${mm}-${yyyy}`;
+                }
+            } catch (e) {
+                console.warn('Invalid date format:', dateToUse);
             }
             $(idOfElement).text(dateToUse);
         }
@@ -648,18 +687,31 @@ util.showIdForDetail = function(idOfElement, colId, resultSet, applyFormat, defa
 
     var textToDisplay = resultSet.get(colId);
     if (textToDisplay !== null && textToDisplay !== undefined && textToDisplay.length !== 0) {
-        // Additional formatting needed for select_multiple
+        // Additional formatting for select_multiple
         if (elementMetadata.type === 'array') {
-            // Remove square brackets and quotes
             textToDisplay = '' + textToDisplay
                 .replace(/"/g, '')
                 .replace(/,/g, ', ')
                 .replace(/\[/g, '')
                 .replace(/\]/g, '');
-
         }
+
+        // Handle scientific notation
+        if (/^[0-9]+(\.[0-9]+)?e[\+\-]?[0-9]+$/i.test(textToDisplay)) {
+            try {
+                if (!textToDisplay.includes('.')) {
+                    textToDisplay = BigInt(textToDisplay).toString();
+                } else {
+                    let num = Number(textToDisplay);
+                    textToDisplay = num.toLocaleString('fullwide', { useGrouping: false });
+                }
+            } catch (e) {
+                // fallback: keep original
+            }
+        }
+
         if (applyFormat) {
-           textToDisplay = util.formatDisplayText(textToDisplay);
+            textToDisplay = util.formatDisplayText(textToDisplay);
         }
 
         $(idOfElement).text(textToDisplay);
@@ -668,6 +720,6 @@ util.showIdForDetail = function(idOfElement, colId, resultSet, applyFormat, defa
             $(idOfElement).text(defaultValue);
         }
     }
-
 };
+
 

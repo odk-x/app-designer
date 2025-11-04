@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Health Facilities Map + List</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+  <link rel="stylesheet" href="../../../assets/css/paginated_list.css" />
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <script src="../../../../system/js/odkCommon.js"></script>
+  <script src="../../../../system/js/odkData.js"></script>
+  <script src="../../../../system/tables/js/odkTables.js"></script>
+  <script src="../../../assets/js/util.js"></script>
+  <script src="../../../assets/js/list_view_logic.js"></script>
+</head>
+
+<body>
+		<header class="app-header">
+			<div id="header" class="nav-header-bar">
+				<div class="nav-header-info">
+				  <div class="nav-header-text">
+					<h2 id="header1">Loading...</h2>
+				  </div>
+				</div>
+			</div>
+		</header>
+  		<main class="dashboard" style="height: 45%; overflow-y: scroll;">
+			<div id="searchBox">
+				<form id="form" action="javascript:getSearchListResults();" class="search-filter">
+				  <div class="search-bar">
+					<input id="search" type="text" name="query" placeholder=" &nbsp Search" onblur="clearListResults()" />
+					<i class="bi bi-search"></i>
+				  </div>
+				  <button type="submit" id="submit" class="filter-btn">
+					<i class="bi bi-sliders"></i>
+				  </button>
+				</form>
+			</div>
+
+			<div id="wrapper">
+				<div id="list" class="card-list"></div>
+			</div>
+
+        <div class="btnDiv">
+                <div class="prevBtnDiv"><button id="prevButton" class="btn" onclick="prevListResults()">Prev</button></div>
+                <span id="navigation-text" class="navTextStyle"><span id="showing">Showing</span> <span id="navTextOffset"></span>-<span id="navTextLimit"></span> <span id="of">of</span> <span id="navTextCnt"></span></span>
+                <select id="limitDropdown" class="dropdownLimit" onchange="newListLimit();">
+                    <option value="10">10</option>
+				    <option value="20">20</option>
+				    <option value="50">50</option>
+				    <option value="100">100</option>
+				    <option value="1000">1000</option>
+			    </select>
+                <div class="nextBtnDiv"><button id="nextButton" class="btn" onclick="nextListResults()">Next</button></div>
+        </div>
+		</main>
+		<div id="map"></div>
+		<button id="center-btn" onclick="centerMapOnUser()" title="Center on Me"></button>
+
+  <script>
+    const map = L.map('map').setView([-13.98, 33.78], 7);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }).addTo(map);
+
+    const markerCluster = L.markerClusterGroup();
+    const markerMap = new Map();
+
+    const customIcon = L.icon({
+      iconUrl: odkCommon.getFileAsUrl('config/assets/img/custom-icon.png'),
+      iconSize: [32, 32],
+      iconAnchor: [16, 32],
+      popupAnchor: [0, -32]
+    });
+
+    function cbSuccess(resultSet) {
+      for (let i = 0; i < resultSet.getCount(); i++) {
+        const lat = parseFloat(resultSet.getData(i, 'Location_latitude'));
+        const lng = parseFloat(resultSet.getData(i, 'Location_longitude'));
+        const name = resultSet.getData(i, 'facility_name');
+        const rowId = resultSet.getRowId(i);
+
+        if (!isNaN(lat) && !isNaN(lng)) {
+          const marker = L.marker([lat, lng], { icon: customIcon });
+          marker.bindPopup(`<b>${name}</b>`);
+          marker.on('click', () => {
+            const el = document.querySelector(`[data-rowid='${rowId}']`);
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              el.classList.add('highlight');
+              setTimeout(() => el.classList.remove('highlight'), 2000);
+            }
+            marker.openPopup();
+          });
+          markerMap.set(rowId, marker);
+          markerCluster.addLayer(marker);
+        }
+      }
+      map.addLayer(markerCluster);
+    }
+
+    function cbFailure(error) {
+      console.error('Map query failed:', error);
+    }
+
+    function getSearchListResults() { listViewLogic.getSearchResults(); }
+    function clearListResults() { listViewLogic.clearResults(); }
+    function prevListResults() { listViewLogic.prevResults(); }
+    function nextListResults() { listViewLogic.nextResults(); }
+    function newListLimit() { listViewLogic.newLimit(); }
+
+    function resumeFunc() {
+      const locale = odkCommon.getPreferredLocale();
+      document.getElementById('showing').textContent = odkCommon.localizeText(locale, "showing");
+      document.getElementById('of').textContent = odkCommon.localizeText(locale, "of");
+      document.getElementById('prevButton').textContent = odkCommon.localizeText(locale, "previous");
+      document.getElementById('nextButton').textContent = odkCommon.localizeText(locale, "next");
+      //document.getElementById('submit').value = odkCommon.localizeText(locale, "search");
+
+      listViewLogic.setTableId('health_facilities');
+      listViewLogic.setListQuery('SELECT * FROM health_facilities WHERE Location_latitude IS NOT NULL AND _sync_state != ?');
+      listViewLogic.setListQueryParams(['deleted']);
+      listViewLogic.setSearchParams('(facility_id LIKE ? OR facility_name LIKE ?)');
+      listViewLogic.setOrderBy('ORDER BY facility_name ASC');
+      listViewLogic.setListElement('#list');
+        listViewLogic.setHeaderElement('#header1');
+      listViewLogic.setSearchTextElement('#search');
+      listViewLogic.setLimitElement('#limitDropdown');
+      listViewLogic.setPrevAndNextButtons('#prevButton', '#nextButton');
+      listViewLogic.setNavTextElements('#navTextLimit', '#navTextOffset', '#navTextCnt');
+      listViewLogic.showEditAndDeleteButtons(false);
+
+      const facIDTxt = odkCommon.localizeText(locale, "facility_id");
+      const facTypeTxt = odkCommon.localizeText(locale, "facility_type_no_colon");
+      listViewLogic.setColIdsToDisplayInList('', 'facility_name', facIDTxt, 'facility_id', facTypeTxt, 'facility_type');
+      listViewLogic.resumeFn('init');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      resumeFunc();
+
+    listViewLogic.setOnClickHandler(function (rowId) {
+      const marker = markerMap.get(rowId);
+      if (marker) {
+        markerCluster.zoomToShowLayer(marker, function () {
+          map.setView(marker.getLatLng(), 16);
+          marker.openPopup();
+        });
+      }
+    });
+
+      odkData.query(
+        'health_facilities',
+        'Location_latitude IS NOT NULL AND Location_longitude IS NOT NULL',
+        [],
+        null, null, null, null, null, null,
+        true,
+        cbSuccess,
+        cbFailure
+      );
+    });
+
+    let userLatLng = [0, 0];
+    let userCircle = null;
+
+    function centerMapOnUser() {
+      if (userLatLng) {
+        map.setView(userLatLng, 16);
+      }
+    }
+
+    const userMarker = L.marker([0, 0], {
+      icon: L.icon({
+        iconUrl: 'https://cdn-icons-png.flaticon.com/512/64/64113.png',
+        iconSize: [25, 25]
+      }),
+      title: "You are here"
+    }).addTo(map);
+
+    if (navigator.geolocation) {
+      navigator.geolocation.watchPosition(
+        (pos) => {
+          const lat = pos.coords.latitude;
+          const lng = pos.coords.longitude;
+          userLatLng = [lat, lng];
+          userMarker.setLatLng(userLatLng).bindPopup(`You<br>Lat: ${lat.toFixed(5)}<br>Lng: ${lng.toFixed(5)}`);
+          if (userCircle) map.removeLayer(userCircle);
+          userCircle = L.circle(userLatLng, { radius: 800, color: 'blue', fillOpacity: 0.1 }).addTo(map);
+        },
+        (err) => console.error("GPS error:", err),
+        { enableHighAccuracy: true, maximumAge: 10000, timeout: 10000 }
+      );
+    }
+  </script>
+</body>
+</html>
+
+  <style>
+
+	#map {
+	  height: 50%; /* or 100vh for full screen height */
+	  width: 100%;
+	  z-index: 1;
+	}
+
+    .highlight {
+      background-color: yellow;
+      transition: background-color 1s;
+    }
+
+    #center-btn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+      background: black;
+      border: 2px solid white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+	
+	.split-container {
+	  display: flex;
+	  flex-direction: row;
+	  height: calc(100vh - 160px); /* Adjust based on header/search height */
+	  width: 100%;
+	  gap: 10px;
+	  margin-top: 20px;
+	}
+
+	.split-left, .split-right {
+	  flex: 1;
+	  overflow: auto;
+	  border-radius: 10px;
+	}
+
+  </style>
+

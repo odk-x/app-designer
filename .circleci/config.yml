@@ -1,0 +1,16 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: Verify setup
+          command: echo "✅ CircleCI is working!"
+
+workflows:
+  build_and_test:
+    jobs:
+      - build

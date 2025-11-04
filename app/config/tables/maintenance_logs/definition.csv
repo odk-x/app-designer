@@ -28,3 +28,6 @@ type_of_preventative_maintenance,type_of_preventative_maintenance,array,"[""type
 type_of_preventative_maintenance_items,items,string,[]
 type_of_repair,type_of_repair,array,"[""type_of_repair_items""]"
 type_of_repair_items,items,string,[]
+under_warranty,under_warranty,string,[]
+warranty_service_provider_contact,warranty_service_provider_contact,string,[]
+warranty_service_provider_name,warranty_service_provider_name,string,[]

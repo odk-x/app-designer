@@ -28,7 +28,7 @@ function resumeFunc(state) {
         listViewLogic.setSearchParams(searchParams);
         listViewLogic.setListElement('#list');
         listViewLogic.setSearchTextElement('#search');
-        listViewLogic.setHeaderElement('#header');
+        listViewLogic.setHeaderElement('#header1');
         listViewLogic.setLimitElement('#limitDropdown');
         listViewLogic.setPrevAndNextButtons('#prevButton', '#nextButton');
         listViewLogic.setNavTextElements('#navTextLimit', '#navTextOffset', '#navTextCnt');
@@ -39,7 +39,7 @@ function resumeFunc(state) {
         var hFacTxt = odkCommon.localizeText(locale, "facility_no_colon");
 
         listViewLogic.setColIdsToDisplayInList(coldRoomTxt, 'tracking_id',
-            modelTxt, 'model', hFacTxt, 'facility_name', );
+            modelTxt, 'model', hFacTxt, 'facility_name');
     }
 
     listViewLogic.resumeFn(state);

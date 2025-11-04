@@ -767,6 +767,20 @@
           }
         },
         "_row_num": 65
+      },
+      {
+        "type": "select_one",
+        "values_list": "yes_no",
+        "name": "is_under_pmm",
+        "display": {
+          "title": {
+            "text": "Is Under PMM Surveillance?"
+          },
+          "prompt": {
+            "text": "Is Under PMM Surveillance?"
+          }
+        },
+        "_row_num": 66
       }
     ],
     "choices": [
@@ -2742,6 +2756,20 @@
           }
         },
         "elementKey": "notes"
+      },
+      "is_under_pmm": {
+        "_defn": [
+          {
+            "_row_num": 66,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": "Is Under PMM Surveillance?"
+        },
+        "valuesList": "yes_no",
+        "elementKey": "is_under_pmm"
       }
     },
     "section_names": [
@@ -3598,12 +3626,31 @@
             "promptIdx": 26
           },
           {
+            "type": "select_one",
+            "values_list": "yes_no",
+            "name": "is_under_pmm",
+            "display": {
+              "title": {
+                "text": "Is Under PMM Surveillance?"
+              },
+              "prompt": {
+                "text": "Is Under PMM Surveillance?"
+              }
+            },
+            "_row_num": 66,
+            "__rowNum__": 65,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen66",
+            "promptIdx": 27
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 66,
-            "_branch_label_enclosing_screen": "survey/_screen66",
-            "promptIdx": 27
+            "_row_num": 67,
+            "_branch_label_enclosing_screen": "survey/_screen67",
+            "promptIdx": 28
           }
         ],
         "validation_tag_map": {
@@ -3838,25 +3885,31 @@
             "operationIdx": 22
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 66,
-            "operationIdx": 23
-          },
-          {
             "_row_num": 66,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(27);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 23
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 67,
+            "operationIdx": 24
+          },
+          {
+            "_row_num": 67,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(28);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 24
+            "operationIdx": 25
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 66,
-            "operationIdx": 25
+            "_row_num": 67,
+            "operationIdx": 26
           }
         ],
         "branch_label_map": {
@@ -3883,8 +3936,9 @@
           "_else64": 22,
           "_endif64": 22,
           "_screen65": 22,
-          "_contents": 24,
-          "_screen66": 24
+          "_screen66": 23,
+          "_contents": 25,
+          "_screen67": 25
         }
       }
     },
@@ -4450,6 +4504,23 @@
         "elementSet": "data",
         "elementPath": "notes"
       },
+      "is_under_pmm": {
+        "_defn": [
+          {
+            "_row_num": 66,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": "Is Under PMM Surveillance?"
+        },
+        "valuesList": "yes_no",
+        "elementKey": "is_under_pmm",
+        "elementName": "is_under_pmm",
+        "elementSet": "data",
+        "elementPath": "is_under_pmm"
+      },
       "serial_number_image_uriFragment": {
         "type": "string",
         "elementType": "rowpath",
@@ -4623,6 +4694,20 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":{\"default\":\"Functional Status\",\"es\":\"Functionando\",\"fr\":\"État de fonctionnement\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "is_under_pmm",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Sí\",\"fr\":\"Oui\"}}},\"_row_num\":48},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\",\"fr\":\"Non\"}}},\"_row_num\":49}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "is_under_pmm",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":\"Is Under PMM Surveillance?\"}"
       },
       {
         "_partition": "Column",
